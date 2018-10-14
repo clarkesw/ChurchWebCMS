@@ -7,6 +7,16 @@
 		format : 'mm/dd/yyyy'
 	});
 </script>
+<script>
+	$('#startDate').datepicker({
+		format : 'mm/dd/yyyy'
+	});
+</script>
+<script>
+	$('#endDate').datepicker({
+		format : 'mm/dd/yyyy'
+	});
+</script>
 
 </body>
 </html>

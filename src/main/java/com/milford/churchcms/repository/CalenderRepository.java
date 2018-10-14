@@ -7,11 +7,11 @@ package com.milford.churchcms.repository;
 
 
 
-import com.milford.churchcms.dao.Calender;
+import com.milford.churchcms.dao.CalendarEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CalenderRepository extends JpaRepository<Calender,Integer>{
+public interface CalenderRepository extends JpaRepository<CalendarEvent,Integer>{
     
 }

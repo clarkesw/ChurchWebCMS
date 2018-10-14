@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ChurchWebCMSApplication {
 
 	public static void main(String[] args) {
-            System.out.println("++++ SpringBootBaseApplication starting!!");
             SpringApplication.run(ChurchWebCMSApplication.class, args);
 	}
 }

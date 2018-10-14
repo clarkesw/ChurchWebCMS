@@ -9,28 +9,31 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Future;
 
 @Entity
 @SuppressWarnings("PersistenceUnitPresent")
-public class Calender {
+public class CalendarEvent {
  
     @Id
     @GeneratedValue 
     private Integer id;
     
-//    @Future
+    @Future
     private Date startDate;
     
-//    @Future
+    @Future
     private Date endDate;
     private String title;
     private String details;
     private String picURL;
+    private boolean isRepeated;
 
-    public Calender() {
+    public CalendarEvent() {
     }
 
-    public Calender(Integer id, Date startDate, Date endDate, String title, String details, String picURL) {
+    public CalendarEvent(Integer id, Date startDate, Date endDate, String title, 
+            String details, String picURL, boolean isRepeated) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -40,7 +43,8 @@ public class Calender {
     }
 
     
-    public Calender(Date startDate, Date endDate, String title, String details, String picURL) {
+    public CalendarEvent(Date startDate, Date endDate, String title, String details, 
+            String picURL, boolean isRepeated) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.title = title;
@@ -86,6 +90,28 @@ public class Calender {
 
     public void setPicURL(String picURL) {
         this.picURL = picURL;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public boolean isIsRepeated() {
+        return isRepeated;
+    }
+
+    public void setIsRepeated(boolean isRepeated) {
+        this.isRepeated = isRepeated;
+    }
+
+    @Override
+    public String toString() {
+        return "CalendarEvent{" + "id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", title=" + 
+                title + ", details=" + details + ", picURL=" + picURL + ", isRepeated=" + isRepeated + '}';
     }
     
     
