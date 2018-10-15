@@ -6,6 +6,7 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.repository.CalenderRepository;
 import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -31,6 +32,9 @@ public class CalendarController {
     @Autowired
     EventService service;
     
+    @Autowired
+    CalenderRepository repository;
+    
     @InitBinder
     public void initBinder(WebDataBinder binder) {
 
@@ -42,15 +46,13 @@ public class CalendarController {
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){
         String username = getLoggedInName(model);
-        model.put("events", service.retrieveEvents());
+       // model.put("events", service.retrieveEvents());
+        model.put("events", repository.findAll());
         return "list-events";
     }
 
     private String getLoggedInName(ModelMap model) {
         Collection<Object> values = model.values();
-//        for(Object val: values){
-//             System.out.println("++++++++ getLoggedInName" + val);
-//        }
         return (String)model.get("user");
     }
  
@@ -63,20 +65,23 @@ public class CalendarController {
     public String addEvent(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent event, BindingResult result){
         if(result.hasErrors())
             return "add-event";
-        service.addEvent( event.getStartDate(), event.getEndDate(), event.getTitle(), event.getDetails(), 
-                event.getPicURL(), event.isIsRepeated());
+//        service.addEvent( event.getStartDate(), event.getEndDate(), event.getTitle(), event.getDetails(), 
+//                event.getPicURL(), event.isIsRepeated());
+        repository.save(event);
         return "redirect:/list-events";
     }
     
     @GetMapping("/delete-event")
     public String deleteEvent(@RequestParam int id){
-        service.deleteEvent(id);
+     //   service.deleteEvent(id);
+        repository.deleteById(id);
         return "redirect:/list-events";
     }
     
     @GetMapping("/update-event")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
-        CalendarEvent event = service.retrieveOneEvent(id);
+     //   CalendarEvent event = service.retrieveOneEvent(id);
+     CalendarEvent event = repository.getOne(id);
         model.put("event", event);
         return "add-event";
     }    
@@ -86,7 +91,8 @@ public class CalendarController {
         if(result.hasErrors())
             return "add-event";
         
-        service.updateEvent(event);
+    //    service.updateEvent(event);
+        repository.save(event);
         return "redirect:/list-events";
     }
 }

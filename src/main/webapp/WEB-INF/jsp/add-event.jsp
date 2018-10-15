@@ -11,7 +11,7 @@
 			<fieldset class="form-group">
 				<form:label path="details">Description</form:label> 
 				<form:textarea  type="text" maxlength="25"
-					class="form-control" required="required" path="details"/>
+					class="form-control" path="details"/>
                                 <form:errors path="details" cssClass="text-warning"/>
 			</fieldset>
 			<fieldset class="form-group">
@@ -29,12 +29,12 @@
                         <fieldset class="form-group">
 				<form:label path="picURL">Image URL</form:label> 
 				<form:input  type="text" 
-					class="form-control" required="required" path="picURL"/>
+					class="form-control" path="picURL"/>
                                 <form:errors path="picURL" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
 				<form:label path="isRepeated">Is Event Repeated?</form:label> 
-				<form:checkbox class="form-control" required="required" path="isRepeated"/>
+				<form:checkbox class="form-control"  path="isRepeated"/>
                                 <form:errors path="isRepeated" cssClass="text-warning"/>
 			</fieldset>
 			<button type="submit" class="btn btn-success">Add</button>
