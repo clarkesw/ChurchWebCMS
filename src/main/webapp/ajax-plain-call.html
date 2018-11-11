@@ -1,0 +1,21 @@
+<html>
+   <head>
+       <title>Me </title>
+       <script>
+            window.onload = function(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "http://localhost:8080/Tester", true);
+                xhr.send();
+                xhr.onreadystatechange = function(){
+ 
+                        document.getElementById("result").innerHTML = xhr.responseText;
+                    }
+                }
+            
+       </script>
+    </head>
+    <body>
+        Where we at?
+        <div id="result"></div>
+    </body>
+</html>
