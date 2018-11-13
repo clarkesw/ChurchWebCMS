@@ -5,57 +5,60 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.dao.Calendar;
+import com.milford.churchcms.util.DateUtil;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import org.slf4j.Logger;
 
 import org.springframework.stereotype.Service;
-//https://www.youtube.com/watch?v=CCVvq4g4Qj0
-// Integer id, Date startDate, Date endDate, String title, String details, String picURL
+
 @Service
 public class EventService {
-    private static List<CalendarEvent> events = new ArrayList<CalendarEvent>();
-    private static int eventCount = 3;
+    public static Logger logger;
+    private static List<Calendar> events = new ArrayList<Calendar>();
+    private static int eventCount = 2;
 
     static {
-        events.add(new CalendarEvent(1,new Date(),new Date(), "ev1", "Learn Spring MVC", 
-                "www.yahoo.com", false));
-        events.add(new CalendarEvent(2,new Date(),new Date(), "ev2", "Learn Spring MVC", 
-                "www.yahoo.com", false));
-        events.add(new CalendarEvent(3, new Date(),new Date(), "ev3", "Learn Spring MVC", 
-                "www.yahoo.com", true));
+        events.add(new Calendar("Learn Spring MVC",DateUtil.returnStringDate("2018-11-26", "10:00:00"), DateUtil.returnStringDate("2018-11-26", "11:00:00")));
+        events.add(new Calendar("Learn Spring MVC",DateUtil.returnStringDate("2018-11-24", "12:00:00"), DateUtil.returnStringDate("2018-11-24", "14:00:00")));
+
     }
 
-    public List<CalendarEvent> retrieveEvents() {
+    public List<Calendar> retrieveEvents() {
         return events;
     }
 
-    public CalendarEvent retrieveOneEvent(int id) {
-        CalendarEvent filteredEvents = new CalendarEvent();
-        for (CalendarEvent event : events) {
+    public Calendar retrieveOneEvent(int id) {
+        logger.debug("EventService.retrieveOneEvent id: {}" + id);
+        Calendar filteredEvents = new Calendar();
+        for (Calendar event : events) {
             if (event.getId() == id) {
                 return event;
             }
         }
         return null;
     }
-    public void addEvent(Date startDate, Date endDate,String name, String desc, String url, boolean isRepeated) {
-        events.add(new CalendarEvent(++eventCount, startDate, endDate, name, desc, url, isRepeated));
+    public void addEvent(String start, String end,String title, String url, boolean isRepeated) {
+        logger.debug("EventService.addEvent title: {}" + title);
+        events.add(new Calendar(++eventCount, isRepeated, title, start, end, url));
+        System.out.print("  ****** Add Event");
     }
  
     public void deleteEvent(int id) {
-        Iterator<CalendarEvent> iterator = events.iterator();
+        logger.debug("EventService.deleteEvent id: {}" + id);
+        Iterator<Calendar> iterator = events.iterator();
         while (iterator.hasNext()) {
-            CalendarEvent event = iterator.next();
+            Calendar event = iterator.next();
             if (event.getId() == id) {
                 iterator.remove();
             }
         }
     }
     
-    public void updateEvent(CalendarEvent event){
+    public void updateEvent(Calendar event){
+        logger.debug("EventService.updateEvent id: {}" + event.getId());
         deleteEvent(event.getId());    
     	events.add(event);
     }

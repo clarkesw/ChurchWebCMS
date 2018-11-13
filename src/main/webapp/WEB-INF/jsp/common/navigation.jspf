@@ -7,6 +7,7 @@
                     <li><img border="0" alt="W3Schools" src="/images/Milford.png" width="50" height="50"></li>
 	            <li class="active"><a href="/welcome">Home</a></li>
 	            <li><a href="/list-todos">Todos</a></li>
+                    <li><a href="/list-events">Calendar</a></li>
 	        </ul>
                 <ul class="nav navbar-right">
 	            <li><a href="/logout">Logout</a></li>

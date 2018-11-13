@@ -15,22 +15,22 @@
                                 <form:errors path="details" cssClass="text-warning"/>
 			</fieldset>
 			<fieldset class="form-group">
-				<form:label path="startDate">Start Date</form:label>
-				<form:input path="startDate" type="text" class="form-control"
+				<form:label path="start">Start Date</form:label>
+				<form:input path="start" type="text" class="form-control"
 					required="required" />
-				<form:errors path="startDate" cssClass="text-warning" />
+				<form:errors path="start" cssClass="text-warning" />
 			</fieldset>
                         <fieldset class="form-group">
-				<form:label path="endDate">End Date</form:label>
-				<form:input path="endDate" type="text" class="form-control"
+				<form:label path="end">End Date</form:label>
+				<form:input path="end" type="text" class="form-control"
 					required="required" />
-				<form:errors path="endDate" cssClass="text-warning" />
+				<form:errors path="end" cssClass="text-warning" />
 			</fieldset>
                         <fieldset class="form-group">
-				<form:label path="picURL">Image URL</form:label> 
+				<form:label path="url">Image URL</form:label> 
 				<form:input  type="text" 
-					class="form-control" path="picURL"/>
-                                <form:errors path="picURL" cssClass="text-warning"/>
+					class="form-control" path="url"/>
+                                <form:errors path="url" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
 				<form:label path="isRepeated">Is Event Repeated?</form:label> 

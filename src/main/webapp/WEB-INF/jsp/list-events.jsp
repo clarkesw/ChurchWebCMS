@@ -20,9 +20,9 @@
 					<tr>
                                             <td>${event.title}</td>
                                             <td>${event.details}</td>
-                                            <td><fmt:formatDate value="${event.startDate}"/></td>
-                                            <td><fmt:formatDate value="${event.endDate}"/></td>
-                                            <td>${event.picURL}</td>
+                                            <td>${event.start}</td>
+                                            <td>${event.end}</td>
+                                            <td>${event.url}</td>
                                             <td>${event.isRepeated}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id}">Delete</a></td>

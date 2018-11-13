@@ -5,10 +5,16 @@
  */
 package com.milford.churchcms;
 
-import com.milford.churchcms.dao.Todo;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -16,32 +22,11 @@ import java.util.List;
  */
 public class Test {
 //    public static void main(String[] args){
-//       List<Todo> todos = new ArrayList<Todo>();
-//       int todoCount = 3;
+//      //   of(int year, int month, int dayOfMonth, int hour, int minute)
+//      
+//        LocalDateTime ldt = LocalDateTime.of(2018, 11, 20, 10, 30);
 //
 //
-//        todos.add(new Todo(1, "clarke", "Learn Spring MVC", new Date(),
-//                false));
-//        todos.add(new Todo(2, "clarke", "Learn Struts", new Date(), false));
-//        todos.add(new Todo(3, "clarke", "Learn Hibernate", new Date(),
-//                false));
-//        
-//        Todo myTodo = new Todo(2, "clarke", "Learn Strutsss", new Date(), false);
-//        
-//        todos.set(1, myTodo);
-//        for (Todo todo : todos) {
-//            if (todo.getUser().equals("clarke")) {
-//                 System.out.println("++++++++++  retrieveTodos "+todo);
-//        
-//            }
-//        }
-//        todos.add(myTodo);
-//        
-//        for (Todo todo : todos) {
-//            if (todo.getUser().equals("clarke")) {
-//                 System.out.println("++++++++++  retrieveTodos "+todo);
-//        
-//            }
-//        }
+//        System.out.println("My Date: " + ldt);
 //    }
 }
