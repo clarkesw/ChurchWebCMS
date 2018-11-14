@@ -26,31 +26,28 @@ public class CalendarEvent {
     private Date endDate;
     private String title;
     private String details;
-    private String picURL;
+    private String url;
     private boolean isRepeated;
 
     public CalendarEvent() {
     }
 
+    public CalendarEvent(Integer id, Date startDate, Date endDate, String title) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.title = title;
+    }
+ 
     public CalendarEvent(Integer id, Date startDate, Date endDate, String title, 
-            String details, String picURL, boolean isRepeated) {
+            String details, String url, boolean isRepeated) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.title = title;
         this.details = details;
-        this.picURL = picURL;
-    }
-
-    
-    public CalendarEvent(Date startDate, Date endDate, String title, String details, 
-            String picURL, boolean isRepeated) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.title = title;
-        this.details = details;
-        this.picURL = picURL;
-    }
+        this.url = url;
+    } 
 
     public Date getStartDate() {
         return startDate;
@@ -84,12 +81,12 @@ public class CalendarEvent {
         this.details = details;
     }
 
-    public String getPicURL() {
-        return picURL;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPicURL(String picURL) {
-        this.picURL = picURL;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Integer getId() {
@@ -111,7 +108,7 @@ public class CalendarEvent {
     @Override
     public String toString() {
         return "CalendarEvent{" + "id=" + id + ", startDate=" + startDate + ", endDate=" + endDate + ", title=" + 
-                title + ", details=" + details + ", picURL=" + picURL + ", isRepeated=" + isRepeated + '}';
+                title + ", details=" + details + ", url=" + url + ", isRepeated=" + isRepeated + '}';
     }
     
     

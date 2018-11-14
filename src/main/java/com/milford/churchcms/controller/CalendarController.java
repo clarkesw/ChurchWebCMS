@@ -6,12 +6,14 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Calendar;
+import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.repository.CalenderRepository;
 import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import javax.validation.Valid;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("user")
 public class CalendarController {
+    
+    public static Logger logger;
     
     @Autowired
     EventService service;
@@ -57,15 +61,16 @@ public class CalendarController {
     }
  
     @GetMapping("/add-events")
-    public String showAddEvent(ModelMap model, @ModelAttribute("event") Calendar event){     
+    public String showAddEvent(ModelMap model, @ModelAttribute("event") CalendarEvent event){     
         return "add-event";
     }
     
     @PostMapping("/add-events")
-    public String addEvent(ModelMap model,@Valid @ModelAttribute("event") Calendar event, BindingResult result){
+    public String addEvent(ModelMap model,@ModelAttribute("event") CalendarEvent event, BindingResult result){
         if(result.hasErrors())
             return "add-event";
-        service.addEvent(event.getStart(),event.getEnd(),event.getTitle(),event.getUrl(),event.getIsRepeated());
+        logger.debug("CalendardController Event : {}",event);
+        service.addLiteEvent(event.getStartDate(),event.getEndDate(),event.getTitle());
         return "redirect:/list-events";
     }
     
@@ -90,7 +95,7 @@ public class CalendarController {
             return "add-event";
         
     //    service.updateEvent(event);
-        service.updateEvent(event);
+    //    service.updateEvent(event);
         return "redirect:/list-events";
     }
 }

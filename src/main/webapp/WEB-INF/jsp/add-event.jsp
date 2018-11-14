@@ -15,16 +15,16 @@
                                 <form:errors path="details" cssClass="text-warning"/>
 			</fieldset>
 			<fieldset class="form-group">
-				<form:label path="start">Start Date</form:label>
-				<form:input path="start" type="text" class="form-control"
+				<form:label path="startDate">Start Date</form:label>
+				<form:input path="startDate" type="text" class="form-control"
 					required="required" />
-				<form:errors path="start" cssClass="text-warning" />
+				<form:errors path="startDate" cssClass="text-warning" />
 			</fieldset>
                         <fieldset class="form-group">
-				<form:label path="end">End Date</form:label>
-				<form:input path="end" type="text" class="form-control"
+				<form:label path="endDate">End Date</form:label>
+				<form:input path="endDate" type="text" class="form-control"
 					required="required" />
-				<form:errors path="end" cssClass="text-warning" />
+				<form:errors path="endDate" cssClass="text-warning" />
 			</fieldset>
                         <fieldset class="form-group">
 				<form:label path="url">Image URL</form:label> 

@@ -1,13 +1,23 @@
 package com.milford.churchcms.dao;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+@SuppressWarnings("PersistenceUnitPresent")
 public class Calendar {
-    private int id;
+    
+    @Id
+    @GeneratedValue 
+    private Integer id;
     private boolean isRepeated;
     private String  title;
-    private String  start;
-    private String  end;
     private String  url;
     private String details;
+    
+    private String  start;
+    private String  end;
 
     public Calendar() {}
 
@@ -26,6 +36,13 @@ public class Calendar {
         this.start = start;
         this.end = end;
         this.url = url;
+    }
+
+    public Calendar(int id, String title, String start, String end) {
+        this.id = id;
+        this.title = title;
+        this.start = start;
+        this.end = end;
     }
 
     public Calendar(String title, String start, String end) {
@@ -65,7 +82,7 @@ public class Calendar {
         this.title = title;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

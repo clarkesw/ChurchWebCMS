@@ -27,7 +27,7 @@ public class WelcomeController {
     @GetMapping("/")
     public String showWelcomePage(ModelMap model){
         model.put("user", getLoggedInUser());
-        System.out.println("++++++++++++ showWelcomePage "+ getLoggedInUser());
+        logger.info("WelcomeController User : {}", getLoggedInUser());
         return "welcome";
     }
     
