@@ -6,8 +6,6 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Calendar;
-import com.milford.churchcms.dao.CalendarEvent;
-import com.milford.churchcms.repository.CalenderRepository;
 import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -36,9 +34,6 @@ public class CalendarController {
     @Autowired
     EventService service;
     
-    @Autowired
-    CalenderRepository repository;
-    
     @InitBinder
     public void initBinder(WebDataBinder binder) {
 
@@ -50,7 +45,6 @@ public class CalendarController {
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){
         String username = getLoggedInName(model);
-       // model.put("events", service.retrieveEvents());
         model.put("events", service.retrieveEvents());
         return "list-events";
     }
@@ -61,36 +55,28 @@ public class CalendarController {
     }
  
     @GetMapping("/add-events")
-    public String showAddEvent(ModelMap model, @ModelAttribute("event") CalendarEvent event){     
+    public String showAddEvent(ModelMap model, @ModelAttribute("calEvent") Calendar calEvent){     
         return "add-event";
     }
     
     @PostMapping("/add-events")
-    public String addEvent(ModelMap model,@ModelAttribute("event") CalendarEvent event, BindingResult result){
-        if(result.hasErrors())
-            return "add-event";
-        logger.debug("CalendardController Event : {}",event);
-        service.addLiteEvent(event.getStartDate(),event.getEndDate(),event.getTitle());
+    public String addEvent(ModelMap model,@Valid @ModelAttribute("calEvent") Calendar calEvent){
+//        if(result.hasErrors())
+//            return "add-event";
+
+           logger.debug("CalendardController Event : {}",calEvent);
+            service.addLiteEvent(calEvent.getTitle(), calEvent.getStartDate(),calEvent.getEndDate());        
         return "redirect:/list-events";
     }
     
     @GetMapping("/delete-event")
     public String deleteEvent(@RequestParam int id){
-     //   service.deleteEvent(id);
         service.deleteEvent(id);
         return "redirect:/list-events";
     }
     
-//    @GetMapping("/update-event")
-//    public String updateShowEvent(ModelMap model, @RequestParam int id){
-//     //   Calendar event = service.retrieveOneEvent(id);
-//     Calendar event = service.updateEvent(id);
-//        model.put("event", event);
-//        return "add-event";
-//    }    
-    
     @PostMapping("/update-event")
-    public String updateEventPost(ModelMap model,@Valid @ModelAttribute("event") Calendar event, BindingResult result){
+    public String updateEventPost(ModelMap model,@Valid @ModelAttribute("calEvent") Calendar event, BindingResult result){
         if(result.hasErrors())
             return "add-event";
         
@@ -98,4 +84,13 @@ public class CalendarController {
     //    service.updateEvent(event);
         return "redirect:/list-events";
     }
+    
+    //    @GetMapping("/update-event")
+//    public String updateShowEvent(ModelMap model, @RequestParam int id){
+//     //   Calendar event = service.retrieveOneEvent(id);
+//     Calendar event = service.updateEvent(id);
+//        model.put("event", event);
+//        return "add-event";
+//    }    
+    
 }

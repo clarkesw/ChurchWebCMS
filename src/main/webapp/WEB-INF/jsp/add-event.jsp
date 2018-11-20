@@ -1,8 +1,8 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-		<form:form method="post" modelAttribute="event" >
-                    	<fieldset class="form-group">
+		<form:form method="post" modelAttribute="calEvent" >
+                      	<fieldset class="form-group">
 				<form:label path="title">Description</form:label> 
 				<form:input  type="text" maxlength="25"
 					class="form-control" required="required" path="title"/>
@@ -14,7 +14,7 @@
 					class="form-control" path="details"/>
                                 <form:errors path="details" cssClass="text-warning"/>
 			</fieldset>
-			<fieldset class="form-group">
+ 			<fieldset class="form-group">
 				<form:label path="startDate">Start Date</form:label>
 				<form:input path="startDate" type="text" class="form-control"
 					required="required" />
@@ -26,7 +26,7 @@
 					required="required" />
 				<form:errors path="endDate" cssClass="text-warning" />
 			</fieldset>
-                        <fieldset class="form-group">
+                     <fieldset class="form-group">
 				<form:label path="url">Image URL</form:label> 
 				<form:input  type="text" 
 					class="form-control" path="url"/>

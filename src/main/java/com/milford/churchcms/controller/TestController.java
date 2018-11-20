@@ -21,8 +21,8 @@ public class TestController {
     public List<Calendar> getTest(){
       
         List<Calendar> calList = new ArrayList<>();
-        calList.add(new Calendar("First Event", DateUtil.returnStringDate("2018-11-26", "10:00:00"),  DateUtil.returnStringDate("2018-11-26", "11:00:00")));
-         calList.add(new Calendar("First Event", DateUtil.returnStringDate("2018-11-24", "10:00:00"),  DateUtil.returnStringDate("2018-11-24", "11:00:00")));
+      //  calList.add(new Calendar("First Event", DateUtil.returnStringDate("2018-11-26", "10:00:00"),  DateUtil.returnStringDate("2018-11-26", "11:00:00")));
+      //   calList.add(new Calendar("First Event", DateUtil.returnStringDate("2018-11-24", "10:00:00"),  DateUtil.returnStringDate("2018-11-24", "11:00:00")));
          
         return calList;
     }
