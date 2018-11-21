@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Date;
 import javax.validation.Valid;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("user")
 public class CalendarController {
     
-    public static Logger logger;
+    public Logger logger = LoggerFactory.getLogger(BaseController.class);
     
     @Autowired
     EventService service;
@@ -60,12 +61,13 @@ public class CalendarController {
     }
     
     @PostMapping("/add-events")
-    public String addEvent(ModelMap model,@Valid @ModelAttribute("calEvent") Calendar calEvent){
-//        if(result.hasErrors())
-//            return "add-event";
+    public String addEvent(ModelMap model,@Valid @ModelAttribute("calEvent") Calendar calEvent, BindingResult result){
+        if(result.hasErrors())
+            return "add-event";
 
-           logger.debug("CalendardController Event : {}",calEvent);
-            service.addLiteEvent(calEvent.getTitle(), calEvent.getStartDate(),calEvent.getEndDate());        
+        System.out.println("CalendardController Event : " + calEvent.getTitle());
+  //      logger.debug("CalendardController Event : {}",calEvent);
+        service.addLiteEvent(calEvent.getTitle(), calEvent.getStartDate(),calEvent.getEndDate());        
         return "redirect:/list-events";
     }
     
