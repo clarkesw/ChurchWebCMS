@@ -12,7 +12,9 @@ public class Calendar {
     
     private Date  startDate;
     private Date  endDate;
-
+    private Date  startTime;
+    private Date  endTime;
+    
     public Calendar() {}
 
     public Calendar(String title, Date startDate, Date endDate) {
@@ -26,6 +28,22 @@ public class Calendar {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public Date getStartDate() {

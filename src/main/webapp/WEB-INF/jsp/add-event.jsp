@@ -15,16 +15,34 @@
                                 <form:errors path="details" cssClass="text-warning"/>
 			</fieldset>
  			<fieldset class="form-group">
-				<form:label path="startDate">Start Date</form:label>
-				<form:input path="startDate" type="text" class="form-control"
-					required="required" />
-				<form:errors path="startDate" cssClass="text-warning" />
+                            <form:label path="startDate">Start Date</form:label>
+
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            
+                            <form:input path="endDate" type="text" class="form-control"/>
 			</fieldset>
                         <fieldset class="form-group">
 				<form:label path="endDate">End Date</form:label>
-				<form:input path="endDate" type="text" class="form-control"
-					required="required" />
-				<form:errors path="endDate" cssClass="text-warning" />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <form:input path="endDate" type="text" class="form-control"
+                                                    required="required" />
+                                            <form:errors path="endDate" cssClass="text-warning" />
+                                        </td>
+                                        <td>
+                                            <form:input path="endTime" type="text" class="form-control"
+                                                    required="required" />
+                                            <form:errors path="endTime" cssClass="text-warning" />     
+                                        </td>
+                                    </tr>
+                                </table>
+				
 			</fieldset>
                      <fieldset class="form-group">
 				<form:label path="url">Image URL</form:label> 
