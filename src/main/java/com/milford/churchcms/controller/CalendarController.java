@@ -65,10 +65,15 @@ public class CalendarController {
         if(result.hasErrors())
             return "add-event";
 
-        System.out.println("CalendardController Event : " + calEvent.getTitle());
+        testCal(calEvent.getStartDate(),calEvent.getStartTime());
   //      logger.debug("CalendardController Event : {}",calEvent);
         service.addLiteEvent(calEvent.getTitle(), calEvent.getStartDate(),calEvent.getEndDate());        
         return "redirect:/list-events";
+    }
+    
+    public void testCal(Date myDate, Date myTime){
+        System.out.println("Raw Date : {}"+ myDate);
+        System.out.println("Raw Time : {}"+ myTime);
     }
     
     @GetMapping("/delete-event")
@@ -87,12 +92,12 @@ public class CalendarController {
         return "redirect:/list-events";
     }
     
-    //    @GetMapping("/update-event")
-//    public String updateShowEvent(ModelMap model, @RequestParam int id){
-//     //   Calendar event = service.retrieveOneEvent(id);
-//     Calendar event = service.updateEvent(id);
-//        model.put("event", event);
-//        return "add-event";
-//    }    
+      @GetMapping("/update-event")
+    public String updateShowEvent(ModelMap model, @RequestParam int id){
+     //   Calendar event = service.retrieveOneEvent(id);
+    //   Calendar event = service.updateEvent(id);
+   //     model.put("event", event);
+        return "add-event";
+    }    
     
 }
