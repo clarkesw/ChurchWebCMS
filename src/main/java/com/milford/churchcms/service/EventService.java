@@ -5,7 +5,6 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.controller.BaseController;
 import com.milford.churchcms.dao.Calendar;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,11 +21,11 @@ public class EventService {
     private static List<Calendar> events = new ArrayList<Calendar>();
     private static int eventCount = 2;
 
-//    static {
-//        events.add(new Calendar("Learn Spring MVC",DateUtil.returnStringDate("2018-11-26", "10:00:00"), DateUtil.returnStringDate("2018-11-26", "11:00:00")));
-//        events.add(new Calendar("Learn Spring MVC",DateUtil.returnStringDate("2018-11-24", "12:00:00"), DateUtil.returnStringDate("2018-11-24", "14:00:00")));
-//
-//    }
+    static {
+        events.add(new Calendar(0, "Learn Spring MVC",new Date() ,new Date() ));
+        events.add(new Calendar(1, "Go Fishing",new Date() ,new Date() ));
+
+    }
 
     public List<Calendar> retrieveEvents() {
         return events;

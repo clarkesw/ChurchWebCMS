@@ -6,10 +6,8 @@
 			<thead>
 				<tr>
                                     <th>Title</th>
-                                    <th>Description</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
-                                    <th>Image URL</th>
                                     <th>Is Event Repeated?</th>
                                     <th></th>
                                     <th></th>
@@ -19,10 +17,8 @@
 				<c:forEach items="${events}" var="event">
 					<tr>
                                             <td>${event.title}</td>
-                                            <td>${event.details}</td>
                                             <td>${event.startDate}</td>
                                             <td>${event.endDate}</td>
-                                            <td>${event.url}</td>
                                             <td>${event.isRepeated}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id}">Delete</a></td>

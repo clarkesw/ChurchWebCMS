@@ -10,6 +10,7 @@ import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.StringTokenizer;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,24 +57,36 @@ public class CalendarController {
     }
  
     @GetMapping("/add-events")
-    public String showAddEvent(ModelMap model, @ModelAttribute("calEvent") Calendar calEvent){     
+    public String showAddEvent(ModelMap model, @ModelAttribute("event") Calendar calEvent){     
         return "add-event";
     }
     
     @PostMapping("/add-events")
-    public String addEvent(ModelMap model,@Valid @ModelAttribute("calEvent") Calendar calEvent, BindingResult result){
+    public String addEvent(ModelMap model,@Valid @ModelAttribute("event") Calendar calEvent, BindingResult result){
         if(result.hasErrors())
             return "add-event";
 
-        testCal(calEvent.getStartDate(),calEvent.getStartTime());
+        Date startDate = addTimeToDate(calEvent.getStartDate(),calEvent.getStartTime());
   //      logger.debug("CalendardController Event : {}",calEvent);
         service.addLiteEvent(calEvent.getTitle(), calEvent.getStartDate(),calEvent.getEndDate());        
         return "redirect:/list-events";
     }
     
-    public void testCal(Date myDate, Date myTime){
+    private Date addTimeToDate(Date myDate, String myTime){
         System.out.println("Raw Date : {}"+ myDate);
         System.out.println("Raw Time : {}"+ myTime);
+        
+        StringTokenizer timeToken = new StringTokenizer(myTime,":");
+        myDate.setHours(Integer.parseInt(timeToken.nextToken()));
+        
+        String time = timeToken.nextToken();
+        String AmPm = time.substring(2);
+        String minutes = time.substring(0,2);
+        
+        myDate.setMinutes(Integer.parseInt(minutes));
+        System.out.println("New Date : {}"+ AmPm);
+        
+        return myDate;
     }
     
     @GetMapping("/delete-event")
@@ -83,20 +96,19 @@ public class CalendarController {
     }
     
     @PostMapping("/update-event")
-    public String updateEventPost(ModelMap model,@Valid @ModelAttribute("calEvent") Calendar event, BindingResult result){
+    public String updateEventPost(ModelMap model,@Valid @ModelAttribute("event") Calendar event, BindingResult result){
         if(result.hasErrors())
             return "add-event";
         
-    //    service.updateEvent(event);
-    //    service.updateEvent(event);
+        service.updateEvent(event);
         return "redirect:/list-events";
     }
     
       @GetMapping("/update-event")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
-     //   Calendar event = service.retrieveOneEvent(id);
-    //   Calendar event = service.updateEvent(id);
-   //     model.put("event", event);
+        Calendar event = service.retrieveOneEvent(id);
+//        Calendar event = service.updateEvent(id);
+//        model.put("event", event);
         return "add-event";
     }    
     
