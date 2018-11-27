@@ -15,9 +15,11 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${events}" var="event">
+                                        <fmt:formatDate value="${event.startDate}" var="formattedStartDate" 
+                                                type="date" pattern="MM-dd-yyyy hh:mm a" />
 					<tr>
                                             <td>${event.title}</td>
-                                            <td>${event.startDate}</td>
+                                            <td>${formattedStartDate}</td>
                                             <td>${event.endDate}</td>
                                             <td>${event.isRepeated}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
