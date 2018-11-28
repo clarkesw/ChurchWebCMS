@@ -103,8 +103,7 @@ public class CalendarController extends BaseController{
       @GetMapping("/update-event")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
         Calendar event = service.retrieveOneEvent(id);
-//        Calendar event = service.updateEvent(id);
-//        model.put("event", event);
+        model.put("event", event);
         return "add-event";
     }    
     
