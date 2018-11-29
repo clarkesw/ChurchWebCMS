@@ -7,8 +7,8 @@ package com.milford.churchcms.service;
 
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,14 +17,14 @@ import org.springframework.stereotype.Service;
 public class WebPageService {
 
     public Logger logger = LoggerFactory.getLogger(WebPageService.class);
-    private final Map<String,WebPage> webPages = new HashMap<>();
-    private final WebPage homePage = new WebPage(0,"High.bmp","Home to C3" ,"WE will rock u", "The church is pregnant.");
+    private final List<WebPage> webPages = new ArrayList<>();
+    private final WebPage homePage = new WebPage(0,AppConstants.WebPage.HOME, "High.bmp","Home to C3" ,"WE will rock u", "The church is pregnant.",true);
     
     {
-        webPages.put(AppConstants.WebPage.HOME, homePage);
+        webPages.add(homePage);
     }
 
-    public Map<String,WebPage> retrievePages() {
+    public List<WebPage> retrievePages() {
         return webPages;
     }
 }

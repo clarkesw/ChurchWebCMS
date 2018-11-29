@@ -5,7 +5,6 @@
  */
 package com.milford.churchcms.controller;
 
-import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +19,9 @@ public class WebPageController extends BaseController{
     @Autowired
     WebPageService service;
     
-    @GetMapping("/show-home")
+    @GetMapping("/list-pages")
     public String showPages(ModelMap model){
-        model.put("events", service.retrievePages());
+        model.put("pages", service.retrievePages());
         return "list-pages";
     }
 }

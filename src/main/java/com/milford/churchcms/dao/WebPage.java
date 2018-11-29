@@ -12,26 +12,40 @@ package com.milford.churchcms.dao;
 public class WebPage {
     
     private Integer id;
+    private String pageName;
     private String mainPic;
     private String pageHeader;
     private String message;
     private String announcements;
+    private boolean isVisible;
 
     public WebPage() {}
 
-    public WebPage(String mainPic, String pageHeader, String message, String announcements) {
+    public WebPage(String pageName, String mainPic, String pageHeader, String message, String announcements, boolean isVisible) {
+        this.pageName = pageName;
         this.mainPic = mainPic;
         this.pageHeader = pageHeader;
         this.message = message;
         this.announcements = announcements;
+        this.isVisible = isVisible;
     }
 
-    public WebPage(int id, String mainPic, String pageHeader, String message, String announcements) {
+    public WebPage(int id, String pageName, String mainPic, String pageHeader, String message, String announcements, boolean isVisible) {
         this.id = id;
+        this.pageName = pageName;
         this.mainPic = mainPic;
         this.pageHeader = pageHeader;
         this.message = message;
         this.announcements = announcements;
+        this.isVisible = isVisible;
+    }
+
+    public String getPageName() {
+        return pageName;
+    }
+
+    public void setPageName(String pageName) {
+        this.pageName = pageName;
     }
 
     public int getId() {
@@ -72,6 +86,14 @@ public class WebPage {
 
     public void setAnnouncements(String announcements) {
         this.announcements = announcements;
+    }
+
+    public boolean isIsVisible() {
+        return isVisible;
+    }
+
+    public void setIsVisible(boolean isVisible) {
+        this.isVisible = isVisible;
     }
 
     @Override
