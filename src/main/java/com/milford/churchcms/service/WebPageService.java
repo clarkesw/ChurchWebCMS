@@ -8,6 +8,7 @@ package com.milford.churchcms.service;
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,5 +27,32 @@ public class WebPageService {
 
     public List<WebPage> retrievePages() {
         return webPages;
+    }
+    
+    public WebPage retrieveOnePage(int id) {
+        logger.debug("EventService.retrieveOneEvent id: {}" + id);
+        for (WebPage page : webPages) {
+            if (page.getId() == id) {
+                return page;
+            }
+        }
+        return null;
+    }
+    
+    public void deletePage(int id) {
+        logger.debug("EventService.deletePage id: {}" + id);
+        Iterator<WebPage> iterator = webPages.iterator();
+        while (iterator.hasNext()) {
+            WebPage page = iterator.next();
+            if (page.getId() == id) {
+                iterator.remove();
+            }
+        }
+    }
+    
+    public void updatePage(WebPage page){
+        logger.debug("EventService.updatePage id: {}" + page.getId());
+        deletePage(page.getId());    
+    	webPages.add(page);
     }
 }

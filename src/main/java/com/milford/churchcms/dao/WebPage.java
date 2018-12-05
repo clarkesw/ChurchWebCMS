@@ -5,6 +5,8 @@
  */
 package com.milford.churchcms.dao;
 
+import java.util.Date;
+
 /**
  *
  * @author clarke
@@ -13,6 +15,7 @@ public class WebPage {
     
     private Integer id;
     private String pageName;
+    private Date   lastModified;
     private String mainPic;
     private String pageHeader;
     private String message;
@@ -38,6 +41,14 @@ public class WebPage {
         this.message = message;
         this.announcements = announcements;
         this.isVisible = isVisible;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 
     public String getPageName() {

@@ -12,7 +12,8 @@ package com.milford.churchcms;
 public class AppConstants {
     
     public class WebPage{
-        public static final String HOME = "home";
-        public static final String CALENDAR = "calendar";
+        public static final int num_of_items = 2;
+        public static final String HOME = "Home";
+        public static final String CALENDAR = "Calendar";
     }
 }

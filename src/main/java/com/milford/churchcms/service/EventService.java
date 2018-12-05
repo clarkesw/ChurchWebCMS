@@ -33,7 +33,6 @@ public class EventService {
 
     public Calendar retrieveOneEvent(int id) {
         logger.debug("EventService.retrieveOneEvent id: {}" + id);
-        Calendar filteredEvents = new Calendar();
         for (Calendar event : events) {
             if (event.getId() == id) {
                 return event;
@@ -43,7 +42,7 @@ public class EventService {
     }
     public void addEvent(Date start, Date end,String title, String url, boolean isRepeated) {
         logger.debug("EventService.addEvent title: {}" + title);
-     //   events.add(new Calendar(++eventCount,start, end, isRepeated, title,  url));
+        events.add(new Calendar(++eventCount, title, start, end));
     }
     
     public void addLiteEvent(String title, Date start, Date end) {
