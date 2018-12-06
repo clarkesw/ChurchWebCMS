@@ -5,15 +5,10 @@
  */
 package com.milford.churchcms;
 
-import java.text.DateFormat;
-import java.text.ParseException;
+import com.milford.churchcms.dao.Calendar;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 /**
@@ -23,10 +18,13 @@ import java.util.logging.Logger;
 public class Test {
 //    public static void main(String[] args){
 //      //   of(int year, int month, int dayOfMonth, int hour, int minute)
-//      
-//        LocalDateTime ldt = LocalDateTime.of(2018, 11, 20, 10, 30);
+//       Date endDate = new Date();
+//       endDate.setDate(23);
+//      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+//        String tt = sdf.format(endDate);
 //
-//
-//        System.out.println("My Date: " + ldt);
+//        System.out.println("My Date: " + tt);
 //    }
 }
+
+// "2018-11-26T10:00:00"

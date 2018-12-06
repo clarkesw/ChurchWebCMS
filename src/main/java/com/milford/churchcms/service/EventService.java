@@ -17,14 +17,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EventService {
-     public Logger logger = LoggerFactory.getLogger(EventService.class);
+    public Logger logger = LoggerFactory.getLogger(EventService.class);
     private static List<Calendar> events = new ArrayList<Calendar>();
     private static int eventCount = 2;
 
+    private static Date endDate = new Date(2018,12,30,20,30);
+    
     static {
-        events.add(new Calendar(0, "Learn Spring MVC",new Date() ,new Date() ));
-        events.add(new Calendar(1, "Go Fishing",new Date() ,new Date() ));
-
+        events.add(new Calendar(0, "Learn Spring MVC",new Date() ,endDate ));
+        events.add(new Calendar(1, "Go Fishing",new Date() ,endDate ));
     }
 
     public List<Calendar> retrieveEvents() {
@@ -40,6 +41,7 @@ public class EventService {
         }
         return null;
     }
+    
     public void addEvent(Date start, Date end,String title, String url, boolean isRepeated) {
         logger.debug("EventService.addEvent title: {}" + title);
         events.add(new Calendar(++eventCount, title, start, end));

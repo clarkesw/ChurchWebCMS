@@ -14,11 +14,11 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${pages}" var="page">
-                                      <%--  <fmt:formatDate value="${page.startDate}" var="formattedStartDate" 
-                                            type="date" pattern="MM-dd-yyyy hh:mm a" /> --%>
+                                        <fmt:formatDate value="${page.lastModified}" var="formattedLastModified" 
+                                            type="date" pattern="MM-dd-yyyy hh:mm a" /> 
 					<tr>
                                             <td>${page.pageName}</td>
-                                            <td><%--${formattedStartDate}--%>${page.lastModified}</td>
+                                            <td>${formattedLastModified}</td>
                                             <td>${page.isVisible}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-page?id=${page.id}">Update</a></td>
 					</tr>

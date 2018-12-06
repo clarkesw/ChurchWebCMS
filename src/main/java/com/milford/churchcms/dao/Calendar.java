@@ -20,7 +20,8 @@ public class Calendar {
     public Calendar(String title, Date startDate, Date endDate) {
         this.title = title;
         this.startDate = startDate;
-        this.endDate = endDate;
+        this.endDate = endDate;   
+        timeSet(startDate, endDate);
     }
 
     public Calendar(Integer id, String title, Date startDate, Date endDate) {
@@ -28,6 +29,12 @@ public class Calendar {
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
+        timeSet(startDate, endDate);
+    }
+    
+    private void timeSet(Date startDate, Date endDate){
+        this.startTime = startDate.getHours() + ":" + startDate.getMinutes();
+        this.endTime = endDate.getHours() + ":" + endDate.getMinutes();
     }
 
     public String getStartTime() {

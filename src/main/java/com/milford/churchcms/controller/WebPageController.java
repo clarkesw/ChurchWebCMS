@@ -7,9 +7,12 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
+import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
 import java.util.Date;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +26,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("user")
 public class WebPageController extends BaseController{
+    
+    public Logger logger = LoggerFactory.getLogger(WebPageController.class);
     
     @Autowired
     WebPageService service;

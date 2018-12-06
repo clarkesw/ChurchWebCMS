@@ -100,9 +100,11 @@ public class CalendarController extends BaseController{
         return "redirect:/list-events";
     }
     
-      @GetMapping("/update-event")
+    @GetMapping("/update-event")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
         Calendar event = service.retrieveOneEvent(id);
+        
+        logger.debug("Calendar End Time: {}" + event.getEndTime());
         model.put("event", event);
         return "add-event";
     }    

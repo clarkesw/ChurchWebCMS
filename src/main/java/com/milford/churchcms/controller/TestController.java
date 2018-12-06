@@ -6,8 +6,8 @@
 package com.milford.churchcms.controller;
 
 
-import com.milford.churchcms.dao.Calendar;
-import com.milford.churchcms.util.DateUtil;
+import com.milford.churchcms.dao.CalTest;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -18,11 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     
     @GetMapping("/test")
-    public List<Calendar> getTest(){
+    public List<CalTest> getTest(){
       
-        List<Calendar> calList = new ArrayList<>();
-      //  calList.add(new Calendar("First Event", DateUtil.returnStringDate("2018-11-26", "10:00:00"),  DateUtil.returnStringDate("2018-11-26", "11:00:00")));
-      //   calList.add(new Calendar("First Event", DateUtil.returnStringDate("2018-11-24", "10:00:00"),  DateUtil.returnStringDate("2018-11-24", "11:00:00")));
+        List<CalTest> calList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        
+        Date startDate = new Date();
+        startDate.setDate(20);
+        startDate.setHours(9);
+        startDate.setMinutes(30);
+        
+        Date endDate = new Date();
+        endDate.setDate(23);
+        endDate.setHours(20);
+        
+        calList.add(new CalTest("First Event", sdf.format(startDate),  sdf.format(endDate)));
+ //       calList.add(new Calendar("First Event", DateUtil.returnStringDate("2018-11-24", "10:00:00"),  DateUtil.returnStringDate("2018-11-24", "11:00:00")));
          
         return calList;
     }
