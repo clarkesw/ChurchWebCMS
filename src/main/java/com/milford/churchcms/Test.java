@@ -5,7 +5,7 @@
  */
 package com.milford.churchcms;
 
-import com.milford.churchcms.dao.Calendar;
+import com.milford.churchcms.dao.CalendarEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

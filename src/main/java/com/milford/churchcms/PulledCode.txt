@@ -4,3 +4,10 @@
 list-events.jsp
   <td><fmt:formatDate value="${event.start}"/></td>
   <td><fmt:formatDate value="${event.end}"/></td>
+
+
+        protected void configure(HttpSecurity http) throws Exception {
+                http.authorizeRequests().antMatchers("/login").permitAll()
+                                .antMatchers("/*todo*/**", "/*event*/**").access("hasRole('USER')").and()
+                                .formLogin();
+        }

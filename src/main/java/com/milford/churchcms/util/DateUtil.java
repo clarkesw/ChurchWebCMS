@@ -5,6 +5,8 @@
  */
 package com.milford.churchcms.util;
 
+import com.milford.churchcms.dao.CalendarEvent;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -15,6 +17,30 @@ import java.util.Date;
  */
 public class DateUtil {
     
+    public static CalendarEvent updateTimeDate(CalendarEvent event){
+        event.setStart(setStartTime(event.getStartDateCont()));
+        event.setEnd(setEndTime(event.getEndDateCont()));
+        event.setStart(setStartUIDate(event.getStartDateCont()));
+        event.setEnd(setEndUIDate(event.getEndDateCont()));
+        return event;
+    }
+    public static String setStartTime(Date startDateCont){
+       return startDateCont.getHours() + ":" + startDateCont.getMinutes();
+    }
+
+    public static String setEndTime( Date endDateCont){
+       return endDateCont.getHours() + ":" + endDateCont.getMinutes();
+    }
+    
+   public static String setStartUIDate( Date endDateCont){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        return sdf.format(endDateCont);  
+    }
+
+   public static String setEndUIDate(Date endDateCont){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        return sdf.format(endDateCont);
+    }
     public static LocalDateTime stringToDate(String date, String time){
         //   LocalDateTime.of(int year, int month, int dayOfMonth, int hour, int minute)
       

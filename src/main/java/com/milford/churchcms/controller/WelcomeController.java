@@ -22,19 +22,26 @@ public class WelcomeController {
     
 //    @Autowired
 //    UserRepository repository;
+    
     Logger logger = LoggerFactory.getLogger(WelcomeController.class);
     
-    @GetMapping("/")
-    public String showWelcomePage(ModelMap model){
-        model.put("user", getLoggedInUser());
-        logger.info("WelcomeController User : {}", getLoggedInUser());
-        return "welcome";
-    }
+//    @GetMapping("/")
+//    public String showWelcomePage(ModelMap model){
+//        return "cms/welcome";
+//    }
     
-    @GetMapping("/welcome")
-    public String showWelcomePageAfterLogin(ModelMap model){
-        return "welcome";
-    }
+//    @GetMapping("/login")
+//    public String showCMSRootPage(ModelMap model){
+//        model.put("user", getLoggedInUser());
+//        logger.debug("WelcomeController User : {}", getLoggedInUser());
+//        return "welcomeddddd";
+//    }
+    
+//    @GetMapping("/welcome")
+//    public String showWelcomePageAfterLogin(ModelMap model){
+//        model.put("user", getLoggedInUser());
+//        return "cms/welcome";
+//    }
     
     private String getLoggedInUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

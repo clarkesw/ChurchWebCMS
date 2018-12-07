@@ -7,7 +7,6 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
-import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
 import java.util.Date;
 import javax.validation.Valid;
@@ -35,23 +34,23 @@ public class WebPageController extends BaseController{
     @GetMapping("/list-pages")
     public String showPages(ModelMap model){
         model.put("pages", service.retrievePages());
-        return "list-pages";
+        return "cms/list-pages";
     }
     
     @PostMapping("/update-page")
     public String updatePagePost(ModelMap model,@Valid @ModelAttribute("page") WebPage page, @ModelAttribute("constants") AppConstants constants, BindingResult result){
         if(result.hasErrors())
-            return "add-page";
+            return "cms/add-page";
         page.setLastModified(new Date());
         service.updatePage(page);
-        return "redirect:/list-pages";
+        return "redirect:/cms/list-pages";
     }
     
     @GetMapping("/update-page")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
         WebPage page = service.retrieveOnePage(id);
         model.put("page", page);
-        return "add-page";
+        return "cms/add-page";
     }   
     
 }
