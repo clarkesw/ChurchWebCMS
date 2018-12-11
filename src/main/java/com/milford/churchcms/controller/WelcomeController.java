@@ -6,42 +6,45 @@
 package com.milford.churchcms.controller;
 
 
+import com.milford.churchcms.dao.User;
+import com.milford.churchcms.service.WelcomeService;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@SessionAttributes("user")
+//@SessionAttributes("user")
 public class WelcomeController {
     
-//    @Autowired
-//    UserRepository repository;
+    @Autowired
+    WelcomeService service;
     
     Logger logger = LoggerFactory.getLogger(WelcomeController.class);
     
-//    @GetMapping("/")
-//    public String showWelcomePage(ModelMap model){
-//        return "cms/welcome";
-//    }
+    @PostMapping("/login")
+    public String checkLoginCredentials(ModelMap model,@Valid @ModelAttribute("user") User user){
+        logger.debug("WelcomeController checkLoginCredentials db :" + user.getUsername() + "   input: "+model.get("username"));
+        User dbUser = service.retrieveOneUser(user.getUsername());
+        
+        if(dbUser == null || dbUser.getPassword() != user.getPassword() )
+            return "/login";
+        return "cms/welcome";
+    }
     
-//    @GetMapping("/login")
-//    public String showCMSRootPage(ModelMap model){
-//        model.put("user", getLoggedInUser());
-//        logger.debug("WelcomeController User : {}", getLoggedInUser());
-//        return "welcomeddddd";
-//    }
-    
-//    @GetMapping("/welcome")
-//    public String showWelcomePageAfterLogin(ModelMap model){
-//        model.put("user", getLoggedInUser());
-//        return "cms/welcome";
-//    }
+    @GetMapping("/login")
+    public String showWelcomePage(ModelMap model,@ModelAttribute("user") User user){
+      //  model.put("user", "clarke");
+        logger.debug("WelcomeController User  ");
+        return "cms/login-page";
+    }
     
     private String getLoggedInUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

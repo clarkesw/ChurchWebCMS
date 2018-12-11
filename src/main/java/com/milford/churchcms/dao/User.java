@@ -9,11 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+//@Entity
 public class User {
     
-    @Id
-    @GeneratedValue 
+//    @Id
+//    @GeneratedValue 
     private Integer id;
     private String username;
     private String password;
@@ -21,7 +21,11 @@ public class User {
     private String lastName;
     private String role;
 
-    public User() {
+    public User() {}
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public User(int id,String username, String password, String firstName, String lastName, String role) {

@@ -33,10 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-                http
-                    .authorizeRequests().antMatchers("/","/WebResponse*/**").permitAll()
-                    .anyRequest().authenticated()
-                   .antMatchers("/*todo*/**", "/*event*/**").access("hasRole('USER')").and()
-               .formLogin().loginPage("/welcome");
+//                http
+//                    .authorizeRequests().antMatchers("/","/WebResponse*/**").permitAll()
+//                    .anyRequest().authenticated()
+//                   .antMatchers("/*todo*/**", "/*event*/**", "/*cms*/**").access("hasRole('USER')").and()
+//               .formLogin();
+
+		http.authorizeRequests().antMatchers("/*","/login","/index*").permitAll()
+                                    .antMatchers("/*todo*/**", "/*event*/**").access("hasRole('USER')");
+                                           //     .and()
+				//.formLogin();
         }
 }
