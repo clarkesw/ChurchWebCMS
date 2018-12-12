@@ -8,6 +8,7 @@ package com.milford.churchcms.service;
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ public class WebPageService {
 
     public Logger logger = LoggerFactory.getLogger(WebPageService.class);
     private final List<WebPage> webPages = new ArrayList<>();
-    private final WebPage homePage = new WebPage(0,AppConstants.WebPage.HOME, "High.bmp","Home to C3" ,"WE will rock u", "The church is pregnant.",true);
+    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "../images/background.png","www.google.com" ,AppConstants.WebPage.HOME, new Date(), "The church is pregnant.",true);
     
     {
         webPages.add(homePage);
@@ -33,6 +34,16 @@ public class WebPageService {
         logger.debug("EventService.retrieveOneEvent id: {}" + id);
         for (WebPage page : webPages) {
             if (page.getId() == id) {
+                return page;
+            }
+        }
+        return null;
+    }
+    
+   public WebPage retrieveOnePage(String name) {
+        logger.debug("EventService.retrieveOneEvent id: {}" + name);
+        for (WebPage page : webPages) {
+            if (page.getPageName() == name) {
                 return page;
             }
         }

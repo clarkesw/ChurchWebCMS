@@ -34,8 +34,11 @@ public class WelcomeController {
         logger.debug("WelcomeController checkLoginCredentials db :" + user.getUsername() + "   input: "+model.get("username"));
         User dbUser = service.retrieveOneUser(user.getUsername());
         
-        if(dbUser == null || dbUser.getPassword() != user.getPassword() )
+        if(dbUser == null || !dbUser.getPassword().equals(user.getPassword() )){
+            model.addAttribute("error", "Incorrect Username/Password.");
             return "/login";
+        }
+            
         return "cms/welcome";
     }
     

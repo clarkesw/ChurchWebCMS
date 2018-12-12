@@ -14,6 +14,9 @@ import java.util.Date;
 public class WebPage {
     
     private Integer id;
+    private String title;
+    private String bgImage;
+    private String link;
     private String pageName;
     private Date   lastModified;
     private String mainPic;
@@ -24,25 +27,43 @@ public class WebPage {
 
     public WebPage() {}
 
-    public WebPage(String pageName, String mainPic, String pageHeader, String message, String announcements, boolean isVisible) {
+    public WebPage(String title, String bgImage, String link, String pageName, Date lastModified, String message, boolean isVisible) {
+        this.title = title;
+        this.bgImage = bgImage;
+        this.link = link;
         this.pageName = pageName;
-        this.mainPic = mainPic;
-        this.pageHeader = pageHeader;
+        this.lastModified = lastModified;
         this.message = message;
-        this.announcements = announcements;
         this.isVisible = isVisible;
     }
 
-    public WebPage(int id, String pageName, String mainPic, String pageHeader, String message, String announcements, boolean isVisible) {
-        this.id = id;
-        this.pageName = pageName;
-        this.mainPic = mainPic;
-        this.pageHeader = pageHeader;
-        this.message = message;
-        this.announcements = announcements;
-        this.isVisible = isVisible;
+    
+    public String getBgImage() {
+        return bgImage;
     }
 
+    public void setBgImage(String bgImage) {
+        this.bgImage = bgImage;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    
     public Date getLastModified() {
         return lastModified;
     }
