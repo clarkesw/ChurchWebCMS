@@ -43,8 +43,14 @@ public class UiController {
         logger.debug("UiController /home");
         model.addAttribute("page", pageService.retrieveOnePage(name));
         return "index";
+
     }
     
+    @GetMapping("/home")
+    public String getHome(){
+        logger.debug("UiController /home");
+        return "index";
+    }
 }
 
 /*
