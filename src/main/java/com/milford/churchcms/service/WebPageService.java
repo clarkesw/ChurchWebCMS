@@ -20,7 +20,7 @@ public class WebPageService {
 
     public Logger logger = LoggerFactory.getLogger(WebPageService.class);
     private final List<WebPage> webPages = new ArrayList<>();
-    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "../images/background.png","www.google.com" ,AppConstants.WebPage.HOME, new Date(), "The church is pregnant.",true);
+    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "../images/backgrounds.png","www.google.com" ,AppConstants.WebPage.HOME, new Date(), "The church is pregnant.",true);
     
     {
         webPages.add(homePage);
@@ -31,7 +31,7 @@ public class WebPageService {
     }
     
     public WebPage retrieveOnePage(int id) {
-        logger.debug("EventService.retrieveOneEvent id: {}" + id);
+        logger.debug("WebPageService.retrieveOneEvent id: {}" + id);
         for (WebPage page : webPages) {
             if (page.getId() == id) {
                 return page;
@@ -41,9 +41,10 @@ public class WebPageService {
     }
     
    public WebPage retrieveOnePage(String name) {
-        logger.debug("EventService.retrieveOneEvent id: {}" + name);
+        logger.debug("WebPageService.retrieveOneEvent name: " + name);
         for (WebPage page : webPages) {
-            if (page.getPageName() == name) {
+   //         System.out.println("WebPageService.retrieveOneEvent page: " + page.getBgImage()+"   "+page.getMessage());
+            if (page.getPageName().equalsIgnoreCase(name)) {
                 return page;
             }
         }

@@ -6,6 +6,7 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.dao.WebPage;
 import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
 import java.util.List;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("WebResponse")
 public class UiController {
     
     public Logger logger = LoggerFactory.getLogger(UiController.class);
@@ -39,8 +39,9 @@ public class UiController {
     }
     
     @GetMapping("/page/{name}")
-    public String getHome(@PathVariable String name, ModelMap model){
-        logger.debug("UiController /home");
+    public String showPage(@PathVariable String name, ModelMap model){
+        
+     //   logger.debug("UiController.showPage page: "+wp.getPageName());
         model.addAttribute("page", pageService.retrieveOnePage(name));
         return "index";
 
