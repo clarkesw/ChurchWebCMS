@@ -43,7 +43,7 @@ public class UiController {
         
      //   logger.debug("UiController.showPage page: "+wp.getPageName());
         model.addAttribute("page", pageService.retrieveOnePage(name));
-        return "index";
+        return "home";
 
     }
     

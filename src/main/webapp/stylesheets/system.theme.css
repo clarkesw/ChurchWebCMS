@@ -136,7 +136,7 @@ input.form-radio {
   text-align: right; /* LTR */
 }
 .more-help-link a {
-  background: url(../../misc/help.png) 0 50% no-repeat; /* LTR */
+  background: url(../../images/help.png) 0 50% no-repeat; /* LTR */
   padding: 1px 0 1px 20px; /* LTR */
 }
 
