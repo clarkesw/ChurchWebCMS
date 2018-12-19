@@ -17,6 +17,8 @@ public class WebPage {
     private String title;
     private String bgImage;
     private String link;
+    private String missionStatement;
+    private Article mainPageArticle;
     private String pageName;
     private Date   lastModified;
     private String mainPic;
@@ -27,16 +29,24 @@ public class WebPage {
 
     public WebPage() {}
 
-    public WebPage(String title, String bgImage, String link, String pageName, Date lastModified, String message, boolean isVisible) {
+    public WebPage(String title, String missionStatement, String bgImage, String link, String pageName, Date lastModified, String message, boolean isVisible) {
         this.title = title;
         this.bgImage = bgImage;
         this.link = link;
+        this.missionStatement = missionStatement;
         this.pageName = pageName;
         this.lastModified = lastModified;
         this.message = message;
         this.isVisible = isVisible;
     }
 
+    public String getMissionStatement() {
+        return missionStatement;
+    }
+
+    public void setMissionStatement(String missionStatement) {
+        this.missionStatement = missionStatement;
+    }
     
     public String getBgImage() {
         return bgImage;

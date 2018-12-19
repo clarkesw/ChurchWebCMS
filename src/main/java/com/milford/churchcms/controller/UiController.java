@@ -6,7 +6,7 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
-import com.milford.churchcms.dao.WebPage;
+import com.milford.churchcms.service.ChurchService;
 import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
 import java.util.List;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -27,6 +26,9 @@ public class UiController {
     
     @Autowired
     EventService eventService;
+    
+    @Autowired
+    ChurchService churchService;
         
     @Autowired
     WebPageService pageService;
@@ -41,7 +43,7 @@ public class UiController {
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
         
-     //   logger.debug("UiController.showPage page: "+wp.getPageName());
+        model.addAttribute("church", churchService.getChurchInfo());
         model.addAttribute("page", pageService.retrieveOnePage(name));
         return "home";
 
@@ -53,12 +55,3 @@ public class UiController {
         return "index";
     }
 }
-
-/*
-{
-  "defaultDate": "11-15-18",
-  "editable": false,
-  "eventLimit": true,
-  "events": [{"title": "First Event","start": "2018-11-26T10:00:00","end": "2018-11-26T10:30:00"}]
-}
-*/

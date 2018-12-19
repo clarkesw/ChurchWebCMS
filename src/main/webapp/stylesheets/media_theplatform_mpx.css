@@ -1,0 +1,32 @@
+
+/**
+ * @file
+ * media-mpx CSS.
+ *
+ */
+.media-mpx-wrapper table {
+  margin: 0;
+}
+.media-mpx-wrapper tr td,
+.media-mpx-wrapper tr th {
+  border: 0;
+}
+.mpx-inactive {
+  border: 4px solid red !important;
+}
+div.mpxplayer_select {
+  height: 40px;
+  clear: both;
+}
+.mpxmedia .media-item .label-wrapper {
+  margin-left: 0;
+}
+li.mpx-browser div.item-data{
+  display: none;
+}
+#media-tab-theplatform_mpx_mpxmedia #scrollbox,
+#media-tab-theplatform_mpx_mpxplayer #scrollbox {
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
