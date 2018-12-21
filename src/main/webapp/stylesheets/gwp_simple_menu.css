@@ -1,0 +1,7 @@
+ul.gwp-simple-menu li > ul.menu { 
+  max-height: 0;
+  overflow: hidden;
+}
+ul.gwp-simple-menu li.expanded.active-trail > ul.menu { 
+  max-height: 1000px; 
+}

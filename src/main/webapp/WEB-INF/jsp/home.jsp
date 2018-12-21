@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+    http://localhost:8080/page/sites/all/modules/custom/gwp_simple_menu/js/gwp_simple_menu5da7.js?p7rj3q
    "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" xmlns:og="http://ogp.me/ns#" xmlns:article="http://ogp.me/ns/article#" xmlns:book="http://ogp.me/ns/book#" xmlns:profile="http://ogp.me/ns/profile#" xmlns:video="http://ogp.me/ns/video#" xmlns:product="http://ogp.me/ns/product#" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 
@@ -23,30 +24,30 @@
 <!--<style type="text/css" media="all">
 @import url("../../stylesheets/media_theplatform_mpx.css?p7rj3q");
 @import url("../../stylesheets/date.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/sites/all/modules/contrib/date/date_popup/themes/datepicker.1.7.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/sites/all/modules/contrib/date/date_repeat_field/date_repeat_field.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/modules/field/theme/field.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/sites/all/modules/contrib/mollom/mollom.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/modules/node/node.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/modules/search/search.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/modules/user/user.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/sites/all/modules/contrib/views/css/views.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/sites/gwp/modules/contrib/ckeditor/css/ckeditor.css?p7rj3q");
+@import url("../../stylesheets/datepicker.1.7.css?p7rj3q");
+@import url("../../stylesheets/date_repeat_field.css?p7rj3q");
+@import url("../../stylesheets/field.css?p7rj3q");
+@import url("../../stylesheets/mollom.css?p7rj3q");
+@import url("../../stylesheets/node.css?p7rj3q");
+@import url("../../stylesheets/search.css?p7rj3q");
+@import url("../../stylesheets/user.css?p7rj3q");
+@import url("../../stylesheets/views.css?p7rj3q");
+@import url("../../stylesheets/ckeditor.css?p7rj3q");
 </style> -->
-<style type="text/css" media="all">
-@import url("http://cf.gatewaypeople.com/sites/all/modules/contrib/ctools/css/ctools.css?p7rj3q");
-@import url("http://gatewaypeople.com/sites/all/modules/custom/gwp_simple_menu/css/gwp_simple_menu.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/sites/all/modules/contrib/addressfield/addressfield.css?p7rj3q");
-@import url("http://cf.gatewaypeople.com/sites/all/libraries/mediaelement/build/mediaelementplayer.min.css?p7rj3q");
-</style>
-<style type="text/css" media="all">
+<!--<style type="text/css" media="all">
+@import url("../../stylesheets/ctools.css?p7rj3q");
+@import url("../../stylesheets/gwp_simple_menu.css?p7rj3q");
+@import url("../../stylesheets/addressfield.css?p7rj3q");
+@import url("../../stylesheets/mediaelementplayer.min.css?p7rj3q");
+</style>-->
+<style type="text/css" media="all"> 
 @import url("../../stylesheets/app.css?p7rj3q");
 </style>
 <!--<link type="text/css" rel="stylesheet" href="//cloud.typography.com/715654/749506/css/fonts.css" media="all" /> -->
 <style type="text/css" media="all">
 @import url("../../stylesheets/jquery.fancybox.css?p7rj3q");
 </style>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="../../scripts/jquery.min.js"></script>
 <script type="text/javascript" src="../../scripts/jquery.once.js?v=1.2"></script>
 <script type="text/javascript" src="../../scripts/drupal.js?p7rj3q"></script>
 <script type="text/javascript" src="../../scripts/jquery.cookie.js?v=67fb34f6a866c40d0570"></script>
@@ -75,7 +76,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
     <header class="header header-v1" role="banner">
         <div class="wrapper">
             <div id="site-logo">
-                <a href="index.html" title="Milford Baptist Church" rel="home" class="site-nav-logo"><img src="http://cf.gatewaypeople.com/prod/s3fs-public/gateway_logo_new.svg?null" alt="Home" /></a>
+                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="http://cf.gatewaypeople.com/prod/s3fs-public/gateway_logo_new.svg?null" alt="Home" /></a>
             </div>
         </div>
         <div class="header-top">
@@ -195,7 +196,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                 </li>
                                             </ul>
                                         </div>
-                                        <script src="http://cf.gatewaypeople.com/prod/s3fs-public/menuCall.js?null"></script>
+                                        <script src="../../scripts/menuCall.js?null"></script>
                                     </div>
                                     <!-- /.nav-inner -->
                                 </div>
@@ -302,7 +303,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                             <div class="card-detail-section card-overlay">
                                                                 <div class="card-header">
                                                                     <span class="card-type-tag card--tag-service">
-                                                      <span class="card-header-type">Service</span><span class="card-header-separator"><span class="card-separator">&nbsp;|&nbsp;</span></span><span class="card-header-department">Milford Baptist Church</span> </span>
+                                                      <span class="card-header-type">Service</span><span class="card-header-separator"><span class="card-separator">&nbsp;|&nbsp;</span></span><span class="card-header-department">${church.name}</span> </span>
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <h4 class="card-title">Overcoming Unforgiveness</h4>
@@ -340,7 +341,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                         <div class="card-detail-section card-overlay">
                                                             <div class="card-header">
                                                                 <span class="card-type-tag card--tag-announcement">
-                                                   <span class="card-header-type">Announcement</span><span class="card-header-separator"><span class="card-separator">&nbsp;|&nbsp;</span></span><span class="card-header-department">Milford Baptist Church</span> </span>
+                                                   <span class="card-header-type">Announcement</span><span class="card-header-separator"><span class="card-separator">&nbsp;|&nbsp;</span></span><span class="card-header-department">${church.name}</span> </span>
                                                             </div>
                                                             <div class="card-body">
                                                                 <h4 class="card-title">Pastor Robert | Health Update</h4>
@@ -742,8 +743,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                 </ul>
             </div>
             <div class="footer-info">
-                <div class="church-tag">Milford Baptist Church | <span>we're all about people</span></div>
-                <div class="church-info">&copy; 2018 | 817.328.1000 | 500 S Nolen Dr, Southlake, TX 76092</div>
+                <div class="church-tag">${church.name}| <span>${church.missionStatement}</span></div>
+                <div class="church-info">&copy; 2018 | ${church.telephone} | ${church.address.AddressLine1}, ${church.address.AddressLine2}</div>
             </div>
             <div class="clearfix"></div>
             <div class="clearfix"></div>
@@ -816,7 +817,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
         })();
         //--><!]]>
     </script>
-    <script type="text/javascript" src="sites/all/modules/custom/gwp_simple_menu/js/gwp_simple_menu5da7.js?p7rj3q"></script>
+    <script type="text/javascript" src="../../gwp_simple_menu5da7.js?p7rj3q"></script>
 </body>
 <!-- Mirrored from gatewaypeople.com/ by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 02 May 2018 17:55:20 GMT -->
 

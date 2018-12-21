@@ -10,7 +10,7 @@ package com.milford.churchcms.dao;
  * @author clarke
  */
 public class Church {
-    private String churchName;
+    private String name;
     private String missionStatement;
     private String email;
     private Address address;
@@ -19,8 +19,8 @@ public class Church {
     private String associatePastor;
     private String youthMinister;
 
-    public Church(String churchName, String missionStatement, String email, Address address, String telephone, String leadPastor) {
-        this.churchName = churchName;
+    public Church(String name, String missionStatement, String email, Address address, String telephone, String leadPastor) {
+        this.name = name;
         this.missionStatement = missionStatement;
         this.email = email;
         this.address = address;
@@ -28,12 +28,12 @@ public class Church {
         this.leadPastor = leadPastor;
     }
     
-    public String getChurchName() {
-        return churchName;
+    public String getName() {
+        return name;
     }
 
-    public void setChurchName(String churchName) {
-        this.churchName = churchName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMissionStatement() {

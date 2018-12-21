@@ -54,5 +54,12 @@ public class Address {
         this.zipCode = zipCode;
     }
     
+    public String getAddressLine1(){
+        return streetAddress;
+    }
+    
+    public String getAddressLine2(){
+        return city + ", " + state + " " + zipCode;
+    }
     
 }
