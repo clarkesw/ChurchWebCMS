@@ -6,6 +6,7 @@
 package com.milford.churchcms.service;
 
 import com.milford.churchcms.dao.Address;
+import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.dao.Church;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +19,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticleService {
     public Logger logger = LoggerFactory.getLogger(ArticleService.class);
-    private Address address = new Address("23 Millford Church Rd", "Smyrna", "GA", 30060);
-    private Church myC = new Church("Milford Baptist","C3","church@milford.com",address, "919-368-6332","Clarence");
+    private Article art = new Article("Helping Others","Sub Title","www.google.com", "To help others you must...", "../../images/your_image.jpg");
     
-    public Church getArticle(){
-        return myC;
+    public Article getArticleInfo(){
+        return art;
     }
 
 }

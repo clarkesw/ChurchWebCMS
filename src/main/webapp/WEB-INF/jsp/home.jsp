@@ -7,12 +7,12 @@
 <meta http-equiv="x-dns-prefetch-control" content="on" />
 <link rel="dns-prefetch" href="//cf.gatewaypeople.com" />
 
-<link rel="canonical" href="${church.churchName}" />
+<link rel="canonical" href="${church.name}" />
 <link rel="shortlink" href="http://milford.com/" />
 <meta property="og:site_name" content="Milford Church" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://milford.com/" />
-<meta property="og:title" content=${church.churchName} />
+<meta property="og:title" content=${church.name} />
 <meta property="og:description" content=${church.missionStatement} />
   <title>${page.title}</title>
   <style type="text/css" media="all">
@@ -330,21 +330,21 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                             </div>
                                             <div class="view-content">
                                                 <div class="card card--type-article card--tag-announcement">
-                                                    <a class="card-wrapper" href="ministries/life/announcement/2018/04/09/pastor-robert-health-update.html">
+                                                    <a class="card-wrapper" href='${article.url}'>
                                                         <div class="card-preview">
-                                                            <div class="card-thumbnail" style="background-image:url('http://cf.gatewaypeople.com/prod/s3fs-public/styles/card_thumbnail/public/thumbnails/PSROBthumbnail.jpg?null&amp;itok=NufQJ3U-');"></div>
+                                                            <div class="card-thumbnail" style="background-image:url('${article.imageURL}');"></div>
                                                             <div class="card-preview-hover">
-                                                                UPDATE (Tuesday, April 24) Here's an update from Pastor Robert: "I wanted to let you know I am getting better and so appreciate your prayers. My night sweats and headaches are better, and my blood levels are rebuilding themselves. And I got a good repor...
+                                                                ${article.content}
                                                             </div>
                                                         </div>
                                                         <!-- /.card-preview -->
                                                         <div class="card-detail-section card-overlay">
                                                             <div class="card-header">
                                                                 <span class="card-type-tag card--tag-announcement">
-                                                   <span class="card-header-type">Announcement</span><span class="card-header-separator"><span class="card-separator">&nbsp;|&nbsp;</span></span><span class="card-header-department">${church.name}</span> </span>
+                                                                 <span class="card-header-type">${article.title}</span> </span>
                                                             </div>
                                                             <div class="card-body">
-                                                                <h4 class="card-title">Pastor Robert | Health Update</h4>
+                                                                <h4 class="card-title">${article.subTitle}</h4>
                                                             </div>
                                                             <!-- /.card-body -->
                                                         </div>

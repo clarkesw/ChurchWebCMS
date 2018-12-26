@@ -6,6 +6,7 @@
 package com.milford.churchcms.service;
 
 import com.milford.churchcms.dao.Address;
+import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.dao.Church;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,5 +25,4 @@ public class ChurchService {
     public Church getChurchInfo(){
         return myC;
     }
-
 }

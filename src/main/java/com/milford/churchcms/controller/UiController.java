@@ -6,6 +6,7 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.service.ArticleService;
 import com.milford.churchcms.service.ChurchService;
 import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
@@ -31,6 +32,9 @@ public class UiController {
     ChurchService churchService;
         
     @Autowired
+    ArticleService articleService;
+    
+    @Autowired
     WebPageService pageService;
         
     @GetMapping("/calEventArray")
@@ -43,6 +47,7 @@ public class UiController {
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
         
+        model.addAttribute("article", articleService.getArticleInfo());
         model.addAttribute("church", churchService.getChurchInfo());
         model.addAttribute("page", pageService.retrieveOnePage(name));
         return "home";
