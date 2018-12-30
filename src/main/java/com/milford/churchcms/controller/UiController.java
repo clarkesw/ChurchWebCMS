@@ -6,6 +6,8 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.dao.Church;
+import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.service.ArticleService;
 import com.milford.churchcms.service.ChurchService;
 import com.milford.churchcms.service.EventService;
@@ -30,6 +32,9 @@ public class UiController {
     
     @Autowired
     ChurchService churchService;
+    
+    @Autowired
+    ChurchRepository churchRepo;
         
     @Autowired
     ArticleService articleService;
@@ -46,9 +51,11 @@ public class UiController {
     
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
-        
+        logger.debug("UiController /page/" + name);
+        List<Church> findAll = churchRepo.findAll();
+        logger.debug("Church Bean size : " + findAll.size());
         model.addAttribute("article", articleService.getArticleInfo());
-        model.addAttribute("church", churchService.getChurchInfo());
+        model.addAttribute("church", findAll.get(0));
         model.addAttribute("page", pageService.retrieveOnePage(name));
         return "home";
 

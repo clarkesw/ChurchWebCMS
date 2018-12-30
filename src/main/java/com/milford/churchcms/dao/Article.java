@@ -10,18 +10,39 @@ package com.milford.churchcms.dao;
  * @author clarke
  */
 public class Article {
+    private int id;
     private String title;
+    private String pageName;
     private String subTitle;
     private String url;
     private String content;
     private String imageURL;
 
-    public Article(String title,String subTitle, String url,String content, String imageURL) {
+    public Article() {}
+
+    public Article(String title, String pageName, String subTitle, String url, String content, String imageURL) {
+        this.title = title;
+        this.pageName = pageName;
         this.subTitle = subTitle;
         this.url = url;
-        this.title = title;
         this.content = content;
         this.imageURL = imageURL;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPageName() {
+        return pageName;
+    }
+
+    public void setPageName(String pageName) {
+        this.pageName = pageName;
     }
 
     public String getSubTitle() {

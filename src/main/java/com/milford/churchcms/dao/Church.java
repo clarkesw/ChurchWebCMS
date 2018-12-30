@@ -5,19 +5,37 @@
  */
 package com.milford.churchcms.dao;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 /**
  *
  * @author clarke
  */
+@Entity
+@Table(name = "CHURCH")
 public class Church {
+    @Id
+    @GeneratedValue
+    private int id;
     private String name;
     private String missionStatement;
     private String email;
+    
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
+    @JoinColumn(name = "ADDRESS_ID")
     private Address address;
     private String telephone;
     private String leadPastor;
     private String associatePastor;
     private String youthMinister;
+
+    public Church() {}
 
     public Church(String name, String missionStatement, String email, Address address, String telephone, String leadPastor) {
         this.name = name;
@@ -26,6 +44,14 @@ public class Church {
         this.address = address;
         this.telephone = telephone;
         this.leadPastor = leadPastor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getName() {

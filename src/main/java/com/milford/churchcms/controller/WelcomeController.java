@@ -19,9 +19,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-//@SessionAttributes("user")
+@SessionAttributes("user")
 public class WelcomeController {
     
     @Autowired
@@ -38,13 +39,13 @@ public class WelcomeController {
             model.addAttribute("error", "Incorrect Username/Password.");
             return "/login";
         }
-            
+        model.put("user", user);   
         return "cms/welcome";
     }
     
     @GetMapping("/login")
     public String showWelcomePage(ModelMap model,@ModelAttribute("user") User user){
-      //  model.put("user", "clarke");
+        model.put("user", user);   
         logger.debug("WelcomeController User  ");
         return "cms/login-page";
     }

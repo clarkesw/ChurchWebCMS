@@ -20,7 +20,7 @@ public class WebPageService {
 
     public Logger logger = LoggerFactory.getLogger(WebPageService.class);
     private final List<WebPage> webPages = new ArrayList<>();
-    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "We believe in the 3 C's", "../images/background.png","www.google.com" ,AppConstants.WebPage.HOME, new Date(), "The church is pregnant.",true);
+    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "../images/background.png","www.google.com" ,AppConstants.WebPage.HOME, new Date(), "The church is pregnant.",true);
     
     {
         webPages.add(homePage);

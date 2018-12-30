@@ -21,7 +21,7 @@
 @import url("../../stylesheets/system.messages.css?p7rj3q");
 @import url("../../stylesheets/system.theme.css?p7rj3q");
 </style>
-<!--<style type="text/css" media="all">
+<style type="text/css" media="all">
 @import url("../../stylesheets/media_theplatform_mpx.css?p7rj3q");
 @import url("../../stylesheets/date.css?p7rj3q");
 @import url("../../stylesheets/datepicker.1.7.css?p7rj3q");
@@ -33,13 +33,13 @@
 @import url("../../stylesheets/user.css?p7rj3q");
 @import url("../../stylesheets/views.css?p7rj3q");
 @import url("../../stylesheets/ckeditor.css?p7rj3q");
-</style> -->
-<!--<style type="text/css" media="all">
+</style> 
+<style type="text/css" media="all">
 @import url("../../stylesheets/ctools.css?p7rj3q");
 @import url("../../stylesheets/gwp_simple_menu.css?p7rj3q");
 @import url("../../stylesheets/addressfield.css?p7rj3q");
 @import url("../../stylesheets/mediaelementplayer.min.css?p7rj3q");
-</style>-->
+</style>
 <style type="text/css" media="all"> 
 @import url("../../stylesheets/app.css?p7rj3q");
 </style>
@@ -76,7 +76,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
     <header class="header header-v1" role="banner">
         <div class="wrapper">
             <div id="site-logo">
-                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="http://cf.gatewaypeople.com/prod/s3fs-public/gateway_logo_new.svg?null" alt="Home" /></a>
+                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="125" height="125" alt="Home" /></a>
             </div>
         </div>
         <div class="header-top">
@@ -92,12 +92,14 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                             <li class="leaf"><a href="ministries/life/tithes-egiving.html">Give</a></li>
                                             <li class="leaf"><a href="ministries/prayer.html">Pray</a></li>
                                             <li class="leaf"><a href="ministries/devotions.html">Devotions</a></li>
-                                            <li class="primary"><a href="/" >Social</a>
-                                            <ul>
-                                                <li><a class="primary">FB</a></li>
-                                              <!--  <li class="leaf"><a href="https://instagram.com/gatewaypeople" class="social instagram" target="_blank"><i class="fa fa-instagram"></i></a></li> -->
-                                                <li><a class="primary">TW</a></li>
-                                            </ul>
+                                            <li>
+                                                <a href="#"> Social</a>
+                                                <ul class="dropdown">
+                                                    <li class="first leaf"><a href="http://www.facebook.com/gatewaypeople" title="" class="social facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                    <li class="leaf"><a href="https://instagram.com/gatewaypeople" class="social instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                                    <li class="last leaf"><a href="http://twitter.com/gatewaypeople" title="" class="social twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                 </ul>   
+                                            </li>
                                         </li>
 
                                         </ul>
@@ -250,7 +252,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                     <div>
                                         <div class="content">
                                             <hgroup>
-                                                <h1>${page.missionStatement}</h1>
+                                                <h1>${church.missionStatement}</h1>
                                             </hgroup>
                                             <a class="button color-white arrow-point-right arrow-after scrollto" href="#block-views-gwp-campus-times-block">Service Times</a><a class="button color-white arrow-point-right arrow-after mobile-hide scrollto" href="#block-block-46">Locations</a><a class="button color-white arrow-point-right arrow-after mobile-show-inline scrollto" href="#block-views-gwp-campus-times-block">Locations</a>
                                         </div>
@@ -744,7 +746,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
             </div>
             <div class="footer-info">
                 <div class="church-tag">${church.name}| <span>${church.missionStatement}</span></div>
-                <div class="church-info">&copy; 2018 | ${church.telephone} | ${church.address.AddressLine1}, ${church.address.AddressLine2}</div>
+                <div class="church-info">&copy; 2018 | ${church.telephone} | ${church.address.addressLine1}, ${church.address.addressLine2}</div>
             </div>
             <div class="clearfix"></div>
             <div class="clearfix"></div>

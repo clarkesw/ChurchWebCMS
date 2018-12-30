@@ -5,21 +5,41 @@
  */
 package com.milford.churchcms.dao;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author clarke
  */
+@Entity
+@Table(name = "ADDRESS")
 public class Address {
+    @Id
+    @GeneratedValue
+    private int id;
     private String streetAddress;
     private String city;
     private String state;
     private int zipCode;
+
+    public Address() {}
 
     public Address(String streetAddress, String city, String state, int zipCode) {
         this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStreetAddress() {

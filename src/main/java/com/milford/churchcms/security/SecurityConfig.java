@@ -38,9 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                   .antMatchers("/*todo*/**", "/*event*/**", "/*cms*/**").access("hasRole('USER')").and()
 //               .formLogin();
 
-		http.authorizeRequests().antMatchers("/*","/login","/index*").permitAll()
+		http.authorizeRequests().antMatchers("/*","/login","/index*","/h2/**").permitAll()
                                     .antMatchers("/*todo*/**", "/*event*/**").access("hasRole('USER')");
                                            //     .and()
 				//.formLogin();
+                http.csrf().disable();
+                http.headers().frameOptions().disable();
         }
 }

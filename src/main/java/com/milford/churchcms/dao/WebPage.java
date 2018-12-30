@@ -17,35 +17,24 @@ public class WebPage {
     private String title;
     private String bgImage;
     private String link;
-    private String missionStatement;
     private Article mainPageArticle;
     private String pageName;
     private Date   lastModified;
     private String mainPic;
     private String pageHeader;
     private String message;
-    private String announcements;
     private boolean isVisible;
 
     public WebPage() {}
 
-    public WebPage(String title, String missionStatement, String bgImage, String link, String pageName, Date lastModified, String message, boolean isVisible) {
+    public WebPage(String title, String bgImage, String link, String pageName, Date lastModified, String message, boolean isVisible) {
         this.title = title;
         this.bgImage = bgImage;
         this.link = link;
-        this.missionStatement = missionStatement;
         this.pageName = pageName;
         this.lastModified = lastModified;
         this.message = message;
         this.isVisible = isVisible;
-    }
-
-    public String getMissionStatement() {
-        return missionStatement;
-    }
-
-    public void setMissionStatement(String missionStatement) {
-        this.missionStatement = missionStatement;
     }
     
     public String getBgImage() {
@@ -122,14 +111,6 @@ public class WebPage {
         this.message = message;
     }
 
-    public String getAnnouncements() {
-        return announcements;
-    }
-
-    public void setAnnouncements(String announcements) {
-        this.announcements = announcements;
-    }
-
     public boolean isIsVisible() {
         return isVisible;
     }
@@ -140,6 +121,7 @@ public class WebPage {
 
     @Override
     public String toString() {
-        return "HomePage{" + "id=" + id + ", mainPic=" + mainPic + ", pageHeader=" + pageHeader + ", message=" + message + ", announcements=" + announcements + '}';
+        return "WebPage{" + "id=" + id + ", title=" + title + ", bgImage=" + bgImage + ", link=" + link + ", mainPageArticle=" + mainPageArticle + ", pageName=" + pageName + ", lastModified=" + lastModified + ", mainPic=" + mainPic + ", pageHeader=" + pageHeader + ", message=" + message + ", isVisible=" + isVisible + '}';
     }
+
 }
