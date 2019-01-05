@@ -5,13 +5,24 @@
  */
 package com.milford.churchcms.dao;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author clarke
  */
+@Entity
+@Table(name = "ARTICLE")
 public class Article {
+    @Id
+    @GeneratedValue
     private int id;
     private String title;
+    @Column(name="page_name")
     private String pageName;
     private String subTitle;
     private String url;

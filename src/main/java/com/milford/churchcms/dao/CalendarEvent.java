@@ -2,14 +2,25 @@ package com.milford.churchcms.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.milford.churchcms.util.DateUtil;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+@Table(name = "CALENDAREVENT")
 public class CalendarEvent {
-   
+    @Id
+    @GeneratedValue 
     private Integer id;
     private String  title;
+    @Column(name="start_date")
     private String  start;
+    @Column(name="end_date")
     private String  end;
     
     @JsonIgnore
@@ -20,9 +31,12 @@ public class CalendarEvent {
     private String details;
     
     @JsonIgnore
+    @Temporal(TemporalType.DATE)
     private Date  startDateCont;
     @JsonIgnore
+    @Temporal(TemporalType.DATE)
     private Date  endDateCont;
+    
     @JsonIgnore
     private String startTime;
     @JsonIgnore

@@ -1,10 +1,6 @@
-
-
-
 list-events.jsp
   <td><fmt:formatDate value="${event.start}"/></td>
   <td><fmt:formatDate value="${event.end}"/></td>
-
 
         protected void configure(HttpSecurity http) throws Exception {
                 http.authorizeRequests().antMatchers("/login").permitAll()
@@ -27,3 +23,10 @@ values (1,null,"church@milford.com","Clarence","C3","Milford Baptist","919-368-6
 
 insert into ChurchDB.address
 values (1, "Smyrna", "GA", "23 Millford Church Rd",30060);
+
+    <li class="primary"><a href="/" >Social</a>
+    <ul>
+        <li><a class="primary">FB</a></li>
+      <!--  <li class="leaf"><a href="https://instagram.com/gatewaypeople" class="social instagram" target="_blank"><i class="fa fa-instagram"></i></a></li> -->
+        <li><a class="primary">TW</a></li>
+    </ul>

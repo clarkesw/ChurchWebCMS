@@ -6,18 +6,34 @@
 package com.milford.churchcms.dao;
 
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author clarke
  */
+@Entity
+@Table(name = "WEBPAGE")
 public class WebPage {
     
-    private Integer id;
+    @Id
+    @GeneratedValue
+    private int id;
     private String title;
     private String bgImage;
     private String link;
-    private Article mainPageArticle;
+    
+    @OneToMany(cascade=CascadeType.ALL, targetEntity = Article.class)
+    @JoinColumn(name = "page_name")
+    private List<Article> mainPageArticle;
     private String pageName;
     private Date   lastModified;
     private String mainPic;
