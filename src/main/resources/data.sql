@@ -1,5 +1,5 @@
-/*insert into ADDRESS 
-values("23 Millford Church Rd", "Smyrna", "GA", 30060);
-
 insert into CHURCH
-values("Milford Baptist","C3","church@milford.com",1, "919-368-6332","Clarence"); */
+values (1,null,"church@milford.com","Clarence","C3","Milford Baptist","919-368-6332",null,1);
+
+insert into ADDRESS
+values (1, "Smyrna", "GA", "23 Millford Church Rd",30060);
