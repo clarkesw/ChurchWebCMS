@@ -31,7 +31,7 @@ public class WebPageService {
     }
     
     public WebPage retrieveOnePage(int id) {
-        logger.debug("WebPageService.retrieveOneEvent id: {}" + id);
+        logger.debug("WebPageService.retrieveOnePage id: {}" + id);
         for (WebPage page : webPages) {
             if (page.getId() == id) {
                 return page;
@@ -41,9 +41,8 @@ public class WebPageService {
     }
     
    public WebPage retrieveOnePage(String name) {
-        logger.debug("WebPageService.retrieveOneEvent name: " + name);
+        logger.debug("WebPageService.retrieveOnePage name: " + name);
         for (WebPage page : webPages) {
-   //         System.out.println("WebPageService.retrieveOneEvent page: " + page.getBgImage()+"   "+page.getMessage());
             if (page.getPageName().equalsIgnoreCase(name)) {
                 return page;
             }
@@ -52,7 +51,7 @@ public class WebPageService {
     }
     
     public void deletePage(int id) {
-        logger.debug("EventService.deletePage id: {}" + id);
+        logger.debug("WebPageService.deletePage id: {}" + id);
         Iterator<WebPage> iterator = webPages.iterator();
         while (iterator.hasNext()) {
             WebPage page = iterator.next();
@@ -63,8 +62,9 @@ public class WebPageService {
     }
     
     public void updatePage(WebPage page){
-        logger.debug("EventService.updatePage id: {}" + page.getId());
+        logger.debug("WebPageService.updatePage id: {}" + page.getId());
         deletePage(page.getId());    
     	webPages.add(page);
+        logger.debug("WebPageService.updatePage id: {}" + webPages.get(0));
     }
 }

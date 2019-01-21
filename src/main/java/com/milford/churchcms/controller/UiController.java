@@ -44,7 +44,7 @@ public class UiController {
         
     @GetMapping("/calEventArray")
     @ResponseBody
-    public List<CalendarEvent> getTest(){
+    public List<CalendarEvent> getCalendarEvent(){
         logger.debug("UiController /calEventArray");
         return eventService.retrieveEvents();
     }

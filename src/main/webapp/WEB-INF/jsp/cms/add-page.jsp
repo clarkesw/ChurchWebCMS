@@ -9,7 +9,7 @@
                                 <form:errors path="pageName" cssClass="text-warning"/>
 			</fieldset>   
                       	<fieldset class="form-group">
-				<form:label path="title">Page Title</form:label> 
+				<form:label path="title">Page Title (On Tab)</form:label> 
 				<form:input  type="text" maxlength="25"
 					class="form-control" required="required" path="title"/>
                                 <form:errors path="title" cssClass="text-warning"/>
@@ -40,6 +40,7 @@
 			<button type="submit" class="btn btn-success">Add</button>
                         
 		</form:form>
+                        <a href="list-articles">Edit ${pageName} Articles</a>
 	</div>
 
 <%@ include file="common/footer.jspf" %>
