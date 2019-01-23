@@ -9,7 +9,6 @@ import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.Church;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.service.ArticleService;
-import com.milford.churchcms.service.ChurchService;
 import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
 import java.util.List;
@@ -29,9 +28,6 @@ public class UiController {
     
     @Autowired
     EventService eventService;
-    
-    @Autowired
-    ChurchService churchService;
     
     @Autowired
     ChurchRepository churchRepo;
