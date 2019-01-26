@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CHURCH")
-public class Church {
+public class ChurchInfo {
     @Id
     @GeneratedValue
     private int id;
@@ -35,9 +35,9 @@ public class Church {
     private String associatePastor;
     private String youthMinister;
 
-    public Church() {}
+    public ChurchInfo() {}
 
-    public Church(String name, String missionStatement, String email, Address address, String telephone, String leadPastor) {
+    public ChurchInfo(String name, String missionStatement, String email, Address address, String telephone, String leadPastor) {
         this.name = name;
         this.missionStatement = missionStatement;
         this.email = email;
@@ -46,7 +46,7 @@ public class Church {
         this.leadPastor = leadPastor;
     }
 
-    public Church(Church info) {
+    public ChurchInfo(ChurchInfo info) {
         this.name = info.getName();
         this.missionStatement = info.getMissionStatement();
         this.email = info.getEmail();
