@@ -6,13 +6,10 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Article;
-import com.milford.churchcms.dao.WebPage;
 import com.milford.churchcms.service.ArticleService;
-import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.StringTokenizer;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -63,31 +60,16 @@ public class ArticleController{
     
     @PostMapping("/add-articles")
     public String addArticle(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
+        logger.debug("addArticle Article : {}",article); 
         if(result.hasErrors())
             return "cms/add-article";
-  //      logger.debug("CalendardController Event : {}",article); 
+        service.addArticle(article);
         return "redirect:list-articles";
-    }
-    
-    private Date addTimeToDate(Date myDate, String myTime){
-        System.out.println("Raw Date : {}"+ myDate);
-        System.out.println("Raw Time : {}"+ myTime);
-        
-        StringTokenizer timeToken = new StringTokenizer(myTime,":");
-        myDate.setHours(Integer.parseInt(timeToken.nextToken()));
-        
-        String time = timeToken.nextToken();
-        String AmPm = time.substring(2);
-        String minutes = time.substring(0,2);
-        
-        myDate.setMinutes(Integer.parseInt(minutes));
-        System.out.println("New Date : {}"+ AmPm);
-        
-        return myDate;
     }
     
     @GetMapping("/delete-article")
     public String deleteArticle(@RequestParam int id){
+        logger.debug("deleteArticle ID : {}",id); 
         service.deleteArticle(id);
         return "redirect:list-articles";
     }
@@ -96,7 +78,7 @@ public class ArticleController{
     public String updateArticlePost(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
         if(result.hasErrors())
             return "cms/add-article";
-
+        service.updateArticle(article);
         return "redirect:list-articles";
     }
     

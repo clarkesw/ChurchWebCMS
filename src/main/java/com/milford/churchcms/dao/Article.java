@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.dao;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,7 @@ public class Article {
     private String url;
     private String content;
     private String imageURL;
+    private Date publishedDate;
 
     public Article() {}
 
@@ -38,6 +40,28 @@ public class Article {
         this.url = url;
         this.content = content;
         this.imageURL = imageURL;
+    }
+
+    public Article(String title, String pageName, String subTitle, String url, String content, String imageURL, Date publishedDate) {
+        this.title = title;
+        this.pageName = pageName;
+        this.subTitle = subTitle;
+        this.url = url;
+        this.content = content;
+        this.imageURL = imageURL;
+        this.publishedDate = publishedDate;
+    }
+
+    public Article(Article art) {
+        new Article (art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL(), new Date());
+    }
+
+    public Date getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(Date publishedDate) {
+        this.publishedDate = publishedDate;
     }
 
     public int getId() {

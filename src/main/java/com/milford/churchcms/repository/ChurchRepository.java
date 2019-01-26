@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author clarke
  */
-public interface ChurchRepository  extends JpaRepository<Church,Integer>{
-  
+public interface ChurchRepository extends JpaRepository<Church,Integer>{
+       
 }

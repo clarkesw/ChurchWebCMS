@@ -1,20 +1,20 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-		<form:form method="post" modelAttribute="article" >
+		<form:form method="post" modelAttribute="info" >
                       	<fieldset class="form-group">
-				<form:label path="title">Title</form:label> 
+				<form:label path="name">Name</form:label> 
 				<form:input  type="text" maxlength="25"
-					class="form-control" required="required" path="title"/>
-                                <form:errors path="title" cssClass="text-warning"/>
+					class="form-control" required="required" path="name"/>
+                                <form:errors path="name" cssClass="text-warning"/>
 			</fieldset>
                          <fieldset class="form-group">
-				<form:label path="subTitle">SubTitle</form:label> 
+				<form:label path="missionStatement">Mission Statement</form:label> 
 				<form:input  type="text" maxlength="25"
-					class="form-control" required="required" path="subTitle"/>
-                                <form:errors path="subTitle" cssClass="text-warning"/>
+					class="form-control" required="required" path="missionStatement"/>
+                                <form:errors path="missionStatement" cssClass="text-warning"/>
 			</fieldset>
-                        <fieldset class="form-group">
+			<fieldset class="form-group">
 				<form:label path="content">Content</form:label> 
 				<form:textarea  type="text" 
 					class="form-control" path="content"/>

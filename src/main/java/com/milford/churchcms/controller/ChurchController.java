@@ -6,6 +6,8 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.dao.Church;
+import com.milford.churchcms.service.ChurchService;
 import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -34,20 +36,13 @@ public class ChurchController{
     public Logger logger = LoggerFactory.getLogger(ChurchController.class);
     
     @Autowired
-    EventService service;
-    
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(
-                dateFormat, false));
-    }
+    ChurchService service;
         
-    @GetMapping("/list-events")
+    @GetMapping("/churchInfo")
     public String showEvent(ModelMap model){
         String username = getLoggedInName(model);
-        model.put("events", service.retrieveEvents());
-        return "cms/list-events";
+        model.put("info", service.getChurchInfo());
+        return "cms/list-info";
     }
 
     private String getLoggedInName(ModelMap model) {
@@ -55,67 +50,21 @@ public class ChurchController{
         return (String)model.get("user");
     }
  
-    @GetMapping("/add-events")
-    public String showAddEvent(ModelMap model, @ModelAttribute("event") CalendarEvent calEvent){     
-        return "cms/add-event";
-    }
-    
-    @PostMapping("/add-events")
-    public String addEvent(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent calEvent, BindingResult result){
-        if(result.hasErrors())
-            return "cms/add-event";
-
-        Date startDate = addTimeToDate(calEvent.getStartDateCont(),calEvent.getStartTime());
-        Date endDate = addTimeToDate(calEvent.getEndDateCont(),calEvent.getEndTime());
-  //      logger.debug("CalendardController Event : {}",calEvent);
-        service.addLiteEvent(calEvent.getTitle(), startDate, endDate);        
-        return "redirect:list-events";
-    }
-    
-    private Date addTimeToDate(Date myDate, String myTime){
-        System.out.println("Raw Date : {}"+ myDate);
-        System.out.println("Raw Time : {}"+ myTime);
-        
-        StringTokenizer timeToken = new StringTokenizer(myTime,":");
-        myDate.setHours(Integer.parseInt(timeToken.nextToken()));
-        
-        String time = timeToken.nextToken();
-        String AmPm = time.substring(2);
-        String minutes = time.substring(0,2);
-        
-        myDate.setMinutes(Integer.parseInt(minutes));
-        System.out.println("New Date : {}"+ AmPm);
-        
-        return myDate;
-    }
-    
-    @GetMapping("/delete-event")
-    public String deleteEvent(@RequestParam int id){
-        service.deleteEvent(id);
-        return "redirect:list-events";
-    }
-    
-    @PostMapping("/update-event")
-    public String updateEventPost(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent event, BindingResult result){
+    @PostMapping("/update-info")
+    public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") Church info, BindingResult result){
         if(result.hasErrors())
             return "cms/add-event";
         
-        service.updateEvent(event);
-        return "redirect:list-events";
+        service.updateInfo(info);
+        return "redirect:list-info";
     }
     
-    @GetMapping("/update-event")
-    public String updateShowEvent(ModelMap model, @RequestParam int id){
-        CalendarEvent event = service.retrieveOneEvent(id);
+    @GetMapping("/update-info")
+    public String updateShowEvent(ModelMap model){
+        Church info = service.getChurchInfo();
         
-        logger.debug("Calendar End Time: {}" + event.getEndTime());
-        model.put("event", event);
-        return "cms/add-event";
+        logger.debug("Updated Info for {}" + info.getName());
+        model.put("info", info);
+        return "cms/add-info";
     }    
-    
-//    @ResponseBody 
-//    @GetMapping("/calEventArray")
-//    public List<CalendarEvent> getTest(){
-//        return service.retrieveEvents();
-//    }
 }

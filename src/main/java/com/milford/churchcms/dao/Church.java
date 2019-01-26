@@ -46,6 +46,15 @@ public class Church {
         this.leadPastor = leadPastor;
     }
 
+    public Church(Church info) {
+        this.name = info.getName();
+        this.missionStatement = info.getMissionStatement();
+        this.email = info.getEmail();
+        this.address = info.getAddress();
+        this.telephone = info.getTelephone();
+        this.leadPastor = info.getLeadPastor();
+    }
+
     public int getId() {
         return id;
     }

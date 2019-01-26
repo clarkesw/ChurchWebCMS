@@ -2,24 +2,24 @@
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
 		<table class="table table-striped">
-			<caption>Articles</caption>
+			<caption>Calendar Events</caption>
 			<thead>
 				<tr>
-                                    <th>Name</th>
-                                    <th>Page</th>
-                                    <th>Published Date</th>
+                                    <th>Web Page</th>
+                                    <th>Last Modified</th>
+                                    <th>Page Visible</th>
                                     <th></th>
                                     <th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${articles}" var="art">
-                                        <fmt:formatDate value="${art.publishedDate}" var="formattedLastModified" 
+				<c:forEach items="${pages}" var="page">
+                                        <fmt:formatDate value="${page.lastModified}" var="formattedLastModified" 
                                             type="date" pattern="MM-dd-yyyy hh:mm a" /> 
 					<tr>
-                                            <td>${art.title}</td>
-                                            <td>${art.pageName}</td>                                                                                        
+                                            <td>${page.pageName}</td>
                                             <td>${formattedLastModified}</td>
+                                            <td>${page.isVisible}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-page?id=${page.id}">Update</a></td>
 					</tr>
 				</c:forEach>
