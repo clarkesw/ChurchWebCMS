@@ -60,7 +60,7 @@
 				<form:checkbox class="form-control"  path="isRepeated"/>
                                 <form:errors path="isRepeated" cssClass="text-warning"/>
 			</fieldset>
-			<button type="submit" class="btn btn-success">Add</button>
+			<button type="submit" class="btn btn-success">Update</button>
                         
 		</form:form>
 	</div>

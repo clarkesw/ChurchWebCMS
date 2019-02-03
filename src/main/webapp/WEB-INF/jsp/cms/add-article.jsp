@@ -26,7 +26,7 @@
 					class="form-control" path="imageURL"/>
                                 <form:errors path="imageURL" cssClass="text-warning"/>
 			</fieldset>
-			<button type="submit" class="btn btn-success">Add</button>
+			<button type="submit" class="btn btn-success">Update</button>
                         
 		</form:form>
 	</div>

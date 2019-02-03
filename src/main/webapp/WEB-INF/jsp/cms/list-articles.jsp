@@ -20,7 +20,7 @@
                                             <td>${art.title}</td>
                                             <td>${art.pageName}</td>                                                                                        
                                             <td>${formattedLastModified}</td>
-                                            <td><a type="button" class="btn btn-success" href="/update-page?id=${page.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-success" href="/update-page?id=${art.id}">Update</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

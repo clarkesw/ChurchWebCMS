@@ -10,13 +10,16 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author clarke
  */
 public class DateUtil {
-    
+     public static Logger logger = LoggerFactory.getLogger(DateUtil.class);
+     
     public static CalendarEvent updateTimeDate(CalendarEvent event){
         event.setStart(setStartTime(event.getStartDateCont()));
         event.setEnd(setEndTime(event.getEndDateCont()));
@@ -25,10 +28,12 @@ public class DateUtil {
         return event;
     }
     public static String setStartTime(Date startDateCont){
+       logger.debug(startDateCont.toString());
        return startDateCont.getHours() + ":" + startDateCont.getMinutes();
     }
 
     public static String setEndTime( Date endDateCont){
+        logger.debug(endDateCont.toString());
        return endDateCont.getHours() + ":" + endDateCont.getMinutes();
     }
     

@@ -24,8 +24,8 @@
                                             <td>${formattedStartDate}</td>
                                             <td>${formattedEndDate}</td>
                                             <td>${event.isRepeated}</td>
-                                            <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
-                                            <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id}">Delete</a></td>
+                                            <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id-1}">Update</a></td>
+                                            <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id-1}">Delete</a></td>
 					</tr>
                                     </c:forEach>
 			</tbody>

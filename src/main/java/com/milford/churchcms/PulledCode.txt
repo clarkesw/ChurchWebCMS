@@ -1,4 +1,7 @@
 list-events.jsp
+${event.isRepeated}
+
+
   <td><fmt:formatDate value="${event.start}"/></td>
   <td><fmt:formatDate value="${event.end}"/></td>
 

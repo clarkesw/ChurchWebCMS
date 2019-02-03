@@ -31,10 +31,8 @@ public class CalendarEvent {
     private String details;
     
     @JsonIgnore
-    @Temporal(TemporalType.DATE)
     private Date  startDateCont;
     @JsonIgnore
-    @Temporal(TemporalType.DATE)
     private Date  endDateCont;
     
     @JsonIgnore
@@ -151,6 +149,11 @@ public class CalendarEvent {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "CalendarEvent{" + "id=" + id + ", title=" + title + ", start=" + start + ", end=" + end + ", isRepeated=" + isRepeated + ", url=" + url + ", details=" + details + ", startDateCont=" + startDateCont + ", endDateCont=" + endDateCont + ", startTime=" + startTime + ", endTime=" + endTime + '}';
     }
       
       

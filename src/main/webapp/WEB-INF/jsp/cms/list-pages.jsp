@@ -2,10 +2,10 @@
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
 		<table class="table table-striped">
-			<caption>Calendar Events</caption>
+			<caption>Web Page</caption>
 			<thead>
 				<tr>
-                                    <th>Web Page</th>
+                                    <th>Page</th>
                                     <th>Last Modified</th>
                                     <th>Page Visible</th>
                                     <th></th>

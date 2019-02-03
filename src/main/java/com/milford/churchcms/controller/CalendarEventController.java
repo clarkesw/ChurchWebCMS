@@ -6,10 +6,13 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import java.util.StringTokenizer;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -36,6 +39,9 @@ public class CalendarEventController{
     @Autowired
     EventService service;
     
+    @Autowired
+    CalendarEventRepository repository;
+    
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -46,7 +52,10 @@ public class CalendarEventController{
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){
         String username = getLoggedInName(model);
-        model.put("events", service.retrieveEvents());
+        List<CalendarEvent> retrieveEvents = repository.findAll();
+        model.put("events", retrieveEvents);
+       logger.debug("showEvent endDate: {}" + retrieveEvents.get(0).getEndDateCont());
+       logger.debug("showEvent endTime: {}" + retrieveEvents.get(0).getEndTime());
         return "cms/list-events";
     }
 
@@ -68,7 +77,8 @@ public class CalendarEventController{
         Date startDate = addTimeToDate(calEvent.getStartDateCont(),calEvent.getStartTime());
         Date endDate = addTimeToDate(calEvent.getEndDateCont(),calEvent.getEndTime());
   //      logger.debug("CalendardController Event : {}",calEvent);
-        service.addLiteEvent(calEvent.getTitle(), startDate, endDate);        
+     //   service.addLiteEvent(calEvent.getTitle(), startDate, endDate);    
+        repository.save(new CalendarEvent(calEvent.getTitle(), startDate, endDate));
         return "redirect:list-events";
     }
     
@@ -91,7 +101,7 @@ public class CalendarEventController{
     
     @GetMapping("/delete-event")
     public String deleteEvent(@RequestParam int id){
-        service.deleteEvent(id);
+        repository.deleteById(id);
         return "redirect:list-events";
     }
     
@@ -100,16 +110,19 @@ public class CalendarEventController{
         if(result.hasErrors())
             return "cms/add-event";
         
-        service.updateEvent(event);
+    //    service.updateEvent(event);
+        repository.delete(event);
+        repository.save(event);
         return "redirect:list-events";
     }
     
     @GetMapping("/update-event")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
-        CalendarEvent event = service.retrieveOneEvent(id);
+        logger.debug("updateShowEvent ID: {}" + id);
+        Optional<CalendarEvent> event = repository.findById(id);
         
-        logger.debug("Calendar End Time: {}" + event.getEndTime());
-        model.put("event", event);
+        logger.debug("updateShowEvent ID: {}" + event.isPresent());
+        model.put("event", event.get());
         return "cms/add-event";
     }    
     

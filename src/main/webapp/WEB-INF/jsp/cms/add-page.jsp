@@ -37,7 +37,7 @@
 				<form:checkbox class="form-control"  path="isVisible"/>
                                 <form:errors path="isVisible" cssClass="text-warning"/>
 			</fieldset>
-			<button type="submit" class="btn btn-success">Add</button>
+			<button type="submit" class="btn btn-success">Update</button>
                         
 		</form:form>
                         <a href="list-articles">Edit ${pageName} Articles</a>

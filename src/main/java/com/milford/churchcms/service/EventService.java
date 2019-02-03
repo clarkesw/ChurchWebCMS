@@ -32,11 +32,13 @@ public class EventService {
     }
 
     public List<CalendarEvent> retrieveEvents() {
+        logger.debug("retrieveEvents title: {}" + events.get(0));
+        
         return events;
     }
 
     public CalendarEvent retrieveOneEvent(int id) {
-        logger.debug("EventService.retrieveOneEvent id: {}" + id);
+        logger.debug("retrieveOneEvent id: {}" + id);
         for (CalendarEvent event : events) {
             if (event.getId() == id) {
                 return event;
@@ -46,17 +48,17 @@ public class EventService {
     }
     
     public void addEvent(Date start, Date end,String title, String url, boolean isRepeated) {
-        logger.debug("EventService.addEvent title: {}" + title);
+        logger.debug("addEvent title: {}" + title);
         events.add(new CalendarEvent(++eventCount, title, start, end));
     }
     
     public void addLiteEvent(String title, Date start, Date end) {
-        logger.debug("EventService.addEvent title: {}" + title);
+        logger.debug("addLiteEvent title: {}" + title);
         events.add(new CalendarEvent(++eventCount, title, start, end));
     }
  
     public void deleteEvent(int id) {
-        logger.debug("EventService.deleteEvent id: {}" + id);
+        logger.debug("deleteEvent id: {}" + id);
         Iterator<CalendarEvent> iterator = events.iterator();
         while (iterator.hasNext()) {
             CalendarEvent event = iterator.next();
