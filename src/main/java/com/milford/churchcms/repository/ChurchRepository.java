@@ -5,13 +5,13 @@
  */
 package com.milford.churchcms.repository;
 
-import com.milford.churchcms.dao.Church;
+import com.milford.churchcms.dao.ChurchInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author clarke
  */
-public interface ChurchRepository extends JpaRepository<Church,Integer>{
+public interface ChurchRepository extends JpaRepository<ChurchInfo,Integer>{
        
 }

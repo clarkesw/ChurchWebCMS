@@ -5,38 +5,29 @@
  */
 package com.milford.churchcms.controller;
 
-import com.milford.churchcms.dao.CalendarEvent;
-import com.milford.churchcms.dao.Church;
-import com.milford.churchcms.service.ChurchService;
-import com.milford.churchcms.service.EventService;
-import java.text.SimpleDateFormat;
+import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.service.ChurchInfoService;
 import java.util.Collection;
-import java.util.Date;
-import java.util.StringTokenizer;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("user")
-public class ChurchController{
+public class ChurchInfoController{
     
-    public Logger logger = LoggerFactory.getLogger(ChurchController.class);
+    public Logger logger = LoggerFactory.getLogger(ChurchInfoController.class);
     
     @Autowired
-    ChurchService service;
+    ChurchInfoService service;
         
     @GetMapping("/churchInfo")
     public String showEvent(ModelMap model){
@@ -51,7 +42,7 @@ public class ChurchController{
     }
  
     @PostMapping("/update-info")
-    public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") Church info, BindingResult result){
+    public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") ChurchInfo info, BindingResult result){
         if(result.hasErrors())
             return "cms/add-event";
         
@@ -61,7 +52,7 @@ public class ChurchController{
     
     @GetMapping("/update-info")
     public String updateShowEvent(ModelMap model){
-        Church info = service.getChurchInfo();
+        ChurchInfo info = service.getChurchInfo();
         
         logger.debug("Updated Info for {}" + info.getName());
         model.put("info", info);
