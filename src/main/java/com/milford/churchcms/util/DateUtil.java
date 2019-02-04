@@ -28,12 +28,12 @@ public class DateUtil {
         return event;
     }
     public static String setStartTime(Date startDateCont){
-       logger.debug(startDateCont.toString());
+       logger.debug("setStartTime  :{}",startDateCont.toString());
        return startDateCont.getHours() + ":" + startDateCont.getMinutes();
     }
 
     public static String setEndTime( Date endDateCont){
-        logger.debug(endDateCont.toString());
+        logger.debug("setEndTime  :{}",endDateCont.toString());
        return endDateCont.getHours() + ":" + endDateCont.getMinutes();
     }
     

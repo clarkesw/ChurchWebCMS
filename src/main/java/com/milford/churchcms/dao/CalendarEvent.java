@@ -62,6 +62,17 @@ public class CalendarEvent {
        this.start =  DateUtil.setStartUIDate(startDateCont);
         this.end = DateUtil.setEndUIDate(endDateCont);
     }
+
+    public CalendarEvent(String title, String url, String details, Date startDateCont, Date endDateCont, String startTime, String endTime) {
+        this.title = title;
+        this.url = url;
+        this.details = details;
+        this.startDateCont = startDateCont;
+        this.endDateCont = endDateCont;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+    
     
     public String getStart() {
         return start;

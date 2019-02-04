@@ -14,20 +14,22 @@
 		</tr>
 		</thead>
 			<tbody>
+                            <c:if test="${not empty events}">
                                 <c:forEach items="${events}" var="event">
                                         <fmt:formatDate value="${event.startDateCont}" var="formattedStartDate" 
-                                                type="date" pattern="MM-dd-yyyy hh:mm a" />
+                                                type="date" pattern="MM-dd-yyyy" />
                                         <fmt:formatDate value="${event.endDateCont}" var="formattedEndDate" 
-                                                type="date" pattern="MM-dd-yyyy hh:mm a" />
+                                                type="date" pattern="MM-dd-yyyy" />
 					<tr>
                                             <td>${event.title}</td>
-                                            <td>${formattedStartDate}</td>
-                                            <td>${formattedEndDate}</td>
+                                            <td>${formattedStartDate} ${event.startTime}</td>
+                                            <td>${formattedEndDate} ${event.endTime}</td>
                                             <td>${event.isRepeated}</td>
-                                            <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id-1}">Update</a></td>
-                                            <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id-1}">Delete</a></td>
+                                            <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id}">Delete</a></td>
 					</tr>
                                     </c:forEach>
+                            </c:if>
 			</tbody>
 		</table>
 		<div> <a class="button" href="/add-events">Add Event</a></div>

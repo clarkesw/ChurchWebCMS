@@ -54,8 +54,8 @@ public class CalendarEventController{
         String username = getLoggedInName(model);
         List<CalendarEvent> retrieveEvents = repository.findAll();
         model.put("events", retrieveEvents);
-       logger.debug("showEvent endDate: {}" + retrieveEvents.get(0).getEndDateCont());
-       logger.debug("showEvent endTime: {}" + retrieveEvents.get(0).getEndTime());
+        if(!retrieveEvents.isEmpty())
+            logger.debug("showEvent Event 1 : {}" + retrieveEvents.get(0));
         return "cms/list-events";
     }
 
@@ -66,19 +66,21 @@ public class CalendarEventController{
  
     @GetMapping("/add-events")
     public String showAddEvent(ModelMap model, @ModelAttribute("event") CalendarEvent calEvent){     
+        logger.debug("showAddEvent Event : {}",calEvent);
         return "cms/add-event";
     }
     
     @PostMapping("/add-events")
     public String addEvent(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent calEvent, BindingResult result){
+        logger.debug("addEvent Event : {}",calEvent);
         if(result.hasErrors())
             return "cms/add-event";
 
         Date startDate = addTimeToDate(calEvent.getStartDateCont(),calEvent.getStartTime());
         Date endDate = addTimeToDate(calEvent.getEndDateCont(),calEvent.getEndTime());
-  //      logger.debug("CalendardController Event : {}",calEvent);
-     //   service.addLiteEvent(calEvent.getTitle(), startDate, endDate);    
-        repository.save(new CalendarEvent(calEvent.getTitle(), startDate, endDate));
+        logger.debug("addEvent startDate : {}",startDate);
+        repository.save(new CalendarEvent(calEvent.getTitle(),calEvent.getUrl(),calEvent.getDetails(), startDate, 
+                                                endDate,calEvent.getStartTime(),calEvent.getEndTime()));
         return "redirect:list-events";
     }
     
@@ -101,16 +103,17 @@ public class CalendarEventController{
     
     @GetMapping("/delete-event")
     public String deleteEvent(@RequestParam int id){
+        logger.debug("deleteEvent Event : {}",id);
         repository.deleteById(id);
         return "redirect:list-events";
     }
     
     @PostMapping("/update-event")
     public String updateEventPost(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent event, BindingResult result){
+        logger.debug("updateEventPost Event : {}",event);
         if(result.hasErrors())
             return "cms/add-event";
         
-    //    service.updateEvent(event);
         repository.delete(event);
         repository.save(event);
         return "redirect:list-events";
@@ -125,10 +128,4 @@ public class CalendarEventController{
         model.put("event", event.get());
         return "cms/add-event";
     }    
-    
-//    @ResponseBody 
-//    @GetMapping("/calEventArray")
-//    public List<CalendarEvent> getTest(){
-//        return service.retrieveEvents();
-//    }
 }
