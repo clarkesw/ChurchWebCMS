@@ -13,5 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author clarke
  */
 public interface CalendarEventRepository extends JpaRepository<CalendarEvent,Integer>{
-    
+    CalendarEvent findByTitle(String title);
+    CalendarEvent findTopByOrderByIdDesc();
 }

@@ -1,3 +1,15 @@
+add-event.jsp
+                     <fieldset class="form-group">
+				<form:label path="staff">Contact Person</form:label> 
+                                
+                                <form:select path="staff">
+                                    <form:option value="NONE" label="--- Select ---"/>
+                                    <form:options items="${firstName}" />
+                                 </form:select>
+                                <form:errors path="staff" cssClass="text-warning"/>
+			</fieldset>
+
+
 list-events.jsp
 ${event.isRepeated}
 

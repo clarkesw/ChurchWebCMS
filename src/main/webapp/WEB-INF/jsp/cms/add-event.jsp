@@ -49,12 +49,7 @@
                                 </table>
 				
                      </fieldset>
-                     <fieldset class="form-group">
-				<form:label path="url">Image URL</form:label> 
-				<form:input  type="text" 
-					class="form-control" path="url"/>
-                                <form:errors path="url" cssClass="text-warning"/>
-			</fieldset>
+<!-- Add Dropdown to select name -->
                         <fieldset class="form-group">
 				<form:label path="isRepeated">Is Event Repeated?</form:label> 
 				<form:checkbox class="form-control"  path="isRepeated"/>

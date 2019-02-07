@@ -38,11 +38,13 @@ public class DateUtil {
     }
     
    public static String setStartUIDate( Date endDateCont){
+       logger.debug("setStartUIDate  :{}",endDateCont.toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         return sdf.format(endDateCont);  
     }
 
    public static String setEndUIDate(Date endDateCont){
+       logger.debug("setEndUIDate  :{}",endDateCont.toString());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         return sdf.format(endDateCont);
     }

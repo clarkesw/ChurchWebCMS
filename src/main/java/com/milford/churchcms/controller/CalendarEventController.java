@@ -78,27 +78,15 @@ public class CalendarEventController{
 
         Date startDate = addTimeToDate(calEvent.getStartDateCont(),calEvent.getStartTime());
         Date endDate = addTimeToDate(calEvent.getEndDateCont(),calEvent.getEndTime());
-        logger.debug("addEvent startDate : {}",startDate);
-        repository.save(new CalendarEvent(calEvent.getTitle(),calEvent.getUrl(),calEvent.getDetails(), startDate, 
-                                                endDate,calEvent.getStartTime(),calEvent.getEndTime()));
+        CalendarEvent lastEvent = repository.findTopByOrderByIdDesc();
+        
+        int eventId = 1;
+        if(lastEvent != null)
+            eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
+        
+        repository.save(new CalendarEvent(eventId,calEvent.getTitle(),"/event/"+eventId,calEvent.getDetails(), startDate, 
+                                                endDate,calEvent.getStartTime(),calEvent.getEndTime(),null));
         return "redirect:list-events";
-    }
-    
-    private Date addTimeToDate(Date myDate, String myTime){
-        System.out.println("Raw Date : {}"+ myDate);
-        System.out.println("Raw Time : {}"+ myTime);
-        
-        StringTokenizer timeToken = new StringTokenizer(myTime,":");
-        myDate.setHours(Integer.parseInt(timeToken.nextToken()));
-        
-        String time = timeToken.nextToken();
-        String AmPm = time.substring(2);
-        String minutes = time.substring(0,2);
-        
-        myDate.setMinutes(Integer.parseInt(minutes));
-        System.out.println("New Date : {}"+ AmPm);
-        
-        return myDate;
     }
     
     @GetMapping("/delete-event")
@@ -110,22 +98,51 @@ public class CalendarEventController{
     
     @PostMapping("/update-event")
     public String updateEventPost(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent event, BindingResult result){
-        logger.debug("updateEventPost Event : {}",event);
+        logger.debug("updateEventPost eventId : {}",event.getId());
         if(result.hasErrors())
             return "cms/add-event";
         
         repository.delete(event);
-        repository.save(event);
+        Date startDate = addTimeToDate(event.getStartDateCont(),event.getStartTime());
+        Date endDate = addTimeToDate(event.getEndDateCont(),event.getEndTime());
+        CalendarEvent lastEvent = repository.findTopByOrderByIdDesc();
+        
+        int eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
+        logger.debug("    eventId after update : {}",eventId);
+        repository.save(new CalendarEvent(eventId, event.getTitle(),"/event/"+eventId,event.getDetails(), startDate, 
+                                                endDate,event.getStartTime(),event.getEndTime(),null));
         return "redirect:list-events";
     }
     
     @GetMapping("/update-event")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
-        logger.debug("updateShowEvent ID: {}" + id);
+        logger.debug("updateShowEvent ID: {}", id);
         Optional<CalendarEvent> event = repository.findById(id);
         
-        logger.debug("updateShowEvent ID: {}" + event.isPresent());
+        logger.debug("updateShowEvent event.isPresent(): {}", event.isPresent());
+        
+     //   if(event.isPresent())
         model.put("event", event.get());
         return "cms/add-event";
+    }
+
+    private String createURL(int id){
+        return "/event/"+id;
+    }
+    private Date addTimeToDate(Date myDate, String myTime){
+        logger.debug("Raw Date : {}", myDate);
+        logger.debug("Raw Time : {}", myTime);
+        
+        StringTokenizer timeToken = new StringTokenizer(myTime,":");
+        myDate.setHours(Integer.parseInt(timeToken.nextToken()));
+        
+        String time = timeToken.nextToken();
+        String AmPm = time.substring(2);
+        String minutes = time.substring(0,2);
+        
+        myDate.setMinutes(Integer.parseInt(minutes));
+        logger.debug("New Date : {}", myDate);
+        
+        return myDate;
     }    
 }

@@ -7,6 +7,7 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.service.ArticleService;
 import com.milford.churchcms.service.EventService;
@@ -30,6 +31,9 @@ public class UiController {
     EventService eventService;
     
     @Autowired
+    CalendarEventRepository churchEventRepo;
+        
+    @Autowired
     ChurchRepository churchRepo;
         
     @Autowired
@@ -42,7 +46,7 @@ public class UiController {
     @ResponseBody
     public List<CalendarEvent> getCalendarEvent(){
         logger.debug("UiController /calEventArray");
-        return eventService.retrieveEvents();
+        return churchEventRepo.findAll();
     }
     
     @GetMapping("/page/{name}")
@@ -53,6 +57,16 @@ public class UiController {
         model.addAttribute("article", articleService.getArticleInfo());
         model.addAttribute("church", findAll.get(0));
         model.addAttribute("page", pageService.retrieveOnePage(name));
+        return "home";
+
+    }
+    
+    @GetMapping("/event/{id}")
+    public String showEventPage(@PathVariable String title, ModelMap model){
+        logger.debug("UiController /event/" + title);
+
+        model.addAttribute("event", pageService.retrieveOnePage(title));
+      //  model.addAttribute("page", pageService.retrieveOnePage("event"));
         return "home";
 
     }

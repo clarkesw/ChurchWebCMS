@@ -15,21 +15,20 @@ import javax.persistence.TemporalType;
 @Table(name = "CALENDAREVENT")
 public class CalendarEvent {
     @Id
-    @GeneratedValue 
-    private Integer id;
+    private Integer id = 1;
     private String  title;
     @Column(name="start_date")
     private String  start;
     @Column(name="end_date")
     private String  end;
+    private String  url = "/event/";
     
     @JsonIgnore
     private boolean isRepeated;    
     @JsonIgnore
-    private String  url;
-    @JsonIgnore
     private String details;
-    
+    @JsonIgnore
+    private Staff contact;
     @JsonIgnore
     private Date  startDateCont;
     @JsonIgnore
@@ -39,6 +38,7 @@ public class CalendarEvent {
     private String startTime;
     @JsonIgnore
     private String endTime;
+    
     
     public CalendarEvent() {}
 
@@ -63,7 +63,9 @@ public class CalendarEvent {
         this.end = DateUtil.setEndUIDate(endDateCont);
     }
 
-    public CalendarEvent(String title, String url, String details, Date startDateCont, Date endDateCont, String startTime, String endTime) {
+    public CalendarEvent(Integer id, String title, String url, String details, Date startDateCont, Date endDateCont, 
+                        String startTime, String endTime, Staff contact) {
+        this.id = id;
         this.title = title;
         this.url = url;
         this.details = details;
@@ -71,9 +73,18 @@ public class CalendarEvent {
         this.endDateCont = endDateCont;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.start =  DateUtil.setStartUIDate(startDateCont);
+        this.end = DateUtil.setEndUIDate(endDateCont);
     }
-    
-    
+
+    public Staff getContact() {
+        return contact;
+    }
+
+    public void setContact(Staff contact) {
+        this.contact = contact;
+    }
+   
     public String getStart() {
         return start;
     }
