@@ -121,8 +121,8 @@ public class CalendarEventController{
         
         logger.debug("updateShowEvent event.isPresent(): {}", event.isPresent());
         
-     //   if(event.isPresent())
-        model.put("event", event.get());
+        if(event.isPresent())
+            model.put("event", event.get());
         return "cms/add-event";
     }
 
@@ -130,8 +130,6 @@ public class CalendarEventController{
         return "/event/"+id;
     }
     private Date addTimeToDate(Date myDate, String myTime){
-        logger.debug("Raw Date : {}", myDate);
-        logger.debug("Raw Time : {}", myTime);
         
         StringTokenizer timeToken = new StringTokenizer(myTime,":");
         myDate.setHours(Integer.parseInt(timeToken.nextToken()));

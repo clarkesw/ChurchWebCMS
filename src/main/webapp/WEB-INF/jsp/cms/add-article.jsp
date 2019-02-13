@@ -26,6 +26,12 @@
 					class="form-control" path="imageURL"/>
                                 <form:errors path="imageURL" cssClass="text-warning"/>
 			</fieldset>
+                        <fieldset class="form-group">
+				<form:label path="pageName">Page to be Shown</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="pageName"/>
+                                <form:errors path="pageName" cssClass="text-warning"/>
+			</fieldset>
 			<button type="submit" class="btn btn-success">Update</button>
                         
 		</form:form>

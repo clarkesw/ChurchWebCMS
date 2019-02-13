@@ -5,9 +5,12 @@
  */
 package com.milford.churchcms.dao;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +30,9 @@ public class Staff {
     private String email;
     private String homePhone;
     private String workPhone;
+    
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
+    @JoinColumn(name = "ADDRESS_ID")
     private Address homeAddress;
 
     public Staff(String firstName, String lastName, String position, String email, String homePhone, String workPhone, Address homeAddress) {

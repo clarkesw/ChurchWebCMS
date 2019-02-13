@@ -5,12 +5,18 @@
  */
 package com.milford.churchcms.dao;
 
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -29,6 +35,7 @@ public class Article {
     private String url;
     private String content;
     private String imageURL;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date publishedDate;
 
     public Article() {}
@@ -40,6 +47,11 @@ public class Article {
         this.url = url;
         this.content = content;
         this.imageURL = imageURL;
+        try {
+            this.publishedDate =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(new Date().toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(Article.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Article(String title, String pageName, String subTitle, String url, String content, String imageURL, Date publishedDate) {

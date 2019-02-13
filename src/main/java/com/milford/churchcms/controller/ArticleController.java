@@ -6,11 +6,12 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Article;
+import com.milford.churchcms.repository.ArticleRepository;
 import com.milford.churchcms.service.ArticleService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.StringTokenizer;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,9 @@ public class ArticleController{
     @Autowired
     ArticleService service;
     
+    @Autowired
+    ArticleRepository repository;
+    
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -44,7 +48,7 @@ public class ArticleController{
     @GetMapping("/list-articles")
     public String showArticle(ModelMap model){
         String username = getLoggedInName(model);
-        model.put("articles", service.retrieveArticles());
+        model.put("articles", repository.findAll()); //service.retrieveArticles());
         return "cms/list-articles";
     }
 
@@ -63,14 +67,16 @@ public class ArticleController{
         logger.debug("addArticle Article : {}",article); 
         if(result.hasErrors())
             return "cms/add-article";
-        service.addArticle(article);
+        
+        repository.save(new Article(article.getTitle(),article.getPageName(),article.getSubTitle(),article.getUrl(),
+                                    article.getContent(),article.getImageURL())); 
         return "redirect:list-articles";
     }
     
     @GetMapping("/delete-article")
     public String deleteArticle(@RequestParam int id){
         logger.debug("deleteArticle ID : {}",id); 
-        service.deleteArticle(id);
+        repository.deleteById(id);  //service.deleteArticle(id);
         return "redirect:list-articles";
     }
     
@@ -78,21 +84,16 @@ public class ArticleController{
     public String updateArticlePost(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
         if(result.hasErrors())
             return "cms/add-article";
-        service.updateArticle(article);
+        repository.save(new Article(article.getTitle(),article.getPageName(),article.getSubTitle(),article.getUrl(),
+                                    article.getContent(),article.getImageURL()));  //service.updateArticle(article);
         return "redirect:list-articles";
     }
     
     @GetMapping("/update-article")
     public String updateShowArticle(ModelMap model, @RequestParam int id){
-        Article article = service.retrieveOneArticle(id);
+        Optional<Article> article = repository.findById(id);//service.retrieveOneArticle(id);
         
-        model.put("article", article);
+        model.put("article", article.get());
         return "cms/add-article";
     }    
-    
-//    @ResponseBody 
-//    @GetMapping("/articleArray")
-//    public List<Article> getTest(){
-//        return service.retrieveEvents();
-//    }
 }

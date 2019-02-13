@@ -27,8 +27,8 @@ public class CalendarEvent {
     private boolean isRepeated;    
     @JsonIgnore
     private String details;
-    @JsonIgnore
-    private Staff contact;
+  //  @JsonIgnore
+  //  private Staff contact;
     @JsonIgnore
     private Date  startDateCont;
     @JsonIgnore
@@ -64,7 +64,7 @@ public class CalendarEvent {
     }
 
     public CalendarEvent(Integer id, String title, String url, String details, Date startDateCont, Date endDateCont, 
-                        String startTime, String endTime, Staff contact) {
+                        String startTime, String endTime, String contact) {
         this.id = id;
         this.title = title;
         this.url = url;
@@ -77,13 +77,13 @@ public class CalendarEvent {
         this.end = DateUtil.setEndUIDate(endDateCont);
     }
 
-    public Staff getContact() {
-        return contact;
-    }
-
-    public void setContact(Staff contact) {
-        this.contact = contact;
-    }
+//    public Staff getContact() {
+//        return contact;
+//    }
+//
+//    public void setContact(Staff contact) {
+//        this.contact = contact;
+//    }
    
     public String getStart() {
         return start;

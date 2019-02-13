@@ -20,11 +20,11 @@
                                             <td>${art.title}</td>
                                             <td>${art.pageName}</td>                                                                                        
                                             <td>${formattedLastModified}</td>
-                                            <td><a type="button" class="btn btn-success" href="/update-page?id=${art.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-success" href="/update-article?id=${art.id}">Update</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<div> <!--<a class="button" href="/add-page">Add Page</a></div> -->
+		<div> <a class="button" href="/add-articles">Add Article</a></div>
 <%@ include file="common/footer.jspf" %>
 
