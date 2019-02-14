@@ -5,7 +5,7 @@
  */
 package com.milford.churchcms.repository;
 
-import com.milford.churchcms.dao.Article;
+import com.milford.churchcms.dao.WebPage;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,8 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author clarke
  */
-public interface ArticleRepository extends JpaRepository<Article,Integer>{
-    Article findByTitle(String title);
-    List<Article> findAllByPageName(String pageName);
-    Article findTopByOrderByIdDesc();
+public interface WebPageRepository extends JpaRepository<WebPage,Integer>{
+    List<WebPage> findAllByPageName(String pageName);
+    WebPage findTopByOrderByIdDesc();
 }

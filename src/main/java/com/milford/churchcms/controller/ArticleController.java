@@ -51,6 +51,13 @@ public class ArticleController{
         model.put("articles", repository.findAll()); //service.retrieveArticles());
         return "cms/list-articles";
     }
+        
+    @GetMapping("/listArticlesForPage")
+    public String showArticle(ModelMap model,@RequestParam String page){
+        String username = getLoggedInName(model);
+        model.put("articles", repository.findAllByPageName(page));
+        return "cms/list-articles";
+    }
 
     private String getLoggedInName(ModelMap model) {
         Collection<Object> values = model.values();
@@ -84,6 +91,7 @@ public class ArticleController{
     public String updateArticlePost(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
         if(result.hasErrors())
             return "cms/add-article";
+        repository.delete(article);
         repository.save(new Article(article.getTitle(),article.getPageName(),article.getSubTitle(),article.getUrl(),
                                     article.getContent(),article.getImageURL()));  //service.updateArticle(article);
         return "redirect:list-articles";

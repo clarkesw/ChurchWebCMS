@@ -40,7 +40,7 @@
 			<button type="submit" class="btn btn-success">Update</button>
                         
 		</form:form>
-                        <a href="list-articles">Edit ${pageName} Articles</a>
+                        <a href="listArticlesForPage?page=${page.pageName}">Edit ${page.pageName} Articles</a>
 	</div>
 
 <%@ include file="common/footer.jspf" %>

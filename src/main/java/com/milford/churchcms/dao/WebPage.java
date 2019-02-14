@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -34,7 +35,7 @@ public class WebPage {
     @JoinColumn(name = "page_name")
     private List<Article> mainPageArticle;
     private String pageName;
-    private Date   lastModified;
+    private String   lastModified;
     private String mainPic;
     private String pageHeader;
     private String message;
@@ -42,12 +43,12 @@ public class WebPage {
 
     public WebPage() {}
 
-    public WebPage(String title, String bgImage, String link, String pageName, Date lastModified, String message, boolean isVisible) {
+    public WebPage(String title, String bgImage, String link, String pageName, String message, boolean isVisible) {
         this.title = title;
         this.bgImage = bgImage;
         this.link = link;
         this.pageName = pageName;
-        this.lastModified = lastModified;
+        this.lastModified =  new SimpleDateFormat("M-d-yyyy  h:mm:ss a").format(new Date());;
         this.message = message;
         this.isVisible = isVisible;
     }
@@ -78,11 +79,11 @@ public class WebPage {
     }
 
     
-    public Date getLastModified() {
+    public String getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(Date lastModified) {
+    public void setLastModified(String lastModified) {
         this.lastModified = lastModified;
     }
 

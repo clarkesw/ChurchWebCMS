@@ -5,18 +5,13 @@
  */
 package com.milford.churchcms.dao;
 
-import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -35,8 +30,7 @@ public class Article {
     private String url;
     private String content;
     private String imageURL;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date publishedDate;
+    private String publishedDate;
 
     public Article() {}
 
@@ -47,32 +41,19 @@ public class Article {
         this.url = url;
         this.content = content;
         this.imageURL = imageURL;
-        try {
-            this.publishedDate =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(new Date().toString());
-        } catch (ParseException ex) {
-            Logger.getLogger(Article.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+        this.publishedDate =  new SimpleDateFormat("M-d-yyyy  h:mm:ss a").format(new Date());
 
-    public Article(String title, String pageName, String subTitle, String url, String content, String imageURL, Date publishedDate) {
-        this.title = title;
-        this.pageName = pageName;
-        this.subTitle = subTitle;
-        this.url = url;
-        this.content = content;
-        this.imageURL = imageURL;
-        this.publishedDate = publishedDate;
     }
 
     public Article(Article art) {
-        new Article (art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL(), new Date());
+        new Article (art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
     }
 
-    public Date getPublishedDate() {
+    public String getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(Date publishedDate) {
+    public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
     }
 
@@ -131,6 +112,9 @@ public class Article {
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Article{" + "id=" + id + ", title=" + title + ", pageName=" + pageName + ", subTitle=" + subTitle + ", url=" + url + ", content=" + content + ", imageURL=" + imageURL + ", publishedDate=" + publishedDate + '}';
+    }  
 }

@@ -6,10 +6,8 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
-import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.WebPage;
 import com.milford.churchcms.service.WebPageService;
-import java.util.Date;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +42,7 @@ public class WebPageController extends BaseController{
         logger.debug("WebPageController.updatePagePost : {}", page);
         if(result.hasErrors())
             return "/cms/add-page";
-        page.setLastModified(new Date());
+      //  page.setLastModified(new Date());
         service.updatePage(page);
         logger.debug("WebPageController redirect:/cms/list-pages ");
         return "redirect:list-pages";

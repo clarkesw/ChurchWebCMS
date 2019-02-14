@@ -14,13 +14,12 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${articles}" var="art">
-                                        <fmt:formatDate value="${art.publishedDate}" var="formattedLastModified" 
-                                            type="date" pattern="MM-dd-yyyy hh:mm a" /> 
 					<tr>
                                             <td>${art.title}</td>
                                             <td>${art.pageName}</td>                                                                                        
-                                            <td>${formattedLastModified}</td>
+                                            <td>${art.publishedDate}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-article?id=${art.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-warning" href="/delete-article?id=${art.id}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

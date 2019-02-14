@@ -8,7 +8,6 @@ package com.milford.churchcms.service;
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ public class WebPageService {
 
     public Logger logger = LoggerFactory.getLogger(WebPageService.class);
     private final List<WebPage> webPages = new ArrayList<>();
-    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "../images/background.png","www.google.com" ,AppConstants.WebPage.HOME, new Date(), "The church is pregnant.",true);
+    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "../images/background.png","www.google.com" ,AppConstants.WebPage.HOME, "The church is pregnant.",true);
     
     {
         webPages.add(homePage);
