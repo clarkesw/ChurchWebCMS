@@ -23,6 +23,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<div> <!--<a class="button" href="/add-page">Add Page</a></div> -->
+		<div> <a class="button" href="/add-pages">Add Page</a></div> 
 <%@ include file="common/footer.jspf" %>
 

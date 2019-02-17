@@ -9,6 +9,7 @@
 	            <li><a href="/list-pages">Web Pages</a></li>
                     <li><a href="/list-events">Calendar</a></li>
                     <li><a href="/list-articles">Article</a></li>
+                    <li><a href="/list-articles">Church Info</a></li>
 	        </ul>
                 <ul class="nav navbar-right">
 	            <li><a href="/logout">Logout</a></li>

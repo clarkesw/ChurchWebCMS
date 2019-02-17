@@ -1,3 +1,5 @@
+https://www.baeldung.com/spring-boot-custom-error-page
+
 add-event.jsp
                      <fieldset class="form-group">
 				<form:label path="staff">Contact Person</form:label> 

@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,8 +35,10 @@ public class WebPage {
     @OneToMany(cascade=CascadeType.ALL, targetEntity = Article.class)
     @JoinColumn(name = "page_name")
     private List<Article> mainPageArticle;
+    
+    @Column(name = "page_name", nullable = false, unique = true)
     private String pageName;
-    private String   lastModified;
+    private String lastModified;
     private String mainPic;
     private String pageHeader;
     private String message;
