@@ -6,9 +6,7 @@
     </head>
     <body background='${page.bgImage}'>
         <br>           
-        <div>${page.message}</div> 
-        <hr>
-        <a href="${page.link}" >Link to know where</a>
+        <h4>${error}</h4>
 
         <div id='demo'></div>
     </body>

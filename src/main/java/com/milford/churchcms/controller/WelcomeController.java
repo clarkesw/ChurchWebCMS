@@ -8,6 +8,7 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.WelcomeService;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +23,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("sUser")
+@SessionAttributes("user")
 public class WelcomeController {
     
     @Autowired
     WelcomeService service;
+    
+    @Autowired 
+    private HttpSession session;
     
     Logger logger = LoggerFactory.getLogger(WelcomeController.class);
     
@@ -46,6 +50,7 @@ public class WelcomeController {
     @GetMapping("/login")
     public String showWelcomePage(ModelMap model,@ModelAttribute("user") User user){
         model.put("user", user);   
+        session.setAttribute("UserId", user);
         logger.debug("WelcomeController User  ");
         return "cms/login-page";
     }
