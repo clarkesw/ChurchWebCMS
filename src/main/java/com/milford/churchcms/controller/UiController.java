@@ -68,7 +68,6 @@ public class UiController {
         model.addAttribute("event", pageService.retrieveOnePage(title));
       //  model.addAttribute("page", pageService.retrieveOnePage("event"));
         return "home";
-
     }
     
     @GetMapping("/home")
