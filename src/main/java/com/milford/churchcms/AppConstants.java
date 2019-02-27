@@ -16,4 +16,8 @@ public class AppConstants {
         public static final String HOME = "Home";
         public static final String CALENDAR = "Calendar";
     }
+    
+    public class Session{
+       // public static final String 
+    }
 }

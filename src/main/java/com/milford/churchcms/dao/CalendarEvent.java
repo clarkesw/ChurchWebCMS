@@ -3,13 +3,13 @@ package com.milford.churchcms.dao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.milford.churchcms.util.DateUtil;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CALENDAREVENT")
@@ -27,8 +27,12 @@ public class CalendarEvent {
     private boolean isRepeated;    
     @JsonIgnore
     private String details;
-  //  @JsonIgnore
-  //  private Staff contact;
+    
+    // Connect to the Staff via ID column after complete the staff add/list pages.
+    @JsonIgnore
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "STAFF_ID")
+    private Staff contact;
     @JsonIgnore
     private Date  startDateCont;
     @JsonIgnore
@@ -77,13 +81,13 @@ public class CalendarEvent {
         this.end = DateUtil.setEndUIDate(endDateCont);
     }
 
-//    public Staff getContact() {
-//        return contact;
-//    }
-//
-//    public void setContact(Staff contact) {
-//        this.contact = contact;
-//    }
+    public Staff getContact() {
+        return contact;
+    }
+
+    public void setContact(Staff contact) {
+        this.contact = contact;
+    }
    
     public String getStart() {
         return start;

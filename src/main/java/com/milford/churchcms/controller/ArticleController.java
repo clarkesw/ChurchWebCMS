@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,9 @@ public class ArticleController{
     @Autowired
     ArticleRepository repository;
     
+    @Autowired 
+    private HttpSession session;
+    
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -54,7 +58,8 @@ public class ArticleController{
         
     @GetMapping("/listArticlesForPage")
     public String showArticle(ModelMap model,@RequestParam String page){
-        String username = getLoggedInName(model);
+     //   String username = getLoggedInName(model);
+        session.setAttribute("ArticalWebPage", page);
         model.put("articles", repository.findAllByPageName(page));
         return "cms/list-articles";
     }
@@ -65,7 +70,10 @@ public class ArticleController{
     }
  
     @GetMapping("/add-articles")
-    public String showAddArticle(ModelMap model, @ModelAttribute("article") Article article){     
+    public String showAddArticle(ModelMap model, @ModelAttribute("article") Article article){   
+        String pageName = (String)session.getAttribute("ArticalWebPage");
+        if(pageName != null)
+            article.setPageName(pageName);
         return "cms/add-article";
     }
     

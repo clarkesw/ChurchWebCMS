@@ -20,10 +20,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("user")
+//@SessionAttributes("user")
 public class WelcomeController {
     
     @Autowired
@@ -36,22 +35,24 @@ public class WelcomeController {
     
     @PostMapping("/login")
     public String checkLoginCredentials(ModelMap model,@Valid @ModelAttribute("user") User user){
-        logger.debug("WelcomeController checkLoginCredentials db :" + user.getUsername() + "   input: "+model.get("username"));
-        User dbUser = service.retrieveOneUser(user.getUsername());
+        String userName = user.getUsername();
+        logger.debug("checkLoginCredentials  User : {}", userName);
+        User dbUser = service.retrieveOneUser(userName);
         
         if(dbUser == null || !dbUser.getPassword().equals(user.getPassword() )){
             model.addAttribute("error", "Incorrect Username/Password.");
             return "/login";
         }
-        model.put("user", user);   
+        session.setAttribute("user", userName);
+        model.put("user", userName);   
         return "cms/welcome";
     }
     
     @GetMapping("/login")
-    public String showWelcomePage(ModelMap model,@ModelAttribute("user") User user){
-        model.put("user", user);   
-        session.setAttribute("UserId", user);
-        logger.debug("WelcomeController User  ");
+    public String showWelcomePage(ModelMap model){
+        logger.debug("WelcomeController User : {}",session.getAttribute("user"));
+        if(session.getAttribute("user") != null)
+            return "cms/welcome";
         return "cms/login-page";
     }
     

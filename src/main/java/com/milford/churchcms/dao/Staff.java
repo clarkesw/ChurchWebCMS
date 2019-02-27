@@ -100,7 +100,9 @@ public class Staff {
     public void setHomeAddress(Address homeAddress) {
         this.homeAddress = homeAddress;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", position=" + position + ", email=" + email + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
+    }
 }

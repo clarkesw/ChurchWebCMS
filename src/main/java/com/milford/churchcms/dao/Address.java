@@ -81,5 +81,10 @@ public class Address {
     public String getAddressLine2(){
         return city + ", " + state + " " + zipCode;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" + "id=" + id + ", streetAddress=" + streetAddress + ", city=" + city + ", state=" + state + ", zipCode=" + zipCode + '}';
+    }
     
 }

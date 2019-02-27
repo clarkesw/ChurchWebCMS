@@ -1,4 +1,4 @@
-package com.in28minutes.springboot.SpringBootBase;
+package com.milford.churchcms;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

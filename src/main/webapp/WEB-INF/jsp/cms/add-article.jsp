@@ -27,13 +27,13 @@
                                 <form:errors path="imageURL" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
-				<form:label path="pageName">Page to be Shown</form:label> 
+				<form:label path="pageName">Page Name(Will not be seen, used for internal reference)</form:label> 
 				<form:input  type="text" 
 					class="form-control" path="pageName"/>
                                 <form:errors path="pageName" cssClass="text-warning"/>
 			</fieldset>
 			<button type="submit" class="btn btn-success">Update</button>
-                        
+                        ${ArticalWebPage}
 		</form:form>
 	</div>
 

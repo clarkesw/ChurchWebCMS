@@ -1,0 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.milford.churchcms.repository;
+
+import com.milford.churchcms.dao.Staff;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+/**
+ *
+ * @author clarke
+ */
+public interface StaffRepository extends JpaRepository<Staff,Integer>{
+    Staff findByPosition(String position);
+    List<Staff> findByFirstNameInAndLastNameIn(String firstName, String lastName);
+    Staff findTopByOrderByIdDesc();
+}
