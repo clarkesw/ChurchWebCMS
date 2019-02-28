@@ -16,7 +16,7 @@
 			</fieldset>
                         <fieldset class="form-group">
 				<form:label path="position">Position</form:label> 
-				<form:textarea  type="text" 
+				<form:input  type="text" 
 					class="form-control" path="position"/>
                                 <form:errors path="position" cssClass="text-warning"/>
 			</fieldset>
@@ -40,16 +40,16 @@
 			</fieldset>                         
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
-                     <c:choose>
+                 <%--    <c:choose>
                         <c:when test="${staff.firstName ne null}">
                             <a href="updateAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}">
                                 Edit ${staff.firstName}'s Address</a>
                         </c:when>
                          <c:otherwise>
-                             <a href="addAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}">
-                                Edit ${staff.firstName}'s Address</a>                            
+                             <a href="addAddressForStaff?fisrtName=${firstName}&lastName=${lastName}">
+                                Add ${firstName}'s Address</a>                            
                          </c:otherwise>
-                      </c:choose>
+                      </c:choose> --%>
 	</div>
 
 <%@ include file="common/footer.jspf" %>

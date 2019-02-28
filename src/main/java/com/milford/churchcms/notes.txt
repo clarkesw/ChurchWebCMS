@@ -1,0 +1,2 @@
+
+Removing a detached instance - means you need to log back in.  

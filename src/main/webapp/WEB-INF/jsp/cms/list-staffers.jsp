@@ -2,7 +2,7 @@
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
 		<table class="table table-striped">
-			<caption>Articles</caption>
+			<caption>Staff</caption>
 			<thead>
 				<tr>
                                     <th>First Name</th>
@@ -19,6 +19,9 @@
                                             <td>${staff.lastName}</td>                                                                                        
                                             <td>${staff.position}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-staff?id=${staff.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-success" 
+                                                   href="addAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}&id=${staff.id}">
+                                                    Edit Address</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-staff?id=${staff.id}">Delete</a></td>
 					</tr>
 				</c:forEach>

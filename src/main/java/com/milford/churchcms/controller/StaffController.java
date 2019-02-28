@@ -5,11 +5,13 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.dao.Address;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.StaffRepository;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -34,9 +36,6 @@ public class StaffController{
     
     @Autowired
     StaffRepository repository;
-    
-    @Autowired 
-    private HttpSession session;
     
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -105,5 +104,6 @@ public class StaffController{
         
         model.put("staff", staff.get());
         return "cms/add-staff";
-    }    
+    }      
+
 }

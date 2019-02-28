@@ -31,10 +31,12 @@ public class Staff {
     private String homePhone;
     private String workPhone;
     
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class, orphanRemoval = true)
     @JoinColumn(name = "ADDRESS_ID")
     private Address homeAddress;
 
+    public Staff(){}
+    
     public Staff(String firstName, String lastName, String position, String email, String homePhone, String workPhone, Address homeAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,6 +45,14 @@ public class Staff {
         this.homePhone = homePhone;
         this.workPhone = workPhone;
         this.homeAddress = homeAddress;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {
