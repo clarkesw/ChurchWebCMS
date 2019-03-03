@@ -6,12 +6,16 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Address;
+import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.AddressRepository;
+import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -39,6 +43,9 @@ public class AddressController{
     @Autowired
     StaffRepository staffRepository;
     
+    @Autowired
+    ChurchRepository churchRepository;
+    
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -52,27 +59,26 @@ public class AddressController{
     }
     
     @GetMapping("/addAddressForStaff")
-    public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("address") Address address, @RequestParam String fisrtName, @RequestParam String lastName, 
-            @RequestParam int id){
-        logger.debug("Get addAddressForStaff  Name : {}",fisrtName);
-        logger.debug(" Address: {}",address);
-
-        model.put("lastName", fisrtName);
-        model.put("lastName", fisrtName);
-        Staff tempStaff = staffRepository.findByFirstNameInAndLastNameIn(fisrtName, lastName).get(0);
+    public String addAddressForStaff(ModelMap model, @RequestParam String fisrtName, @RequestParam String lastName){
+        
+        logger.debug("GET addAddressForStaff  Name : {}",fisrtName);
+        
+        model.put("name", fisrtName);
+        Address address = staffRepository.findByFirstNameInAndLastNameIn(fisrtName, lastName).get(0).getHomeAddress();
         
         if(address != null){
-            model.put("address",tempStaff.getHomeAddress());
+            model.put("address",address);
         }else{
             model.put("address", new Address());
         }
+        logger.debug(" Address: {}",address);
         return "cms/add-address";
     }    
     
     @PostMapping("/addAddressForStaff")
     public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("address") Address address, BindingResult result, 
-            @RequestParam String fisrtName, @RequestParam String lastName, HttpServletRequest request){
-        logger.debug("Post addAddressForStaff  Name : {}",fisrtName);
+            @RequestParam String fisrtName, @RequestParam String lastName){
+        logger.debug("POST addAddressForStaff  Name : {}",fisrtName);
 
         Staff tempStaff = staffRepository.findByFirstNameInAndLastNameIn(fisrtName, lastName).get(0);
         logger.debug("Address: {}",address);
@@ -85,4 +91,41 @@ public class AddressController{
         return "login"; 
     }    
  
+    @GetMapping("/addAddressForChurch")
+    public String addAddressForChurch(ModelMap model, @RequestParam int address_id){
+        
+        Address churchAddress = repository.findById(address_id).get();
+        model.put("name", "Church");
+        logger.debug("GET addAddressForChurch  Address : {}",churchAddress);
+        
+        if(churchAddress != null){
+            model.put("address",churchAddress);
+        }else{
+            model.put("address", new Address());
+        }
+        return "cms/add-address";
+    }    
+    
+    @PostMapping("/addAddressForChurch")
+    public String addAddressForChurch(ModelMap model,@Valid @ModelAttribute("address") Address address){
+        logger.debug("Post addAddressForChurch  Name : {}",address);
+
+        ChurchInfo myInfo = returnInfo();
+        churchRepository.delete(myInfo);
+        myInfo.setAddress(address);
+        
+        churchRepository.save(myInfo);
+        
+        return "redirect:login"; 
+    }    
+    
+    private ChurchInfo returnInfo(){
+        List<ChurchInfo> infoList = churchRepository.findAll();
+        ChurchInfo myInfo = null;        
+        for(ChurchInfo info : infoList){
+            myInfo = info;
+ 
+        }
+        return myInfo;
+    }
 }

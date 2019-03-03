@@ -126,6 +126,9 @@ public class ChurchInfo {
     public void setYouthMinister(String youthMinister) {
         this.youthMinister = youthMinister;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", address=" + address + ", telephone=" + telephone + ", leadPastor=" + leadPastor + ", associatePastor=" + associatePastor + ", youthMinister=" + youthMinister + '}';
+    }
 }

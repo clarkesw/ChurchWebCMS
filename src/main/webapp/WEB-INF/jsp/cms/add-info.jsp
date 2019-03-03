@@ -11,7 +11,7 @@
                          <fieldset class="form-group">
 				<form:label path="missionStatement">Mission Statement</form:label> 
 				<form:input  type="text" maxlength="25"
-					class="form-control" required="required" path="missionStatement"/>
+					class="form-control" path="missionStatement"/>
                                 <form:errors path="missionStatement" cssClass="text-warning"/>
 			</fieldset>
 			<fieldset class="form-group">
@@ -25,6 +25,25 @@
 				<form:input  type="text" 
 					class="form-control" path="telephone"/>
                                 <form:errors path="telephone" cssClass="text-warning"/>
+			</fieldset>
+                        <fieldset class="form-group">
+				<form:label path="leadPastor">Lead Pastor</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="leadPastor"/>
+                                <form:errors path="leadPastor" cssClass="text-warning"/>
+			</fieldset>
+                       <fieldset class="form-group">
+				<form:label path="associatePastor">Associate Pastor</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="associatePastor"/>
+                                <form:errors path="associatePastor" cssClass="text-warning"/>
+			</fieldset>
+
+                        <fieldset class="form-group">
+				<form:label path="youthMinister">Youth Minister</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="youthMinister"/>
+                                <form:errors path="youthMinister" cssClass="text-warning"/>
 			</fieldset>
 			<button type="submit" class="btn btn-success">Update</button>
                         

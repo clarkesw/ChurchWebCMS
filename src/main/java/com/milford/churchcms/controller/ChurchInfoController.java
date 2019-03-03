@@ -6,8 +6,11 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.service.ChurchInfoService;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +31,15 @@ public class ChurchInfoController{
     
     @Autowired
     ChurchInfoService service;
+    
+    @Autowired
+    ChurchRepository churchRepository;
         
-    @GetMapping("/churchInfo")
+    @GetMapping("/list-info")
     public String showEvent(ModelMap model){
+        logger.debug("GET showEvent ");
         String username = getLoggedInName(model);
-        model.put("info", service.getChurchInfo());
+        model.put("info", returnInfo());
         return "cms/list-info";
     }
 
@@ -43,19 +50,38 @@ public class ChurchInfoController{
  
     @PostMapping("/update-info")
     public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") ChurchInfo info, BindingResult result){
+        logger.debug("POST updateInfoPost Info :{}",info);
         if(result.hasErrors())
             return "cms/add-event";
         
-        service.updateInfo(info);
+        churchRepository.delete(info);
+        churchRepository.save(info);  
+      //  service.updateInfo(info);
         return "redirect:list-info";
     }
     
     @GetMapping("/update-info")
     public String updateShowEvent(ModelMap model){
-        ChurchInfo info = service.getChurchInfo();
         
-        logger.debug("Updated Info for {}" + info.getName());
-        model.put("info", info);
+        ChurchInfo myInfo = returnInfo();
+        
+        if(myInfo != null){      
+           model.put("info", myInfo);         
+        }else{
+           model.put("info", new ChurchInfo());  
+        }   
+        
+        logger.debug("Updated Info for {}" + myInfo);
         return "cms/add-info";
     }    
+    
+    private ChurchInfo returnInfo(){
+        List<ChurchInfo> infoList = churchRepository.findAll();
+        ChurchInfo myInfo = null;        
+        for(ChurchInfo info : infoList){
+            myInfo = info;
+ 
+        }
+        return myInfo;
+    }
 }
