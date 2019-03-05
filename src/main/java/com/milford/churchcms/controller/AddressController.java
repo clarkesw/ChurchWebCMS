@@ -15,8 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +35,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AddressController{
     
     public Logger logger = LoggerFactory.getLogger(AddressController.class);
+    
+    @Autowired 
+    private HttpSession session;
     
     @Autowired
     AddressRepository repository;
@@ -93,11 +95,10 @@ public class AddressController{
  
     @GetMapping("/addAddressForChurch")
     public String addAddressForChurch(ModelMap model, @RequestParam int address_id){
-        
+        logger.debug("GET addAddressForChurch  Address : {}",address_id);
         Address churchAddress = repository.findById(address_id).get();
         model.put("name", "Church");
-        logger.debug("GET addAddressForChurch  Address : {}",churchAddress);
-        
+        session.setAttribute("AddressID", address_id);
         if(churchAddress != null){
             model.put("address",churchAddress);
         }else{
@@ -109,8 +110,10 @@ public class AddressController{
     @PostMapping("/addAddressForChurch")
     public String addAddressForChurch(ModelMap model,@Valid @ModelAttribute("address") Address address){
         logger.debug("Post addAddressForChurch  Name : {}",address);
-
+        Integer id = (Integer)session.getAttribute("AddressID");
         ChurchInfo myInfo = returnInfo();
+        logger.debug("   ChurchInfo myInfo : {}",myInfo);
+         
         churchRepository.delete(myInfo);
         myInfo.setAddress(address);
         

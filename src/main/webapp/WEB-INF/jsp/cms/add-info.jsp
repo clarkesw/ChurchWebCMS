@@ -45,6 +45,7 @@
 					class="form-control" path="youthMinister"/>
                                 <form:errors path="youthMinister" cssClass="text-warning"/>
 			</fieldset>
+                        <input type=hidden id="address" name="address">
 			<button type="submit" class="btn btn-success">Update</button>
                         
 		</form:form>

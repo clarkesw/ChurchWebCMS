@@ -21,7 +21,10 @@
                                     <td><a type="button" class="btn btn-success" 
                                           href="addAddressForChurch?address_id=${info.address.id}">
                                            Edit Address</a></td>
-                                    <td><a type="button" class="btn btn-success" href="/update-info">Update</a></td>
+                                    <c:if test="${info.address.id eq 0}">
+                                        
+                                    <
+                                    <td><a type="button" class="btn btn-success" href="/update-info?id=${info.id}">Update</a></td>
                                 </tr>
 
 			</tbody>
