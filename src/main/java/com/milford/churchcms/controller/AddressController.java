@@ -90,16 +90,17 @@ public class AddressController{
         
         staffRepository.save(tempStaff);
         
-        return "login"; 
+        return "redirect:login"; 
     }    
  
     @GetMapping("/addAddressForChurch")
     public String addAddressForChurch(ModelMap model, @RequestParam int address_id){
         logger.debug("GET addAddressForChurch  Address : {}",address_id);
-        Address churchAddress = repository.findById(address_id).get();
+        
         model.put("name", "Church");
         session.setAttribute("AddressID", address_id);
-        if(churchAddress != null){
+        if(address_id != -1){
+            Address churchAddress = repository.findById(address_id).get();
             model.put("address",churchAddress);
         }else{
             model.put("address", new Address());

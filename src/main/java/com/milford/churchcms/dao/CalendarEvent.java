@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
 
 @Entity
 @Table(name = "CALENDAREVENT")
@@ -33,9 +34,13 @@ public class CalendarEvent {
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "STAFF_ID")
     private Staff contact;
+    
     @JsonIgnore
+    @FutureOrPresent
     private Date  startDateCont;
+    
     @JsonIgnore
+    @FutureOrPresent
     private Date  endDateCont;
     
     @JsonIgnore
