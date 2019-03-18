@@ -49,13 +49,12 @@
                                 </table>
 				
                      </fieldset>
-<!-- Add Dropdown to select name -->
-                        <fieldset class="form-group">
-				<form:label path="isRepeated">Is Event Repeated?</form:label> 
-				<form:checkbox class="form-control"  path="isRepeated"/>
-                                <form:errors path="isRepeated" cssClass="text-warning"/>
-			</fieldset>
-			<button type="submit" class="btn btn-success">Update</button>
+                    <fieldset class="form-group">
+                            <form:label path="isRepeated">Is Event Repeated?</form:label> 
+                            <form:checkbox class="form-control"  path="isRepeated"/>
+                            <form:errors path="isRepeated" cssClass="text-warning"/>
+                    </fieldset>
+                    <button type="submit" class="btn btn-success">Update</button>
                         
 		</form:form>
 	</div>

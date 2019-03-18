@@ -38,8 +38,8 @@ public class Staff {
     public Staff(){}
     
     public Staff(String firstName, String lastName, String position, String email, String homePhone, String workPhone, Address homeAddress) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        setFirstName(firstName);
+        setLastName(lastName);
         this.position = position;
         this.email = email;
         this.homePhone = homePhone;
@@ -60,7 +60,7 @@ public class Staff {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
     }
 
     public String getLastName() {
@@ -68,7 +68,7 @@ public class Staff {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
     }
 
     public String getPosition() {

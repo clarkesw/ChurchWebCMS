@@ -38,7 +38,6 @@ public class ChurchInfoController{
     @GetMapping("/list-info")
     public String showEvent(ModelMap model){
         logger.debug("GET showEvent ");
-        String username = getLoggedInName(model);
         model.put("info", returnInfo());
         return "cms/list-info";
     }

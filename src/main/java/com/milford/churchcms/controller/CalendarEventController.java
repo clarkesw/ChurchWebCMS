@@ -6,7 +6,9 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.CalendarEventRepository;
+import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.service.EventService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -42,6 +44,9 @@ public class CalendarEventController{
     @Autowired
     CalendarEventRepository repository;
     
+    @Autowired
+    StaffRepository staffRepository;
+    
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -66,13 +71,13 @@ public class CalendarEventController{
  
     @GetMapping("/add-events")
     public String showAddEvent(ModelMap model, @ModelAttribute("event") CalendarEvent calEvent){     
-        logger.debug("showAddEvent Event : {}",calEvent);
+        logger.debug("GET /add-events Event : {}",calEvent);
         return "cms/add-event";
     }
     
     @PostMapping("/add-events")
     public String addEvent(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent calEvent, BindingResult result){
-        logger.debug("addEvent Event : {}",calEvent);
+        logger.debug("POST /add-events Event : {}",calEvent);
         if(result.hasErrors())
             return "cms/add-event";
 
@@ -91,14 +96,14 @@ public class CalendarEventController{
     
     @GetMapping("/delete-event")
     public String deleteEvent(@RequestParam int id){
-        logger.debug("deleteEvent Event : {}",id);
+        logger.debug("/delete-event Event : {}",id);
         repository.deleteById(id);
         return "redirect:list-events";
     }
     
     @PostMapping("/update-event")
     public String updateEventPost(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent event, BindingResult result){
-        logger.debug("updateEventPost eventId : {}",event.getId());
+        logger.debug("POST /update-event eventId : {}",event.getId());
         if(result.hasErrors())
             return "cms/add-event";
         
@@ -116,14 +121,22 @@ public class CalendarEventController{
     
     @GetMapping("/update-event")
     public String updateShowEvent(ModelMap model, @RequestParam int id){
-        logger.debug("updateShowEvent ID: {}", id);
+        logger.debug("POST /update-event ID: {}", id);
         Optional<CalendarEvent> event = repository.findById(id);
-        
-        logger.debug("updateShowEvent event.isPresent(): {}", event.isPresent());
-        
+        List<Staff> findAll = staffRepository.findAll();
+        model.addAttribute("staffList",findAll); //firstAndLastName(findAll));
+        logger.debug("   # of Staff: {}", findAll.size());
         if(event.isPresent())
             model.put("event", event.get());
         return "cms/add-event";
+    }
+    
+    private List<String> firstAndLastName(List<Staff> staffers){
+        List<String> names = null;
+        for(Staff staff : staffers){
+            names.add(staff.getFirstName() + " " +staff.getLastName());
+        }
+        return names;
     }
 
     private String createURL(int id){

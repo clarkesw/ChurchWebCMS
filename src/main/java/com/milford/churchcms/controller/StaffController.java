@@ -5,11 +5,16 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.dao.Address;
+import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Staff;
+import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -33,6 +38,9 @@ public class StaffController{
     
     @Autowired
     StaffRepository repository;
+    
+    @Autowired
+    CalendarEventRepository calendarRepo;
     
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -101,6 +109,45 @@ public class StaffController{
         
         model.put("staff", staff.get());
         return "cms/add-staff";
-    }      
+    }     
+    
+    @PostMapping("/addContactToEvent")
+    public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result, 
+            @RequestParam String fisrtName, @RequestParam String lastName){
+        logger.debug("POST addContactToEvent  Name : {}",fisrtName);
 
+        CalendarEvent myEvent = returnInfo();
+        logger.debug("   ChurchInfo myInfo : {}",myInfo);
+         
+        churchRepository.delete(myInfo);
+        myInfo.setAddress(address);
+        
+        churchRepository.save(myInfo);
+        
+        return "redirect:login"; 
+    }    
+ 
+    @GetMapping("/addContactToEvent")
+    public String addAddressForChurch(ModelMap model, @RequestParam int contact_id){
+        logger.debug("GET addContactToEvent  Address : {}",contact_id);
+        
+        session.setAttribute("ContactID", contact_id);
+        if(address_id != -1){
+            Address churchAddress = repository.findById(address_id).get();
+            model.put("address",churchAddress);
+        }else{
+            model.put("address", new Address());
+        }
+        return "cms/add-address";
+    }    
+
+    private CalendarEvent returnInfo(){
+        List<CalendarEvent> infoList = churchRepository.findAll();
+        CalendarEvent myInfo = null;        
+        for(CalendarEvent info : infoList){
+            myInfo = info;
+ 
+        }
+        return myInfo;
+    }
 }
