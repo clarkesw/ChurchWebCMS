@@ -113,36 +113,36 @@ public class StaffController{
     
     @PostMapping("/addContactToEvent")
     public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result, 
-            @RequestParam String fisrtName, @RequestParam String lastName){
+            @RequestParam String fisrtName, @RequestParam String lastName, @RequestParam int id){
         logger.debug("POST addContactToEvent  Name : {}",fisrtName);
 
-        CalendarEvent myEvent = returnInfo();
-        logger.debug("   ChurchInfo myInfo : {}",myInfo);
+        Optional<CalendarEvent> myEvent = calendarRepo.findById(id);
+        CalendarEvent event = myEvent.get();
+        logger.debug("   ChurchInfo myEvent : {}", event);
          
-        churchRepository.delete(myInfo);
-        myInfo.setAddress(address);
+        calendarRepo.delete(event);
+        event.setContact(staff);
         
-        churchRepository.save(myInfo);
+        calendarRepo.save(event);
         
         return "redirect:login"; 
     }    
  
     @GetMapping("/addContactToEvent")
-    public String addAddressForChurch(ModelMap model, @RequestParam int contact_id){
-        logger.debug("GET addContactToEvent  Address : {}",contact_id);
-        
-        session.setAttribute("ContactID", contact_id);
-        if(address_id != -1){
-            Address churchAddress = repository.findById(address_id).get();
-            model.put("address",churchAddress);
+    public String addContactToEvent(ModelMap model, @RequestParam int contact_id){
+        logger.debug("GET addContactToEvent  Contact ID : {}",contact_id);
+       
+        if(contact_id != -1){
+            Staff staff = repository.findById(contact_id).get();
+            model.put("contact",staff);
         }else{
-            model.put("address", new Address());
+            model.put("contact", new Staff());
         }
-        return "cms/add-address";
+        return "cms/add-contact";
     }    
 
     private CalendarEvent returnInfo(){
-        List<CalendarEvent> infoList = churchRepository.findAll();
+        List<CalendarEvent> infoList = calendarRepo.findAll();
         CalendarEvent myInfo = null;        
         for(CalendarEvent info : infoList){
             myInfo = info;
