@@ -1,20 +1,23 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-		<form:form method="post" modelAttribute="updateContact" >
+		<form:form method="post" modelAttribute="myStaff" action="addContactToEvent">
                     <fieldset>
-                        <form:select path = "contact">
-                         <%--  <form:option value = "NONE" label = "Select a Contact"/> --%>
+                    <table>
+                            <tr><td>
+                                    <form:radiobutton path="staff" items="${staffList}" />
+                            </td></tr>               
+                    </table>
+            
+                 <%--         <form:select path = "staffList">
                               <c:forEach items="${staffList}" var="staff"> 
-                                <form:option value="${staff.firstName} ${staff.lastName}"/>
-
-                       
+                                <form:option value="${staff.firstName} ${staff.lastName}">
+                                   ${staff.firstName} ${staff.lastName}
+                                </form:option>
                               </c:forEach>
-                         <%--   <form:options items = "${staffList}" />--%>
-                        </form:select>   
+                        </form:select>     --%>
                     </fieldset>          
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
 	</div>
-
 <%@ include file="common/footer.jspf" %>

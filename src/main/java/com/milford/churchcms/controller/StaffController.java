@@ -5,10 +5,9 @@
  */
 package com.milford.churchcms.controller;
 
-import com.milford.churchcms.dao.Address;
 import com.milford.churchcms.dao.CalendarEvent;
-import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Staff;
+import com.milford.churchcms.dao.StaffList;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.text.SimpleDateFormat;
@@ -16,6 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +42,9 @@ public class StaffController{
     @Autowired
     CalendarEventRepository calendarRepo;
     
+    @Autowired 
+    private HttpSession session;
+        
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -111,17 +114,22 @@ public class StaffController{
         return "cms/add-staff";
     }     
     
-    @PostMapping("/addContactToEvent")
-    public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result, 
-            @RequestParam String fisrtName, @RequestParam String lastName, @RequestParam int id){
+    @PostMapping("/addContactToEvent") // Need both the event.id and staff.id
+    public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("myStaff") StaffList staffer, BindingResult result, 
+            @RequestParam String fisrtName, @RequestParam String lastName){
         logger.debug("POST addContactToEvent  Name : {}",fisrtName);
-
-        Optional<CalendarEvent> myEvent = calendarRepo.findById(id);
+        int eventId = (Integer)session.getAttribute("EventID");
+        
+        Optional<CalendarEvent> myEvent = calendarRepo.findById(eventId);
         CalendarEvent event = myEvent.get();
         logger.debug("   ChurchInfo myEvent : {}", event);
-         
-        calendarRepo.delete(event);
-        event.setContact(staff);
+  //      calendarRepo.delete(event);
+        
+      //  List<Staff> list = staffList.getStaffers();
+//        for(Staff staffer : staffList){
+//            if(staffer.getFirstName().equals(fisrtName) && staffer.getLastName().equals(lastName))
+//                event.setContact(staffer);
+
         
         calendarRepo.save(event);
         
@@ -129,15 +137,18 @@ public class StaffController{
     }    
  
     @GetMapping("/addContactToEvent")
-    public String addContactToEvent(ModelMap model, @RequestParam int contact_id){
-        logger.debug("GET addContactToEvent  Contact ID : {}",contact_id);
-       
-        if(contact_id != -1){
-            Staff staff = repository.findById(contact_id).get();
-            model.put("contact",staff);
-        }else{
-            model.put("contact", new Staff());
-        }
+    public String addContactToEvent(ModelMap model, @RequestParam int contactId, @RequestParam int id){ //,@Valid @ModelAttribute("staffList") StaffList staffList
+        logger.debug("GET addContactToEvent  Contact ID : {}",contactId);
+
+        List<Staff> staff = repository.findAll();
+       model.put("staffList", staff);
+//        if(contactId != -1){
+//            Staff staff = repository.findById(contactId).get();
+//            model.put("contact",staff);
+//        }else{
+//            model.put("contact", new Staff());
+//        }
+        logger.debug("  ******* staffList : {}");
         return "cms/add-contact";
     }    
 
