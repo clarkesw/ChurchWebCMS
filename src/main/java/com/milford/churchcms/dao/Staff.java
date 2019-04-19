@@ -26,6 +26,7 @@ public class Staff {
     private Integer id;
     private String firstName;
     private String lastName;
+    private String fullName;
     private String position;
     private String email;
     private String homePhone;
@@ -37,14 +38,27 @@ public class Staff {
 
     public Staff(){}
     
-    public Staff(String firstName, String lastName, String position, String email, String homePhone, String workPhone, Address homeAddress) {
+    public Staff(String firstName, String lastName, String position, String email, String homePhone, 
+             String workPhone, Address homeAddress) {
         setFirstName(firstName);
         setLastName(lastName);
+        setConFullName();
         this.position = position;
         this.email = email;
         this.homePhone = homePhone;
         this.workPhone = workPhone;
         this.homeAddress = homeAddress;
+    }
+
+    private void setConFullName(){
+        this.fullName = this.lastName + "," + this.firstName;
+    }
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Integer getId() {
@@ -113,6 +127,7 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", position=" + position + ", email=" + email + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
+        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", position=" + position 
+                + ", email=" + email + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
     }
 }

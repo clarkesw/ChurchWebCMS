@@ -114,24 +114,16 @@ public class StaffController{
         return "cms/add-staff";
     }     
     
-    @PostMapping("/addContactToEvent") // Need both the event.id and staff.id
-    public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("myStaff") StaffList staffer, BindingResult result, 
-            @RequestParam String fisrtName, @RequestParam String lastName){
-        logger.debug("POST addContactToEvent  Name : {}",fisrtName);
+    @PostMapping("/addContactToEventPost") // Need both the event.id and staff.id
+    public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("staffer") Staff staffer){
+        logger.debug("POST addContactToEvent  Name : {}",staffer.getFullName());
         int eventId = (Integer)session.getAttribute("EventID");
         
         Optional<CalendarEvent> myEvent = calendarRepo.findById(eventId);
         CalendarEvent event = myEvent.get();
         logger.debug("   ChurchInfo myEvent : {}", event);
   //      calendarRepo.delete(event);
-        
-      //  List<Staff> list = staffList.getStaffers();
-//        for(Staff staffer : staffList){
-//            if(staffer.getFirstName().equals(fisrtName) && staffer.getLastName().equals(lastName))
-//                event.setContact(staffer);
-
-        
-        calendarRepo.save(event);
+//        calendarRepo.save(event);
         
         return "redirect:login"; 
     }    
@@ -142,13 +134,9 @@ public class StaffController{
 
         List<Staff> staff = repository.findAll();
        model.put("staffList", staff);
-//        if(contactId != -1){
-//            Staff staff = repository.findById(contactId).get();
-//            model.put("contact",staff);
-//        }else{
-//            model.put("contact", new Staff());
-//        }
-        logger.debug("  ******* staffList : {}");
+       model.put("staffer", new Staff());
+
+        logger.debug("  ******* staffList : {}", staff.size());
         return "cms/add-contact";
     }    
 
