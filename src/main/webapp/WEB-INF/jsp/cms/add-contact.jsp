@@ -15,6 +15,5 @@
                   </form:select>  
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
-                        ${staffList.get(0).firstName}
 	</div>
 <%@ include file="common/footer.jspf" %>

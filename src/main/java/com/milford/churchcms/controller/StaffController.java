@@ -7,7 +7,6 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.Staff;
-import com.milford.churchcms.dao.StaffList;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.text.SimpleDateFormat;
@@ -83,7 +82,7 @@ public class StaffController{
         logger.debug("addStaff Staff : {}",staff); 
         if(result.hasErrors())
             return "cms/add-staff";
-        
+        staff.setConFullName();
         repository.save(staff); 
         return "redirect:list-staffers";
     }
@@ -122,8 +121,9 @@ public class StaffController{
         Optional<CalendarEvent> myEvent = calendarRepo.findById(eventId);
         CalendarEvent event = myEvent.get();
         logger.debug("   ChurchInfo myEvent : {}", event);
-  //      calendarRepo.delete(event);
-//        calendarRepo.save(event);
+        calendarRepo.delete(event);
+        event.setContact(staffer);
+        calendarRepo.save(event);
         
         return "redirect:login"; 
     }    
@@ -131,10 +131,11 @@ public class StaffController{
     @GetMapping("/addContactToEvent")
     public String addContactToEvent(ModelMap model, @RequestParam int contactId, @RequestParam int id){ //,@Valid @ModelAttribute("staffList") StaffList staffList
         logger.debug("GET addContactToEvent  Contact ID : {}",contactId);
-
+        session.setAttribute("EventID", id);
+        
         List<Staff> staff = repository.findAll();
-       model.put("staffList", staff);
-       model.put("staffer", new Staff());
+        model.put("staffList", staff);
+        model.put("staffer", new Staff());
 
         logger.debug("  ******* staffList : {}", staff.size());
         return "cms/add-contact";

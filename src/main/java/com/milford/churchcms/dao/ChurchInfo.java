@@ -26,6 +26,7 @@ public class ChurchInfo {
     private String name;
     private String missionStatement;
     private String email;
+    private String url;
     
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "ADDRESS_ID")
@@ -53,8 +54,17 @@ public class ChurchInfo {
         this.address = info.getAddress();
         this.telephone = info.getTelephone();
         this.leadPastor = info.getLeadPastor();
+        this.url = info.getUrl();
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
     public int getId() {
         return id;
     }

@@ -34,7 +34,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                      <td><a type="button" class="btn btn-success" 
-                                                          href="addContactToEvent?contactId=${event.contact.id}&id=${event.id}">${event.contact.id} Edit Contact</a></td>                                       
+                                                          href="addContactToEvent?contactId=${event.contact.id}&id=${event.id}">Edit Contact</a></td>                                       
                                                 </c:otherwise>
                                             </c:choose> 
                                             <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id}">Delete</a></td>

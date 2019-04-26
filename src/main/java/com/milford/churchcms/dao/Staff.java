@@ -50,8 +50,8 @@ public class Staff {
         this.homeAddress = homeAddress;
     }
 
-    private void setConFullName(){
-        this.fullName = this.lastName + "," + this.firstName;
+    public void setConFullName(){
+        this.fullName = this.lastName + ", " + this.firstName;
     }
     public String getFullName() {
         return fullName;

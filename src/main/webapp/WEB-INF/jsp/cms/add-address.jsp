@@ -1,7 +1,7 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-		<form:form method="post" modelAttribute="contact" >
+		<form:form method="post" modelAttribute="address" >
                       	<fieldset class="form-group">
 				<form:label path="streetAddress">Street Address</form:label> 
 				<form:input  type="text" maxlength="25"

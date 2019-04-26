@@ -8,10 +8,10 @@
 <link rel="dns-prefetch" href="//cf.gatewaypeople.com" />
 
 <link rel="canonical" href="${church.name}" />
-<link rel="shortlink" href="http://milford.com/" />
-<meta property="og:site_name" content="Milford Church" />
+<link rel="shortlink" href="${church.url}" />
+<meta property="og:site_name" content="${church.name}" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://milford.com/" />
+<meta property="og:url" content="${church.url}" />
 <meta property="og:title" content=${church.name} />
 <meta property="og:description" content=${church.missionStatement} />
   <title>${page.title}</title>
@@ -124,12 +124,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                     <div class="wrapper">
                                                         <div>
                                                             <ul class="menu">
-                                                                <li class="first leaf"><a href="ministries/life/about-gateway-church.html" title="">About Us</a></li>
-                                                                <li class="leaf"><a href="ministries/life/get-connected.html">Get Connected</a></li>
+                                                                <li class="first leaf"><a href="/aboutOurChruch">About Us</a></li>
+                                                                <li class="leaf"><a href="/makeConnections">Get Connected</a></li>
                                                                 <li class="leaf"><a href="ministries.html">Ministries</a></li>
                                                                 <li class="leaf"><a href="events.html" title="">Events</a></li>
                                                                 <li class="leaf"><a href="index.html" class="super-menu-trigger mobile-menu-disable active">Conferences</a></li>
-                                                                <li class="last leaf"><a href="watch/live.html" class="watch-button-placeholder mobile-menu-disable">ON AIR</a></li>
+                                                                <li class="last leaf"><a href="/mediaArchive" class="watch-button-placeholder mobile-menu-disable">Media Archive</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -139,49 +139,15 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                         </div>
                                         <div id="dl-menu" class="dl-menuwrapper">
                                             <span class="dl-trigger hamburger icon">
-                              <a href="#"></a>
-                              </span>
+                                            <a href="#"></a>
+                                            </span>
                                             <ul class="dl-menu">
-                                                <li id="mobile_campus" class="dl-menu-border">
-                                                    <a href="#">Campuses</a>
-                                                    <ul class="campus-selector">
-                                                        <li class="first odd">
-                                                            <a href='index0409.html?campus=22' data-campus-id="22" data-campus-long-title="Southlake" data-campus-abbreviation="SLK" target="_blank">Southlake</a>
-                                                        </li>
-                                                        <li class="even">
-                                                            <a href='indexe41c.html?campus=562326' data-campus-id="562326" data-campus-long-title="Dallas" data-campus-abbreviation="DAL" target="_blank">Dallas</a>
-                                                        </li>
-                                                        <li class="odd">
-                                                            <a href='index892c.html?campus=43' data-campus-id="43" data-campus-long-title="Frisco" data-campus-abbreviation="FRS" target="_blank">Frisco</a>
-                                                        </li>
-                                                        <li class="even">
-                                                            <a href='index6add.html?campus=44' data-campus-id="44" data-campus-long-title="Grand Prairie" data-campus-abbreviation="GRP" target="_blank">Grand Prairie</a>
-                                                        </li>
-                                                        <li class="odd">
-                                                            <a href='index6e68.html?campus=45' data-campus-id="45" data-campus-long-title="North Fort Worth" data-campus-abbreviation="NFW" target="_blank">North Fort Worth</a>
-                                                        </li>
-                                                        <li class="last even">
-                                                            <a href='index6252.html?campus=29' data-campus-id="29" data-campus-long-title="NRH" data-campus-abbreviation="NRH" target="_blank">NRH</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
                                                 <li class="first leaf"><a href="ministries/life/about-gateway-church.html" title="">About Us</a></li>
                                                 <li class="leaf"><a href="ministries/life/get-connected.html">Get Connected</a></li>
                                                 <li class="leaf"><a href="ministries.html">Ministries</a></li>
                                                 <li class="leaf"><a href="events.html" title="">Events</a></li>
                                                 <li class="leaf"><a href="index.html" class="super-menu-trigger mobile-menu-disable active">Conferences</a></li>
                                                 <li class="last leaf"><a href="watch/live.html" class="watch-button-placeholder mobile-menu-disable">ON AIR</a></li>
-                                                <li id="mobile_conferences" class="dl-menu-border">
-                                                    <a href="#">Conferences</a>
-                                                    <ul class="menu">
-                                                        <li class="first leaf"><a href="http://first.gatewaypeople.com/" target="_blank">First Conference</a></li>
-                                                        <li class="leaf"><a href="http://xomarriageconference.com/" target="_blank">XO Marriage Conference</a></li>
-                                                        <li class="leaf"><a href="http://menssummit.com/" id="site-affiliate-links-mens-summit" class="site-affiliate-links-item">Men&#039;s Summit</a></li>
-                                                        <li class="leaf"><a href="http://pinkimpact.com/" id="site-affiliate-links-pink-impact" class="site-affiliate-links-item">Pink Impact</a></li>
-                                                        <li class="leaf"><a href="http://gatewaystudentconference.com/" id="site-affiliate-links-gateway-student-conference" class="site-affiliate-links-item">Gateway Student Conference</a></li>
-                                                        <li class="last leaf"><a href="http://gatewayconference.com/" id="site-affiliate-links-gateway-conference" class="site-affiliate-links-item" target="_blank">Gateway Conference</a></li>
-                                                    </ul>
-                                                </li>
                                                 <li class="first leaf"><a href="watch/live.html" class="watch-live">Watch Live</a></li>
                                                 <li class="leaf"><a href="watch/message-archives/individualf6eb.html?og_group_ref_target_id_entityreference_filter=1" class="watch-archive">Messages</a></li>
                                                 <li class="leaf"><a href="ministries/life/tithes-egiving.html">Give</a></li>
@@ -210,28 +176,6 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                     </div>
                 </div>
                 <!-- /.header-inner -->
-                <div class="super-menu">
-                    <div class="wrapper">
-                        <div class="region region-super-menu">
-                            <div id="block-menu-menu-super-menu-conferences" class="block block-menu">
-                                <div class="wrapper">
-                                    <h2>Conferences</h2>
-                                    <div>
-                                        <ul class="menu gwp-simple-menu gwp-simple-menu--og-menu gwp-simple-menu--og-menu--department">
-                                            <li class="first leaf"><a href="http://first.gatewaypeople.com/" target="_blank">First Conference</a></li>
-                                            <li class="leaf"><a href="http://xomarriageconference.com/" target="_blank">XO Marriage Conference</a></li>
-                                            <li class="leaf"><a href="http://menssummit.com/" id="site-affiliate-links-mens-summit" class="site-affiliate-links-item">Men&#039;s Summit</a></li>
-                                            <li class="leaf"><a href="http://pinkimpact.com/" id="site-affiliate-links-pink-impact" class="site-affiliate-links-item">Pink Impact</a></li>
-                                            <li class="leaf"><a href="http://gatewaystudentconference.com/" id="site-affiliate-links-gateway-student-conference" class="site-affiliate-links-item">Gateway Student Conference</a></li>
-                                            <li class="last leaf"><a href="http://gatewayconference.com/" id="site-affiliate-links-gateway-conference" class="site-affiliate-links-item" target="_blank">Gateway Conference</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- /.wrapper -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
     </header>
     <section id="content">
         <div class="clearfix">
@@ -265,19 +209,6 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                         <div id="block-gwp-sites-homepage-multiple-locations" class="block block-gwp-sites">
                             <div class="wrapper">
                                 <div>
-                                    <div class="col-left">
-                                     <!--   <div class="view view-gwp-campus-selector view-id-gwp_campus_selector view-display-id-gwp_home_campus_details campus-selector view-dom-id-5b48586f98e5ef0eb09082f5dd03ad59"> -->
-                                            <div class="view-empty">
-                                                <div>
-                                                    <h2>One Church. Multiple Locations.</h2>
-                                                    <p><a class="button arrow-point-right arrow-after mobile-hide scrollto" href="#block-block-46">Find a Campus Near You</a></p>
-                                                    <p><a class="button arrow-point-right arrow-after mobile-show-inline scrollto" href="#block-views-gwp-campus-times-block">Find a Campus Near You</a></p>
-                                                    <p><a class="button arrow-point-right arrow-after scrollto" href="#block-views-gwp-campus-times-block">View Service Times</a></p>
-                                                    <p><a class="button arrow-point-right arrow-after" href="watch/message-archives/individualf6eb.html?og_group_ref_target_id_entityreference_filter=1">Watch Archives</a></p>
-                                                </div>
-                                            </div>
-                                       <!-- </div> -->
-                                    </div>
                                     <div class="col-right last">
                                         <div class="desk-1-2-gut-sm">
                                             <div class="view view-gwp-front view-id-gwp_front view-display-id-block_1 view-dom-id-0a5482419788787e522baa17655858dd">

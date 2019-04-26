@@ -15,9 +15,17 @@
                             <tr>
                                 <td>${name.name}</td>
                                 <td><a type="button" class="btn btn-success" href="/update-name?id=${name.id}">Update</a></td>
-                                <c:if test="name.deletable">
+                             <%--   <c:if test="${name.deletable}">
                                     <td><a type="button" class="btn btn-warning" href="/delete-name?id=${name.id}">Delete</a></td>
-                                </c:if>
+                                </c:if> --%>
+                                <c:choose>
+                                    <c:when test="${name.deletable}">
+                                        <td><a type="button" class="btn btn-warning" href="/delete-name?id=${name.id}">Delete</a></td>
+                                    </c:when>    
+                                    <c:otherwise>
+                                        <td></td>
+                                    </c:otherwise>
+                                </c:choose>                                    
                             </tr>
                             </c:forEach>
 			</tbody>

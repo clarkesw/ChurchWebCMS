@@ -27,12 +27,8 @@ public class WebPageNames {
     public WebPageNames() {}
 
     public WebPageNames(String name) {
-        if(name.equals("Home") || name.equals("Calendar")){
-            deletable = false;
-        }else{
-            deletable = true;
-        }
-            
+        if((name.equals("Home") || name.equals("Calendar")))
+            deletable = false;     
         this.name = name;
     }
 

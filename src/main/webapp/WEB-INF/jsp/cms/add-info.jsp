@@ -21,6 +21,12 @@
                                 <form:errors path="email" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
+				<form:label path="url">Web URL</form:label> 
+				<form:input  type="text" maxlength="25"
+					class="form-control" path="url"/>
+                                <form:errors path="url" cssClass="text-warning"/>
+			</fieldset>
+                        <fieldset class="form-group">
 				<form:label path="telephone">Phone Number</form:label> 
 				<form:input  type="text" 
 					class="form-control" path="telephone"/>
