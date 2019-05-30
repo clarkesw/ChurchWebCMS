@@ -91,7 +91,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                             <li class="leaf"><a href="watch/message-archives/individualf6eb.html?og_group_ref_target_id_entityreference_filter=1" class="watch-archive">Messages</a></li>
                                             <li class="leaf"><a href="ministries/life/tithes-egiving.html">Give</a></li>
                                             <li class="leaf"><a href="ministries/prayer.html">Pray</a></li>
-                                            <li class="leaf"><a href="ministries/devotions.html">Devotions</a></li>
+                                            <li class="leaf"><a href="devotions.html">Devotions</a></li>
                                             <li>
                                                 <a href="#"> Social</a>
                                                 <ul class="dropdown">
@@ -124,12 +124,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                     <div class="wrapper">
                                                         <div>
                                                             <ul class="menu">
-                                                                <li class="first leaf"><a href="/aboutOurChruch">About Us</a></li>
-                                                                <li class="leaf"><a href="/makeConnections">Get Connected</a></li>
-                                                                <li class="leaf"><a href="ministries.html">Ministries</a></li>
-                                                                <li class="leaf"><a href="events.html" title="">Events</a></li>
-                                                                <li class="leaf"><a href="index.html" class="super-menu-trigger mobile-menu-disable active">Conferences</a></li>
-                                                                <li class="last leaf"><a href="/mediaArchive" class="watch-button-placeholder mobile-menu-disable">Media Archive</a></li>
+                                                                <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
+                                                                <li class="leaf"><a href="makeConnections">Get Connected</a></li>
+                                                                <li class="leaf"><a href="ministries">Ministries</a></li>
+                                                                <li class="leaf"><a href="calendarEvents" title="">Events</a></li>
+                                                                <li class="last leaf"><a href="mediaArchive" class="watch-button-placeholder mobile-menu-disable">Media Archive</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -142,26 +141,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                             <a href="#"></a>
                                             </span>
                                             <ul class="dl-menu">
-                                                <li class="first leaf"><a href="ministries/life/about-gateway-church.html" title="">About Us</a></li>
-                                                <li class="leaf"><a href="ministries/life/get-connected.html">Get Connected</a></li>
-                                                <li class="leaf"><a href="ministries.html">Ministries</a></li>
-                                                <li class="leaf"><a href="events.html" title="">Events</a></li>
-                                                <li class="leaf"><a href="index.html" class="super-menu-trigger mobile-menu-disable active">Conferences</a></li>
-                                                <li class="last leaf"><a href="watch/live.html" class="watch-button-placeholder mobile-menu-disable">ON AIR</a></li>
-                                                <li class="first leaf"><a href="watch/live.html" class="watch-live">Watch Live</a></li>
-                                                <li class="leaf"><a href="watch/message-archives/individualf6eb.html?og_group_ref_target_id_entityreference_filter=1" class="watch-archive">Messages</a></li>
-                                                <li class="leaf"><a href="ministries/life/tithes-egiving.html">Give</a></li>
-                                                <li class="leaf"><a href="ministries/prayer.html">Pray</a></li>
-                                                <li class="leaf"><a href="http://gatewaydevotions.com/">Devotions</a></li>
-                                                <li class="leaf"><a href="http://store.gatewaypeople.com/">Store</a></li>
-                                                <li class="last expanded">
-                                                    <a href="index.html" class="active">Social</a>
-                                                    <ul class="menu">
-                                                        <li class="first leaf"><a href="http://www.facebook.com/gatewaypeople" title="">Facebook</a></li>
-                                                        <li class="leaf"><a href="https://instagram.com/gatewaypeople">Instagram</a></li>
-                                                        <li class="last leaf"><a href="http://twitter.com/gatewaypeople" title="">Twitter</a></li>
-                                                    </ul>
-                                                </li>
+                                                    <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
+                                                    <li class="leaf"><a href="makeConnections">Get Connected</a></li>
+                                                    <li class="leaf"><a href="ministries">Ministries</a></li>
+                                                    <li class="leaf"><a href="calendarEvents" title="">Events</a></li>
+                                                    <li class="last leaf"><a href="mediaArchive" class="watch-button-placeholder mobile-menu-disable">Media Archive</a></li>
                                             </ul>
                                         </div>
                                         <script src="../../scripts/menuCall.js?null"></script>
@@ -259,7 +243,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                         </div>
                                         <div class="desk-1-2-gut-sm">
                                             <div class="view-header">
-                                                <h3>Featured Article</h3>
+                                                <h3>${article.title}</h3>
                                             </div>
                                             <div class="view-content">
                                                 <div class="card card--type-article card--tag-announcement">

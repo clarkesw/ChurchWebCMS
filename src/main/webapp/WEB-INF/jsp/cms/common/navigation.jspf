@@ -10,6 +10,7 @@
                     <li><a href="/list-names">Web Page Name</a></li>
                     <li><a href="/list-events">Calendar</a></li>
                     <li><a href="/list-articles">Article</a></li>
+                     <li><a href="/list-sermons">Sermon</a></li>
                     <li><a href="/list-info">Church Info</a></li>
                     <li><a href="/list-staffers">Staff</a></li>
 	        </ul>

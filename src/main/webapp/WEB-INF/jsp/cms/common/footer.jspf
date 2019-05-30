@@ -2,7 +2,7 @@
 	$('#startTime').timepicker();
 </script>
 <script>
-	$('#startDate').datepicker({
+	$('#startDateCont').datepicker({
 		format : 'mm/dd/yyyy'
 	});
 </script>
@@ -11,10 +11,14 @@
 </script>
 
 <script>
-	$('#endDate').datepicker({
+	$('#endDateCont').datepicker({
 		format : 'mm/dd/yyyy'
 	});
 </script>
-
+<script>
+	$('#sermonDate').datepicker({
+		format : 'mm/dd/yyyy'
+	});
+</script>
 </body>
 </html>
