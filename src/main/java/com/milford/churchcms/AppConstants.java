@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class AppConstants {
     
+    public static final String dateFormat = "M-d-yyyy  h:mm:ss a";
     public final static List<String> books = new ArrayList<>(
          Arrays.asList("Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel",
                  "2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job",

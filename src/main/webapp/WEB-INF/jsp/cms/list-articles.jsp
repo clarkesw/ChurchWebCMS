@@ -7,7 +7,7 @@
 				<tr>
                                     <th>Name</th>
                                     <th>Page</th>
-                                    <th>Published Date</th>
+                                    <th>Last Modified Date</th>
                                     <th></th>
                                     <th></th>
 				</tr>
@@ -17,7 +17,7 @@
 					<tr>
                                             <td>${art.title}</td>
                                             <td>${art.pageName}</td>                                                                                        
-                                            <td>${art.publishedDate}</td>
+                                            <td>${art.lastModified}</td>
                                             <td><a type="button" class="btn btn-success" href="/update-article?id=${art.id}">Update</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-article?id=${art.id}">Delete</a></td>
 					</tr>

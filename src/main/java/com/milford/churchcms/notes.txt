@@ -1,2 +1,6 @@
 
 Removing a detached instance - means you need to log back in.  
+
+https://www.google.com/maps/place/1030+Milford+Church+Rd+SW,+Marietta,+GA+30060
+
+class="button color-white arrow-point-right arrow-after mobile-hide scrollto"

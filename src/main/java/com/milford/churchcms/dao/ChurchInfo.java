@@ -5,11 +5,14 @@
  */
 package com.milford.churchcms.dao;
 
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,6 +38,10 @@ public class ChurchInfo {
     private String leadPastor;
     private String associatePastor;
     private String youthMinister;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ServiceTimes.class)   
+    @JoinColumn(name = "id",referencedColumnName="id")
+    private List<ServiceTimes> serviceTimes;
 
     public ChurchInfo() {}
 
@@ -55,6 +62,15 @@ public class ChurchInfo {
         this.telephone = info.getTelephone();
         this.leadPastor = info.getLeadPastor();
         this.url = info.getUrl();
+        this.serviceTimes = info.getServiceTimes();
+    }
+
+    public List<ServiceTimes> getServiceTimes() {
+        return serviceTimes;
+    }
+
+    public void setServiceTimes(List<ServiceTimes> serviceTimes) {
+        this.serviceTimes = serviceTimes;
     }
 
     public String getUrl() {

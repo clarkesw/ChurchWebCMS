@@ -15,5 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface WebPageRepository extends JpaRepository<WebPage,Integer>{
     List<WebPage> findAllByPageName(String pageName);
+    WebPage findByPageName(String pageName);
     WebPage findTopByOrderByIdDesc();
 }

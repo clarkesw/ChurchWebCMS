@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.dao;
 
+import com.milford.churchcms.AppConstants;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,8 +22,8 @@ import javax.persistence.Table;
 @Table(name = "ARTICLE")
 public class Article {
     @Id
-    @GeneratedValue
-    private int id;
+    private Integer id = 1;
+    
     private String title;
     @Column(name="page_name")
     private String pageName;
@@ -30,31 +31,42 @@ public class Article {
     private String url;
     private String content;
     private String imageURL;
-    private String publishedDate;
+    @Column(name="last_modified")
+    private String lastModified;
 
     public Article() {}
+    
+    public Article(Article art) {
+        new Article (art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
+    }
 
     public Article(String title, String pageName, String subTitle, String url, String content, String imageURL) {
         this.title = title;
         this.pageName = pageName;
         this.subTitle = subTitle;
-        this.url = url;
+        this.url = createUrl(this.id);
         this.content = content;
         this.imageURL = imageURL;
-        this.publishedDate =  new SimpleDateFormat("M-d-yyyy  h:mm:ss a").format(new Date());
-
+        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
+    }
+        
+    public Article(int id, String title, String pageName, String subTitle, String content, String imageURL) {
+        this.id = id;
+        this.title = title;
+        this.pageName = pageName;
+        this.subTitle = subTitle;
+        this.url = createUrl(id);
+        this.content = content;
+        this.imageURL = imageURL;
+        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
     }
 
-    public Article(Article art) {
-        new Article (art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
+    public String getLastModified() {
+        return lastModified;
     }
 
-    public String getPublishedDate() {
-        return publishedDate;
-    }
-
-    public void setPublishedDate(String publishedDate) {
-        this.publishedDate = publishedDate;
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
     }
 
     public int getId() {
@@ -113,8 +125,11 @@ public class Article {
         this.imageURL = imageURL;
     }
 
+    private String createUrl(int id){
+        return "/article/" + id;
+    }
     @Override
     public String toString() {
-        return "Article{" + "id=" + id + ", title=" + title + ", pageName=" + pageName + ", subTitle=" + subTitle + ", url=" + url + ", content=" + content + ", imageURL=" + imageURL + ", publishedDate=" + publishedDate + '}';
+        return "Article{" + "id=" + id + ", title=" + title + ", pageName=" + pageName + ", subTitle=" + subTitle + ", url=" + url + ", content=" + content + ", imageURL=" + imageURL + ", lastModified=" + lastModified + '}';
     }  
 }

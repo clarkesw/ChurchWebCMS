@@ -5,16 +5,13 @@
  */
 package com.milford.churchcms.repository;
 
-import com.milford.churchcms.dao.Article;
-import java.util.List;
+import com.milford.churchcms.dao.ServiceTimes;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author clarke
  */
-public interface ArticleRepository extends JpaRepository<Article,Integer>{
-    Article findByTitle(String title);
-    List<Article> findAllByPageName(String pageName);
-    Article findTopByOrderByLastModified();
+public interface ServiceTimeRepository extends JpaRepository<ServiceTimes,Integer>{
+    ServiceTimes findTopByOrderByIdDesc();
 }

@@ -29,7 +29,7 @@
                            <form:options items = "${books}"  itemLabel="book"/>
                         </form:select> --%>
                         <form:input  type="text" maxlength="25"
-                                class="form-control" path="book"/>
+                                class="form-control" required="required" path="book"/>
                         <form:errors path="book" cssClass="text-warning"/>
                 </fieldset>
                 <fieldset class="form-group">

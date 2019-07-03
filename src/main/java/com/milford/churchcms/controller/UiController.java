@@ -5,11 +5,13 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.repository.ArticleRepository;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.service.ArticleService;
+import com.milford.churchcms.repository.WebPageRepository;
 import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
 import java.util.List;
@@ -31,14 +33,17 @@ public class UiController {
     EventService eventService;
     
     @Autowired
-    CalendarEventRepository churchEventRepo;
+    CalendarEventRepository churchEventRepository;
         
     @Autowired
-    ChurchRepository churchRepo;
+    ChurchRepository churchRepository;
         
     @Autowired
-    ArticleService articleService;
+    ArticleRepository articleRepository;
     
+    @Autowired
+    WebPageRepository pageRepository;
+        
     @Autowired
     WebPageService pageService;
         
@@ -46,17 +51,17 @@ public class UiController {
     @ResponseBody
     public List<CalendarEvent> getCalendarEvent(){
         logger.debug("UiController /calEventArray");
-        return churchEventRepo.findAll();
+        return churchEventRepository.findAll();
     }
     
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
         logger.debug("UiController /page/" + name);
-        List<ChurchInfo> findAll = churchRepo.findAll();
-        logger.debug("Church Bean size : " + findAll.size());
-        model.addAttribute("article", articleService.getArticleInfo());
-        model.addAttribute("church", findAll.get(0));
-        model.addAttribute("page", pageService.retrieveOnePage(name));
+        List<ChurchInfo> churchInfo = churchRepository.findAll();
+        Article article = articleRepository.findTopByOrderByLastModified();
+        model.addAttribute("article", article);
+        model.addAttribute("church", churchInfo.get(0));
+        model.addAttribute("page", pageRepository.findByPageName(name));
         return "home";
 
     }

@@ -6,8 +6,9 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.dao.ServiceTimes;
 import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.service.ChurchInfoService;
+import com.milford.churchcms.repository.ServiceTimeRepository;
 import java.util.Collection;
 import java.util.List;
 import javax.validation.Valid;
@@ -30,10 +31,10 @@ public class ChurchInfoController{
     public Logger logger = LoggerFactory.getLogger(ChurchInfoController.class);
     
     @Autowired
-    ChurchInfoService service;
+    ChurchRepository churchRepository;
     
     @Autowired
-    ChurchRepository churchRepository;
+    ServiceTimeRepository timeRepository;    
         
     @GetMapping("/list-info")
     public String showEvent(ModelMap model){
@@ -54,7 +55,8 @@ public class ChurchInfoController{
         if(result.hasErrors())
             return "cms/add-event";
         
-        churchRepository.deleteById(id);//.delete(info);
+        if(id != -1)
+            churchRepository.deleteById(id);//.delete(info);
         churchRepository.save(info);  
         return "redirect:list-info";
     }
@@ -71,6 +73,29 @@ public class ChurchInfoController{
         }   
         
         return "cms/add-info";
+    }    
+    
+    @PostMapping("/editServiceTimes")
+    public String updateServicePost(ModelMap model,@Valid @ModelAttribute("serviceTime") ServiceTimes time){
+        logger.debug("POST updateServicePost Info :{}",time);
+        
+        ChurchInfo myInfo = returnInfo();
+        churchRepository.delete(myInfo);
+        
+        myInfo.getServiceTimes().add(time);
+        churchRepository.save(myInfo);
+        return "redirect:list-info";
+    }
+    
+    @GetMapping("/editServiceTimes")
+    public String updateShowService(ModelMap model){
+        List<ServiceTimes> serviceTimes = timeRepository.findAll();
+        logger.debug("GET updateInfoPost Church Info : {}",serviceTimes.size());
+        
+        model.put("serviceTimes", serviceTimes);
+        model.put("serviceTime", new ServiceTimes());
+        
+        return "cms/add-serviceTime";
     }    
     
     private ChurchInfo returnInfo(){

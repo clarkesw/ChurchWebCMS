@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.dao;
 
+import com.milford.churchcms.AppConstants;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +52,7 @@ public class WebPage {
         this.bgImage = bgImage;
         this.link = link;
         this.pageName = pageName;
-        this.lastModified =  new SimpleDateFormat("M-d-yyyy  h:mm:ss a").format(new Date());;
+        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
         this.message = message;
         this.isVisible = isVisible;
     }

@@ -77,11 +77,13 @@ public class WebPageController{
         if(result.hasErrors())
             return "cms/add-page";
 
+        repository.deleteById(page.getId() +1);
         try{
             repository.save(new WebPage(page.getTitle(),page.getBgImage(), page.getLink(), page.getPageName(), 
                 page.getMessage(), page.isIsVisible()));   
         }catch(Exception e){
-            throw new DBException("Add Web Page ",DbExceptionDescription.NOT_UNIQUE);
+            e.printStackTrace();
+           // throw new DBException("Add Web Page ",DbExceptionDescription.NOT_UNIQUE);
         }
     
         return "redirect:/cms/list-pages";

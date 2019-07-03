@@ -4,7 +4,7 @@
 		<form:form method="post" modelAttribute="address" >
                       	<fieldset class="form-group">
 				<form:label path="streetAddress">Street Address</form:label> 
-				<form:input  type="text" maxlength="25"
+				<form:input  type="text" maxlength="50"
 					class="form-control" required="required" path="streetAddress"/>
                                 <form:errors path="streetAddress" cssClass="text-warning"/>
 			</fieldset>

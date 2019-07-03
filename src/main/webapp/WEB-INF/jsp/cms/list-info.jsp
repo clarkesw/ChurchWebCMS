@@ -8,7 +8,8 @@
                                     <th>Name</th>
                                     <th>Mission Statement</th>
                                     <th>Lead Pastor</th>
-                                    <th></th>
+                                    <th>Address</th>
+                                    <th>Service Times</th>
                                     <th></th>
 				</tr>
 			</thead>
@@ -28,7 +29,18 @@
                                                   href="addAddressForChurch?address_id=${info.address.id}">Edit Address</a></td>                                       
                                         </c:otherwise>
                                     </c:choose>
-                                    <td><a type="button" class="btn btn-success" href="/update-info?id=${info.id}">Update</a></td>
+                                    <td><a type="button" class="btn btn-success" 
+                                                  href="editServiceTimes">Edit Times</a></td>
+                                    <c:choose>
+                                        <c:when test="${empty info.id}">
+                                            <td><a type="button" class="btn btn-success" 
+                                                  href="update-info?id=-1">Add</a></td>
+                                        </c:when>
+                                        <c:otherwise>
+                                             <td><a type="button" class="btn btn-success" 
+                                                  href="update-info?id=${info.id}">Update</a></td>                                       
+                                        </c:otherwise>
+                                    </c:choose>
                                 </tr>
 
 			</tbody>

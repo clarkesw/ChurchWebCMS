@@ -7,7 +7,6 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.repository.ArticleRepository;
-import com.milford.churchcms.service.ArticleService;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -32,10 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ArticleController{
     
     public Logger logger = LoggerFactory.getLogger(ArticleController.class);
-    
-    @Autowired
-    ArticleService service;
-    
+
     @Autowired
     ArticleRepository repository;
     
@@ -52,7 +48,7 @@ public class ArticleController{
     @GetMapping("/list-articles")
     public String showArticle(ModelMap model){
         String username = getLoggedInName(model);
-        model.put("articles", repository.findAll()); //service.retrieveArticles());
+        model.put("articles", repository.findAll());
         return "cms/list-articles";
     }
         
@@ -82,8 +78,9 @@ public class ArticleController{
         logger.debug("addArticle Article : {}",article); 
         if(result.hasErrors())
             return "cms/add-article";
-        
-        repository.save(new Article(article.getTitle(),article.getPageName(),article.getSubTitle(),article.getUrl(),
+        Article lastArt = repository.findTopByOrderByLastModified();
+        int articleId = (lastArt != null) ? lastArt.getId() + 1 : 1;
+        repository.save(new Article(articleId, article.getTitle(),article.getPageName(),article.getSubTitle(),
                                     article.getContent(),article.getImageURL())); 
         return "redirect:list-articles";
     }
@@ -91,7 +88,7 @@ public class ArticleController{
     @GetMapping("/delete-article")
     public String deleteArticle(@RequestParam int id){
         logger.debug("deleteArticle ID : {}",id); 
-        repository.deleteById(id);  //service.deleteArticle(id);
+        repository.deleteById(id);  
         return "redirect:list-articles";
     }
     
@@ -100,14 +97,18 @@ public class ArticleController{
         if(result.hasErrors())
             return "cms/add-article";
         repository.delete(article);
-        repository.save(new Article(article.getTitle(),article.getPageName(),article.getSubTitle(),article.getUrl(),
-                                    article.getContent(),article.getImageURL()));  //service.updateArticle(article);
+        
+        Article lastArt = repository.findTopByOrderByLastModified();
+        int articleId = (lastArt != null) ? lastArt.getId() + 1 : 1;
+        repository.save(new Article(articleId, article.getTitle(),article.getPageName(),article.getSubTitle(),
+                                    article.getContent(),article.getImageURL())); 
+
         return "redirect:list-articles";
     }
     
     @GetMapping("/update-article")
     public String updateShowArticle(ModelMap model, @RequestParam int id){
-        Optional<Article> article = repository.findById(id);//service.retrieveOneArticle(id);
+        Optional<Article> article = repository.findById(id);
         
         model.put("article", article.get());
         return "cms/add-article";
