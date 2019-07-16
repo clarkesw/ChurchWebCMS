@@ -63,62 +63,16 @@
 <script type="text/javascript" src="../../scripts/moment-timezone-with-data.js?p7rj3q"></script>
 <script type="text/javascript" src="../../scripts/jquery.countdown.min.js?p7rj3q"></script>
 <script type="text/javascript" src="../../scripts/jquery.fancybox.pack.js?p7rj3q"></script>
-<meta charset='utf-8' />
-<link href='../scripts/fullcalendar.min.css' rel='stylesheet' />
-<link href='../scripts/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<script src='../scripts/moment.min.js'></script>
-<script src='../scripts/jquery.min.js'></script>
-<script src='../scripts/fullcalendar.min.js'></script>
-       <script>
-           var result;
-            window.onload = function(){
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "http://localhost:8080/calEventArray", true);
-                xhr.send();
-                xhr.onreadystatechange = function(){
- 
-                        result = xhr.responseText;
-                        document.getElementById("demo").innerHTML = result;
-                    }
-                }
-       </script>
-<script>
-
-$(document).ready(function() {
-        $('#calendar').fullCalendar({
-            theme: true,
-            editable: false,
-            events: "/calEventArray"
-        });
- 
-    });
-
-</script>
-<style>
-
-  body {
-    margin: 40px 10px;
-    padding: 0;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    font-size: 14px;
-  }
-
-  #calendar {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-</style>
 
 </head>
 
-<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-department og-context og-context-node og-context-node-1" >
+<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-department og-context og-context-node og-context-node-1" background='${page.bgImage}'>
 
     <div id="top"></div>
     <header class="header header-v1" role="banner">
         <div class="wrapper">
             <div id="site-logo">
-                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="100" height="100" alt="Home" /></a>
+                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="125" height="125" alt="Home" /></a>
             </div>
         </div>
         <div class="header-top">
@@ -179,7 +133,7 @@ $(document).ready(function() {
     </header>
     <section id="content">
     
-        <div id='calendar'></div>
+        <!-- /.content-wrapper remove-->
     </section>
     <!-- /#content -->
     <footer class="site-info">

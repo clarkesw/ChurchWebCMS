@@ -7,6 +7,7 @@ package com.milford.churchcms.dao;
 
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ import javax.persistence.Table;
 public class ChurchInfo {
     @Id
     @GeneratedValue
+    @Column(name = "sid")
     private int id;
     private String name;
     private String missionStatement;
@@ -40,7 +42,7 @@ public class ChurchInfo {
     private String youthMinister;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ServiceTimes.class)   
-    @JoinColumn(name = "id",referencedColumnName="id")
+    @JoinColumn(name = "sid",referencedColumnName="sid")
     private List<ServiceTimes> serviceTimes;
 
     public ChurchInfo() {}
@@ -155,6 +157,8 @@ public class ChurchInfo {
 
     @Override
     public String toString() {
-        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", address=" + address + ", telephone=" + telephone + ", leadPastor=" + leadPastor + ", associatePastor=" + associatePastor + ", youthMinister=" + youthMinister + '}';
+        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", url=" + url + ", address=" + address + ", telephone=" + telephone + ", leadPastor=" + leadPastor + ", associatePastor=" + associatePastor + ", youthMinister=" + youthMinister + ", serviceTimes=" + serviceTimes + '}';
     }
+
+
 }

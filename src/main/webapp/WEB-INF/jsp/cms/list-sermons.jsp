@@ -8,7 +8,7 @@
                                     <th>Title</th>
                                     <th>Sub Title</th>
                                     <th>Date</th>
-                                    <th></th>
+                                    <th><Passages/th>
                                     <th></th>
                                     <th></th>
 		</tr>
@@ -22,8 +22,7 @@
                                             <td>${sermon.title}</td>
                                             <td>${sermon.subTitle}</td>
                                             <td>${formattedDate}</td>
-                                            <td></td>
-                                            <td><a type="button" class="btn btn-success" href="/update-sermon?id=${sermon.id}">Update</a></td>
+                                            <td></td>                                            
                                               
                                              <c:choose>
                                                 <c:when test="${empty sermon.passages}">
@@ -35,6 +34,7 @@
                                                           href="addPassagesToSermon?id=${sermon.id}">Edit Passages</a></td>                                     
                                                 </c:otherwise>
                                             </c:choose> 
+                                            <td><a type="button" class="btn btn-success" href="/update-sermon?id=${sermon.id}">Update</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-sermon?id=${sermon.id}">Delete</a></td> 
 					</tr>
                                     </c:forEach>

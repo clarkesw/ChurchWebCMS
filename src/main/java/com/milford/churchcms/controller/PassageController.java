@@ -119,20 +119,18 @@ public class PassageController{
     @PostMapping("/addPassagesToSermon") 
     public String addPassagesToSermon(ModelMap model,@Valid @ModelAttribute("passage") Passage passage){
         logger.debug("POST addPassagesToSermon  Name : {}",passage);
-        int eventId = (Integer)session.getAttribute("SermonID");
+        int sermonId = (Integer)session.getAttribute("SermonID");
        
-        Optional<Sermon> mySermon = sermonRepo.findById(eventId);
-        System.out.println("     mySermon : "+ mySermon.isPresent());
+        Optional<Sermon> mySermon = sermonRepo.findById(sermonId);
         Sermon sermon = mySermon.get();     
         sermonRepo.delete(sermon);
         
-        System.out.println("     sermon : "+ sermon.getPassages());
         sermon.getPassages().add(passage); 
         List<Passage> passes = sermon.getPassages();
         
-        System.out.println("     passages : "+ passes.size());
-        
-        sermonRepo.save(new Sermon(sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate(),
+        Sermon lastSermon = sermonRepo.findTopByOrderByIdDesc();
+        int lastSermonId = (lastSermon != null) ? lastSermon.getId() + 1 : 1;
+        sermonRepo.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate(),
                 new ArrayList<>(passes)));
         
         return "redirect:list-sermons"; 

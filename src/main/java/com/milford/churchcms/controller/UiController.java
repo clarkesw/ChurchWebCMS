@@ -11,6 +11,7 @@ import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.repository.ArticleRepository;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
+import com.milford.churchcms.repository.SermonRepository;
 import com.milford.churchcms.repository.WebPageRepository;
 import com.milford.churchcms.service.EventService;
 import com.milford.churchcms.service.WebPageService;
@@ -37,6 +38,9 @@ public class UiController {
         
     @Autowired
     ChurchRepository churchRepository;
+    
+    @Autowired
+    SermonRepository sermonRepository;
         
     @Autowired
     ArticleRepository articleRepository;
@@ -57,11 +61,18 @@ public class UiController {
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
         logger.debug("UiController /page/" + name);
+        
         List<ChurchInfo> churchInfo = churchRepository.findAll();
         Article article = articleRepository.findTopByOrderByLastModified();
         model.addAttribute("article", article);
         model.addAttribute("church", churchInfo.get(0));
+        model.addAttribute("sermon", sermonRepository.findTopByOrderBySermonDateDesc());
         model.addAttribute("page", pageRepository.findByPageName(name));
+        
+        logger.debug(" *** " + churchInfo.get(0));
+        if("event".equals(name))
+            return "event";
+                
         return "home";
 
     }
@@ -72,7 +83,7 @@ public class UiController {
 
         model.addAttribute("event", pageService.retrieveOnePage(title));
       //  model.addAttribute("page", pageService.retrieveOnePage("event"));
-        return "home";
+        return "event";
     }
     
     @GetMapping("/home")

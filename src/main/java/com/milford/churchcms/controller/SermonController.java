@@ -73,12 +73,9 @@ public class SermonController{
             return "cms/add-sermon";
 
         Sermon lastSermon = repository.findTopByOrderBySermonDateDesc();
+        int lastSermonId = (lastSermon != null) ? lastSermon.getId() + 1 : 1;
         
-        int eventId = 1;
-        if(lastSermon != null)
-            eventId = (lastSermon != null) ? lastSermon.getId() + 1 : 1;
-        
-        repository.save(sermon);
+        repository.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate()));
         return "redirect:list-sermons";
     }
     
@@ -96,7 +93,10 @@ public class SermonController{
             return "cms/add-sermon";
         
         repository.delete(sermon);
-        repository.save(sermon);
+        Sermon lastSermon = repository.findTopByOrderBySermonDateDesc();
+        int lastSermonId = (lastSermon != null) ? lastSermon.getId() + 1 : 1;
+        
+        repository.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate()));
         return "redirect:list-sermons";
     }
     

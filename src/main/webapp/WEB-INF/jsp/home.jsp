@@ -77,7 +77,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
     <header class="header header-v1" role="banner">
         <div class="wrapper">
             <div id="site-logo">
-                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="125" height="125" alt="Home" /></a>
+                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="90" height="90" alt="Home" /></a>
             </div>
         </div>
         <div class="header-top">
@@ -128,7 +128,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                                 <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
                                                                 <li class="leaf"><a href="makeConnections">Get Connected</a></li>
                                                                 <li class="leaf"><a href="ministries">Ministries</a></li>
-                                                                <li class="leaf"><a href="calendarEvents">Events</a></li>
+                                                                <li class="leaf"><a href="event">Calendar</a></li>
                                                                <li class="last leaf"><a href="mediaArchive" >Media Archive</a></li> 
                                                             </ul>
                                                         </div>
@@ -180,12 +180,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                             <hgroup>
                                                 <h1>${church.missionStatement}</h1>
                                             </hgroup>
-                                            <div class="button color-white tooltip"><h5>Service Times</h5>
+                                            <div class="button color-white tooltip"><h5>Service Times ${church.serviceTimes.get(0)}</h5>
                                             <span class="tooltiptext">
                                                 <table>
-                                                    <c:if test="${not empty serviceTimes}">
+                                                    <c:if test="${not empty church.serviceTimes}">
                                                         <c:forEach items="${church.serviceTimes}" var="times">
-                                                            <tr><td>${times.dayAndTime}</td></tr>
+                                                            <tr><td>${times.day}</td></tr>
                                                         </c:forEach>
                                                     </c:if> 
                                                 </table></span>
@@ -208,7 +208,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                 </div>
                                                 <div class="view-content">
                                                     <div class="card card--type-session card--tag-service">
-                                                        <a class="card-wrapper" href="ministries/life/events/the-overcoming-life-a-gateway-series/session/2018/04/28/overcoming.html">
+                                                        <a class="card-wrapper" href="${sermon.url}">
                                                             <div class="card-preview">
                                                                 <div class="card-thumbnail" style="background-image:url('http://cdn.gatewaypeople.com/video/Main/2018/Images/20180428_OvercomingUnforgiveness.jpg');"></div>
                                                                 <div class="card-preview-content">
@@ -220,23 +220,17 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                                     </ul>
                                                                 </div>
                                                                 <div class="card-preview-hover">
-                                                                    This weekend, Pastor Jimmy Evans continues The Overcoming Life series with a message titled ?Overcoming Unforgiveness? where he shares why harboring unforgiveness is detrimental and how to forgive from the heart.
+                                                                    ${sermon.description}
                                                                 </div>
                                                             </div>
                                                             <!-- /.card-preview -->
                                                             <div class="card-detail-section card-overlay">
                                                                 <div class="card-header">
                                                                     <span class="card-type-tag card--tag-service">
-                                                      <span class="card-header-type">Service</span><span class="card-header-separator"><span class="card-separator">&nbsp;|&nbsp;</span></span><span class="card-header-department">${church.name}</span> </span>
+                                                      <span class="card-header-type">Service</span><span class="card-header-separator"><span class="card-separator">&nbsp;|&nbsp;</span></span><span class="card-header-department">${sermon.title}</span> </span>
                                                                 </div>
                                                                 <div class="card-body">
-                                                                    <h4 class="card-title">Overcoming Unforgiveness</h4>
-                                                                    <div class="card-subtitle">
-                                                                        The Overcoming Life | A Gateway Series<span class="card-separator">&nbsp;|&nbsp;</span>2018
-                                                                    </div>
-                                                                    <div class="card-key-info">
-                                                                        Jimmy Evans<span class="card-separator">&nbsp;|&nbsp;</span>32:02
-                                                                    </div>
+                                                                    <h4 class="card-title">${sermon.subTitle}</h4>
                                                                 </div>
                                                                 <!-- /.card-body -->
                                                             </div>
@@ -341,6 +335,5 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
     <script async src='https://tag.simpli.fi/sifitag/613b3ba0-054d-0136-44aa-067f653fa718'></script>
     <script type="text/javascript" src="../../gwp_simple_menu5da7.js?p7rj3q"></script>
 </body>
-<!-- Mirrored from gatewaypeople.com/ by HTTrack Website Copier/3.x [XR&CO'2013], Wed, 02 May 2018 17:55:20 GMT -->
 
 </html>

@@ -33,7 +33,6 @@
                                 <form:errors path="pageName" cssClass="text-warning"/>
 			</fieldset>
 			<button type="submit" class="btn btn-success">Update</button>
-                        ${ArticalWebPage}
 		</form:form>
 	</div>
 

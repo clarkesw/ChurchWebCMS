@@ -7,8 +7,6 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
-import com.milford.churchcms.exception.DBException;
-import com.milford.churchcms.exception.DbExceptionDescription;
 import com.milford.churchcms.repository.WebPageRepository;
 import com.milford.churchcms.service.WebPageService;
 import java.util.Optional;
@@ -39,7 +37,7 @@ public class WebPageController{
     
     @GetMapping("/list-pages")
     public String showPages(ModelMap model){
-        logger.debug("showPages ");
+        logger.debug("/list-pages ");
         model.put("pages", repository.findAll());
         return "cms/list-pages";
     }
@@ -47,7 +45,7 @@ public class WebPageController{
     @PostMapping("/update-page")
     public String updatePagePost(ModelMap model,@Valid @ModelAttribute("page") WebPage page, 
                                     @ModelAttribute("constants") AppConstants constants, BindingResult result){
-        logger.debug("updatePagePost WebPage: {}", page);
+        logger.debug("POST /update-page WebPage: {}", page);
         if(result.hasErrors())
             return "/cms/add-page";
 
@@ -58,8 +56,8 @@ public class WebPageController{
     
     @GetMapping("/update-page")
     public String updateShowPage(ModelMap model, @RequestParam int id){
-        logger.debug("updateShowPage ID: {}",id);
         Optional<WebPage> page = repository.findById(id);
+        logger.debug("GET /update-page WebPage: {}", page.get());
         
         model.put("page", page.get());
         return "/cms/add-page";
@@ -67,17 +65,20 @@ public class WebPageController{
     
     @GetMapping("/add-pages")
     public String showAddWebPage(ModelMap model,@Valid @ModelAttribute("page") WebPage page){    
-        logger.debug("showAddWebPage WebPage: {}",page);
+        logger.debug("GET /add-pages WebPage: {}",page);
         return "cms/add-page";
     }
     
     @PostMapping("/add-pages")
     public String addWebPage(ModelMap model,@Valid @ModelAttribute("page") WebPage page, BindingResult result){
-        logger.debug("addWebPage WebPage : {}",page);
+        logger.debug("POST /add-pages WebPage : {}",page);
         if(result.hasErrors())
             return "cms/add-page";
-
-        repository.deleteById(page.getId() +1);
+        Optional<WebPage> findById = repository.findById(page.getId());
+        logger.debug(" ***** " + findById.isPresent());
+       
+        if(findById.isPresent())
+            repository.deleteById(page.getId() +1);
         try{
             repository.save(new WebPage(page.getTitle(),page.getBgImage(), page.getLink(), page.getPageName(), 
                 page.getMessage(), page.isIsVisible()));   
@@ -86,7 +87,7 @@ public class WebPageController{
            // throw new DBException("Add Web Page ",DbExceptionDescription.NOT_UNIQUE);
         }
     
-        return "redirect:/cms/list-pages";
+        return "redirect:list-pages";
     }
   
 }

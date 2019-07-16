@@ -20,18 +20,18 @@ public class ServiceTimes {
     
     @Id
     @GeneratedValue
-    private Integer id;
+    private int id;
     private String day;
     private String time;
 
     public ServiceTimes() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

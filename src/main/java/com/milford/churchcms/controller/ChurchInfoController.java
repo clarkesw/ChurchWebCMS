@@ -37,8 +37,8 @@ public class ChurchInfoController{
     ServiceTimeRepository timeRepository;    
         
     @GetMapping("/list-info")
-    public String showEvent(ModelMap model){
-        logger.debug("GET showEvent ");
+    public String showInfo(ModelMap model){
+        logger.debug("GET /list-info ");
         model.put("info", returnInfo());
         return "cms/list-info";
     }
@@ -62,7 +62,7 @@ public class ChurchInfoController{
     }
     
     @GetMapping("/update-info")
-    public String updateShowEvent(ModelMap model){
+    public String updateShowInfo(ModelMap model){
         ChurchInfo myInfo = returnInfo();
         logger.debug("GET updateInfoPost Church Info : {}",myInfo);
         
@@ -77,7 +77,7 @@ public class ChurchInfoController{
     
     @PostMapping("/editServiceTimes")
     public String updateServicePost(ModelMap model,@Valid @ModelAttribute("serviceTime") ServiceTimes time){
-        logger.debug("POST updateServicePost Info :{}",time);
+        logger.debug("POST /editServiceTimes Time :{}",time);
         
         ChurchInfo myInfo = returnInfo();
         churchRepository.delete(myInfo);
@@ -90,7 +90,7 @@ public class ChurchInfoController{
     @GetMapping("/editServiceTimes")
     public String updateShowService(ModelMap model){
         List<ServiceTimes> serviceTimes = timeRepository.findAll();
-        logger.debug("GET updateInfoPost Church Info : {}",serviceTimes.size());
+        logger.debug("GET /editServiceTimes Times : {}",serviceTimes.size());
         
         model.put("serviceTimes", serviceTimes);
         model.put("serviceTime", new ServiceTimes());

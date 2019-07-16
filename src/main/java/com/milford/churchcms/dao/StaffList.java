@@ -7,8 +7,6 @@ package com.milford.churchcms.dao;
 
 import com.milford.churchcms.repository.StaffRepository;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,11 +17,11 @@ public class StaffList {
     
     @Autowired
     StaffRepository repository;
-    
-    public Logger logger = LoggerFactory.getLogger(StaffList.class);
     private List<Staff> staffers;
 
-    public StaffList() {}
+    public StaffList() {
+        staffers = repository.findAll();
+    }
 
     public StaffList(List<Staff> staffers) {
         this.staffers = staffers;
@@ -39,5 +37,10 @@ public class StaffList {
     
     public int length(){
         return staffers.size();
+    }
+
+    @Override
+    public String toString() {
+        return "StaffList{" + "repository=" + repository + ", staffers=" + staffers + '}';
     }
 }

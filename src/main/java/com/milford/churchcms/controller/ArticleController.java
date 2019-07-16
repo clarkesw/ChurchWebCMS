@@ -47,6 +47,7 @@ public class ArticleController{
         
     @GetMapping("/list-articles")
     public String showArticle(ModelMap model){
+        logger.debug("GET /list-articles");
         String username = getLoggedInName(model);
         model.put("articles", repository.findAll());
         return "cms/list-articles";
@@ -54,7 +55,7 @@ public class ArticleController{
         
     @GetMapping("/listArticlesForPage")
     public String showArticle(ModelMap model,@RequestParam String page){
-     //   String username = getLoggedInName(model);
+        logger.debug("GET /listArticlesForPage page : {}",page); 
         session.setAttribute("ArticalWebPage", page);
         model.put("articles", repository.findAllByPageName(page));
         return "cms/list-articles";
@@ -67,6 +68,7 @@ public class ArticleController{
  
     @GetMapping("/add-articles")
     public String showAddArticle(ModelMap model, @ModelAttribute("article") Article article){   
+        logger.debug("GET /add-articles Article : {}",article); 
         String pageName = (String)session.getAttribute("ArticalWebPage");
         if(pageName != null)
             article.setPageName(pageName);
@@ -75,7 +77,7 @@ public class ArticleController{
     
     @PostMapping("/add-articles")
     public String addArticle(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
-        logger.debug("addArticle Article : {}",article); 
+        logger.debug("POST /add-articles Article : {}",article); 
         if(result.hasErrors())
             return "cms/add-article";
         Article lastArt = repository.findTopByOrderByLastModified();
@@ -94,6 +96,7 @@ public class ArticleController{
     
     @PostMapping("/update-article")
     public String updateArticlePost(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
+        logger.debug("POST /update-article article : {}",article);
         if(result.hasErrors())
             return "cms/add-article";
         repository.delete(article);
@@ -108,6 +111,7 @@ public class ArticleController{
     
     @GetMapping("/update-article")
     public String updateShowArticle(ModelMap model, @RequestParam int id){
+        logger.debug("GET /update-article ID : {}",id);
         Optional<Article> article = repository.findById(id);
         
         model.put("article", article.get());

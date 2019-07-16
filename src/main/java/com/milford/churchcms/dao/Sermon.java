@@ -5,14 +5,12 @@
  */
 package com.milford.churchcms.dao;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -27,9 +25,10 @@ import javax.persistence.Table;
 public class Sermon {
     @Id
     @Column(name = "sid")
-    @GeneratedValue
-    private int id;
+    private Integer id = 1;
     private String title;
+    private String url;
+    private String imageURL;
     private String subTitle;
     private String description;
     private Date sermonDate;
@@ -40,18 +39,36 @@ public class Sermon {
 
     public Sermon() {}
 
-    public Sermon(String title, String description, Date sermonDate) {
+    public Sermon(int id, String title, String subTitle, String description, Date sermonDate) {
         this.title = title;
         this.description = description;
         this.sermonDate = sermonDate;
+        this.url = createUrl(id);
     }
 
-    public Sermon(String title, String subTitle, String description, Date date, List<Passage> passages) {
+    public Sermon(int id, String title, String subTitle, String description, Date date, List<Passage> passages) {
         this.title = title;
         this.subTitle = subTitle;
         this.description = description;
         this.sermonDate = date;
         this.passages = passages;
+        this.url = createUrl(id);
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+    
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public int getId() {
@@ -102,8 +119,12 @@ public class Sermon {
         this.passages = passages;
     }
 
+    private String createUrl(int id){
+        return "/sermon/" + id;
+    }
+
     @Override
     public String toString() {
-        return "Sermon{" + "title=" + title + ", subTitle=" + subTitle + ", description=" + description + ", sermonDate=" + sermonDate + ", passages=" + passages + '}';
+        return "Sermon{" + "id=" + id + ", title=" + title + ", url=" + url + ", imageURL=" + imageURL + ", subTitle=" + subTitle + ", description=" + description + ", sermonDate=" + sermonDate + ", passages=" + passages + '}';
     }
 }

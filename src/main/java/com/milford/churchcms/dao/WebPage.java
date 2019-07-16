@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -28,13 +29,14 @@ public class WebPage {
     
     @Id
     @GeneratedValue
+    @Column(name = "sid")
     private int id;
     private String title;
     private String bgImage;
     private String link;
     
-    @OneToMany(cascade=CascadeType.ALL, targetEntity = Article.class)
-    @JoinColumn(name = "page_name")
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL, targetEntity = Article.class)
+    @JoinColumn(name = "sid",referencedColumnName="sid")
     private List<Article> mainPageArticle;
     
     @Column(name = "page_name", nullable = false, unique = true)
