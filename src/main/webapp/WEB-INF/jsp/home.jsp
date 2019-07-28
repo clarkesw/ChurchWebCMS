@@ -15,31 +15,31 @@
 <meta property="og:title" content=${church.name} />
 <meta property="og:description" content=${church.missionStatement} />
   <title>${page.title}</title>
-  <style type="text/css" media="all">
-@import url("../../stylesheets/system.base.css?p7rj3q");
-@import url("../../stylesheets/base.css");
-@import url("../../stylesheets/system.menus.css?p7rj3q");
-@import url("../../stylesheets/system.messages.css?p7rj3q");
-@import url("../../stylesheets/system.theme.css?p7rj3q");
+<style type="text/css" media="all">
+    @import url("../../stylesheets/system.base.css?p7rj3q");
+    @import url("../../stylesheets/base.css");
+    @import url("../../stylesheets/system.menus.css?p7rj3q");
+    @import url("../../stylesheets/system.messages.css?p7rj3q");
+    @import url("../../stylesheets/system.theme.css?p7rj3q");
 </style>
 <style type="text/css" media="all">
-@import url("../../stylesheets/media_theplatform_mpx.css?p7rj3q");
-@import url("../../stylesheets/date.css?p7rj3q");
-@import url("../../stylesheets/datepicker.1.7.css?p7rj3q");
-@import url("../../stylesheets/date_repeat_field.css?p7rj3q");
-@import url("../../stylesheets/field.css?p7rj3q");
-@import url("../../stylesheets/mollom.css?p7rj3q");
-@import url("../../stylesheets/node.css?p7rj3q");
-@import url("../../stylesheets/search.css?p7rj3q");
-@import url("../../stylesheets/user.css?p7rj3q");
-@import url("../../stylesheets/views.css?p7rj3q");
-@import url("../../stylesheets/ckeditor.css?p7rj3q");
+    @import url("../../stylesheets/media_theplatform_mpx.css?p7rj3q");
+    @import url("../../stylesheets/date.css?p7rj3q");
+    @import url("../../stylesheets/datepicker.1.7.css?p7rj3q");
+    @import url("../../stylesheets/date_repeat_field.css?p7rj3q");
+    @import url("../../stylesheets/field.css?p7rj3q");
+    @import url("../../stylesheets/mollom.css?p7rj3q");
+    @import url("../../stylesheets/node.css?p7rj3q");
+    @import url("../../stylesheets/search.css?p7rj3q");
+    @import url("../../stylesheets/user.css?p7rj3q");
+    @import url("../../stylesheets/views.css?p7rj3q");
+    @import url("../../stylesheets/ckeditor.css?p7rj3q");
 </style> 
 <style type="text/css" media="all">
-@import url("../../stylesheets/ctools.css?p7rj3q");
-@import url("../../stylesheets/gwp_simple_menu.css?p7rj3q");
-@import url("../../stylesheets/addressfield.css?p7rj3q");
-@import url("../../stylesheets/mediaelementplayer.min.css?p7rj3q");
+    @import url("../../stylesheets/ctools.css?p7rj3q");
+    @import url("../../stylesheets/gwp_simple_menu.css?p7rj3q");
+    @import url("../../stylesheets/addressfield.css?p7rj3q");
+    @import url("../../stylesheets/mediaelementplayer.min.css?p7rj3q");
 </style>
 <style type="text/css" media="all"> 
 @import url("../../stylesheets/app.css?p7rj3q");
@@ -64,6 +64,11 @@
 <script type="text/javascript" src="../../scripts/jquery.countdown.min.js?p7rj3q"></script>
 <script type="text/javascript" src="../../scripts/jquery.fancybox.pack.js?p7rj3q"></script>
 <%--<script type="text/javascript" src="../../scripts/combined.js?p7rj3q"></script> --%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"gwp_horizon","theme_token":"Ix13TT1jKfaGfqM4RyoDZM2Hb66lO1GS7dBemiL4Tlw","jquery_version":"1.8","js":{"0":1,"http:\/\/gatewaypeople.com\/sites\/all\/modules\/custom\/gwp_simple_menu\/js\/gwp_simple_menu.js":1,"\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.8.3\/jquery.min.js":1,"1":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/ui\/external\/jquery.cookie.js":1,"sites\/all\/modules\/contrib\/jquery_update\/replace\/misc\/jquery.form.min.js":1,"sites\/all\/libraries\/mediaelement\/build\/mediaelement-and-player.min.js":1,"misc\/ajax.js":1,"sites\/all\/modules\/contrib\/jquery_update\/js\/jquery_update.js":1,"sites\/all\/modules\/contrib\/views\/js\/base.js":1,"misc\/progress.js":1,"sites\/gwp\/libraries\/momentjs\/moment.js":1,"sites\/all\/modules\/contrib\/views\/js\/ajax_view.js":1,"sites\/all\/libraries\/momenttimezonejs\/moment-timezone-with-data.js":1,"sites\/gwp\/libraries\/final_countdown\/jquery.countdown.min.js":1,"sites\/gwp\/themes\/gwp_horizon\/js\/lib\/fancyBox\/jquery.fancybox.pack.js":1,"sites\/gwp\/themes\/gwp_horizon\/js\/combined.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/all\/modules\/contrib\/media_theplatform_mpx\/css\/media_theplatform_mpx.css":1,"sites\/all\/modules\/contrib\/date\/date_api\/date.css":1,"sites\/all\/modules\/contrib\/date\/date_popup\/themes\/datepicker.1.7.css":1,"sites\/all\/modules\/contrib\/date\/date_repeat_field\/date_repeat_field.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/contrib\/mollom\/mollom.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/contrib\/views\/css\/views.css":1,"sites\/gwp\/modules\/contrib\/ckeditor\/css\/ckeditor.css":1,"sites\/all\/modules\/contrib\/ctools\/css\/ctools.css":1,"http:\/\/gatewaypeople.com\/sites\/all\/modules\/custom\/gwp_simple_menu\/css\/gwp_simple_menu.css":1,"sites\/all\/modules\/contrib\/addressfield\/addressfield.css":1,"sites\/all\/libraries\/mediaelement\/build\/mediaelementplayer.min.css":1,"sites\/gwp\/themes\/gwp_horizon\/styles\/css\/app.css":1,"\/\/cloud.typography.com\/715654\/749506\/css\/fonts.css":1,"sites\/gwp\/themes\/gwp_horizon\/js\/lib\/fancyBox\/jquery.fancybox.css":1}},"better_exposed_filters":{"views":{"gwp_campus_selector":{"displays":{"gwp_home_campus_details":{"filters":[]},"block_campus_selector":{"filters":[]}}},"gwp_front":{"displays":{"block_1":{"filters":[]},"block_4":{"filters":[]}}},"gwp_archives":{"displays":{"home_recent_archives_block":{"filters":[]}}},"gwp_live":{"displays":{"home_live_service_block":{"filters":[]}}},"gwp_campus_times":{"displays":{"block":{"filters":[]}}}}},"views":{"ajax_path":"\/views\/ajax","ajaxViews":{"views_dom_id:a99cb8afedeeb8729d4fc70c9f2c5d77":{"view_name":"gwp_front","view_display_id":"block_4","view_args":"","view_path":"node\/1","view_base_path":"highlights-global","view_dom_id":"a99cb8afedeeb8729d4fc70c9f2c5d77","pager_element":0},"views_dom_id:32617cb1cc198fbac80f06f36e370c54":{"view_name":"gwp_archives","view_display_id":"home_recent_archives_block","view_args":"","view_path":"node\/1","view_base_path":"node\/1","view_dom_id":"32617cb1cc198fbac80f06f36e370c54","pager_element":0}}},"currentPath":"node\/1","currentPathIsAdmin":false,"urlIsAjaxTrusted":{"\/":true},"ogContext":{"groupType":"node","gid":"1"}});
@@ -128,7 +133,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                                 <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
                                                                 <li class="leaf"><a href="makeConnections">Get Connected</a></li>
                                                                 <li class="leaf"><a href="ministries">Ministries</a></li>
-                                                                <li class="leaf"><a href="event">Calendar</a></li>
+                                                                <li class="leaf"><a href="calendar">Calendar</a></li>
                                                                <li class="last leaf"><a href="mediaArchive" >Media Archive</a></li> 
                                                             </ul>
                                                         </div>
@@ -179,13 +184,15 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                         <div class="content">
                                             <hgroup>
                                                 <h1>${church.missionStatement}</h1>
-                                            </hgroup>
-                                            <div class="button color-white tooltip"><h5>Service Times ${church.serviceTimes.get(0)}</h5>
-                                            <span class="tooltiptext">
+                                            </hgroup>                                                    
+            
+                                            <div class="button color-white tooltip"><h5>Service Times</h5>
+
+                                           <span class="tooltiptext">
                                                 <table>
                                                     <c:if test="${not empty church.serviceTimes}">
-                                                        <c:forEach items="${church.serviceTimes}" var="times">
-                                                            <tr><td>${times.day}</td></tr>
+                                                        <c:forEach items="${church.serviceTimes}" var="timee" varStatus="counter">
+                                                            <tr><td>${timee.day} @ ${timee.time}</td></tr>
                                                         </c:forEach>
                                                     </c:if> 
                                                 </table></span>

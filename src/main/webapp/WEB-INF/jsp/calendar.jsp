@@ -178,30 +178,13 @@ $(document).ready(function() {
         </div>        <!-- /.header-inner -->
     </header>
     <section id="content">
-        <center>
-            <div id='event'>
-                <table width="400" cellpadding="100">
-                    <tr>
-                        <td>Title</td><td><h3>${event.title}</h3></td>
-                    </tr>
-                    <tr>
-                        <td>Contact</td><td><b><a href="mailto:${contact.email}">${contact.firstName} ${contact.lastName}</a></b> <br>${contact.workPhone}</td>
-                    </tr>
-                    <tr>
-                        <td>Date</td><td>${event.startDateCont} <br> ${event.startTime} to ${event.endTime}</td>
-                    </tr>
-                    <tr>
-                        <td>Details</td><td>${event.details}</td>
-                    </tr>
-                </table>
-                
-
-            </div>
-        </center>
+    
+        <div id='calendar'></div>
     </section>
     <!-- /#content -->
     <footer class="site-info">
         <div class="wrapper">
+            <div class="footer-info">
                 <div class="church-tag">${church.name}| <span>${church.missionStatement}</span></div>
                 <div class="church-info">&copy; 2018 | ${church.telephone} | ${church.address.addressLine1}, ${church.address.addressLine2}</div>
             </div>

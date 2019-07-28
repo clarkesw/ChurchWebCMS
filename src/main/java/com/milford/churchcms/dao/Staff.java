@@ -50,7 +50,7 @@ public class Staff {
         this.homeAddress = homeAddress;
     }
 
-    public void setConFullName(){
+    public final void setConFullName(){
         this.fullName = this.lastName + ", " + this.firstName;
     }
     public String getFullName() {
@@ -73,7 +73,7 @@ public class Staff {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public final void setFirstName(String firstName) {
         this.firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
     }
 
@@ -81,7 +81,7 @@ public class Staff {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public final void setLastName(String lastName) {
         this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
     }
 
