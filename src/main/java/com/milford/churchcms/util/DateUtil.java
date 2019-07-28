@@ -55,6 +55,11 @@ public class DateUtil {
         return ldt;
     }
     
+    public static String dateFormat(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        return sdf.format(date);
+    }
+        
     public static Date localToDate(LocalDateTime ldt){
         return Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
     }

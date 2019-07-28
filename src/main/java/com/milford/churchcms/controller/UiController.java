@@ -14,6 +14,7 @@ import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.SermonRepository;
 import com.milford.churchcms.repository.WebPageRepository;
 import com.milford.churchcms.service.WebPageService;
+import com.milford.churchcms.util.DateUtil;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -82,6 +83,8 @@ public class UiController {
         CalendarEvent oneEvent = calEvent.get();
         model.addAttribute("event",oneEvent);
         model.addAttribute("church", getChurchInfo());
+        model.addAttribute("startdate", DateUtil.dateFormat(oneEvent.getStartDateCont()));
+        model.addAttribute("enddate", DateUtil.dateFormat(oneEvent.getEndDateCont()));
         model.addAttribute("contact",oneEvent.getContact());
         logger.debug("event" + oneEvent);
         return "event";
