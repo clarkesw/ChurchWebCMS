@@ -28,7 +28,8 @@ public class Staff {
     private String lastName;
     private String fullName;
     private String position;
-    private String email;
+    private String homeEmail;
+    private String workEmail;
     private String homePhone;
     private String workPhone;
     
@@ -38,13 +39,14 @@ public class Staff {
 
     public Staff(){}
     
-    public Staff(String firstName, String lastName, String position, String email, String homePhone, 
-             String workPhone, Address homeAddress) {
+    public Staff(String firstName, String lastName, String position, String homeEmail, String workEmail,
+            String homePhone, String workPhone, Address homeAddress) {
         setFirstName(firstName);
         setLastName(lastName);
         setConFullName();
         this.position = position;
-        this.email = email;
+        this.homeEmail = homeEmail;
+        this.workEmail = workEmail;
         this.homePhone = homePhone;
         this.workPhone = workPhone;
         this.homeAddress = homeAddress;
@@ -93,12 +95,20 @@ public class Staff {
         this.position = position;
     }
 
-    public String getEmail() {
-        return email;
+    public String getHomeEmail() {
+        return homeEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setHomeEmail(String homeEmail) {
+        this.homeEmail = homeEmail;
+    }
+
+    public String getWorkEmail() {
+        return workEmail;
+    }
+
+    public void setWorkEmail(String workEmail) {
+        this.workEmail = workEmail;
     }
 
     public String getHomePhone() {
@@ -127,7 +137,7 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", position=" + position 
-                + ", email=" + email + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
+        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
     }
+
 }

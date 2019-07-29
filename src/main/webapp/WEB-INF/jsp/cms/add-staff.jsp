@@ -21,10 +21,16 @@
                                 <form:errors path="position" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
-				<form:label path="email">Email</form:label> 
+				<form:label path="workEmail">Work Email</form:label> 
 				<form:input  type="text" 
-					class="form-control" path="email"/>
-                                <form:errors path="email" cssClass="text-warning"/>
+					class="form-control" path="workEmail"/>
+                                <form:errors path="workEmail" cssClass="text-warning"/>
+			</fieldset>
+                        <fieldset class="form-group">
+				<form:label path="homeEmail">Home Email</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="homeEmail"/>
+                                <form:errors path="homeEmail" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
 				<form:label path="workPhone">Work Phone</form:label> 
@@ -40,7 +46,7 @@
 			</fieldset>                         
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
-                 <%--    <c:choose>
+                    <c:choose>
                         <c:when test="${staff.firstName ne null}">
                             <a href="updateAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}">
                                 Edit ${staff.firstName}'s Address</a>
@@ -49,7 +55,7 @@
                              <a href="addAddressForStaff?fisrtName=${firstName}&lastName=${lastName}">
                                 Add ${firstName}'s Address</a>                            
                          </c:otherwise>
-                      </c:choose> --%>
+                    </c:choose> 
 	</div>
 
 <%@ include file="common/footer.jspf" %>

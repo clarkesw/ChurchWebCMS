@@ -188,7 +188,7 @@ $(document).ready(function() {
                         <td>&nbsp;</td><td>&nbsp;</td>
                     </tr>                   
                     <tr>
-                        <td>Contact</td><td><a href="mailto:${contact.email}">${contact.firstName} ${contact.lastName}</a> <br>${contact.workPhone}</td>
+                        <td>Contact</td><td><a href="mailto:${contact.workEmail}">${contact.firstName} ${contact.lastName}</a> <br>${contact.workPhone}</td>
                     </tr>
                                          <tr>
                         <td>&nbsp;</td><td>&nbsp;</td>
