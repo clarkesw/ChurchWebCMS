@@ -319,7 +319,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
     </section>
     <!-- /#content -->
     <footer class="site-info">
-        <div class="wrapper">
+        <div class="wrapper"><%--
             <div class="footer-social">
                 <ul>
                     <li><a href="https://facebook.com/gatewaypeople" target="_blank"><i class="icon-facebook"></i></a></li>
@@ -327,7 +327,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                     <li><a href="https://instagram.com/gatewaypeople" target="_blank"><i class="icon-instagram"></i></a></li>
                     <li><a href="https://www.youtube.com/user/gatewaychurchtv" target="_blank"><i class="icon-youtube"></i></a></li>
                 </ul>
-            </div>
+            </div>  --%>
             <div class="footer-info">
                 <div class="church-tag">${church.name}| <span>${church.missionStatement}</span></div>
                 <div class="church-info">&copy; 2018 | ${church.telephone} | ${church.address.addressLine1}, ${church.address.addressLine2}</div>

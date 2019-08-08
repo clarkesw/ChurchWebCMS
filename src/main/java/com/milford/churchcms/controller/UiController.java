@@ -58,7 +58,7 @@ public class UiController {
     
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
-        logger.debug("UiController /page/" + name);
+        logger.debug("GET /page/" + name);
         
         ChurchInfo myChurch = getChurchInfo();
         Article article = articleRepository.findTopByOrderByLastModified();
@@ -68,7 +68,7 @@ public class UiController {
         model.addAttribute("sermon", sermonRepository.findTopByOrderBySermonDateDesc());
         model.addAttribute("page", pageRepository.findByPageName(name));
         
-        logger.debug(" *** " + myChurch);
+        logger.debug(" *** " + pageRepository.findByPageName(name));
         if("calendar".equals(name)){
             return "calendar";
         }  
