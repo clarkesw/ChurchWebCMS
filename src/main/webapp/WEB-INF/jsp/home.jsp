@@ -82,7 +82,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
     <header class="header header-v1" role="banner">
         <div class="wrapper">
             <div id="site-logo">
-                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="90" height="90" alt="Home" /></a>
+                <a href="home" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="90" height="90" alt="Home" /></a>
             </div>
         </div>
         <div class="header-top">
