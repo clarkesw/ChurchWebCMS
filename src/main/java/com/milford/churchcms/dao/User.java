@@ -9,16 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 public class User {
     
-//    @Id
-//    @GeneratedValue 
+    @Id
+    @GeneratedValue 
     private Integer id;
     private String username;
     private String password;
-    private String firstName;
-    private String lastName;
     private String role;
 
     public User() {}
@@ -26,15 +24,6 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public User(int id,String username, String password, String firstName, String lastName, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.role = role;
     }
 
     public Integer getId() {
@@ -61,22 +50,6 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getRole() {
         return role;
     }
@@ -87,7 +60,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role + '}';
-    }
-    
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + '}';
+    }   
 }

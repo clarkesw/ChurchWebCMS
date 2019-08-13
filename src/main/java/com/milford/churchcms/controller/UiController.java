@@ -13,13 +13,19 @@ import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.SermonRepository;
 import com.milford.churchcms.repository.WebPageRepository;
+import com.milford.churchcms.service.MyJmsMessage;
 import com.milford.churchcms.service.WebPageService;
 import com.milford.churchcms.util.DateUtil;
+import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Payload;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +51,9 @@ public class UiController {
     
     @Autowired
     WebPageRepository pageRepository;
+    
+    @Autowired
+    MyJmsMessage myJmsMessage;
         
     @Autowired
     WebPageService pageService;
@@ -74,6 +83,11 @@ public class UiController {
         }  
                 
         return "home";
+    }
+    
+    @GetMapping("/email/{name}")
+    public void sendEmail(@PathVariable String name){
+        // Figure out Later.
     }
     
     @GetMapping("/event/{id}")

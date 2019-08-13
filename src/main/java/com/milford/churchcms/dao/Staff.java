@@ -24,6 +24,10 @@ public class Staff {
     @Id
     @GeneratedValue
     private Integer id;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")    
+    private User user;
     private String firstName;
     private String lastName;
     private String fullName;

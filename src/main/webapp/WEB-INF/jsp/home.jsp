@@ -134,7 +134,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                                 <li class="leaf"><a href="makeConnections">Get Connected</a></li>
                                                                 <li class="leaf"><a href="ministries">Ministries</a></li>
                                                                 <li class="leaf"><a href="calendar">Calendar</a></li>
-                                                               <li class="last leaf"><a href="mediaArchive" >Media Archive</a></li> 
+                                                               <li class="last leaf"><a href="../email/clarke.job@gmail.com" >Media Archive</a></li> 
                                                             </ul>
                                                         </div>
                                                     </div>
