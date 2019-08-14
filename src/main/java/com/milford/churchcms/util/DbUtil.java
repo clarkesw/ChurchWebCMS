@@ -39,8 +39,7 @@ public class DbUtil {
          stmt.setString(1, userId);
          ResultSet rs = stmt.executeQuery();
          while (rs.next()) {
-             user = new User(rs.getInt("ID"),rs.getString("USERID"),rs.getString("PASSWORD"),
-                     rs.getString("FIRSTNAME"),rs.getString("LASTNAME"), null);
+             user = new User(rs.getString("USERID"),rs.getString("PASSWORD"), null);
         }
           
          stmt.close(); 
