@@ -18,6 +18,7 @@ import com.milford.churchcms.service.WebPageService;
 import com.milford.churchcms.util.DateUtil;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,9 @@ public class UiController {
         
     @Autowired
     WebPageService pageService;
+    
+    @Autowired 
+    private HttpSession session;
         
     @GetMapping("/calEventArray")
     @ResponseBody

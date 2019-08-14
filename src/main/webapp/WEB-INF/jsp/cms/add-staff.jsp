@@ -43,7 +43,22 @@
 				<form:input  type="text" 
 					class="form-control" path="homePhone"/>
                                 <form:errors path="homePhone" cssClass="text-warning"/>
-			</fieldset>                         
+			</fieldset>
+                        
+                    <c:if test = "${not empty unlockRole}">
+                        <fieldset class="form-group">
+				<form:label path="user">User Name</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="user"/>
+                                <form:errors path="user" cssClass="text-warning"/>
+			</fieldset> 
+                        <fieldset class="form-group">
+				<form:label path="password">Password</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="password"/>
+                                <form:errors path="password" cssClass="text-warning"/>
+			</fieldset> 
+                    </c:if>
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
                     <c:choose>

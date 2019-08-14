@@ -43,7 +43,7 @@ public class WelcomeController {
             model.addAttribute("error", "Incorrect Username/Password.");
             return "/login";
         }
-        session.setAttribute("user", userName);
+        session.setAttribute("loggedInUser", userName);
         model.put("user", userName);   
         return "cms/welcome";
     }

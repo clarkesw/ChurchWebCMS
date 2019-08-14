@@ -7,6 +7,7 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.Staff;
+import com.milford.churchcms.dao.User;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.text.SimpleDateFormat;
@@ -74,6 +75,9 @@ public class StaffController{
     @GetMapping("/add-staff")
     public String showAddStaff(ModelMap model, @ModelAttribute("staff") Staff staff){   
         logger.debug("showAddStaff"); 
+        User currentUser = (User)session.getAttribute("loggedInUser");
+        if("admin".equals(currentUser.getRole()))
+            model.addAttribute("unlockRole","good");
         return "cms/add-staff";
     }
     
