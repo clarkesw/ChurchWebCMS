@@ -25,8 +25,8 @@ public class Staff {
     @GeneratedValue
     private Integer id;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")    
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = User.class)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "id")    
     private User user;
     private String firstName;
     private String lastName;

@@ -58,6 +58,10 @@
 					class="form-control" path="password"/>
                                 <form:errors path="password" cssClass="text-warning"/>
 			</fieldset> 
+                        <form:select path = "role">
+                           <form:option value = "NONE" label = "Select"/>
+                           <form:options items = "${roles}"  itemLabel="role"/>
+                        </form:select>  
                     </c:if>
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
