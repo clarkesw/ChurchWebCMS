@@ -8,8 +8,10 @@ package com.milford.churchcms.dao;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "USER")
 public class User {
     
     @Id

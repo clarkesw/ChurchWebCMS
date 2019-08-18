@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
@@ -76,11 +77,12 @@ public class StaffController{
     @GetMapping("/add-staff")
     public String showAddStaff(ModelMap model, @ModelAttribute("staff") Staff staff){   
         User currentUser = (User)session.getAttribute("loggedInUser");
-        logger.debug("GET /add-staff loggedInUser: {} privilages: {}", currentUser.getUsername(), currentUser.getRole());  
+        logger.debug("GET /add-staff loggedInUser: {} Privilages: {}", currentUser.getUsername(), currentUser.getRole());  
         
         if("admin".equals(currentUser.getRole()))
             model.addAttribute("unlockRole","good");
        
+        model.addAttribute("roles", AppConstants.roles);
         return "cms/add-staff";
     }
     

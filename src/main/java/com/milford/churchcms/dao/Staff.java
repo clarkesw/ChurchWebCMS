@@ -56,6 +56,14 @@ public class Staff {
         this.homeAddress = homeAddress;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public final void setConFullName(){
         this.fullName = this.lastName + ", " + this.firstName;
     }
@@ -141,7 +149,7 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
+        return "Staff{" + "id=" + id + ", user=" + user + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
     }
 
 }

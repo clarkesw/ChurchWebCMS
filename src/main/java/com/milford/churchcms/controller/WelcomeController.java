@@ -7,6 +7,7 @@ package com.milford.churchcms.controller;
 
 
 import com.milford.churchcms.dao.User;
+import com.milford.churchcms.repository.UserRepository;
 import com.milford.churchcms.service.WelcomeService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class WelcomeController {
     
     @Autowired
-    WelcomeService service;
+    UserRepository repository;
     
     @Autowired 
     private HttpSession session;
@@ -37,8 +38,7 @@ public class WelcomeController {
     public String checkLoginCredentials(ModelMap model,@Valid @ModelAttribute("user") User user){
         String userName = user.getUsername();
         logger.debug("POST /login  User : {}", userName);
-        User dbUser = service.retrieveOneUser(userName);
-        logger.debug("*** perm : {}", dbUser.getRole());
+        User dbUser = repository.findByUsername(userName);
         
         if(dbUser == null || !dbUser.getPassword().equals(user.getPassword() )){
             model.addAttribute("error", "Incorrect Username/Password.");
