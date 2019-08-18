@@ -36,21 +36,22 @@ public class WelcomeController {
     @PostMapping("/login")
     public String checkLoginCredentials(ModelMap model,@Valid @ModelAttribute("user") User user){
         String userName = user.getUsername();
-        logger.debug("checkLoginCredentials  User : {}", userName);
+        logger.debug("POST /login  User : {}", userName);
         User dbUser = service.retrieveOneUser(userName);
+        logger.debug("*** perm : {}", dbUser.getRole());
         
         if(dbUser == null || !dbUser.getPassword().equals(user.getPassword() )){
             model.addAttribute("error", "Incorrect Username/Password.");
             return "/login";
         }
-        session.setAttribute("loggedInUser", userName);
+        session.setAttribute("loggedInUser", dbUser);
         model.put("user", userName);   
         return "cms/welcome";
     }
     
     @GetMapping("/login")
     public String showWelcomePage(ModelMap model){
-        logger.debug("WelcomeController User : {}",session.getAttribute("user"));
+        logger.debug("GET /login User : {}",session.getAttribute("user"));
         if(session.getAttribute("user") != null)
             return "cms/welcome";
         return "cms/login-page";

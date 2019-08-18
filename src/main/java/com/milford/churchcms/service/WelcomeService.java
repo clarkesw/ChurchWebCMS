@@ -19,7 +19,7 @@ public class WelcomeService {
     public Logger logger = LoggerFactory.getLogger(WelcomeService.class);
     
     private final List<User> users = new ArrayList<>();
-    private final User rootUser = new User("clarke","t",null);
+    private final User rootUser = new User("clarke","t","admin");
     
     {
         users.add(rootUser);

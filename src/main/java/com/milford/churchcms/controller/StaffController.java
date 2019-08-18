@@ -54,6 +54,7 @@ public class StaffController{
         
     @GetMapping("/list-staffers")
     public String showArticle(ModelMap model){
+        logger.debug("GET /list-staffers"); 
         String username = getLoggedInName(model);
         model.put("staffers", repository.findAll()); //service.retrieveArticles());
         return "cms/list-staffers";
@@ -74,16 +75,18 @@ public class StaffController{
  
     @GetMapping("/add-staff")
     public String showAddStaff(ModelMap model, @ModelAttribute("staff") Staff staff){   
-        logger.debug("showAddStaff"); 
         User currentUser = (User)session.getAttribute("loggedInUser");
+        logger.debug("GET /add-staff loggedInUser: {} privilages: {}", currentUser.getUsername(), currentUser.getRole());  
+        
         if("admin".equals(currentUser.getRole()))
             model.addAttribute("unlockRole","good");
+       
         return "cms/add-staff";
     }
     
     @PostMapping("/add-staff")
     public String addStaff(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result){
-        logger.debug("addStaff Staff : {}",staff); 
+        logger.debug("POST /add-staff Staff : {}",staff); 
         if(result.hasErrors())
             return "cms/add-staff";
         staff.setConFullName();
@@ -93,14 +96,14 @@ public class StaffController{
     
     @GetMapping("/delete-staff")
     public String deleteStaff(@RequestParam int id){
-        logger.debug("deleteStaff ID : {}",id); 
+        logger.debug("GET /delete-staff ID : {}",id); 
         repository.deleteById(id);  //service.deleteArticle(id);
         return "redirect:list-staffers";
     }
     
     @PostMapping("/update-staff")
     public String updateStaffPost(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result){
-        logger.debug("updateStaffPost Staff : {}",staff);
+        logger.debug("POST /update-staff Staff : {}",staff);
         if(result.hasErrors())
             return "cms/add-staff";
         repository.delete(staff);
@@ -110,7 +113,7 @@ public class StaffController{
     
     @GetMapping("/update-staff")
     public String updateShowStaff(ModelMap model, @RequestParam int id){
-        logger.debug("updateShowStaff  ID : {}",id);
+        logger.debug("GET /update-staff  ID : {}",id);
         Optional<Staff> staff = repository.findById(id);
         
         model.put("staff", staff.get());
@@ -119,7 +122,7 @@ public class StaffController{
     
     @PostMapping("/addContactToEventPost") // Need both the event.id and staff.id
     public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("staffer") Staff staffer){
-        logger.debug("POST addContactToEvent  Name : {}",staffer.getFullName());
+        logger.debug("POST /addContactToEvent  Name : {}",staffer.getFullName());
         int eventId = (Integer)session.getAttribute("EventID");
         
         Optional<CalendarEvent> myEvent = calendarRepo.findById(eventId);
@@ -134,7 +137,7 @@ public class StaffController{
  
     @GetMapping("/addContactToEvent")
     public String addContactToEvent(ModelMap model, @RequestParam int contactId, @RequestParam int id){ //,@Valid @ModelAttribute("staffList") StaffList staffList
-        logger.debug("GET addContactToEvent  Contact ID : {}",contactId);
+        logger.debug("GET /addContactToEvent  Contact ID : {}",contactId);
         session.setAttribute("EventID", id);
         
         List<Staff> staff = repository.findAll();
