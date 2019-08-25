@@ -15,6 +15,7 @@ values (1, false, 'HOME');
 
 insert into webpagenames
 values (2, false, 'EVENT'); 
-*/
+
 insert into user
 values (1,'OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=','admin','clarke');
+*/
