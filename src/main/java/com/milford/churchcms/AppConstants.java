@@ -16,6 +16,8 @@ import java.util.List;
 public class AppConstants {
     
     public static final String dateFormat = "M-d-yyyy  h:mm:ss a";
+    public static final String salt = "feiH34rvfdk!!fe((";
+    
     public static List<String> roles = new ArrayList<>(
         Arrays.asList("ADMIN","USER"));
     

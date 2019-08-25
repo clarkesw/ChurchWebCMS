@@ -5,11 +5,7 @@
  */
 package com.milford.churchcms;
 
-import com.milford.churchcms.dao.Passage;
-import com.milford.churchcms.dao.Sermon;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import com.milford.churchcms.util.PasswordUtil;
 
 /**
  *
@@ -17,6 +13,10 @@ import java.util.List;
  */
 public class Test {
 //    public static void main(String[] args){
+//        String pass = "t";
+//        String secPass = PasswordUtil.generateSecurePassword(pass);
+//        System.out.println("Hashed pass "+ secPass);
+//        System.out.println("pass "+ PasswordUtil.verifyUserPassword(pass, secPass));
 //    }  
 }
 

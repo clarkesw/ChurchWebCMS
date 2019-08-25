@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.dao;
 
+import com.milford.churchcms.util.PasswordUtil;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -50,7 +51,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        
+        this.password = PasswordUtil.generateSecurePassword(password);
     }
 
     public String getRole() {
