@@ -94,10 +94,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                 <div class="wrapper">                         
                                     <div>
                                         <ul class="menu">
-                                            <li class="leaf"><a href="watch/message-archives/individualf6eb.html?og_group_ref_target_id_entityreference_filter=1" class="watch-archive">Messages</a></li>
-                                            <li class="leaf"><a href="ministries/life/tithes-egiving.html">Give</a></li>
-                                            <li class="leaf"><a href="ministries/prayer.html">Pray</a></li>
-                                            <li class="leaf"><a href="devotions.html">Devotions</a></li>
+                                            <li class="leaf"><a >Messages</a></li>
+                                            <li class="leaf"><a >Give</a></li>
+                                            <li class="leaf"><a >Pray</a></li>
+                                            <li class="leaf"><a >Devotions</a></li>
                                            <%-- <li>
                                                 <a href="#"> Social</a>
                                                 <ul class="dropdown">
@@ -130,9 +130,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                     <div class="wrapper">
                                                         <div>
                                                             <ul class="menu">
-                                                                <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
-                                                                <li class="leaf"><a href="makeConnections">Get Connected</a></li>
-                                                                <li class="leaf"><a href="ministries">Ministries</a></li>
+                                                                <li class="first leaf"><a >About Us</a></li>
+                                                                <li class="leaf"><a >Get Connected</a></li>
+                                                                <li class="leaf"><a >Ministries</a></li>
                                                                 <li class="leaf"><a href="calendar">Calendar</a></li>
                                                                <li class="last leaf"><a href="../email/clarke.job@gmail.com" >Media Archive</a></li> 
                                                             </ul>

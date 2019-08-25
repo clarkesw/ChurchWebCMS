@@ -8,7 +8,6 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.repository.UserRepository;
-import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -41,9 +40,10 @@ public class WelcomeController {
         logger.debug("POST /login  User : {}", userName);
         User dbUser = repository.findByUsername(userName);
         
-        logger.debug("  ***  Pass : {}", dbUser.getPassword());
+        logger.debug("  ***  DB Pass : {}", dbUser.getPassword());
+        logger.debug("  ***  Pass : {} Vaerified {}", user.getPassword(),PasswordUtil.verifyUserPassword(user.getPassword(),dbUser.getPassword()));
         
-        if(dbUser == null || !PasswordUtil.verifyUserPassword(user.getPassword(),dbUser.getPassword())){
+        if(dbUser == null || !user.getPassword().equalsIgnoreCase(dbUser.getPassword())){
             model.addAttribute("error", "Incorrect Username/Password.");
             return "cms/login-page";
         }
