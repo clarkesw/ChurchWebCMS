@@ -56,6 +56,7 @@ public class CalendarEventController{
         
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){
+        logger.debug("GET /list-events");
         String username = getLoggedInName(model);
         List<CalendarEvent> retrieveEvents = repository.findAll();
         model.put("events", retrieveEvents);
@@ -124,7 +125,7 @@ public class CalendarEventController{
         logger.debug("POST /update-event ID: {}", id);
         Optional<CalendarEvent> event = repository.findById(id);
         List<Staff> findAll = staffRepository.findAll();
-        model.addAttribute("staffList",findAll); //firstAndLastName(findAll));
+        model.addAttribute("staffList",findAll); 
         logger.debug("   # of Staff: {}", findAll.size());
         if(event.isPresent())
             model.put("event", event.get());

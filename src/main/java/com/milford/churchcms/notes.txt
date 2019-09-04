@@ -8,3 +8,7 @@ class="button color-white arrow-point-right arrow-after mobile-hide scrollto"
 /home/clarke/NetBeansProjects/ChurchWebCMS/src/main/webapp/images/
 
 1	OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=	admin	clarke
+
+Questions for Clarence:
+1. What are the pastor positions? 
+2. 

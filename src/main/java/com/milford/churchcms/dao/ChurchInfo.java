@@ -32,14 +32,33 @@ public class ChurchInfo {
     private String missionStatement;
     private String email;
     private String url;
+    private String telephone;
     
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;
-    private String telephone;
-    private String leadPastor;
-    private String associatePastor;
-    private String youthMinister;
+    
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "LEAD_ID")
+    private Staff leadPastor;
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "ASSOC_ID")
+    private Staff associatePastor;
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "YOUTH_ID")
+    private Staff youthPastor;
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "MUSIC_ID")
+    private Staff musicPastor;
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "ADULT_ID")
+    private Staff adultPastor;
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "OUT_R_ID")
+    private Staff outReachPastor;
+    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
+    @JoinColumn(name = "COLLAGE_ID")
+    private Staff collagePastor;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ServiceTimes.class)   
     @JoinColumn(name = "sid",referencedColumnName="sid")
@@ -47,7 +66,7 @@ public class ChurchInfo {
 
     public ChurchInfo() {}
 
-    public ChurchInfo(String name, String missionStatement, String email, Address address, String telephone, String leadPastor) {
+    public ChurchInfo(String name, String missionStatement, String email, Address address, String telephone, Staff leadPastor) {
         this.name = name;
         this.missionStatement = missionStatement;
         this.email = email;
@@ -131,34 +150,59 @@ public class ChurchInfo {
         this.telephone = telephone;
     }
 
-    public String getLeadPastor() {
+    public Staff getLeadPastor() {
         return leadPastor;
     }
 
-    public void setLeadPastor(String leadPastor) {
+    public void setLeadPastor(Staff leadPastor) {
         this.leadPastor = leadPastor;
     }
 
-    public String getAssociatePastor() {
+    public Staff getAssociatePastor() {
         return associatePastor;
     }
 
-    public void setAssociatePastor(String associatePastor) {
+    public void setAssociatePastor(Staff associatePastor) {
         this.associatePastor = associatePastor;
     }
 
-    public String getYouthMinister() {
-        return youthMinister;
+    public Staff getYouthPastor() {
+        return youthPastor;
     }
 
-    public void setYouthMinister(String youthMinister) {
-        this.youthMinister = youthMinister;
+    public void setYouthPastor(Staff youthPastor) {
+        this.youthPastor = youthPastor;
     }
 
-    @Override
-    public String toString() {
-        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", url=" + url + ", address=" + address + ", telephone=" + telephone + ", leadPastor=" + leadPastor + ", associatePastor=" + associatePastor + ", youthMinister=" + youthMinister + ", serviceTimes=" + serviceTimes + '}';
+    public Staff getMusicPastor() {
+        return musicPastor;
     }
 
+    public void setMusicPastor(Staff musicPastor) {
+        this.musicPastor = musicPastor;
+    }
 
+    public Staff getAdultPastor() {
+        return adultPastor;
+    }
+
+    public void setAdultPastor(Staff adultPastor) {
+        this.adultPastor = adultPastor;
+    }
+
+    public Staff getOutReachPastor() {
+        return outReachPastor;
+    }
+
+    public void setOutReachPastor(Staff outReachPastor) {
+        this.outReachPastor = outReachPastor;
+    }
+
+    public Staff getCollagePastor() {
+        return collagePastor;
+    }
+
+    public void setCollagePastor(Staff collagePastor) {
+        this.collagePastor = collagePastor;
+    }
 }

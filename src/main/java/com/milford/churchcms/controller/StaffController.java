@@ -77,7 +77,7 @@ public class StaffController{
     @GetMapping("/add-staff")
     public String showAddStaff(ModelMap model, @ModelAttribute("staff") Staff staff){   
         User currentUser = (User)session.getAttribute("loggedInUser");
-        logger.debug("GET /add-staff loggedInUser: {} Privilages: {}", currentUser.getUsername(), currentUser.getRole());  
+        logger.debug("GET /add-staff User: {}", currentUser.getUsername());  
         
         if("admin".equals(currentUser.getRole()))
             model.addAttribute("unlockRole","good");

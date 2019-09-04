@@ -7,8 +7,10 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.ServiceTimes;
+import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.ServiceTimeRepository;
+import com.milford.churchcms.repository.StaffRepository;
 import java.util.Collection;
 import java.util.List;
 import javax.validation.Valid;
@@ -35,10 +37,14 @@ public class ChurchInfoController{
     
     @Autowired
     ServiceTimeRepository timeRepository;    
+    
+    @Autowired
+    StaffRepository staffRepository;
         
     @GetMapping("/list-info")
     public String showInfo(ModelMap model){
         logger.debug("GET /list-info ");
+
         model.put("info", returnInfo());
         return "cms/list-info";
     }
@@ -51,7 +57,7 @@ public class ChurchInfoController{
     @PostMapping("/update-info")
     public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") ChurchInfo info, BindingResult result, 
             @RequestParam int id){
-        logger.debug("POST updateInfoPost Info :{}",info);
+        logger.debug("POST /update-info Info :{}",info);
         if(result.hasErrors())
             return "cms/add-event";
         
@@ -64,7 +70,9 @@ public class ChurchInfoController{
     @GetMapping("/update-info")
     public String updateShowInfo(ModelMap model){
         ChurchInfo myInfo = returnInfo();
-        logger.debug("GET updateInfoPost Church Info : {}",myInfo);
+        logger.debug("GET /update-info Church Info : {}",myInfo);
+        List<Staff> findAll = staffRepository.findAll();
+        model.addAttribute("staffList",findAll); 
         
         if(myInfo != null){      
            model.put("info", myInfo);         

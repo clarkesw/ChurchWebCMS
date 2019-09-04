@@ -32,25 +32,14 @@
 					class="form-control" path="telephone"/>
                                 <form:errors path="telephone" cssClass="text-warning"/>
 			</fieldset>
-                        <fieldset class="form-group">
-				<form:label path="leadPastor">Lead Pastor</form:label> 
-				<form:input  type="text" 
-					class="form-control" path="leadPastor"/>
-                                <form:errors path="leadPastor" cssClass="text-warning"/>
-			</fieldset>
-                       <fieldset class="form-group">
-				<form:label path="associatePastor">Associate Pastor</form:label> 
-				<form:input  type="text" 
-					class="form-control" path="associatePastor"/>
-                                <form:errors path="associatePastor" cssClass="text-warning"/>
-			</fieldset>
+                                <c:if test="${not empty staffList}">
+                                      <form:select path = "leadPastor">
+                                        <form:label path = "leadPastor">Lead Pastor</form:label> 
+                                       <form:option value = "NONE" label = "Select"/>
+                                       <form:options items = "${staffList}" itemLabel="fullName"/>
+                                    </form:select>  
+                                </c:if>
 
-                        <fieldset class="form-group">
-				<form:label path="youthMinister">Youth Minister</form:label> 
-				<form:input  type="text" 
-					class="form-control" path="youthMinister"/>
-                                <form:errors path="youthMinister" cssClass="text-warning"/>
-			</fieldset>
                         <input type=hidden id="address" name="address">
 			<button type="submit" class="btn btn-success">Update</button>
                         
