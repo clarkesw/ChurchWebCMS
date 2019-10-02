@@ -12,3 +12,6 @@ class="button color-white arrow-point-right arrow-after mobile-hide scrollto"
 Questions for Clarence:
 1. What are the pastor positions? 
 2. 
+
+
+15 2 * * * root mysqldump -u root -pPASSWORD --all-databases | gzip > /mnt/disk2/database_`data ' %m-%d-%Y'`.sql.gz 

@@ -110,12 +110,12 @@
                     <artifactId>mysql-connector-java</artifactId>
                     <version>5.1.46</version>
                 </dependency>
-	 <dependency>
-	  <groupId>commons-dbcp</groupId>
-	  <artifactId>commons-dbcp</artifactId>
-	  <version>1.4</version>
-	  <type>jar</type>
-	 </dependency>
+                <dependency>
+                    <groupId>commons-dbcp</groupId>
+                    <artifactId>commons-dbcp</artifactId>
+                    <version>1.4</version>
+                    <type>jar</type>
+                </dependency>
 	</dependencies>
 
 	<build>
@@ -125,7 +125,15 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+             <filters>
+                <filter>src/main/resources/config.properties</filter>
+            </filters>
+            <resources>
+                <resource>
+                    <filtering>true</filtering>
+                    <directory>src/main/resources</directory>
+                </resource>
+            </resources>
 	</build>
-
 
 </project>

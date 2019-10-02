@@ -90,7 +90,7 @@ public class PassageController{
     
     @GetMapping("/delete-passage")
     public String deleteSermon(@RequestParam int id){
-        logger.debug("/delete-passage Passage : {}",id);
+        logger.debug("GET /delete-passage Passage : {}",id);
         repository.deleteById(id);
         return "redirect:list-passages";
     }
@@ -118,7 +118,7 @@ public class PassageController{
     
     @PostMapping("/addPassagesToSermon") 
     public String addPassagesToSermon(ModelMap model,@Valid @ModelAttribute("passage") Passage passage){
-        logger.debug("POST addPassagesToSermon  Name : {}",passage);
+        logger.debug("POST /addPassagesToSermon  Name : {}",passage);
         int sermonId = (Integer)session.getAttribute("SermonID");
        
         Optional<Sermon> mySermon = sermonRepo.findById(sermonId);
@@ -138,7 +138,7 @@ public class PassageController{
  
     @GetMapping("/addPassagesToSermon")
     public String addPassagesToSermon(ModelMap model, @RequestParam int id){ 
-        logger.debug("GET addPassagesToSermon  ");
+        logger.debug("GET /addPassagesToSermon  ");
         session.setAttribute("SermonID", id);
         
         List<Passage> passages = repository.findAll();
