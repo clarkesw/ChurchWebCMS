@@ -104,10 +104,10 @@ public class UiController {
     }
     
     @GetMapping("/article/{id}")
-    public String showArticlePage(@PathVariable String title, ModelMap model){
-        logger.debug("GET /article/" + title);
+    public String showArticlePage(@PathVariable int id, ModelMap model){
+        logger.debug("GET /article/" + id);
 
-        model.addAttribute("event", pageService.retrieveOnePage(title));
+        model.addAttribute("article", articleRepository.findById(id));
         model.addAttribute("page", pageService.retrieveOnePage("event"));
         return "event";
     }

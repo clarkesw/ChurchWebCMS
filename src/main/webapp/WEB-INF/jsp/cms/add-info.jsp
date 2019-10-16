@@ -33,9 +33,9 @@
                                 <form:errors path="telephone" cssClass="text-warning"/>
 			</fieldset>
                                 <c:if test="${not empty staffList}">
-                                      <form:select path = "leadPastor">
-                                        <form:label path = "leadPastor">Lead Pastor</form:label> 
-                                       <form:option value = "NONE" label = "Select"/>
+                                    <form:label path="leadPastor">Lead Pastor</form:label> 
+                                    <form:select path = "leadPastor.fullName">
+                                       <form:option label = "Select" value="NONE"/>
                                        <form:options items = "${staffList}" itemLabel="fullName"/>
                                     </form:select>  
                                 </c:if>

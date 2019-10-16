@@ -48,15 +48,15 @@ public class PasswordUtil {
     }
     
     public static boolean verifyUserPassword(String providedPassword,
-            String securedPassword)
-    {
+            String securedPassword){
+        
         boolean returnValue = false;
         
         // Generate New secure password with the same salt
-        String newSecurePassword = generateSecurePassword(providedPassword);
+       // String newSecurePassword = generateSecurePassword(providedPassword);
         
         // Check if two passwords are equal
-        returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);
+        returnValue = providedPassword.equalsIgnoreCase(securedPassword);
         
         return returnValue;
     }

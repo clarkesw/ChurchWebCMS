@@ -14,6 +14,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,22 +34,40 @@ public class WelcomeController {
     @Autowired 
     private HttpSession session;
     
+    @Value("${spring.datasource.url}")
+    private String dataSourceInfo;
+    
     Logger logger = LoggerFactory.getLogger(WelcomeController.class);
     
     @PostMapping("/login")
     public String checkLoginCredentials(ModelMap model,@Valid @ModelAttribute("user") User user){
+        String[] dataSource =  dataSourceInfo.split(":");
+        String rootPW = PasswordUtil.generateSecurePassword("root");
+        String whichDB = dataSource[1];
         String userName = user.getUsername();
+
         logger.debug("POST /login  User : {}", userName);
         User dbUser = repository.findByUsername(userName);
         
-        logger.debug("  ***  DB Pass : {}", dbUser.getPassword());
-        logger.debug("  ***  Pass : {} Vaerified {}", user.getPassword(),PasswordUtil.verifyUserPassword(user.getPassword(),dbUser.getPassword()));
-        
-        if(dbUser == null || !user.getPassword().equalsIgnoreCase(dbUser.getPassword())){
+        if(dbUser == null){
             model.addAttribute("error", "Incorrect Username/Password.");
             return "cms/login-page";
         }
-        session.setAttribute("loggedInUser", dbUser);
+            
+        if("mysql".equals(whichDB)){
+            
+            if(!user.getPassword().equalsIgnoreCase(dbUser.getPassword())){
+                model.addAttribute("error", "Incorrect Username/Password.");
+                return "cms/login-page";
+            }
+        }else{
+            if(!user.getPassword().equalsIgnoreCase(rootPW)){
+                model.addAttribute("error", "Incorrect Username/Password.");
+                return "cms/login-page";
+            }
+        }
+        
+        session.setAttribute("loggedInUser", user);
         model.put("user", userName);   
         return "cms/welcome";
     }
