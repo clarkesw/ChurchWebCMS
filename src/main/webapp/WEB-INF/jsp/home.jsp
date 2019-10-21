@@ -309,8 +309,6 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                             <!-- /.wrapper -->
                         </div>
                     </div>
-                    <div class="content-footer">
-                    </div>
                 </div>
             </div>
             <!-- /.content-inner -->
@@ -318,29 +316,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
         <!-- /.content-wrapper -->
     </section>
     <!-- /#content -->
+
     <footer class="site-info">
-        <div class="wrapper"><%--
-            <div class="footer-social">
-                <ul>
-                    <li><a href="https://facebook.com/gatewaypeople" target="_blank"><i class="icon-facebook"></i></a></li>
-                    <li><a href="https://twitter.com/gatewaypeople" target="_blank"><i class="icon-twitter"></i></a></li>
-                    <li><a href="https://instagram.com/gatewaypeople" target="_blank"><i class="icon-instagram"></i></a></li>
-                    <li><a href="https://www.youtube.com/user/gatewaychurchtv" target="_blank"><i class="icon-youtube"></i></a></li>
-                </ul>
-            </div>  --%>
+        <div class="wrapper">
             <div class="footer-info">
                 <div class="church-tag">${church.name}| <span>${church.missionStatement}</span></div>
                 <div class="church-info">&copy; 2018 | ${church.telephone} | ${church.address.addressLine1}, ${church.address.addressLine2}</div>
             </div>
-            <div class="clearfix"></div>
-            <div class="clearfix"></div>
         </div>
         <!-- /.wrapper -->
     </footer>
-    <div class="footer-spacer"></div>
-    <div id="scroll-top-top" style="display: none;"><a href="#top" data-target="0" class="scrollto"><i class="fa fa-chevron-up"></i></a></div>
-    <script async src='https://tag.simpli.fi/sifitag/613b3ba0-054d-0136-44aa-067f653fa718'></script>
-    <script type="text/javascript" src="../../gwp_simple_menu5da7.js?p7rj3q"></script>
 </body>
 
 </html>
