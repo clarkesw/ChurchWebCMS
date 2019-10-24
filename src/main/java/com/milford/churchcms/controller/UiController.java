@@ -110,14 +110,9 @@ public class UiController {
         logger.debug("GET /article/  : {}" + article);     
 
         model.addAttribute("article", article);
+        model.addAttribute("church", getChurchInfo());
         model.addAttribute("page", pageService.retrieveOnePage("event"));
-        return "event";
-    }
-    
-    @GetMapping("/home")
-    public String getHome(){
-        logger.debug("GET /home");
-        return "index";
+        return "article";
     }
     
     private ChurchInfo getChurchInfo(){
