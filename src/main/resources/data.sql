@@ -18,4 +18,4 @@ insert into church
 values (1,null,'church@milford.com','Clarence','C3','Milford Baptist','919-368-6332',null,null,1);
 */
 insert into user
-values (1,'root', 'admin', 'root');
+values (1,'OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=','admin','clarke');
