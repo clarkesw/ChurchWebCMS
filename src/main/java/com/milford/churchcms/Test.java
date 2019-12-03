@@ -5,20 +5,47 @@
  */
 package com.milford.churchcms;
 
+import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.util.PasswordUtil;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author clarke
  */
 public class Test {
+    
+
+        
 //    public static void main(String[] args){
 //        String pass = "t";
-//        String secPass = PasswordUtil.generateSecurePassword(pass);
-//        System.out.println("Hashed pass "+ secPass);
-//        System.out.println("pass "+ PasswordUtil.verifyUserPassword(pass, secPass));
+//        
+//       InnerTest my = new InnerTest();
+//       
+//        my.doStuff();
 //    }  
 }
+
+    class Beverage{
+        @Autowired
+        ChurchRepository churchRepository;
+        
+        public void doStuff(){
+            System.out.println("Password: " + returnInfo());
+        }
+        
+      private ChurchInfo returnInfo(){
+        List<ChurchInfo> infoList = churchRepository.findAll();
+        ChurchInfo myInfo = null;        
+        for(ChurchInfo info : infoList){
+            myInfo = info;
+        }
+        System.out.println("Church Info: " + myInfo.toString());
+        return myInfo;
+      }
+    }
 
 //class Lambda{
 //     List<Integer> numbers = Arrays.asList(1,2,3);

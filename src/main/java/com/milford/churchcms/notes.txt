@@ -9,9 +9,7 @@ class="button color-white arrow-point-right arrow-after mobile-hide scrollto"
 
 1	OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=	admin	clarke
 
-Questions for Clarence:
-1. What are the pastor positions? 
-2. 
-
 
 15 2 * * * root mysqldump -u root -pPASSWORD --all-databases | gzip > /mnt/disk2/database_`data ' %m-%d-%Y'`.sql.gz 
+
+app.css(line 2311)  footer.site-info height: 220px
