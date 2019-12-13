@@ -25,9 +25,6 @@ public class Staff {
     @GeneratedValue
     private Integer id;
     
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "USER_ID", referencedColumnName = "id")    
-    private User user;
     private String firstName;
     private String lastName;
     private String fullName;
@@ -36,6 +33,10 @@ public class Staff {
     private String workEmail;
     private String homePhone;
     private String workPhone;
+    
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = User.class)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "id")    
+    private User user;
     
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class, orphanRemoval = true)
     @JoinColumn(name = "ADDRESS_ID")

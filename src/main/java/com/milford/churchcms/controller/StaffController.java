@@ -11,6 +11,7 @@ import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.StaffRepository;
+import com.milford.churchcms.repository.UserRepository;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -42,7 +43,10 @@ public class StaffController{
     
     @Autowired
     CalendarEventRepository calendarRepo;
-    
+ 
+    @Autowired
+    UserRepository userRepo;
+        
     @Autowired 
     private HttpSession session;
         
@@ -108,6 +112,7 @@ public class StaffController{
         logger.debug("POST /update-staff Staff : {}",staff);
         if(result.hasErrors())
             return "cms/add-staff";
+        userRepo.delete(staff.getUser());
         repository.delete(staff);
         repository.save(staff);  
         return "redirect:list-staffers";
@@ -116,11 +121,35 @@ public class StaffController{
     @GetMapping("/update-staff")
     public String updateShowStaff(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-staff  ID : {}",id);
+        User currentUser = (User)session.getAttribute("loggedInUser");
         Optional<Staff> staff = repository.findById(id);
+        logger.debug("User : {}",currentUser);
         
+        if("admin".equals(currentUser.getRole()))
+            model.addAttribute("unlockRole","good");
         model.put("staff", staff.get());
+        
         return "cms/add-staff";
     }     
+
+/*    @PostMapping("/update-user")
+    public String updateUserPost(ModelMap model,@Valid @ModelAttribute("user") User user, BindingResult result){
+        logger.debug("POST /update-user User : {}",user);
+        if(result.hasErrors())
+            return "cms/add-user";
+        userRepo.delete(user);
+        userRepo.save(user);  
+        return "redirect:list-staffers";
+    }
+    
+    @GetMapping("/update-user")
+    public String updateShowUser(ModelMap model, @RequestParam int id){
+        logger.debug("GET /update-user  ID : {}",id);
+        Optional<User> user = userRepo.findById(id);
+        
+        model.put("user", user.get());
+        return "cms/add-user";
+    }    */
     
     @PostMapping("/addContactToEventPost") // Need both the event.id and staff.id
     public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("staffer") Staff staffer){
