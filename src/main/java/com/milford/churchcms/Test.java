@@ -6,18 +6,40 @@
 package com.milford.churchcms;
 
 import com.milford.churchcms.util.PasswordUtil;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  *
  * @author clarke
  */
-public class Test {
-//    public static void main(String[] args){
-//        String pass = "t";
-//        String secPass = PasswordUtil.generateSecurePassword(pass);
-//        System.out.println("Hashed pass "+ secPass);
-//        System.out.println("pass "+ PasswordUtil.verifyUserPassword(pass, secPass));
-//    }  
+public class Test {    
+    
+    public static void main(String[] args) throws InterruptedException, ExecutionException{
+        SfFuture sf = new SfFuture();
+        Future<Integer> calculate = sf.calculate(15);
+        String pass = "t";
+
+        System.out.println("Hashed pass "+ calculate.get());
+        sf.shutdown();
+    }  
+}
+
+class SfFuture{
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    
+    public Future<Integer> calculate(Integer input) {        
+        return executor.submit(() -> {
+            Thread.sleep(1000);
+            return input * input;
+        });
+    }
+    
+    public void shutdown(){
+        executor.shutdown();
+    }
 }
 
 //class Lambda{
