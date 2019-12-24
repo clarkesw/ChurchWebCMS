@@ -111,8 +111,11 @@ public class ChurchInfoController{
         ChurchInfo myInfo = null;        
         for(ChurchInfo info : infoList){
             myInfo = info;
- 
         }
+        
+        if(null != myInfo)
+            System.out.println("Church Info: " + myInfo.toString());
+        
         return myInfo;
     }
 }

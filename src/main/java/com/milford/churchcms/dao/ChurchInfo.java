@@ -40,25 +40,25 @@ public class ChurchInfo {
     
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "LEAD_ID")
-    private Staff leadPastor;
+    private Staff leadPastor = null;
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "ASSOC_ID")
-    private Staff associatePastor;
+    private Staff associatePastor = null;
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "YOUTH_ID")
-    private Staff youthPastor;
+    private Staff youthPastor = null;
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "MUSIC_ID")
-    private Staff musicPastor;
+    private Staff musicPastor = null;
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "ADULT_ID")
-    private Staff adultPastor;
+    private Staff adultPastor = null;
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "OUT_R_ID")
-    private Staff outReachPastor;
+    private Staff outReachPastor = null;
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
     @JoinColumn(name = "COLLAGE_ID")
-    private Staff collagePastor;
+    private Staff collagePastor = null;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ServiceTimes.class)   
     @JoinColumn(name = "sid",referencedColumnName="sid")
@@ -204,5 +204,17 @@ public class ChurchInfo {
 
     public void setCollagePastor(Staff collagePastor) {
         this.collagePastor = collagePastor;
+    }
+
+    @Override
+    public String toString() {
+        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", url=" + url + ", telephone=" + telephone + ", address=" + address + ", serviceTimes=" + serviceTimes + 
+                ", leadPastor=" + ((leadPastor == null) ? leadPastor : "null")+ 
+                ", associatePastor=" + ((associatePastor == null) ? associatePastor : "null") + 
+                ", youthPastor=" + ((youthPastor == null) ? youthPastor : "null") + 
+                ", musicPastor=" + ((musicPastor == null) ? musicPastor : "null") + 
+                ", adultPastor=" + ((adultPastor == null) ? adultPastor : "null") + 
+                ", outReachPastor=" + ((outReachPastor == null) ? outReachPastor : "null") + 
+                ", collagePastor=" +  ((collagePastor == null) ? collagePastor : "null")+ '}';
     }
 }
