@@ -33,6 +33,8 @@ public class Staff {
     private String workEmail;
     private String homePhone;
     private String workPhone;
+    private String photo;
+    private String bio;
     
     @OneToOne(cascade = CascadeType.ALL, targetEntity = User.class)
     @JoinColumn(name = "USER_ID", referencedColumnName = "id")    
@@ -55,6 +57,18 @@ public class Staff {
         this.homePhone = homePhone;
         this.workPhone = workPhone;
         this.homeAddress = homeAddress;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public User getUser() {
@@ -150,7 +164,7 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Staff{" + "id=" + id + ", user=" + user + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", homeAddress=" + homeAddress + '}';
+        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", photo=" + photo + ", bio=" + bio + ", user=" + user + ", homeAddress=" + homeAddress + '}';
     }
 
 }

@@ -44,6 +44,12 @@
 					class="form-control" path="homePhone"/>
                                 <form:errors path="homePhone" cssClass="text-warning"/>
 			</fieldset>
+                        <fieldset class="form-group">
+				<form:label path="photo">Photo</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="photo"/>
+                                <form:errors path="photo" cssClass="text-warning"/>
+			</fieldset>
                         
                     <c:if test = "${not empty unlockRole}">
                         <fieldset class="form-group">

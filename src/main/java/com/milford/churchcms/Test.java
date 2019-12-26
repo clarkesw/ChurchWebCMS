@@ -19,14 +19,14 @@ import java.util.concurrent.Future;
  */
 public class Test {    
     
-    public static void main(String[] args) throws InterruptedException, ExecutionException{
-        SfFuture sf = new SfFuture();
-        Future<Integer> calculate = sf.calculate(15);
-        String pass = "t";
-
-        System.out.println("Hashed pass "+ calculate.get());
-        sf.shutdown();
-    }  
+//    public static void main(String[] args) throws InterruptedException, ExecutionException{
+//        SfFuture sf = new SfFuture();
+//        Future<Integer> calculate = sf.calculate(15);
+//        String pass = "t";
+//
+//        System.out.println("Hashed pass "+ calculate.get());
+//        sf.shutdown();
+//    }  
 }
 
 class SfFuture{
