@@ -16,53 +16,49 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author clarke
  */
-public class Test {
-        
-//    public static void main(String[] args){
+
+public class Test {    
+    
+//    public static void main(String[] args) throws InterruptedException, ExecutionException{
+//        SfFuture sf = new SfFuture();
+//        Future<Integer> calculate = sf.calculate(15);
 //        String pass = "t";
-//        
-//        Thread loop = new Thread(
-//          new Runnable() {
-//            @Override
-//            public void run() {
-//              while (true) {
-//                if (Thread.interrupted()) {
-//                  break;
-//                }
-//                // Continue to do nothing
-//              }
-//            }
-//          }
-//        );
-//        loop.start();
-//        System.out.println("Enter Y/N.");
-//        Scanner s = new Scanner(System.in);
-//        String nextLine = s.nextLine();
-//        
-//        if("y".equalsIgnoreCase(nextLine))
-//            loop.interrupt();
-//        System.out.println("Loop: " + loop.isInterrupted());
 //    }  
 }
 
-    class Beverage{
-        @Autowired
-        ChurchRepository churchRepository;
-        
-        public void doStuff(){
-            System.out.println("Password: " + returnInfo());
-        }
-        
-      private ChurchInfo returnInfo(){
-        List<ChurchInfo> infoList = churchRepository.findAll();
-        ChurchInfo myInfo = null;        
-        for(ChurchInfo info : infoList){
-            myInfo = info;
-        }
-        System.out.println("Church Info: " + myInfo.toString());
-        return myInfo;
-      }
-    }
+//class SfFuture{
+//    ExecutorService executor = Executors.newSingleThreadExecutor();
+//    
+//    public Future<Integer> calculate(Integer input) {        
+//        return executor.submit(() -> {
+//            Thread.sleep(1000);
+//            return input * input;
+//        });
+//    }
+//    
+//    public void shutdown(){
+//        executor.shutdown();
+//    }
+//}
+
+//    class Beverage{
+//        @Autowired
+//        ChurchRepository churchRepository;
+//        
+//        public void doStuff(){
+//            System.out.println("Password: " + returnInfo());
+//        }
+//        
+//      private ChurchInfo returnInfo(){
+//        List<ChurchInfo> infoList = churchRepository.findAll();
+//        ChurchInfo myInfo = null;        
+//        for(ChurchInfo info : infoList){
+//            myInfo = info;
+//        }
+//        System.out.println("Church Info: " + myInfo.toString());
+//        return myInfo;
+//      }
+//    }
 
 //class Lambda{
 //     List<Integer> numbers = Arrays.asList(1,2,3);
@@ -128,4 +124,26 @@ public class Test {
 //    }
 //}
 //
-//// "2018-11-26T10:00:00"
+//        
+//        Thread loop = new Thread(
+//          new Runnable() {
+//            @Override
+//            public void run() {
+//              while (true) {
+//                if (Thread.interrupted()) {
+//                  break;
+//                }
+//                // Continue to do nothing
+//              }
+//            }
+//          }
+//        );
+//        loop.start();
+//        System.out.println("Enter Y/N.");
+//        Scanner s = new Scanner(System.in);
+//        String nextLine = s.nextLine();
+//        
+//        if("y".equalsIgnoreCase(nextLine))
+//            loop.interrupt();
+//        System.out.println("Loop: " + loop.isInterrupted());
+

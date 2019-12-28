@@ -76,8 +76,8 @@ public class UiController {
         model.addAttribute("sermon", sermonRepository.findTopByOrderBySermonDateDesc());
         model.addAttribute("page", pageRepository.findByPageName(name));
         
-        logger.debug(" *** " + pageRepository.findByPageName(name));
         if("calendar".equals(name)){
+            logger.debug(" Calendar " + pageRepository.findByPageName(name));
             return "calendar";
         }  
                 

@@ -163,6 +163,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                 </div>
             </div>
         </div>        <!-- /.header-inner -->
+        <marquee behavior="scroll" direction="left">Here is some scrolling text... right to left!</marquee>
     </header>
     <section id="content">
         <div class="clearfix">
