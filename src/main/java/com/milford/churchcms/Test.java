@@ -9,6 +9,7 @@ import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.util.PasswordUtil;
 import java.util.List;
+import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,15 +17,31 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author clarke
  */
 public class Test {
-    
-
         
 //    public static void main(String[] args){
 //        String pass = "t";
 //        
-//       InnerTest my = new InnerTest();
-//       
-//        my.doStuff();
+//        Thread loop = new Thread(
+//          new Runnable() {
+//            @Override
+//            public void run() {
+//              while (true) {
+//                if (Thread.interrupted()) {
+//                  break;
+//                }
+//                // Continue to do nothing
+//              }
+//            }
+//          }
+//        );
+//        loop.start();
+//        System.out.println("Enter Y/N.");
+//        Scanner s = new Scanner(System.in);
+//        String nextLine = s.nextLine();
+//        
+//        if("y".equalsIgnoreCase(nextLine))
+//            loop.interrupt();
+//        System.out.println("Loop: " + loop.isInterrupted());
 //    }  
 }
 
