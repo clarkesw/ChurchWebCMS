@@ -116,7 +116,7 @@ public class CalendarEventController{
         int eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
         logger.debug("    eventId after update : {}",eventId);
         repository.save(new CalendarEvent(eventId, event.getTitle(),"/event/"+eventId,event.getDetails(), startDate, 
-                                                endDate,event.getStartTime(),event.getEndTime(),null));
+                                                endDate,event.getStartTime(),event.getEndTime(),event.getContact()));
         return "redirect:list-events";
     }
     
@@ -140,9 +140,6 @@ public class CalendarEventController{
         return names;
     }
 
-    private String createURL(int id){
-        return "/event/"+id;
-    }
     private Date addTimeToDate(Date myDate, String myTime){
         
         StringTokenizer timeToken = new StringTokenizer(myTime,":");

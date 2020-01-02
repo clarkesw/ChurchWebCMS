@@ -81,9 +81,9 @@ public class StaffController{
     @GetMapping("/add-staff")
     public String showAddStaff(ModelMap model, @ModelAttribute("staff") Staff staff){   
         User currentUser = (User)session.getAttribute("loggedInUser");
-        logger.debug("GET /add-staff User: {}", currentUser.getUsername());  
+        logger.debug("GET /add-staff User: {}", currentUser);  
         
-        if("admin".equals(currentUser.getRole()))
+        if("admin".equalsIgnoreCase(currentUser.getRole()))
             model.addAttribute("unlockRole","good");
        
         model.addAttribute("roles", AppConstants.roles);
@@ -103,7 +103,11 @@ public class StaffController{
     @GetMapping("/delete-staff")
     public String deleteStaff(@RequestParam int id){
         logger.debug("GET /delete-staff ID : {}",id); 
-        repository.deleteById(id);  //service.deleteArticle(id);
+        
+        Staff staff = repository.getOne(id);
+        int userId = staff.getUser().getId();
+        userRepo.deleteById(userId);
+        repository.deleteById(id);  
         return "redirect:list-staffers";
     }
     

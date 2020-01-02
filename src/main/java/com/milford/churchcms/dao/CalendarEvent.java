@@ -73,7 +73,7 @@ public class CalendarEvent {
     }
 
     public CalendarEvent(Integer id, String title, String url, String details, Date startDateCont, Date endDateCont, 
-                        String startTime, String endTime, String contact) {
+                        String startTime, String endTime, Staff contact) {
         this.id = id;
         this.title = title;
         this.url = url;
@@ -84,6 +84,7 @@ public class CalendarEvent {
         this.endTime = endTime;
         this.start =  DateUtil.setStartUIDate(startDateCont);
         this.end = DateUtil.setEndUIDate(endDateCont);
+        this.contact = contact;
     }
 
     public Staff getContact() {
@@ -180,12 +181,10 @@ public class CalendarEvent {
 
     public void setUrl(String url) {
         this.url = url;
-    }
+    } 
 
     @Override
     public String toString() {
-        return "CalendarEvent{" + "id=" + id + ", title=" + title + ", start=" + start + ", end=" + end + ", isRepeated=" + isRepeated + ", url=" + url + ", details=" + details + ", startDateCont=" + startDateCont + ", endDateCont=" + endDateCont + ", startTime=" + startTime + ", endTime=" + endTime + '}';
+        return "CalendarEvent{" + "id=" + id + ", title=" + title + ", start=" + start + ", end=" + end + ", url=" + url + ", isRepeated=" + isRepeated + ", details=" + details + ", contact=" + contact + ", startDateCont=" + startDateCont + ", endDateCont=" + endDateCont + ", startTime=" + startTime + ", endTime=" + endTime + '}';
     }
-      
-      
 }
