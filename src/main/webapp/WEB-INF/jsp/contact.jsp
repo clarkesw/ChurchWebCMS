@@ -158,19 +158,22 @@
             <div id='event'>
                 <table width="600" cellpadding="20" border="0">
                     <tr>
-                        <td>Name</td><td><b>${article.title}</b></td>
+                        <td>Name</td><td><b>${contact.fullName}</b></td>
                     </tr>
                      <tr>
-                        <td>Title</td><td>${article.lastModified}</td>
+                        <td>Position</td><td>${contact.position}</td>
                     </tr>                   
                     <tr>
-                        <td>Phone #</td><td>&nbsp;</td>
+                        <td>Phone #</td><td>${contact.workPhone}</td>
                     </tr>          
                      <tr>
-                        <td>Email</td><td>&nbsp;</td>
-                    </tr>          
+                        <td>Email</td><td>${contact.workEmail}</td>
+                    </tr>  
                     <tr>
-                        <td>Photo</td><td>${article.content}</td>
+                        <td>Bio</td><td>${contact.bio}</td>
+                    </tr> 
+                    <tr>
+                        <td>Photo</td><td>${contact.photo}</td>
                     </tr>
                 </table>
                 

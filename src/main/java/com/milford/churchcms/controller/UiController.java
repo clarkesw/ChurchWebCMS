@@ -8,10 +8,12 @@ package com.milford.churchcms.controller;
 import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ArticleRepository;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.SermonRepository;
+import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.WebPageRepository;
 import com.milford.churchcms.service.MyJmsMessage;
 import com.milford.churchcms.service.WebPageService;
@@ -54,6 +56,9 @@ public class UiController {
     @Autowired
     WebPageService pageService;
     
+    @Autowired
+    StaffRepository staffRepository;
+    
     @Autowired 
     private HttpSession session;
         
@@ -87,6 +92,14 @@ public class UiController {
     @GetMapping("/email/{name}")
     public void sendEmail(@PathVariable String name){
         // Figure out Later.
+    }
+    
+    @GetMapping("/staff/{id}")
+    public String getStaff(@PathVariable int id, ModelMap model){
+        Optional<Staff> staff = staffRepository.findById(id);
+        if(staff.isPresent())
+            model.addAttribute("contact", staff.get());
+        return "contact";
     }
     
     @GetMapping("/event/{id}")

@@ -7,7 +7,8 @@
                 <table>
                 
                     <tr>
-                        <td>Messages</td>
+                        <td>No Messages</td>
+                        <td>Send Message</td>
                     </tr>
                 
                 </table>
