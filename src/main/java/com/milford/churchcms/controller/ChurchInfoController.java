@@ -6,6 +6,7 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.dao.ServiceTimes;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ChurchRepository;
@@ -13,6 +14,7 @@ import com.milford.churchcms.repository.ServiceTimeRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,27 +45,31 @@ public class ChurchInfoController{
         
     @GetMapping("/list-info")
     public String showInfo(ModelMap model){
-        logger.debug("GET /list-info ");
+        ChurchInfo info = returnInfo();
+        logger.debug("GET /list-info Info: {}",info);
 
-        model.put("info", returnInfo());
+        model.put("info", info);
         return "cms/list-info";
     }
 
-    private String getLoggedInName(ModelMap model) {
-        Collection<Object> values = model.values();
-        return (String)model.get("user");
-    }
- 
     @PostMapping("/update-info")
     public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") ChurchInfo info, BindingResult result, 
             @RequestParam int id){
         logger.debug("POST /update-info Info :{}",info);
+        int leadId = Integer.parseInt(info.getLeadPastor().getFullName());
+        Optional<Staff> lead = staffRepository.findById(leadId);
         if(result.hasErrors())
             return "cms/add-event";
         
-        if(id != -1)
-            churchRepository.deleteById(id);//.delete(info);
-        churchRepository.save(info);  
+        if(id != -1){
+            logger.debug("Delete Id :{}",id);
+            logger.debug("Delete Staff Id :{}",info.getLeadPastor());
+     //       staffRepository.deleteById(leadId);
+            churchRepository.deleteAll();
+        }
+        Staff newStaff = staffRepository.save(lead.get());
+        churchRepository.save(new ChurchInfo(info.getName(),info.getMissionStatement(),info.getEmail(),
+                info.getAddress(),info.getTelephone(),newStaff));  
         return "redirect:list-info";
     }
     
@@ -112,9 +118,6 @@ public class ChurchInfoController{
         for(ChurchInfo info : infoList){
             myInfo = info;
         }
-        
-        if(null != myInfo)
-            System.out.println("Church Info: " + myInfo.toString());
         
         return myInfo;
     }

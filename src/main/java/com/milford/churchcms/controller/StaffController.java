@@ -135,25 +135,6 @@ public class StaffController{
         
         return "cms/add-staff";
     }     
-
-/*    @PostMapping("/update-user")
-    public String updateUserPost(ModelMap model,@Valid @ModelAttribute("user") User user, BindingResult result){
-        logger.debug("POST /update-user User : {}",user);
-        if(result.hasErrors())
-            return "cms/add-user";
-        userRepo.delete(user);
-        userRepo.save(user);  
-        return "redirect:list-staffers";
-    }
-    
-    @GetMapping("/update-user")
-    public String updateShowUser(ModelMap model, @RequestParam int id){
-        logger.debug("GET /update-user  ID : {}",id);
-        Optional<User> user = userRepo.findById(id);
-        
-        model.put("user", user.get());
-        return "cms/add-user";
-    }    */
     
     @PostMapping("/addContactToEventPost") // Need both the event.id and staff.id
     public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("staffer") Staff staffer){

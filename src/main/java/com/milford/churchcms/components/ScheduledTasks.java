@@ -24,8 +24,8 @@ public class ScheduledTasks {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(cron = "${scheduling.job.cron}")
-    public void run() {
-        log.debug("run()");
-    }
+//    @Scheduled(cron = "${scheduling.job.cron}")
+//    public void run() {
+//        log.debug("run()");
+//    }
 }
