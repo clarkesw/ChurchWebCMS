@@ -5,25 +5,43 @@
  */
 package com.milford.churchcms;
 
-import com.milford.churchcms.dao.ChurchInfo;
-import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.util.PasswordUtil;
-import java.util.List;
-import java.util.Scanner;
-import org.springframework.beans.factory.annotation.Autowired;
-
 /**
  *
  * @author clarke
  */
 
-public class Test {    
-    
-//    public static void main(String[] args) throws InterruptedException, ExecutionException{
-//        SfFuture sf = new SfFuture();
-//        Future<Integer> calculate = sf.calculate(15);
-//        String pass = "t";
-//    }  
+public class Test{
+
+//     public static void main(String []args) throws Exception{
+//         String s = null;
+//         
+//         if(s == null)
+//            System.out.println("Hello World");
+//            
+//     //   try{
+//           exceptionTry(); 
+//     //   }catch(Exception e){
+//     //       System.out.println(e);
+//      //  }
+//        
+//     }
+     
+     public static void exceptionTry(){// throws Exception{
+        int a = 0;
+   //     try{
+            a = 10/0;
+    //    }catch(Exception ex){
+          //  ex.printStackTrace(); // In Black
+    //        throw new OurException("This is messy"); //In Red
+    //    }
+    }
+
+}
+
+class OurException extends RuntimeException{
+    public OurException(String errorMessage) {
+        super(errorMessage);
+    }
 }
 
 //class SfFuture{

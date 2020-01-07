@@ -5,6 +5,9 @@
  */
 package com.milford.churchcms.dao;
 
+import com.milford.churchcms.AppConstants;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +26,16 @@ public class Banner {
     @GeneratedValue
     private int id;
     private String message;
-    private String lastUpdated;
+    
+    @Column(name="last_modified")
+    private String lastModified;
+
+    public Banner() {}
+
+    public Banner(String message) {
+        this.message = message;
+        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
+    }
 
     public int getId() {
         return id;
@@ -41,17 +53,17 @@ public class Banner {
         this.message = message;
     }
 
-    public String getLastUpdated() {
-        return lastUpdated;
+    public String getLastModified() {
+        return lastModified;
     }
 
-    public void setLastUpdated(String lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
     }
 
     @Override
     public String toString() {
-        return "Banner{" + "id=" + id + ", message=" + message + ", lastUpdated=" + lastUpdated + '}';
+        return "Banner{" + "id=" + id + ", message=" + message + ", lastModified=" + lastModified + '}';
     }
-    
+
 }

@@ -6,10 +6,12 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Article;
+import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ArticleRepository;
+import com.milford.churchcms.repository.BannerRepository;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.SermonRepository;
@@ -59,6 +61,9 @@ public class UiController {
     @Autowired
     StaffRepository staffRepository;
     
+    @Autowired
+    BannerRepository bannerRepository;
+    
     @Autowired 
     private HttpSession session;
         
@@ -69,6 +74,17 @@ public class UiController {
         return eventRepository.findAll();
     }
     
+    @GetMapping("/bannerMessage")
+    @ResponseBody
+    public String getBanner(){
+        Optional<Banner> message = bannerRepository.findTopByOrderByIdDesc();
+        logger.debug("GET /bannerMessage");
+        
+        if(message.isPresent())
+            return message.get().getMessage();
+        
+        return ""; 
+    }
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
         logger.debug("GET /page/" + name);

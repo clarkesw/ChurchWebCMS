@@ -31,6 +31,7 @@ public class Sermon {
     private String imageURL;
     private String subTitle;
     private String description;
+    // TODO check if sermonDate needs to be a string
     private Date sermonDate;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Passage.class)   

@@ -6,13 +6,15 @@
 	        <ul class="nav navbar-nav">
                     <li><img border="0" alt="Milford" src="/images/Milford.png" width="50" height="50"></li>
 	            <li class="active"><a href="login">Home</a></li>
-	            <li><a href="/list-pages">Web Pages</a></li>
-                    <li><a href="/list-names">Web Page Name</a></li>
+	       <!--     <li><a href="/list-pages">Web Pages</a></li>
+                    <li><a href="/list-names">Web Page Name</a></li> -->
                     <li><a href="/list-events">Calendar</a></li>
                     <li><a href="/list-articles">Article</a></li>
                      <li><a href="/list-sermons">Sermon</a></li>
+                     <li><a href="/list-staffers">Staff</a></li>
+                     <li><a href="/list-banner">Banner</a></li>
                     <li><a href="/list-info">Church Info</a></li>
-                    <li><a href="/list-staffers">Staff</a></li>
+                    
 	        </ul>
                 <ul class="nav navbar-right">
 	            <li><a href="/logout">Logout</a></li>

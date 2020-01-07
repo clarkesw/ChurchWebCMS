@@ -6,13 +6,11 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.ChurchInfo;
-import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.dao.ServiceTimes;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.ServiceTimeRepository;
 import com.milford.churchcms.repository.StaffRepository;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -64,7 +62,6 @@ public class ChurchInfoController{
         if(id != -1){
             logger.debug("Delete Id :{}",id);
             logger.debug("Delete Staff Id :{}",info.getLeadPastor());
-     //       staffRepository.deleteById(leadId);
             churchRepository.deleteAll();
         }
         Staff newStaff = staffRepository.save(lead.get());

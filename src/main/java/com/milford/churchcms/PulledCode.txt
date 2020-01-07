@@ -47,3 +47,7 @@ values (1, "Smyrna", "GA", "23 Millford Church Rd",30060);
       <!--  <li class="leaf"><a href="https://instagram.com/gatewaypeople" class="social instagram" target="_blank"><i class="fa fa-instagram"></i></a></li> -->
         <li><a class="primary">TW</a></li>
     </ul>
+
+       <!--     <div id="banner">
+                <marquee behavior="scroll" direction="left">${banner.message}</marquee>
+            </div> /.header-inner -->
