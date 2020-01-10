@@ -8,12 +8,21 @@
                 
                     <tr>
                         <td>No Messages</td>
-                        <td>Send Message</td>
+                        <td></td>
                     </tr>
                 
                 </table>
             </h3>
         </div>
 </div>
+ 
+-<a>File Upload:</a>
+Select file: <br />
+<form action="fileupload.jsp" method="post"
+                        enctype="multipart/form-data">
+<input type="file" name="file" size="50" />
+<br />
+<input type="submit" value="Upload File" />
+</form> 
 
 <%@ include file="common/footer.jspf" %>

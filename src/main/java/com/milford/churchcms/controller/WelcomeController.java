@@ -79,6 +79,14 @@ public class WelcomeController {
         return "cms/login-page";
     }
     
+//    @GetMapping("/login")
+//    public String showWelcomePage(ModelMap model){
+//        logger.debug("GET /login User : {}",session.getAttribute("user"));
+//        if(session.getAttribute("user") != null)
+//            return "cms/welcome";
+//        return "cms/login-page";
+//    }
+    
     private String getLoggedInUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();

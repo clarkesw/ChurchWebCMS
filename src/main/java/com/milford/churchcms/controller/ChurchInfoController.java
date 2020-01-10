@@ -54,19 +54,26 @@ public class ChurchInfoController{
     public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") ChurchInfo info, BindingResult result, 
             @RequestParam int id){
         logger.debug("POST /update-info Info :{}",info);
-        int leadId = Integer.parseInt(info.getLeadPastor().getFullName());
-        Optional<Staff> lead = staffRepository.findById(leadId);
+        int leadId = -1;
+        Staff newStaff = null;
+        Optional<Staff> lead = null;
+        
         if(result.hasErrors())
             return "cms/add-event";
         
-        if(id != -1){
-            logger.debug("Delete Id :{}",id);
-            logger.debug("Delete Staff Id :{}",info.getLeadPastor());
-            churchRepository.deleteAll();
+        logger.debug("Id :{}",id);
+        logger.debug("Id :{}",info.getLeadPastor());
+        if(!"NONE".equals(info.getLeadPastor().getFullName())){
+            leadId = Integer.parseInt(info.getLeadPastor().getFullName());
+            lead = staffRepository.findById(leadId);
+            newStaff = staffRepository.save(lead.get());
         }
-        Staff newStaff = staffRepository.save(lead.get());
+
+        if(id != -1)
+            churchRepository.deleteAll();
+        
         churchRepository.save(new ChurchInfo(info.getName(),info.getMissionStatement(),info.getEmail(),
-                info.getAddress(),info.getTelephone(),newStaff));  
+                info.getAddress(),info.getTelephone(),newStaff)); 
         return "redirect:list-info";
     }
     

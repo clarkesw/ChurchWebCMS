@@ -38,7 +38,7 @@ public class ChurchInfo {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;
     
-    @OneToOne(cascade=CascadeType.DETACH, targetEntity = Staff.class, orphanRemoval = true)
+    @OneToOne(cascade=CascadeType.DETACH, targetEntity = Staff.class)
     @JoinColumn(name = "LEAD_ID")
     private Staff leadPastor = null;
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)

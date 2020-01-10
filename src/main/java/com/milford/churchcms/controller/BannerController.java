@@ -7,8 +7,6 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.repository.BannerRepository;
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -20,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller

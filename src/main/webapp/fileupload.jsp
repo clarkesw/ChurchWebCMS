@@ -9,7 +9,7 @@
    File file ;
    int maxFileSize = 5000 * 1024;
    int maxMemSize = 5000 * 1024;
-   String filePath = "/home/clarke/Downloads/";
+   String filePath = "/home/clarke/";
 
    String contentType = request.getContentType();
    if ((contentType.indexOf("multipart/form-data") >= 0)) {
@@ -23,16 +23,17 @@
          List fileItems = upload.parseRequest(request);
          Iterator i = fileItems.iterator();
          out.println("<html>");
+         out.println("<meta http-equiv=\"Refresh\" content=\"3; url=/login\" />");
          out.println("<body>");
-         while ( i.hasNext () ) 
-         {
+         
+         while ( i.hasNext () ){
             FileItem fi = (FileItem)i.next();
             if ( !fi.isFormField () )  {
                 String fieldName = fi.getFieldName();
                 String fileName = fi.getName();
                 boolean isInMemory = fi.isInMemory();
                 long sizeInBytes = fi.getSize();
-                file = new File( filePath + "yourFileName") ;
+                file = new File( filePath + fileName) ;
                 fi.write( file ) ;
                 out.println("Uploaded Filename: " + filePath + fileName + "<br>");
             }
