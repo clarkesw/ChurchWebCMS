@@ -208,8 +208,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                            <span class="tooltiptext">
                                                 <table>
                                                     <c:if test="${not empty church.serviceTimes}">
-                                                        <c:forEach items="${church.serviceTimes}" var="timee" varStatus="counter">
-                                                            <tr><td>${timee.day} @ ${timee.time}</td></tr>
+                                                        <c:forEach items="${church.serviceTimes}" var="time" varStatus="counter">
+                                                            <tr><td>${time.day} @ ${time.time}</td></tr>
                                                         </c:forEach>
                                                     </c:if> 
                                                 </table></span>

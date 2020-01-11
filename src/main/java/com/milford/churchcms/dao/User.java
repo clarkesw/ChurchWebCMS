@@ -51,9 +51,13 @@ public class User {
     }
 
     public void setPassword(String password) {
-        
         this.password = PasswordUtil.generateSecurePassword(password);
     }
+    
+    public void setBlankPassword() {  
+        this.password = "";
+    }
+
 
     public String getRole() {
         return role;

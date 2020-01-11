@@ -7,9 +7,11 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.CalendarEvent;
+import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.repository.CalendarEventRepository;
+import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.UserRepository;
 import java.text.SimpleDateFormat;
@@ -37,9 +39,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StaffController{
     
     public Logger logger = LoggerFactory.getLogger(StaffController.class);
+    private int staffId;
+    private String role;
     
     @Autowired
     StaffRepository repository;
+    
+    @Autowired
+    ChurchRepository churchRepo;
     
     @Autowired
     CalendarEventRepository calendarRepo;
@@ -134,6 +141,60 @@ public class StaffController{
         model.put("staff", staff.get());
         
         return "cms/add-staff";
+    }     
+    
+    @PostMapping("/update-user")
+    public String updateUserPost(ModelMap model,@Valid @ModelAttribute("user") User user, BindingResult result){
+        Staff savedStaff = null;
+        ChurchInfo church = null;
+        
+        logger.debug("POST /update-user User : {}",user);
+       
+        user.setRole(role);
+        if(result.hasErrors())
+            return "cms/update-user";
+        userRepo.delete(user);
+        Optional<Staff> staff = repository.findById(staffId);
+        Optional<ChurchInfo> optChurch = churchRepo.findTopByOrderByIdDesc();
+        
+        if(optChurch.isPresent()){
+            church = optChurch.get();
+            churchRepo.deleteAll();
+        }
+        
+        if(staff.isPresent()){
+            repository.deleteById(staffId);
+            staff.get().setUser(user);
+            savedStaff = repository.save(staff.get());
+        }
+     
+        if(optChurch.isPresent()){
+            church.setLeadPastor(savedStaff);
+            churchRepo.save(church);
+        }
+        
+        return "redirect:list-staffers";
+    }
+    
+    @GetMapping("/update-user")
+    public String updateShowUser(ModelMap model, @RequestParam int userId, @RequestParam int staffId){
+        logger.debug("GET /update-user  ID : {}",userId);
+        User currentUser = (User)session.getAttribute("loggedInUser");
+       
+        Optional<User> optUser = userRepo.findById(userId);
+        User user = optUser.get();
+
+        user.setBlankPassword();
+        logger.debug("User : {}",user);
+                    
+       if(!currentUser.getUsername().equals(optUser.get().getUsername()))
+           return "redirect:list-staffers";
+  
+        model.put("user", user);
+        this.staffId = staffId;
+        role = currentUser.getRole();
+        
+        return "cms/add-user";
     }     
     
     @PostMapping("/addContactToEventPost") // Need both the event.id and staff.id

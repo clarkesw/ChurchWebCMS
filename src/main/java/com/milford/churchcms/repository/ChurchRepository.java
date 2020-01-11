@@ -6,6 +6,7 @@
 package com.milford.churchcms.repository;
 
 import com.milford.churchcms.dao.ChurchInfo;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author clarke
  */
 public interface ChurchRepository extends JpaRepository<ChurchInfo,Integer>{
-       
+       Optional<ChurchInfo> findTopByOrderByIdDesc();
 }

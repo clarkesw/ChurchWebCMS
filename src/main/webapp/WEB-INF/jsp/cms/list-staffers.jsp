@@ -26,7 +26,7 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                      <td><a type="button" class="btn btn-success" 
-                                                          href="update-user?address_id=${staff.user.id}">Edit User</a></td>                                       
+                                                          href="update-user?userId=${staff.user.id}&staffId=${staff.id}">Edit User</a></td>                                       
                                                 </c:otherwise>
                                             </c:choose>
                                             <td><a type="button" class="btn btn-success" 
