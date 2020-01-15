@@ -31,6 +31,11 @@ public class AppConstants {
                  "2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John",
                  "Jude","Revelation")); 
     
+    public final static List<String> positions = new ArrayList<>(
+         Arrays.asList("Lead Pastor","Assistant Pastor","Out Reach Pastor","Youth Pastor","Adult Pastor","College Pastor",
+                 "Administrative Assistant","Food Bank","Deacon","Elder","Security","Custodian","Usher","Preschool","Greeter",
+                 "")); 
+    
     public class WebPage{
         public static final int num_of_items = 2;
         public static final String HOME = "Home";
