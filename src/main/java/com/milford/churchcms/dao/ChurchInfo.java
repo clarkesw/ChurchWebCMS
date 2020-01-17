@@ -63,6 +63,10 @@ public class ChurchInfo {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ServiceTimes.class)   
     @JoinColumn(name = "sid",referencedColumnName="sid")
     private List<ServiceTimes> serviceTimes;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Staff.class)   
+    @JoinColumn(name = "sid",referencedColumnName="sid")
+    private List<Staff> staffers;    
 
     public ChurchInfo() {}
 
@@ -95,6 +99,14 @@ public class ChurchInfo {
         this.leadPastor = info.getLeadPastor();
         this.url = info.getUrl();
         this.serviceTimes = info.getServiceTimes();
+    }
+
+    public List<Staff> getStaffers() {
+        return staffers;
+    }
+
+    public void setStaffers(List<Staff> staffers) {
+        this.staffers = staffers;
     }
 
     public List<ServiceTimes> getServiceTimes() {

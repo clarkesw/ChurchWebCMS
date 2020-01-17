@@ -7,11 +7,8 @@ values (1,'stufff', '2019-05-19T01:00',2019-05-19,'1:00am',false, '2019-05-19T03
 
 insert into webpagenames
 values (1, false, 'HOME'); 
-
-insert into webpagenames
-values (2, false, 'EVENT'); 
-
 */
+
 insert into church
 values (1,'church@milford.com','C3','Milford Baptist','919-368-6332',null,null,null,null,null,1,null,null,null);
 
