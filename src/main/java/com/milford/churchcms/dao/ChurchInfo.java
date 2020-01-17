@@ -38,27 +38,9 @@ public class ChurchInfo {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;
     
-    @OneToOne(cascade=CascadeType.DETACH, targetEntity = Staff.class)
-    @JoinColumn(name = "LEAD_ID")
-    private Staff leadPastor = null;
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
-    @JoinColumn(name = "ASSOC_ID")
-    private Staff associatePastor = null;
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
-    @JoinColumn(name = "YOUTH_ID")
-    private Staff youthPastor = null;
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
-    @JoinColumn(name = "MUSIC_ID")
-    private Staff musicPastor = null;
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
-    @JoinColumn(name = "ADULT_ID")
-    private Staff adultPastor = null;
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
-    @JoinColumn(name = "OUT_R_ID")
-    private Staff outReachPastor = null;
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
-    @JoinColumn(name = "COLLAGE_ID")
-    private Staff collagePastor = null;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Staff.class)   
+    @JoinColumn(name = "sid",referencedColumnName="sid")
+    private List<Staff> staffers;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ServiceTimes.class)   
     @JoinColumn(name = "sid",referencedColumnName="sid")
@@ -70,24 +52,24 @@ public class ChurchInfo {
 
     public ChurchInfo() {}
 
-    public ChurchInfo(String name, String missionStatement, String email, Address address, String telephone, Staff leadPastor) {
+    public ChurchInfo(String name, String missionStatement, String email, Address address, String telephone, List<Staff> staffers) {
         this.id = id;
         this.name = name;
         this.missionStatement = missionStatement;
         this.email = email;
         this.address = address;
         this.telephone = telephone;
-        this.leadPastor = leadPastor;
+        this.staffers = staffers;
     }
         
-    public ChurchInfo(int id,String name, String missionStatement, String email, Address address, String telephone, Staff leadPastor) {
+    public ChurchInfo(int id,String name, String missionStatement, String email, Address address, String telephone, List<Staff> staffers) {
         this.id = id;
         this.name = name;
         this.missionStatement = missionStatement;
         this.email = email;
         this.address = address;
         this.telephone = telephone;
-        this.leadPastor = leadPastor;
+        this.staffers = staffers;
     }
 
     public ChurchInfo(ChurchInfo info) {
@@ -96,7 +78,7 @@ public class ChurchInfo {
         this.email = info.getEmail();
         this.address = info.getAddress();
         this.telephone = info.getTelephone();
-        this.leadPastor = info.getLeadPastor();
+        this.staffers = info.getStaffers();
         this.url = info.getUrl();
         this.serviceTimes = info.getServiceTimes();
     }
@@ -173,71 +155,17 @@ public class ChurchInfo {
         this.telephone = telephone;
     }
 
-    public Staff getLeadPastor() {
-        return leadPastor;
+    public List<Staff> getStaffers() {
+        return staffers;
     }
 
-    public void setLeadPastor(Staff leadPastor) {
-        this.leadPastor = leadPastor;
-    }
-
-    public Staff getAssociatePastor() {
-        return associatePastor;
-    }
-
-    public void setAssociatePastor(Staff associatePastor) {
-        this.associatePastor = associatePastor;
-    }
-
-    public Staff getYouthPastor() {
-        return youthPastor;
-    }
-
-    public void setYouthPastor(Staff youthPastor) {
-        this.youthPastor = youthPastor;
-    }
-
-    public Staff getMusicPastor() {
-        return musicPastor;
-    }
-
-    public void setMusicPastor(Staff musicPastor) {
-        this.musicPastor = musicPastor;
-    }
-
-    public Staff getAdultPastor() {
-        return adultPastor;
-    }
-
-    public void setAdultPastor(Staff adultPastor) {
-        this.adultPastor = adultPastor;
-    }
-
-    public Staff getOutReachPastor() {
-        return outReachPastor;
-    }
-
-    public void setOutReachPastor(Staff outReachPastor) {
-        this.outReachPastor = outReachPastor;
-    }
-
-    public Staff getCollagePastor() {
-        return collagePastor;
-    }
-
-    public void setCollagePastor(Staff collagePastor) {
-        this.collagePastor = collagePastor;
+    public void setStaffers(List<Staff> staffers) {
+        this.staffers = staffers;
     }
 
     @Override
     public String toString() {
-        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", url=" + url + ", telephone=" + telephone + ", address=" + address + ", serviceTimes=" + serviceTimes + 
-                ", leadPastor=" + leadPastor; //+ 
-            //    ", associatePastor=" + ((associatePastor == null) ? associatePastor : "null") + 
-            //    ", youthPastor=" + ((youthPastor == null) ? youthPastor : "null") + 
-           //     ", musicPastor=" + ((musicPastor == null) ? musicPastor : "null") + 
-           //     ", adultPastor=" + ((adultPastor == null) ? adultPastor : "null") + 
-          //      ", outReachPastor=" + ((outReachPastor == null) ? outReachPastor : "null") + 
-          //      ", collagePastor=" +  ((collagePastor == null) ? collagePastor : "null")+ '}';
+        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", url=" + url + ", telephone=" + telephone + ", address=" + address + ", staffers=" + staffers + ", serviceTimes=" + serviceTimes + '}';
     }
+
 }

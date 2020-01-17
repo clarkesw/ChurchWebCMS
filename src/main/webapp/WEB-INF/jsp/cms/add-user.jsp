@@ -2,7 +2,6 @@
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
             <form:form method="post" modelAttribute="user" >
-                        
 
                         <fieldset class="form-group">
 				<form:label path="username">User Name</form:label> 

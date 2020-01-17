@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -145,7 +146,7 @@ public class StaffController{
     
     @PostMapping("/update-user")
     public String updateUserPost(ModelMap model,@Valid @ModelAttribute("user") User user, BindingResult result){
-        Staff savedStaff = null;
+        List<Staff> savedStaff = null;
         ChurchInfo church = null;
         
         logger.debug("POST /update-user User : {}",user);
@@ -154,7 +155,7 @@ public class StaffController{
         if(result.hasErrors())
             return "cms/update-user";
         userRepo.delete(user);
-        Optional<Staff> staff = repository.findById(staffId);
+        List<Staff> staff = repository.findAll();
         Optional<ChurchInfo> optChurch = churchRepo.findTopByOrderByIdDesc();
         
         if(optChurch.isPresent()){
@@ -162,14 +163,18 @@ public class StaffController{
             churchRepo.deleteAll();
         }
         
-        if(staff.isPresent()){
-            repository.deleteById(staffId);
-            staff.get().setUser(user);
-            savedStaff = repository.save(staff.get());
+        ListIterator<Staff> staffIterator = staff.listIterator();
+        while(staffIterator.hasNext()){
+            Staff nextStaff = staffIterator.next();
+            if(nextStaff.getId().equals(staffId)){
+                repository.deleteById(staffId);
+                nextStaff.setUser(user);
+                repository.save(nextStaff);            
+            }
         }
-     
+
         if(optChurch.isPresent()){
-            church.setLeadPastor(savedStaff);
+            church.setStaffers(savedStaff);
             churchRepo.save(church);
         }
         
