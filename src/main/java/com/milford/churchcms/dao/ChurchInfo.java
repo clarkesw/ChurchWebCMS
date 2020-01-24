@@ -38,7 +38,7 @@ public class ChurchInfo {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;
     
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Staff.class)   
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Staff.class)   
     @JoinColumn(name = "sid",referencedColumnName="sid")
     private List<Staff> staffers;
     

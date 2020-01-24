@@ -56,24 +56,24 @@ public class ChurchInfoController{
         logger.debug("POST /update-info Info :{}",info);
         int leadId = -1;
         Staff newStaff = null;
-        Optional<Staff> lead = null;
+        List<Staff> staffers = staffRepository.findAll();
         
         if(result.hasErrors())
             return "cms/add-event";
         
         logger.debug("Id :{}",id);
-        logger.debug("Id :{}",info.getLeadPastor());
-        if(!"NONE".equals(info.getLeadPastor().getFullName())){
-            leadId = Integer.parseInt(info.getLeadPastor().getFullName());
-            lead = staffRepository.findById(leadId);
-            newStaff = staffRepository.save(lead.get());
-        }
+//        logger.debug("Id :{}",info.getLeadPastor());
+//        if(!"NONE".equals(info.getLeadPastor().getFullName())){
+//            leadId = Integer.parseInt(info.getLeadPastor().getFullName());
+//            lead = staffRepository.findById(leadId);
+//            newStaff = staffRepository.save(lead.get());
+//        }
 
         if(id != -1)
             churchRepository.deleteAll();
         
         churchRepository.save(new ChurchInfo(info.getName(),info.getMissionStatement(),info.getEmail(),
-                info.getAddress(),info.getTelephone(),newStaff)); 
+                info.getAddress(),info.getTelephone(),null)); 
         return "redirect:list-info";
     }
     

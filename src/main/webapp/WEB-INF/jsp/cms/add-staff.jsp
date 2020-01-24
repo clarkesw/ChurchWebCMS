@@ -15,12 +15,6 @@
                                 <form:errors path="lastName" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
-				<form:label path="position">Position</form:label> 
-				<form:input  type="text" 
-					class="form-control" path="position"/>
-                                <form:errors path="position" cssClass="text-warning"/>
-			</fieldset>
-                        <fieldset class="form-group">
 				<form:label path="workEmail">Work Email</form:label> 
 				<form:input  type="text" 
 					class="form-control" path="workEmail"/>
@@ -50,6 +44,12 @@
 					class="form-control" path="photo"/>
                                 <form:errors path="photo" cssClass="text-warning"/>
 			</fieldset>
+                        <form:label path="position">Position</form:label> 
+                      <form:select path="position">
+                           <form:option value = "NONE" label = "Select"/>
+                           <form:options items = "${positions}" />
+                        </form:select> 
+       
                         
                     <c:if test = "${not empty unlockRole}">
                         <fieldset class="form-group">

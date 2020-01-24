@@ -7,7 +7,6 @@
 				<tr>
                                     <th>Name</th>
                                     <th>Mission Statement</th>
-                                    <th>Lead Pastor</th>
                                     <th>Address</th>
                                     <th>Service Times</th>
                                     <th></th>
@@ -18,7 +17,6 @@
                                 <tr>
                                     <td>${info.name}</td>
                                     <td>${info.missionStatement}</td>
-                                    <td>${info.leadPastor.fullName}</td>
                                     <c:choose>
                                         <c:when test="${empty info.address}">
                                             <td><a type="button" class="btn btn-success" 
