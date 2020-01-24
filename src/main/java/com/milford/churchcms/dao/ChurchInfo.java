@@ -45,10 +45,6 @@ public class ChurchInfo {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ServiceTimes.class)   
     @JoinColumn(name = "sid",referencedColumnName="sid")
     private List<ServiceTimes> serviceTimes;
-    
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Staff.class)   
-    @JoinColumn(name = "sid",referencedColumnName="sid")
-    private List<Staff> staffers;    
 
     public ChurchInfo() {}
 
@@ -153,14 +149,6 @@ public class ChurchInfo {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public List<Staff> getStaffers() {
-        return staffers;
-    }
-
-    public void setStaffers(List<Staff> staffers) {
-        this.staffers = staffers;
     }
 
     @Override

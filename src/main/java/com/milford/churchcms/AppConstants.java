@@ -23,7 +23,8 @@ public class AppConstants {
     
     public final static List<String> positions = new ArrayList<>(
          Arrays.asList("Lead Pastor", "Associate Pastor", "Youth Pastor", "College Pastor", "Music Pastor",
-                 "IT","Sound", "Video","Guitarist", "Drumer", "Choir", "Pianist"));
+                 "IT","Sound", "Video","Guitarist", "Drumer", "Choir", "Pianist",
+                 "Administrative Assistant","Food Bank","Deacon","Elder","Security","Custodian","Usher","Preschool","Greeter"));
     
     public final static List<String> books = new ArrayList<>(
          Arrays.asList("Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel",
@@ -34,11 +35,6 @@ public class AppConstants {
                  "Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy",
                  "2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John",
                  "Jude","Revelation")); 
-    
-    public final static List<String> positions = new ArrayList<>(
-         Arrays.asList("Lead Pastor","Assistant Pastor","Out Reach Pastor","Youth Pastor","Adult Pastor","College Pastor",
-                 "Administrative Assistant","Food Bank","Deacon","Elder","Security","Custodian","Usher","Preschool","Greeter",
-                 "")); 
     
     public class WebPage{
         public static final int num_of_items = 2;
