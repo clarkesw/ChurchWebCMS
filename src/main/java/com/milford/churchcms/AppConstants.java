@@ -21,6 +21,10 @@ public class AppConstants {
     public static List<String> roles = new ArrayList<>(
         Arrays.asList("ADMIN","USER"));
     
+    public final static List<String> positions = new ArrayList<>(
+         Arrays.asList("Lead Pastor", "Associate Pastor", "Youth Pastor", "College Pastor", "Music Pastor",
+                 "IT","Sound", "Video","Guitarist", "Drumer", "Choir", "Pianist"));
+    
     public final static List<String> books = new ArrayList<>(
          Arrays.asList("Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel",
                  "2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job",
