@@ -95,6 +95,8 @@ public class StaffController{
             model.addAttribute("unlockRole","good");
        
         model.addAttribute("roles", AppConstants.roles);
+        model.addAttribute("positions", AppConstants.positions);
+
         return "cms/add-staff";
     }
     
@@ -140,8 +142,9 @@ public class StaffController{
         if("admin".equals(currentUser.getRole()))
             model.addAttribute("unlockRole","good");
         
-        model.put("positions", AppConstants.positions);
-        model.put("staff", staff.get());
+        model.addAttribute("roles", AppConstants.roles);
+        model.addAttribute("positions", AppConstants.positions);
+        model.addAttribute("staff", staff.get());
         
         return "cms/add-staff";
     }     

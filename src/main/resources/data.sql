@@ -10,10 +10,10 @@ values (1, false, 'HOME');
 */
 
 insert into church
-values (1,'church@milford.com','C3','Milford Baptist','919-368-6332',null,null,null,null,null,1,null,null,null);
+values (1,'church@milford.com','C3','Milford Baptist','919-368-6332',null,null);
 
 insert into user
 values (2,'OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=','admin','clarke');
 
 insert into staff
-values (1,null, "clarke", "clarke swindell",null,null, "swindell",null,"IT","me@church.com","(404)431-2941",null,2);
+values (1,null, "clarke", "clarke swindell",null,null, "swindell",null,"IT","me@church.com","(404)431-2941",null,2,null);
