@@ -33,6 +33,10 @@ public class ChurchInfo {
     private String email;
     private String url;
     private String telephone;
+    private String fax;
+    private String facebook;
+    private String twitter;
+    private String youtube;
     
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "ADDRESS_ID")
@@ -79,6 +83,39 @@ public class ChurchInfo {
         this.serviceTimes = info.getServiceTimes();
     }
 
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public String getYoutube() {
+        return youtube;
+    }
+
+    public void setYoutube(String youtube) {
+        this.youtube = youtube;
+    }
+
+    
     public List<Staff> getStaffers() {
         return staffers;
     }
@@ -153,7 +190,6 @@ public class ChurchInfo {
 
     @Override
     public String toString() {
-        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", url=" + url + ", telephone=" + telephone + ", address=" + address + ", staffers=" + staffers + ", serviceTimes=" + serviceTimes + '}';
+        return "ChurchInfo{" + "id=" + id + ", name=" + name + ", missionStatement=" + missionStatement + ", email=" + email + ", url=" + url + ", telephone=" + telephone + ", fax=" + fax + ", facebook=" + facebook + ", twitter=" + twitter + ", youtube=" + youtube + ", address=" + address + ", staffers=" + staffers + ", serviceTimes=" + serviceTimes + '}';
     }
-
 }

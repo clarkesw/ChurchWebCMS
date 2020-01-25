@@ -10,10 +10,8 @@ import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.repository.PassageRepository;
 import com.milford.churchcms.repository.SermonRepository;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
@@ -21,13 +19,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("user")
-public class PassageController{
+public class PassageController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(PassageController.class);
     
@@ -47,13 +42,6 @@ public class PassageController{
         
     @Autowired 
     private HttpSession session;
-        
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(
-                dateFormat, false));
-    }
         
     @GetMapping("/list-passages")
     public String showSermon(ModelMap model){

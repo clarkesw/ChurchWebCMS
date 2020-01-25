@@ -8,22 +8,17 @@ package com.milford.churchcms.controller;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.SermonRepository;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,27 +26,20 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("user")
-public class SermonController{
+public class SermonController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(SermonController.class);
     
     @Autowired
     SermonRepository repository;
-    
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(
-                dateFormat, false));
-    }
         
     @GetMapping("/list-sermons")
     public String showSermon(ModelMap model){
         String username = getLoggedInName(model);
         List<Sermon> sermons = repository.findAll();
+        logger.debug("GET /list-sermons Sermon #: {}",sermons.size());
         model.put("sermons", sermons);
-        if(!sermons.isEmpty())
-            logger.debug("showEvent Sermon 1 : {}" + sermons.get(0));
+
         return "cms/list-sermons";
     }
 

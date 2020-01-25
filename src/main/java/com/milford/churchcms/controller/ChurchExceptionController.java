@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 
 //@Controller
-public class ChurchExceptionController{ /*implements ErrorController  {
+public class ChurchExceptionController  extends BaseController{ /*implements ErrorController  {
     public Logger logger = LoggerFactory.getLogger(WebPageController.class);
  
     @RequestMapping("/error")

@@ -37,12 +37,12 @@ public class Staff {
     private String photo;
     private String bio;
     
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinColumn(name = "USER_ID")    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = User.class, orphanRemoval = true)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "id")    
     private User user;
     
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class, orphanRemoval = true)
-    @JoinColumn(name = "ADDRESS_ID")
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "id")
     private Address homeAddress;
 
     public Staff(){}

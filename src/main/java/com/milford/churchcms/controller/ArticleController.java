@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ArticleController{
+public class ArticleController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
@@ -38,13 +38,6 @@ public class ArticleController{
     @Autowired 
     private HttpSession session;
     
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(
-                dateFormat, false));
-    }
-        
     @GetMapping("/list-articles")
     public String showArticle(ModelMap model){
         logger.debug("GET /list-articles");

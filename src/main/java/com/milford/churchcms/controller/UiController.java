@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class UiController {
+public class UiController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(UiController.class);
     

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("user")
-public class BannerController{
+public class BannerController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(BannerController.class);
     

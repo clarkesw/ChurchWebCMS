@@ -10,7 +10,7 @@ values (1, false, 'HOME');
 */
 
 insert into church
-values (1,'church@milford.com','C3','Milford Baptist','919-368-6332',null,null);
+values (1,'church@milford.com',null,null,'C3','Milford Baptist','919-368-6332',null,null,null,null);
 
 insert into user
 values (2,'OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=','admin','clarke');

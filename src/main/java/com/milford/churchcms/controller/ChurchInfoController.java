@@ -12,7 +12,6 @@ import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.ServiceTimeRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.util.List;
-import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("user")
-public class ChurchInfoController{
+public class ChurchInfoController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(ChurchInfoController.class);
     

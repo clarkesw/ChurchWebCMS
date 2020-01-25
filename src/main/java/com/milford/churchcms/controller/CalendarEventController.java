@@ -10,7 +10,6 @@ import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.service.EventService;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -20,13 +19,10 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("user")
-public class CalendarEventController{
+public class CalendarEventController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(CalendarEventController.class);
     
@@ -46,13 +42,6 @@ public class CalendarEventController{
     
     @Autowired
     StaffRepository staffRepository;
-    
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(
-                dateFormat, false));
-    }
         
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){

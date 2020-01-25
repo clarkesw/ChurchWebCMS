@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("user")
-public class WebPageController{
+public class WebPageController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(WebPageController.class);
     

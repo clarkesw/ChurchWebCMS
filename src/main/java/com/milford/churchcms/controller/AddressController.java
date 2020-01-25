@@ -11,22 +11,16 @@ import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.AddressRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.StaffRepository;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,19 +41,7 @@ public class AddressController{
     
     @Autowired
     ChurchRepository churchRepository;
-    
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(
-                dateFormat, false));
-    }
         
-    private String getLoggedInName(ModelMap model) {
-        Collection<Object> values = model.values();
-        return (String)model.get("user");
-    }
-    
     @GetMapping("/addAddressForStaff")
     public String addAddressForStaff(ModelMap model, @RequestParam String fisrtName, @RequestParam String lastName){
         
@@ -90,7 +72,7 @@ public class AddressController{
         
         staffRepository.save(tempStaff);
         
-        return "redirect:login"; 
+        return "redirect:list-staffers"; 
     }    
  
     @GetMapping("/addAddressForChurch")
@@ -120,7 +102,7 @@ public class AddressController{
         
         churchRepository.save(myInfo);
         
-        return "redirect:login"; 
+        return "redirect:list-info"; 
     }    
     
     private ChurchInfo returnInfo(){
