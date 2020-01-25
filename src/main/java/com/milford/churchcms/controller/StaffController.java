@@ -139,6 +139,8 @@ public class StaffController{
         
         if("admin".equals(currentUser.getRole()))
             model.addAttribute("unlockRole","good");
+        
+        model.put("positions", AppConstants.positions);
         model.put("staff", staff.get());
         
         return "cms/add-staff";

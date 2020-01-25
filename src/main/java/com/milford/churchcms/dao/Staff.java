@@ -7,6 +7,7 @@ package com.milford.churchcms.dao;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,8 +37,8 @@ public class Staff {
     private String photo;
     private String bio;
     
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "USER_ID", referencedColumnName = "id")    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = User.class)
+    @JoinColumn(name = "USER_ID")    
     private User user;
     
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class, orphanRemoval = true)
