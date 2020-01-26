@@ -89,7 +89,7 @@ public class UiController extends BaseController{
     public String showPage(@PathVariable String name, ModelMap model){
         logger.debug("GET /page/" + name);
         
-        ChurchInfo myChurch = getChurchInfo();
+        ChurchInfo myChurch = churchRepository.findTopByOrderByIdDesc().get();
         Article article = articleRepository.findTopByOrderByLastModified();
         model.addAttribute("article", article);
         model.addAttribute("church", myChurch);

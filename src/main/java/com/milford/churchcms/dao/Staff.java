@@ -60,6 +60,10 @@ public class Staff {
         this.homeAddress = homeAddress;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
     public void setBio(String bio) {
         this.bio = bio;
     }

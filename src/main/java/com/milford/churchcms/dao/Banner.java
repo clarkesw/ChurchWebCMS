@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,8 +22,7 @@ import javax.persistence.Table;
 public class Banner {
     
     @Id
-    @GeneratedValue
-    private int id;
+    private int id = 1;
     private String message;
     
     @Column(name="last_modified")

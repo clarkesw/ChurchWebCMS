@@ -14,7 +14,7 @@
 <meta property="og:url" content="${church.url}" />
 <meta property="og:title" content=${church.name} />
 <meta property="og:description" content=${church.missionStatement} />
-  <title>${page.title}</title>
+  <title>${church.name}</title>
   <style type="text/css" media="all">
 @import url("../../stylesheets/system.base.css?p7rj3q");
 @import url("../../stylesheets/base.css");

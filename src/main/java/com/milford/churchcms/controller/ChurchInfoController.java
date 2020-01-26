@@ -12,6 +12,7 @@ import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.ServiceTimeRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,10 +43,15 @@ public class ChurchInfoController extends BaseController{
         
     @GetMapping("/list-info")
     public String showInfo(ModelMap model){
-        ChurchInfo info = returnInfo();
-        logger.debug("GET /list-info Info: {}",info);
+        Optional<ChurchInfo> info = churchRepository.findTopByOrderByIdDesc();
+        
+        if(info.isPresent()){
+            logger.debug("GET /list-info Info: {}",info.get());
+            model.put("info", info.get());       
+        }else{
+            model.addAttribute("info",new ChurchInfo());
+        }
 
-        model.put("info", info);
         return "cms/list-info";
     }
 

@@ -56,14 +56,8 @@ public class StaffController extends BaseController{
     @GetMapping("/list-staffers")
     public String showArticle(ModelMap model){
         logger.debug("GET /list-staffers"); 
-        String username = getLoggedInName(model);
         model.put("staffers", repository.findAll()); 
         return "cms/list-staffers";
-    }
-
-    private String getLoggedInName(ModelMap model) {
-        Collection<Object> values = model.values();
-        return (String)model.get("user");
     }
  
     @GetMapping("/add-staff")
@@ -187,7 +181,7 @@ public class StaffController extends BaseController{
         return "cms/add-user";
     }     
     
-    @PostMapping("/addContactToEventPost") // Need both the event.id and staff.id
+    @PostMapping("/addContactToEventPost") 
     public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("staffer") Staff staffer){
         logger.debug("POST /addContactToEvent  Name : {}",staffer.getFullName());
         int eventId = (Integer)session.getAttribute("EventID");
@@ -199,11 +193,11 @@ public class StaffController extends BaseController{
         event.setContact(staffer);
         calendarRepo.save(event);
         
-        return "redirect:login"; 
+        return "redirect:list-events"; 
     }    
  
     @GetMapping("/addContactToEvent")
-    public String addContactToEvent(ModelMap model, @RequestParam int contactId, @RequestParam int id){ //,@Valid @ModelAttribute("staffList") StaffList staffList
+    public String addContactToEvent(ModelMap model, @RequestParam int contactId, @RequestParam int id){
         logger.debug("GET /addContactToEvent  Contact ID : {}",contactId);
         session.setAttribute("EventID", id);
         
@@ -211,17 +205,7 @@ public class StaffController extends BaseController{
         model.put("staffList", staff);
         model.put("staffer", new Staff());
 
-        logger.debug("  ******* staffList : {}", staff.size());
+        logger.debug("  staffList : {}", staff.size());
         return "cms/add-contact";
     }    
-
-    private CalendarEvent returnInfo(){
-        List<CalendarEvent> infoList = calendarRepo.findAll();
-        CalendarEvent myInfo = null;        
-        for(CalendarEvent info : infoList){
-            myInfo = info;
- 
-        }
-        return myInfo;
-    }
 }

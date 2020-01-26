@@ -75,9 +75,7 @@ public class CalendarEventController extends BaseController{
         Date endDate = addTimeToDate(calEvent.getEndDateCont(),calEvent.getEndTime());
         CalendarEvent lastEvent = repository.findTopByOrderByIdDesc();
         
-        int eventId = 1;
-        if(lastEvent != null)
-            eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
+        int eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
         
         repository.save(new CalendarEvent(eventId,calEvent.getTitle(),"/event/"+eventId,calEvent.getDetails(), startDate, 
                                                 endDate,calEvent.getStartTime(),calEvent.getEndTime(),null));
