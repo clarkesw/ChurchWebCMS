@@ -45,20 +45,13 @@ public class CalendarEventController extends BaseController{
         
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){
-        logger.debug("GET /list-events");
-        String username = getLoggedInName(model);
         List<CalendarEvent> retrieveEvents = repository.findAll();
+        logger.debug("GET /list-events # of Events : {} ", retrieveEvents.size());
+
         model.put("events", retrieveEvents);
-        if(!retrieveEvents.isEmpty())
-            logger.debug("showEvent Event 1 : {}" + retrieveEvents.get(0));
         return "cms/list-events";
     }
 
-    private String getLoggedInName(ModelMap model) {
-        Collection<Object> values = model.values();
-        return (String)model.get("user");
-    }
- 
     @GetMapping("/add-events")
     public String showAddEvent(ModelMap model, @ModelAttribute("event") CalendarEvent calEvent){     
         logger.debug("GET /add-events Event : {}",calEvent);
@@ -117,14 +110,6 @@ public class CalendarEventController extends BaseController{
         if(event.isPresent())
             model.put("event", event.get());
         return "cms/add-event";
-    }
-    
-    private List<String> firstAndLastName(List<Staff> staffers){
-        List<String> names = null;
-        for(Staff staff : staffers){
-            names.add(staff.getFirstName() + " " +staff.getLastName());
-        }
-        return names;
     }
 
     private Date addTimeToDate(Date myDate, String myTime){
