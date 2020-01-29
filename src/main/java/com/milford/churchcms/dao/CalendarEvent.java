@@ -3,12 +3,9 @@ package com.milford.churchcms.dao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.milford.churchcms.util.DateUtil;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
 
@@ -16,7 +13,7 @@ import javax.validation.constraints.FutureOrPresent;
 @Table(name = "CALENDAREVENT")
 public class CalendarEvent {
     @Id
-    private Integer id = 1;
+    private int id = 1;
     private String  title;
     @Column(name="start_date")
     private String  start;
@@ -29,11 +26,9 @@ public class CalendarEvent {
     @JsonIgnore
     private String details;
     
-    // Connect to the Staff via ID column after complete the staff add/list pages.
+    // Turn this into an String of the full name.
     @JsonIgnore
-    @OneToOne(cascade=CascadeType.ALL, targetEntity = Staff.class)
-    @JoinColumn(name = "STAFF_ID")
-    private Staff contact;
+    private String contactName;
     
     @JsonIgnore
     @FutureOrPresent
@@ -51,32 +46,11 @@ public class CalendarEvent {
     
     public CalendarEvent() {}
 
-    public CalendarEvent(String title, Date startDateCont, Date endDateCont) {
-        this.title = title;
-        this.startDateCont = startDateCont;
-        this.endDateCont = endDateCont;   
-        this.startTime = DateUtil.setStartTime(endDateCont); 
-        this.endTime = DateUtil.setEndTime(endDateCont);
-       this.start =  DateUtil.setStartUIDate(startDateCont);
-        this.end = DateUtil.setEndUIDate(endDateCont);
-    }
-
-    public CalendarEvent(Integer id, String title, Date startDateCont, Date endDateCont) {
+    public CalendarEvent(Integer id, String title, String details, Date startDateCont, Date endDateCont, 
+                        String startTime, String endTime, String contact) {
         this.id = id;
         this.title = title;
-        this.startDateCont = startDateCont;
-        this.endDateCont = endDateCont;
-        this.startTime = DateUtil.setStartTime(endDateCont); 
-        this.endTime = DateUtil.setEndTime(endDateCont);
-       this.start =  DateUtil.setStartUIDate(startDateCont);
-        this.end = DateUtil.setEndUIDate(endDateCont);
-    }
-
-    public CalendarEvent(Integer id, String title, String url, String details, Date startDateCont, Date endDateCont, 
-                        String startTime, String endTime, Staff contact) {
-        this.id = id;
-        this.title = title;
-        this.url = url;
+        this.url = url + Integer.valueOf(id);
         this.details = details;
         this.startDateCont = startDateCont;
         this.endDateCont = endDateCont;
@@ -84,17 +58,17 @@ public class CalendarEvent {
         this.endTime = endTime;
         this.start =  DateUtil.setStartUIDate(startDateCont);
         this.end = DateUtil.setEndUIDate(endDateCont);
-        this.contact = contact;
+        this.contactName = contact;
     }
 
-    public Staff getContact() {
-        return contact;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setContact(Staff contact) {
-        this.contact = contact;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
-   
+
     public String getStart() {
         return start;
     }
@@ -185,6 +159,7 @@ public class CalendarEvent {
 
     @Override
     public String toString() {
-        return "CalendarEvent{" + "id=" + id + ", title=" + title + ", start=" + start + ", end=" + end + ", url=" + url + ", isRepeated=" + isRepeated + ", details=" + details + ", contact=" + contact + ", startDateCont=" + startDateCont + ", endDateCont=" + endDateCont + ", startTime=" + startTime + ", endTime=" + endTime + '}';
+        return "CalendarEvent{" + "id=" + id + ", title=" + title + ", start=" + start + ", end=" + end + ", url=" + url + ", isRepeated=" + isRepeated + ", details=" + details + ", contactName=" + contactName + ", startDateCont=" + startDateCont + ", endDateCont=" + endDateCont + ", startTime=" + startTime + ", endTime=" + endTime + '}';
     }
+
 }

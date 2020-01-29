@@ -7,7 +7,9 @@ package com.milford.churchcms.repository;
 
 import com.milford.churchcms.dao.Staff;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -16,5 +18,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface StaffRepository extends JpaRepository<Staff,Integer>{
     Staff findByPosition(String position);
     List<Staff> findByFirstNameInAndLastNameIn(String firstName, String lastName);
+    
+    @Query("select fullName from Staff")
+    List<String> getFullNames();
+    Optional<Staff> findByFullName(String fullName);
     Staff findTopByOrderByIdDesc();
 }

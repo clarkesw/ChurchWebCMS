@@ -25,15 +25,15 @@ import javax.persistence.Table;
 @Table(name = "SERMON")
 public class Sermon {
     @Id
-    @GeneratedValue
     @Column(name = "sid")
-    private Integer id;
+    private Integer id = 1;
     private String title;
     private String url;
     private String imageURL;
     private String subTitle;
+    
+    @Column(columnDefinition="TEXT")
     private String description;
-    // TODO check if sermonDate needs to be a string
     private Date sermonDate;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Passage.class)   
@@ -43,6 +43,7 @@ public class Sermon {
     public Sermon() {}
 
     public Sermon(int id, String title, String subTitle, String description, Date sermonDate) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.sermonDate = sermonDate;
@@ -50,6 +51,7 @@ public class Sermon {
     }
 
     public Sermon(int id, String title, String subTitle, String description, Date date, List<Passage> passages) {
+        this.id = id;
         this.title = title;
         this.subTitle = subTitle;
         this.description = description;

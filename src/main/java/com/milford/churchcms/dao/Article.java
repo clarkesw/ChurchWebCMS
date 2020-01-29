@@ -28,6 +28,8 @@ public class Article {
     private String pageName;
     private String subTitle;
     private String url;
+    
+    @Column(columnDefinition="TEXT")
     private String content;
     private String imageURL;
     @Column(name="last_modified")

@@ -1,7 +1,7 @@
 <%@ include file="common/header.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-		<form:form method="post" modelAttribute="staffer" action="addContactToEventPost">
+		<form:form method="post" modelAttribute="staffer" action="addContactToEvent">
 <%--                    <fieldset>
                         <table>
                             <tr><td>

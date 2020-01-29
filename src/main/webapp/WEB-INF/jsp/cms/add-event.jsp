@@ -14,6 +14,11 @@
 					class="form-control" path="details"/>
                                 <form:errors path="details" cssClass="text-warning"/>
 			</fieldset>
+                                <form:label path="contactName">Contact</form:label> 
+                                <form:select path="contactName">
+                                     <form:option value = "NONE" label = "Select"/>
+                                     <form:options items = "${staffList}" />
+                                </form:select> 
  			<fieldset class="form-group">
                             <form:label path="startDateCont">Start Date</form:label>
                                 <table>

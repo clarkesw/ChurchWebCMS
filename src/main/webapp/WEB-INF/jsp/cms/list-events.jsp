@@ -25,18 +25,8 @@
                                             <td>${formattedStartDate} ${event.startTime}</td>
                                             <td>${formattedEndDate} ${event.endTime}</td>
                                             <td>${event.isRepeated}</td>
-                                            <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
                                             
-                                             <c:choose>
-                                                <c:when test="${empty event.contact}">
-                                                    <td><a type="button" class="btn btn-success" 
-                                                          href="addContactToEvent?contactId=-1&id=${event.id}"> ${event.contact}Add Contact</a></td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                     <td><a type="button" class="btn btn-success" 
-                                                          href="addContactToEvent?contactId=${event.contact.id}&id=${event.id}">Edit Contact</a></td>                                       
-                                                </c:otherwise>
-                                            </c:choose> 
+                                            <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id}">Delete</a></td>
 					</tr>
                                     </c:forEach>

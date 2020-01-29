@@ -123,12 +123,22 @@ public class UiController extends BaseController{
         logger.debug("GET /event/" + id);
         Optional<CalendarEvent> calEvent = eventRepository.findById(id);
         CalendarEvent oneEvent = calEvent.get();
+       
+        Optional<Staff> staffer = staffRepository.findByFullName(oneEvent.getContactName());
+        
         model.addAttribute("event",oneEvent);
         model.addAttribute("church", getChurchInfo());
         model.addAttribute("startdate", DateUtil.dateFormat(oneEvent.getStartDateCont()));
         model.addAttribute("enddate", DateUtil.dateFormat(oneEvent.getEndDateCont()));
-        model.addAttribute("contact",oneEvent.getContact());
-        logger.debug("event" + oneEvent);
+        
+        if(staffer.isPresent()){
+            model.addAttribute("contact",staffer.get());
+        }else{
+            model.addAttribute("contact",new Staff());
+        }
+        
+        
+        logger.debug("    event" + oneEvent);
         return "event";
     }
     

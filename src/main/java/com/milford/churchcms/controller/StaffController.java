@@ -6,7 +6,6 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
-import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
@@ -14,7 +13,6 @@ import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.UserRepository;
-import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
@@ -56,7 +54,7 @@ public class StaffController extends BaseController{
     @GetMapping("/list-staffers")
     public String showArticle(ModelMap model){
         logger.debug("GET /list-staffers"); 
-        model.put("staffers", repository.findAll()); 
+        model.put("staffers", repository.getFullNames()); 
         return "cms/list-staffers";
     }
  
@@ -180,32 +178,5 @@ public class StaffController extends BaseController{
         
         return "cms/add-user";
     }     
-    
-    @PostMapping("/addContactToEventPost") 
-    public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("staffer") Staff staffer){
-        logger.debug("POST /addContactToEvent  Name : {}",staffer.getFullName());
-        int eventId = (Integer)session.getAttribute("EventID");
         
-        Optional<CalendarEvent> myEvent = calendarRepo.findById(eventId);
-        CalendarEvent event = myEvent.get();
-        logger.debug("   ChurchInfo myEvent : {}", event);
-        calendarRepo.delete(event);
-        event.setContact(staffer);
-        calendarRepo.save(event);
-        
-        return "redirect:list-events"; 
-    }    
- 
-    @GetMapping("/addContactToEvent")
-    public String addContactToEvent(ModelMap model, @RequestParam int contactId, @RequestParam int id){
-        logger.debug("GET /addContactToEvent  Contact ID : {}",contactId);
-        session.setAttribute("EventID", id);
-        
-        List<Staff> staff = repository.findAll();
-        model.put("staffList", staff);
-        model.put("staffer", new Staff());
-
-        logger.debug("  staffList : {}", staff.size());
-        return "cms/add-contact";
-    }    
 }

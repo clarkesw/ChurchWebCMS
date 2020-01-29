@@ -27,8 +27,8 @@ public class EventService {
     static {
         endDate.setDate(23);
         endDate.setHours(20);
-        events.add(new CalendarEvent(0, "Learn Spring MVC",new Date() ,endDate ));
-        events.add(new CalendarEvent(1, "Go Fishing",new Date() ,endDate ));
+    //    events.add(new CalendarEvent(0, "Learn Spring MVC",new Date() ,endDate ));
+    //    events.add(new CalendarEvent(1, "Go Fishing",new Date() ,endDate ));
     }
 
     public List<CalendarEvent> retrieveEvents() {
@@ -49,12 +49,12 @@ public class EventService {
     
     public void addEvent(Date start, Date end,String title, String url, boolean isRepeated) {
         logger.debug("addEvent title: {}" + title);
-        events.add(new CalendarEvent(++eventCount, title, start, end));
+     //   events.add(new CalendarEvent(++eventCount, title, start, end));
     }
     
     public void addLiteEvent(String title, Date start, Date end) {
         logger.debug("addLiteEvent title: {}" + title);
-        events.add(new CalendarEvent(++eventCount, title, start, end));
+     //   events.add(new CalendarEvent(++eventCount, title, start, end));
     }
  
     public void deleteEvent(int id) {

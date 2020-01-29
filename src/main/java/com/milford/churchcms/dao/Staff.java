@@ -85,7 +85,7 @@ public class Staff {
     }
 
     public final void setConFullName(){
-        this.fullName = this.lastName + ", " + this.firstName;
+        this.fullName = this.firstName + " " + this.lastName;
     }
     public String getFullName() {
         return fullName;

@@ -60,9 +60,9 @@ public class SermonController extends BaseController{
         if(result.hasErrors())
             return "cms/add-sermon";
 
-        Sermon lastSermon = repository.findTopByOrderBySermonDateDesc();
-        int lastSermonId = (lastSermon != null) ? lastSermon.getId() + 1 : 1;
-        
+        Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
+        int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
+        logger.debug("   Sermon ID : {}",lastSermonId);
         repository.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate()));
         return "redirect:list-sermons";
     }
@@ -81,8 +81,8 @@ public class SermonController extends BaseController{
             return "cms/add-sermon";
         
         repository.delete(sermon);
-        Sermon lastSermon = repository.findTopByOrderBySermonDateDesc();
-        int lastSermonId = (lastSermon != null) ? lastSermon.getId() + 1 : 1;
+        Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
+        int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
         
         repository.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate()));
         return "redirect:list-sermons";

@@ -116,8 +116,9 @@ public class PassageController extends BaseController{
         sermon.getPassages().add(passage); 
         List<Passage> passes = sermon.getPassages();
         
-        Sermon lastSermon = sermonRepo.findTopByOrderByIdDesc();
-        int lastSermonId = (lastSermon != null) ? lastSermon.getId() + 1 : 1;
+        Optional<Sermon> lastSermon = sermonRepo.findTopByOrderBySermonDateDesc();
+        int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
+
         sermonRepo.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate(),
                 new ArrayList<>(passes)));
         

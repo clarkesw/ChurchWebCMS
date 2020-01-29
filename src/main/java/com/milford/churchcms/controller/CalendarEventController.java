@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,9 @@ public class CalendarEventController extends BaseController{
     @Autowired
     StaffRepository staffRepository;
         
+    @Autowired 
+    private HttpSession session;
+        
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){
         List<CalendarEvent> retrieveEvents = repository.findAll();
@@ -55,6 +59,9 @@ public class CalendarEventController extends BaseController{
     @GetMapping("/add-events")
     public String showAddEvent(ModelMap model, @ModelAttribute("event") CalendarEvent calEvent){     
         logger.debug("GET /add-events Event : {}",calEvent);
+        List<String> findAll = staffRepository.getFullNames();
+        model.addAttribute("staffList",findAll); 
+        logger.debug("   StaffList : {}",findAll);
         return "cms/add-event";
     }
     
@@ -70,7 +77,7 @@ public class CalendarEventController extends BaseController{
         
         int eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
         
-        repository.save(new CalendarEvent(eventId,calEvent.getTitle(),"/event/"+eventId,calEvent.getDetails(), startDate, 
+        repository.save(new CalendarEvent(eventId,calEvent.getTitle(),calEvent.getDetails(), startDate, 
                                                 endDate,calEvent.getStartTime(),calEvent.getEndTime(),null));
         return "redirect:list-events";
     }
@@ -95,8 +102,8 @@ public class CalendarEventController extends BaseController{
         
         int eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
         logger.debug("    eventId after update : {}",eventId);
-        repository.save(new CalendarEvent(eventId, event.getTitle(),"/event/"+eventId,event.getDetails(), startDate, 
-                                                endDate,event.getStartTime(),event.getEndTime(),event.getContact()));
+        repository.save(new CalendarEvent(eventId, event.getTitle(),event.getDetails(), startDate, 
+                                                endDate,event.getStartTime(),event.getEndTime(),event.getContactName()));
         return "redirect:list-events";
     }
     
@@ -104,13 +111,45 @@ public class CalendarEventController extends BaseController{
     public String updateShowEvent(ModelMap model, @RequestParam int id){
         logger.debug("POST /update-event ID: {}", id);
         Optional<CalendarEvent> event = repository.findById(id);
-        List<Staff> findAll = staffRepository.findAll();
+        List<String> findAll = staffRepository.getFullNames();
         model.addAttribute("staffList",findAll); 
-        logger.debug("   # of Staff: {}", findAll.size());
+        logger.debug("   StaffList : {}",findAll);
         if(event.isPresent())
             model.put("event", event.get());
         return "cms/add-event";
     }
+    
+//    @PostMapping("/addContactToEvent") 
+//    public String addContactToEvent(ModelMap model,@Valid @ModelAttribute("staffer") Staff staffer){
+//        logger.debug("POST /addContactToEvent  Name : {}",staffer.getFullName());
+//        int eventId = (Integer)session.getAttribute("EventID");
+//        
+//        Optional<CalendarEvent> myEvent = repository.findById(eventId);
+//        CalendarEvent event = myEvent.get();
+//        logger.debug("   staffer : {}", staffer);
+//        repository.delete(event);
+//        event.setContact(staffer);
+//        Date startDate = addTimeToDate(event.getStartDateCont(),event.getStartTime());
+//        Date endDate = addTimeToDate(event.getEndDateCont(),event.getEndTime());
+//        
+//        repository.save(new CalendarEvent(computeId(eventId), event.getTitle(),event.getDetails(), startDate, 
+//                            endDate,event.getStartTime(),event.getEndTime(),event.getContact()));
+//        
+//        return "redirect:list-events"; 
+//    }    
+// 
+    @GetMapping("/addContactToEvent")
+    public String addContactToEvent(ModelMap model, @RequestParam int contactId, @RequestParam int id){
+        logger.debug("GET /addContactToEvent  Contact ID : {}",contactId);
+        session.setAttribute("EventID", id);
+        
+        List<Staff> staff = staffRepository.findAll();
+        model.put("staffList", staff);
+        model.put("staffer", new Staff());
+
+        logger.debug("  staffList : {}", staff.size());
+        return "cms/add-contact";
+    }    
 
     private Date addTimeToDate(Date myDate, String myTime){
         
@@ -125,5 +164,10 @@ public class CalendarEventController extends BaseController{
         logger.debug("New Date : {}", myDate);
         
         return myDate;
-    }    
+    }  
+    
+    private int computeId(int id){
+        CalendarEvent lastEvent = repository.findTopByOrderByIdDesc();   
+        return (lastEvent != null) ? lastEvent.getId() + 1 : 1;
+    }
 }

@@ -14,7 +14,7 @@
 <meta property="og:url" content="${church.url}" />
 <meta property="og:title" content=${church.name} />
 <meta property="og:description" content=${church.missionStatement} />
-  <title>${page.title}</title>
+  <title>${church.name}</title>
   <style type="text/css" media="all">
 @import url("../../stylesheets/system.base.css?p7rj3q");
 @import url("../../stylesheets/base.css");
@@ -118,7 +118,7 @@ $(document).ready(function() {
     <header class="header header-v1" role="banner">
         <div class="wrapper">
             <div id="site-logo">
-                <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="100" height="100" alt="Home" /></a>
+                <a href="../index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="100" height="100" alt="Home" /></a>
             </div>
         </div>
         <div class="header-top">
@@ -159,7 +159,7 @@ $(document).ready(function() {
                                                                 <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
                                                                 <li class="leaf"><a href="makeConnections">Get Connected</a></li>
                                                                 <li class="leaf"><a href="ministries">Ministries</a></li>
-                                                                <li class="leaf"><a href="calendarEvents">Events</a></li>
+                                                                <li class="leaf"><a href="../calendarEvents">Events</a></li>
                                                                <li class="last leaf"><a href="mediaArchive" >Media Archive</a></li> 
                                                             </ul>
                                                         </div>

@@ -23,11 +23,11 @@
             <br><br><hr>
             <form:form method="post" modelAttribute="passage" action="addPassagesToSermon"> 
                 <fieldset class="form-group">
-                        <form:label path="book">Book</form:label> 
+                      <form:label path="book">Book</form:label> 
                       <form:select path="book">
                            <form:option value = "NONE" label = "Select"/>
                            <form:options items = "${books}" />
-                        </form:select> 
+                      </form:select> 
               <%--            <form:input  type="text" maxlength="25"
                                 class="form-control" required="required" path="book"/>
                         <form:errors path="book" cssClass="text-warning"/>--%>

@@ -6,6 +6,7 @@
 package com.milford.churchcms.repository;
 
 import com.milford.churchcms.dao.Sermon;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,6 +14,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author clarke
  */
 public interface SermonRepository extends JpaRepository<Sermon,Integer>{
-    Sermon findTopByOrderByIdDesc();
-    Sermon findTopByOrderBySermonDateDesc();
+    Optional<Sermon> findTopByOrderByIdDesc();
+    Optional<Sermon> findTopByOrderBySermonDateDesc();
 }
