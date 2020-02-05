@@ -57,51 +57,52 @@ public class PassageController extends BaseController{
         Collection<Object> values = model.values();
         return (String)model.get("user");
     }
- 
-    @GetMapping("/add-passages")
-    public String showAddSermon(ModelMap model, @ModelAttribute("passage") Passage passage){     
-        logger.debug("GET /add-passages Passage : {}",passage);
-        return "cms/add-passage";
-    }
-    
-    @PostMapping("/add-passages")
-    public String addSermon(ModelMap model,@Valid @ModelAttribute("passage") Passage passage, BindingResult result){
-        logger.debug("POST /add-passages Passage : {}",passage);
-        if(result.hasErrors())
-            return "cms/add-passage";
-
-        Passage lastSermon = repository.findTopByOrderByIdDesc();
-        
-        repository.save(passage);
-        return "redirect:list-passages";
-    }
+// 
+//    @GetMapping("/add-passages")
+//    public String showAddSermon(ModelMap model, @ModelAttribute("passage") Passage passage){     
+//        logger.debug("GET /add-passages Passage : {}",passage);
+//        return "cms/add-passage";
+//    }
+//    
+//    @PostMapping("/add-passages")
+//    public String addSermon(ModelMap model,@Valid @ModelAttribute("passage") Passage passage, BindingResult result){
+//        logger.debug("POST /add-passages Passage : {}",passage);
+//        if(result.hasErrors())
+//            return "cms/add-passage";
+//
+//        Passage lastSermon = repository.findTopByOrderByIdDesc();
+//        
+//        repository.save(passage);
+//        return "redirect:list-passages";
+//    }
     
     @GetMapping("/delete-passage")
     public String deleteSermon(@RequestParam int id){
-        logger.debug("GET /delete-passage Passage : {}",id);
+        logger.debug("GET /delete-passage Passage ID: {}",id);
         repository.deleteById(id);
-        return "redirect:list-passages";
+        return "redirect:list-sermons";
     }
     
     @PostMapping("/update-passage")
     public String updateSermonPost(ModelMap model,@Valid @ModelAttribute("passage") Passage passage, BindingResult result){
-        logger.debug("POST /update-passage eventId : {}",passage.getId());
+        logger.debug("POST /update-passage ID : {}",passage.getId());
         if(result.hasErrors())
             return "cms/add-passage";
         
-        repository.delete(passage);
+        repository.deleteById(passage.getId());
         repository.save(passage);
-        return "redirect:list-passages";
+        return "redirect:list-sermons";
     }
     
     @GetMapping("/update-passage")
     public String updateShowSermon(ModelMap model, @RequestParam int id){
-        logger.debug("POST /update-passage ID: {}", id);
+        logger.debug("GET /update-passage ID: {}", id);
         Optional<Passage> passage = repository.findById(id);
 
         if(passage.isPresent())
             model.put("passage", passage.get());
-        return "cms/add-passage";
+        model.put("books", AppConstants.books);
+        return "cms/update-passage";
     }
     
     @PostMapping("/addPassagesToSermon") 

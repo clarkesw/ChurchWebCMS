@@ -37,7 +37,7 @@ public class SermonController extends BaseController{
     public String showSermon(ModelMap model){
         String username = getLoggedInName(model);
         List<Sermon> sermons = repository.findAll();
-        logger.debug("GET /list-sermons Sermon #: {}",sermons.size());
+        logger.debug("GET /list-sermons Sermon #: {}",sermons.get(0));
         model.put("sermons", sermons);
 
         return "cms/list-sermons";
@@ -76,21 +76,20 @@ public class SermonController extends BaseController{
     
     @PostMapping("/update-sermon")
     public String updateSermonPost(ModelMap model,@Valid @ModelAttribute("sermon") Sermon sermon, BindingResult result){
-        logger.debug("POST /update-sermon eventId : {}",sermon.getId());
+        logger.debug("POST /update-sermon : {}",sermon);
         if(result.hasErrors())
             return "cms/add-sermon";
         
         repository.delete(sermon);
         Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
         int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
-        
         repository.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate()));
         return "redirect:list-sermons";
     }
     
     @GetMapping("/update-sermon")
     public String updateShowSermon(ModelMap model, @RequestParam int id){
-        logger.debug("POST /update-sermon ID: {}", id);
+        logger.debug("GET /update-sermon ID: {}", id);
         Optional<Sermon> sermon = repository.findById(id);
 
         if(sermon.isPresent())

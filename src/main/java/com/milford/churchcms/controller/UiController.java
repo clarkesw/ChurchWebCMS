@@ -96,6 +96,9 @@ public class UiController extends BaseController{
         model.addAttribute("services", myChurch.getServiceTimes());
         model.addAttribute("sermon", sermonRepository.findTopByOrderBySermonDateDesc());
         model.addAttribute("page", pageRepository.findByPageName(name));
+        logger.debug("  sermon" + sermonRepository.findTopByOrderBySermonDateDesc());
+        logger.debug("  church" + myChurch);
+        logger.debug("  article" + article);
         
         if("calendar".equals(name)){
             logger.debug(" Calendar " + pageRepository.findByPageName(name));
