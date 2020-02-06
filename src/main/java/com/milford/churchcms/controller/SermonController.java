@@ -35,9 +35,8 @@ public class SermonController extends BaseController{
         
     @GetMapping("/list-sermons")
     public String showSermon(ModelMap model){
-        String username = getLoggedInName(model);
         List<Sermon> sermons = repository.findAll();
-        logger.debug("GET /list-sermons Sermon #: {}",sermons.get(0));
+        logger.debug("GET /list-sermons Sermon #: {}",sermons.size());
         model.put("sermons", sermons);
 
         return "cms/list-sermons";

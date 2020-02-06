@@ -9,6 +9,7 @@ import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ArticleRepository;
 import com.milford.churchcms.repository.BannerRepository;
@@ -89,14 +90,20 @@ public class UiController extends BaseController{
     public String showPage(@PathVariable String name, ModelMap model){
         logger.debug("GET /page/" + name);
         
-        ChurchInfo myChurch = churchRepository.findTopByOrderByIdDesc().get();
+        Optional<Sermon> sermon = sermonRepository.findTopByOrderBySermonDateDesc();
+        Optional<ChurchInfo> myChurch = churchRepository.findTopByOrderByIdDesc();
         Article article = articleRepository.findTopByOrderByLastModified();
+        
         model.addAttribute("article", article);
-        model.addAttribute("church", myChurch);
-        model.addAttribute("services", myChurch.getServiceTimes());
-        model.addAttribute("sermon", sermonRepository.findTopByOrderBySermonDateDesc());
+        if(myChurch.isPresent()){
+            model.addAttribute("church", myChurch.get());
+            model.addAttribute("services", myChurch.get().getServiceTimes());          
+        }
+        if(sermon.isPresent())
+            model.addAttribute("sermon", sermon.get());
         model.addAttribute("page", pageRepository.findByPageName(name));
-        logger.debug("  sermon" + sermonRepository.findTopByOrderBySermonDateDesc());
+        
+        logger.debug("  sermon" + sermon);
         logger.debug("  church" + myChurch);
         logger.debug("  article" + article);
         
@@ -155,6 +162,23 @@ public class UiController extends BaseController{
         model.addAttribute("church", getChurchInfo());
         model.addAttribute("page", pageService.retrieveOnePage("event"));
         return "article";
+    }
+  
+    @GetMapping("/sermon/{id}")
+    public String showSermonPage(@PathVariable int id, ModelMap model){
+        Optional<Sermon> sermonOpt = sermonRepository.findById(id);
+        Sermon sermon = sermonOpt.get();
+        logger.debug("GET /sermon/  : {}" + sermon);     
+
+        model.addAttribute("sermon", sermon);
+        model.addAttribute("church", getChurchInfo());
+        model.addAttribute("page", pageService.retrieveOnePage("event"));
+        return "sermon";
+    }
+    
+    @GetMapping("/toolbar")
+    public String toolBar(){
+        return "toolbar";
     }
     
     private ChurchInfo getChurchInfo(){

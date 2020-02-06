@@ -16,7 +16,7 @@
 			</fieldset>
 			<fieldset class="form-group">
 				<form:label path="description">Description</form:label> 
-				<form:textarea  type="text" 
+				<form:textarea  name="wysiwyg" id="wysiwyg" rows="30" cols="150" type="text" 
 					class="form-control" path="description"/>
                                 <form:errors path="description" cssClass="text-warning"/>
 			</fieldset>

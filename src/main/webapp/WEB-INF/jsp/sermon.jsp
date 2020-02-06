@@ -156,21 +156,25 @@
     <section id="content">
         <center>
             <div id='event'>
-                <table width="600" cellpadding="20" border="0">
+                <table width="600" cellpadding="100" border="0">
                     <tr>
-                        <td>Title</td><td><b>${article.title}</b></td>
+                        <th width="100">&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
-                     <tr>
-                        <td>Date</td><td>${article.lastModified}</td>
-                    </tr>                   
                     <tr>
-                        <td>&nbsp;</td><td>&nbsp;</td>
-                    </tr>          
+                        <td width="100">Title</td><td><b>${sermon.title}</b></td>
+                    </tr>
+                    <tr>
+                        <td width="100">Sub Title</td><td>${sermon.subTitle}</td>
+                    </tr> 
                      <tr>
-                        <td>&nbsp;</td><td>&nbsp;</td>
+                        <td width="100">Date</td><td>${sermon.sermonDate}</td>
+                    </tr>                            
+                     <tr>
+                        <td width="100">&nbsp;</td><td>&nbsp;</td>
                     </tr>          
                     <tr>
-                        <td>Details</td><td>${article.content}</td>
+                        <td width="100">Details</td><td><pre>${sermon.description}</pre></td>
                     </tr>
                 </table>
                 
