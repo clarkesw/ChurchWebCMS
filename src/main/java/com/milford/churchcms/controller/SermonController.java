@@ -6,8 +6,8 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Sermon;
-import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.SermonRepository;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +36,7 @@ public class SermonController extends BaseController{
     @GetMapping("/list-sermons")
     public String showSermon(ModelMap model){
         List<Sermon> sermons = repository.findAll();
-        logger.debug("GET /list-sermons Sermon #: {}",sermons.size());
+        logger.debug("GET /list-sermons Sermon size: {}",sermons.get(0));
         model.put("sermons", sermons);
 
         return "cms/list-sermons";
@@ -62,7 +62,8 @@ public class SermonController extends BaseController{
         Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
         int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
         logger.debug("   Sermon ID : {}",lastSermonId);
-        repository.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate()));
+        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), sermon.getDescription(),
+                sermon.getSermonDate(),sermon.getPassages()));
         return "redirect:list-sermons";
     }
     
@@ -82,7 +83,8 @@ public class SermonController extends BaseController{
         repository.delete(sermon);
         Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
         int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
-        repository.save(new Sermon(lastSermonId, sermon.getTitle(),sermon.getSubTitle(),sermon.getDescription(),sermon.getSermonDate()));
+        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), sermon.getDescription(),
+                sermon.getSermonDate(),sermon.getPassages()));
         return "redirect:list-sermons";
     }
     
@@ -90,21 +92,10 @@ public class SermonController extends BaseController{
     public String updateShowSermon(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-sermon ID: {}", id);
         Optional<Sermon> sermon = repository.findById(id);
-
+        model.addAttribute("passageList", sermon.get().getPassages());
+        logger.debug("   passageList: {}", sermon.get().getPassages());
         if(sermon.isPresent())
             model.put("sermon", sermon.get());
         return "cms/add-sermon";
-    }
-    
-    private List<String> firstAndLastName(List<Staff> staffers){
-        List<String> names = null;
-        for(Staff staff : staffers){
-            names.add(staff.getFirstName() + " " +staff.getLastName());
-        }
-        return names;
-    }
-
-    private String createURL(int id){
-        return "/sermon/"+id;
     }
 }

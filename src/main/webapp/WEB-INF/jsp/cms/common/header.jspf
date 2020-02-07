@@ -20,7 +20,15 @@
                     $('#wysiwyg').wysiwyg();
                 });
         </script>
-        
+        <script>
+            function copyLinkFunc() {
+              var copyText = document.getElementById("myInput");
+              copyText.select();
+              copyText.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+              alert("Copied Passage Link: " + copyText.value +"\n\n Now paste where you want it in description below");
+            }
+        </script>   
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" />
         <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../../../../stylesheets/jquery.wysiwyg.css" type="text/css" />

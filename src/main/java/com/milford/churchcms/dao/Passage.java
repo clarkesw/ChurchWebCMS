@@ -23,6 +23,7 @@ public class Passage {
     private String book;
     private int chapter;
     private int verse;
+    private String link;
 
     public Passage(){}
     
@@ -30,11 +31,21 @@ public class Passage {
         this.book = pass.book;
         this.chapter = pass.chapter;
         this.verse = pass.verse;
+        setLink(pass.book, pass.chapter, pass.verse);
      }
     public Passage(String book, int chapter, int verse) {
         this.book = book;
         this.chapter = chapter;
         this.verse = verse;
+        setLink(book, chapter, verse);
+    }
+
+    public String getLink() {
+        return link;
+    }
+//http://labs.bible.org/api/?passage=John%203:16-17
+    private void setLink(String book, int chapter, int verse) {
+        this.link = "http://labs.bible.org/api/?passage=" + book + " " + chapter + ":" + verse;
     }
 
     public int getId() {

@@ -41,15 +41,6 @@ public class Sermon {
 
     public Sermon() {}
 
-    public Sermon(int id, String title, String subTitle, String description, Date sermonDate) {
-        this.id = id;
-        this.title = title;
-        this.subTitle = subTitle;
-        this.description = description;
-        this.sermonDate = sermonDate;
-        this.url = createUrl(id);
-    }
-
     public Sermon(int id, String title, String subTitle, String description, Date date, List<Passage> passages) {
         this.id = id;
         this.title = title;
