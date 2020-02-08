@@ -14,29 +14,31 @@
 					class="form-control" path="subTitle"/>
                                 <form:errors path="subTitle" cssClass="text-warning"/>
 			</fieldset>
-                        <table border="1" cellpadding="10">
-                            <thead>
-                                <tr>
-                                    <th width="100">Book</th>
-                                    <th width="100">Chapter</th>
-                                    <th width="100">Verse </th>
-                                    <th width="100"> </th>
-                                </tr>
-                            </thead>
-                            <c:if test="${not empty passageList}">
-                                <c:forEach items="${passageList}" var="pass">
+                        <fieldset class="form-group">
+                            <table border="1" cellpadding="10">
+                                <thead>
                                     <tr>
-                                        <td>${pass.book}</td>
-                                        <td>${pass.chapter}</td>
-                                        <td>${pass.verse}</td>
-                                        <td>
-                                            <input id="myInput" value="${pass.link}">
-                                            <button onclick="copyLinkFunc()">Copy Link</button>
-                                        </td>
-                                    </tr>   
-                                </c:forEach>
-                            </c:if> 
-                        </table>  
+                                        <th width="100">Book</th>
+                                        <th width="100">Chapter</th>
+                                        <th width="100">Verse </th>
+                                        <th width="100"> </th>
+                                    </tr>
+                                </thead>
+                                <c:if test="${not empty passageList}">
+                                    <c:forEach items="${passageList}" var="pass">
+                                        <tr>
+                                            <td>${pass.book}</td>
+                                            <td>${pass.chapter}</td>
+                                            <td>${pass.verse}</td>
+                                            <td>
+                                                <input id="myInput" value="${pass.link}">
+                                                <button onclick="copyLinkFunc()">Copy Link</button>
+                                            </td>
+                                        </tr>   
+                                    </c:forEach>
+                                </c:if> 
+                            </table>  
+                        </fieldset>
 			<fieldset class="form-group">
 				<form:label path="description">Description</form:label> 
 				<form:textarea  name="wysiwyg" id="wysiwyg" rows="30" cols="150" type="text" 

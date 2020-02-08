@@ -13,6 +13,7 @@ import javax.persistence.Table;
 /**
  *
  * @author clarke
+ * //http://labs.bible.org/api/?passage=John%203:16-17
  */
 @Entity
 @Table(name = "PASSAGE")
@@ -43,7 +44,7 @@ public class Passage {
     public String getLink() {
         return link;
     }
-//http://labs.bible.org/api/?passage=John%203:16-17
+
     private void setLink(String book, int chapter, int verse) {
         this.link = "http://labs.bible.org/api/?passage=" + book + " " + chapter + ":" + verse;
     }
@@ -82,6 +83,7 @@ public class Passage {
 
     @Override
     public String toString() {
-        return "Passage{" + "book=" + book + ", chapter=" + chapter + ", verse=" + verse + '}';
+        return "Passage{" + "id=" + id + ", book=" + book + ", chapter=" + chapter + ", verse=" + verse + ", link=" + link + '}';
     }
+
 }

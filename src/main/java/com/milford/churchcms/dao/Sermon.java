@@ -121,6 +121,7 @@ public class Sermon {
 
     @Override
     public String toString() {
-        return "Sermon{" + "id=" + id + ", title=" + title + ", url=" + url + ", imageURL=" + imageURL + ", subTitle=" + subTitle + ", description=" + description + ", sermonDate=" + sermonDate + ", passages=" + passages + '}';
+        return "Sermon{" + "id=" + id + ", title=" + title + ", url=" + url + ", imageURL=" + imageURL + ", subTitle=" + subTitle + 
+                ", description=" + ((description != null) ? "Text Availible" : "null") + ", sermonDate=" + sermonDate + ", passages=" + passages + '}';
     }
 }

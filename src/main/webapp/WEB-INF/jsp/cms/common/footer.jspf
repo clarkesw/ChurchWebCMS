@@ -1,24 +1,39 @@
-<script>
-	$('#startTime').timepicker();
-</script>
-<script>
-	$('#startDateCont').datepicker({
-		format : 'mm/dd/yyyy'
-	});
-</script>
-<script>
-	$('#endTime').timepicker();
-</script>
+        <script>
+                $('#startTime').timepicker();
+        </script>
+        <script>
+                $('#startDateCont').datepicker({
+                        format : 'mm/dd/yyyy'
+                });
+        </script>
+        <script>
+                $('#endTime').timepicker();
+        </script>
 
-<script>
-	$('#endDateCont').datepicker({
-		format : 'mm/dd/yyyy'
-	});
-</script>
-<script>
-	$('#sermonDate').datepicker({
-		format : 'mm/dd/yyyy'
-	});
-</script>
-</body>
+        <script>
+                $('#endDateCont').datepicker({
+                        format : 'mm/dd/yyyy'
+                });
+        </script>
+        <script>
+                $('#sermonDate').datepicker({
+                        format : 'mm/dd/yyyy'
+                });
+        </script>
+        <script>
+              $(function()
+                {
+                    $('#wysiwyg').wysiwyg();
+                });
+        </script>
+        <script>
+            function copyLinkFunc() {
+              var copyText = document.getElementById("myInput");
+              copyText.select();
+              copyText.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+             // alert("Copied Passage Link: " + copyText.value +"\n\n Now paste where you want it in description below");
+            }
+        </script>   <!--  -->
+    </body>
 </html>

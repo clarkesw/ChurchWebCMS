@@ -131,6 +131,7 @@ public class Article {
     }
     @Override
     public String toString() {
-        return "Article{" + "id=" + id + ", title=" + title + ", pageName=" + pageName + ", subTitle=" + subTitle + ", url=" + url + ", content=" + content + ", imageURL=" + imageURL + ", lastModified=" + lastModified + '}';
+        return "Article{" + "id=" + id + ", title=" + title + ", pageName=" + pageName + ", subTitle=" + subTitle + ", url=" + url + 
+                ", content=" + ((content != null) ? "Text Availible" : "null")  + ", imageURL=" + imageURL + ", lastModified=" + lastModified + '}';
     }  
 }

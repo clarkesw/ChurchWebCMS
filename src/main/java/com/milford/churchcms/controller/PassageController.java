@@ -114,7 +114,7 @@ public class PassageController extends BaseController{
         Sermon sermon = mySermon.get();     
         sermonRepo.delete(sermon);
         
-        sermon.getPassages().add(passage); 
+        sermon.getPassages().add(new Passage(passage)); 
         List<Passage> passes = sermon.getPassages();
         
         Optional<Sermon> lastSermon = sermonRepo.findTopByOrderBySermonDateDesc();

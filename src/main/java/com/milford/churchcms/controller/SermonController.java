@@ -5,12 +5,13 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.repository.SermonRepository;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +33,14 @@ public class SermonController extends BaseController{
     
     @Autowired
     SermonRepository repository;
+    
+    @Autowired 
+    private HttpSession session;
         
     @GetMapping("/list-sermons")
     public String showSermon(ModelMap model){
         List<Sermon> sermons = repository.findAll();
-        logger.debug("GET /list-sermons Sermon size: {}",sermons.get(0));
+        logger.debug("GET /list-sermons Sermon size: {}",sermons.size());
         model.put("sermons", sermons);
 
         return "cms/list-sermons";
@@ -82,9 +86,10 @@ public class SermonController extends BaseController{
         
         repository.delete(sermon);
         Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
+        List<Passage> passages = (List<Passage>)session.getAttribute("passages");
         int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
         repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), sermon.getDescription(),
-                sermon.getSermonDate(),sermon.getPassages()));
+                sermon.getSermonDate(),passages));
         return "redirect:list-sermons";
     }
     
@@ -94,6 +99,7 @@ public class SermonController extends BaseController{
         Optional<Sermon> sermon = repository.findById(id);
         model.addAttribute("passageList", sermon.get().getPassages());
         logger.debug("   passageList: {}", sermon.get().getPassages());
+        session.setAttribute("passages", sermon.get().getPassages());
         if(sermon.isPresent())
             model.put("sermon", sermon.get());
         return "cms/add-sermon";
