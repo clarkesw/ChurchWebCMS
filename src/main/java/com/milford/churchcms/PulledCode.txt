@@ -51,3 +51,20 @@ values (1, "Smyrna", "GA", "23 Millford Church Rd",30060);
        <!--     <div id="banner">
                 <marquee behavior="scroll" direction="left">${banner.message}</marquee>
             </div> /.header-inner -->
+
+
+        <script>
+              $(function()
+                {
+                    $('#wysiwyg').wysiwyg();
+                });
+        </script>
+        <script>
+            function copyLinkFunc() {
+              var copyText = document.getElementById("myInput");
+              copyText.select();
+              copyText.setSelectionRange(0, 99999)
+              document.execCommand("copy");
+             // alert("Copied Passage Link: " + copyText.value +"\n\n Now paste where you want it in description below");
+            }
+        </script> 
