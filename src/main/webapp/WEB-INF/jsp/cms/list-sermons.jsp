@@ -8,7 +8,8 @@
                                     <th>Title</th>
                                     <th>Sub Title</th>
                                     <th>Date</th>
-                                    <th><Passages/th>
+                                    <th><Passages</th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
 		</tr>
@@ -22,19 +23,29 @@
                                             <td>${sermon.title}</td>
                                             <td>${sermon.subTitle}</td>
                                             <td>${formattedDate}</td>
-                                            <td></td>                                            
-                                              
                                              <c:choose>
                                                 <c:when test="${empty sermon.passages}">
                                                     <td><a type="button" class="btn btn-success" 
-                                                          href="addPassagesToSermon?id=${sermon.id}"> Add Passages</a></td>
+                                                          href="addPassagesToSermon?id=${sermon.id}">Add Passages</a></td>
                                                 </c:when>
                                                 <c:otherwise>
                                                 <%-- sermonId=${sermon.passages.id}& --%>      <td><a type="button" class="btn btn-success" 
                                                           href="addPassagesToSermon?id=${sermon.id}">Edit Passages</a></td>                                     
                                                 </c:otherwise>
                                             </c:choose> 
-                                            <td><a type="button" class="btn btn-success" href="/update-sermon?id=${sermon.id}">Update</a></td>
+                                                          
+                                             <c:choose>
+                                                <c:when test="${empty sermon.description}">
+                                                    <td><a type="button" class="btn btn-success" 
+                                                          href="addDescriptionToSermon?id=${sermon.id}">Add Description</a></td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td><a type="button" class="btn btn-success" 
+                                                          href="addDescriptionToSermon?id=${sermon.id}">Edit Description</a></td>                                     
+                                                </c:otherwise>
+                                            </c:choose> 
+                       
+                                            <td><a type="button" class="btn btn-success" href="/update-sermon?id=${sermon.id}">Edit</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-sermon?id=${sermon.id}">Delete</a></td> 
 					</tr>
                                     </c:forEach>

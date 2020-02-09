@@ -77,8 +77,7 @@ public class SermonController extends BaseController{
         repository.deleteById(id);
         return "redirect:list-sermons";
     }
-    
-    @PostMapping("/update-sermon")
+        @PostMapping("/update-sermon")
     public String updateSermonPost(ModelMap model,@Valid @ModelAttribute("sermon") Sermon sermon, BindingResult result){
         logger.debug("POST /update-sermon : {}",sermon);
         if(result.hasErrors())
@@ -102,6 +101,33 @@ public class SermonController extends BaseController{
         session.setAttribute("passages", sermon.get().getPassages());
         if(sermon.isPresent())
             model.put("sermon", sermon.get());
+        return "cms/add-sermon";
+    }
+    
+    @PostMapping("/addDescriptionToSermon")
+    public String addDescriptionSermonPost(ModelMap model,@Valid @ModelAttribute("description") String description, BindingResult result){
+        logger.debug("POST /addDescriptionToSermon : {}",description);
+        if(result.hasErrors())
+            return "cms/add-description";
+        
+        Integer sermonId = (Integer)session.getAttribute("sermonId");
+        Integer lastSermonIdRep = repository.getGreatestSid().get(0);
+        Sermon sermon = repository.findById(sermonId).get();
+       
+        repository.deleteById(sermonId);
+        
+        List<Passage> passages = (List<Passage>)session.getAttribute("passages");
+        int lastSermonId = (lastSermonIdRep != null) ? lastSermonIdRep + 1 : 1;
+        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description,
+                sermon.getSermonDate(),passages));
+        return "redirect:list-sermons";
+    }
+    
+    @GetMapping("/addDescriptionToSermon")
+    public String addDescriptionSermon(ModelMap model, @RequestParam int id){
+        logger.debug("GET /addDescriptionToSermon ID: {}", id);
+        session.setAttribute("sermonId", id);
+
         return "cms/add-sermon";
     }
 }

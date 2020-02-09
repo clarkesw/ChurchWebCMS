@@ -6,8 +6,10 @@
 package com.milford.churchcms.repository;
 
 import com.milford.churchcms.dao.Sermon;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -16,4 +18,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SermonRepository extends JpaRepository<Sermon,Integer>{
     Optional<Sermon> findTopByOrderByIdDesc();
     Optional<Sermon> findTopByOrderBySermonDateDesc();
+    
+    @Query("SELECT id FROM Sermon ORDER BY id DESC")
+    List<Integer> getGreatestSid();
 }
