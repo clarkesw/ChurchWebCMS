@@ -18,7 +18,7 @@
 <body>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-            <form:form method="post" modelAttribute="addDescriptionToSermon" >
+            <form:form method="post" action="addDescriptionToSermon" modelAttribute="descriptions">
                 <fieldset class="form-group">
                         <form:label path="description">Description</form:label> 
                         <form:textarea  name="wysiwyg" id="wysiwyg" rows="30" cols="150" type="text" 
