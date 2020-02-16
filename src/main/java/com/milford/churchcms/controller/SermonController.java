@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.dao.Description;
 import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.repository.SermonRepository;
@@ -105,7 +106,7 @@ public class SermonController extends BaseController{
     }
     
     @PostMapping("/addDescriptionToSermon")
-    public String addDescriptionSermonPost(ModelMap model,@Valid @ModelAttribute("description") String description, BindingResult result){
+    public String addDescriptionSermonPost(ModelMap model,@Valid @ModelAttribute("description") Description description, BindingResult result){
         logger.debug("POST /addDescriptionToSermon : {}",description);
         if(result.hasErrors())
             return "cms/add-description";
@@ -118,7 +119,7 @@ public class SermonController extends BaseController{
         
         List<Passage> passages = (List<Passage>)session.getAttribute("passages");
         int lastSermonId = (lastSermonIdRep != null) ? lastSermonIdRep + 1 : 1;
-        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description,
+        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description.getDescription(),
                 sermon.getSermonDate(),passages));
         return "redirect:list-sermons";
     }
@@ -127,7 +128,14 @@ public class SermonController extends BaseController{
     public String addDescriptionSermon(ModelMap model, @RequestParam int id){
         logger.debug("GET /addDescriptionToSermon ID: {}", id);
         session.setAttribute("sermonId", id);
-
-        return "cms/add-sermon";
+        Optional<Sermon> sermon = repository.findById(id);
+        
+        if(sermon.isPresent()){
+            model.put("description", sermon.get().getDescription());
+        }else{
+            model.put("description", new Description());
+        }
+        logger.debug("   Description : {}", model.get("description"));
+        return "cms/add-description";
     }
 }
