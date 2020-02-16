@@ -16,7 +16,7 @@
 			<tbody>
 				<c:forEach items="${staffers}" var="staff">
 					<tr>
-                                            <td>${staff.firstName}</td>
+                                            <td>${staff.firstname}</td>
                                             <td>${staff.lastName}</td>                                                                                        
                                             <td>${staff.position}</td>
                                             <c:choose>
