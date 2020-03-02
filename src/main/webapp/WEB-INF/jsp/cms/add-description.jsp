@@ -6,7 +6,7 @@
 <html>
     <head>
         <title>Church CMS</title>
-        <script src="webjars/jquery/1.9.1/jquery.min.js"></script> 
+        <script src="../../../../scripts/jquery-1.3.2.js"></script> 
         <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../../../../scripts/jquery.wysiwyg.js"></script>
 
@@ -18,7 +18,7 @@
 <body>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-            <form:form method="post" action="addDescriptionToSermon" modelAttribute="descriptions">
+            <form:form method="post" action="addDescriptionToSermon" modelAttribute="description">
                 <fieldset class="form-group">
                         <form:label path="description">Description</form:label> 
                         <form:textarea  name="wysiwyg" id="wysiwyg" rows="30" cols="150" type="text" 

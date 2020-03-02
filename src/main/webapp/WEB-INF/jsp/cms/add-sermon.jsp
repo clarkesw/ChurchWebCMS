@@ -10,10 +10,11 @@
 			</fieldset>
 			<fieldset class="form-group">
 				<form:label path="subTitle">Sub Title</form:label> 
-				<form:textarea  type="text" 
+				<form:textarea  type="text" maxlength="25"
 					class="form-control" path="subTitle"/>
                                 <form:errors path="subTitle" cssClass="text-warning"/>
 			</fieldset>
+                        <br>
                         <fieldset class="form-group">
                             <table border="1" cellpadding="10">
                                 <thead>
@@ -39,6 +40,12 @@
                                 </c:if> 
                             </table>  
                         </fieldset>
+			<fieldset class="form-group">
+				<form:label path="imageURL">Image URL</form:label> 
+				<form:textarea  type="text" maxlength="25"
+					class="form-control" path="imageURL"/>
+                                <form:errors path="imageURL" cssClass="text-warning"/>
+			</fieldset>
                         <fieldset class="form-group">
                             <form:label path="sermonDate">Sermon Date</form:label>
                                 <table>

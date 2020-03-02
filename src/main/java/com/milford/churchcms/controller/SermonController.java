@@ -130,12 +130,14 @@ public class SermonController extends BaseController{
         session.setAttribute("sermonId", id);
         Optional<Sermon> sermon = repository.findById(id);
         
-        if(sermon.isPresent()){
+        if(sermon.isPresent() && sermon.get().getDescription() != null){
             model.put("description", sermon.get().getDescription());
+            logger.debug("   Old description : {}", sermon.get().getDescription());
         }else{
             model.put("description", new Description());
+            logger.debug("   New description");
         }
-        logger.debug("   Description : {}", model.get("description"));
+        
         return "cms/add-description";
     }
 }

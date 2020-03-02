@@ -32,8 +32,11 @@ public class Staff {
     private String position;
     private String homeEmail;
     private String workEmail;
-    private String homePhone;
+    private String homePhone;    
     private String workPhone;
+    private String mobilePhone;
+    private boolean recieveChurchUpdates;
+    private boolean recievePrayerRequests;
     private String photo;
     private String bio;
     
