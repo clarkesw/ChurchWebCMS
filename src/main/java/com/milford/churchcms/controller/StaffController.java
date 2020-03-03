@@ -54,7 +54,7 @@ public class StaffController extends BaseController{
     @GetMapping("/list-staffers")
     public String showArticle(ModelMap model){
         logger.debug("GET /list-staffers"); 
-        model.put("staffers", repository.getFullNames()); 
+        model.put("staffers", repository.findAll()); 
         return "cms/list-staffers";
     }
  

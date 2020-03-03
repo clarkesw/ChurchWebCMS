@@ -6,6 +6,7 @@
 package com.milford.churchcms.dao;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,7 @@ public class Staff {
     @GeneratedValue
     private Integer id;
     
+    @Column(name="first_name")
     private String firstName;
     private String lastName;
     private String fullName;
@@ -35,6 +37,7 @@ public class Staff {
     private String homePhone;    
     private String workPhone;
     private String mobilePhone;
+    private String mobileCarrier;
     private boolean recieveChurchUpdates;
     private boolean recievePrayerRequests;
     private String photo;
@@ -51,7 +54,8 @@ public class Staff {
     public Staff(){}
     
     public Staff(String firstName, String lastName, String position, String homeEmail, String workEmail,
-            String homePhone, String workPhone, Address homeAddress) {
+            String homePhone, String workPhone, Address homeAddress, String mobilePhone, String mobileCarrier,
+            boolean recieveChurchUpdates, boolean recievePrayerRequests) {
         setFirstName(firstName);
         setLastName(lastName);
         setConFullName();
@@ -61,7 +65,45 @@ public class Staff {
         this.homePhone = homePhone;
         this.workPhone = workPhone;
         this.homeAddress = homeAddress;
+        this.mobilePhone = mobilePhone;
+        this.mobileCarrier = mobileCarrier;
+        this.recieveChurchUpdates = recieveChurchUpdates;
+        this.recievePrayerRequests = recievePrayerRequests;
     }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getMobileCarrier() {
+        return mobileCarrier;
+    }
+
+    public void setMobileCarrier(String mobileCarrier) {
+        this.mobileCarrier = mobileCarrier;
+    }
+
+    public boolean isRecieveChurchUpdates() {
+        return recieveChurchUpdates;
+    }
+
+    public void setRecieveChurchUpdates(boolean recieveChurchUpdates) {
+        this.recieveChurchUpdates = recieveChurchUpdates;
+    }
+
+    public boolean isRecievePrayerRequests() {
+        return recievePrayerRequests;
+    }
+
+    public void setRecievePrayerRequests(boolean recievePrayerRequests) {
+        this.recievePrayerRequests = recievePrayerRequests;
+    }
+    
+    
 
     public String getBio() {
         return bio;
@@ -172,7 +214,12 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + workPhone + ", photo=" + photo + ", bio=" + bio + ", user=" + user + ", homeAddress=" + homeAddress + '}';
+        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + 
+                ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + 
+                ", workPhone=" + workPhone + ", mobilePhone=" + mobilePhone + ", mobileCarrier=" + mobileCarrier + 
+                ", recieveChurchUpdates=" + recieveChurchUpdates + ", recievePrayerRequests=" + recievePrayerRequests + 
+                ", photo=" + photo + ", bio=" + bio + ", user=" + user + ", homeAddress=" + homeAddress + '}';
     }
+
 
 }

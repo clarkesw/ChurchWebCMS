@@ -13,3 +13,9 @@ class="button color-white arrow-point-right arrow-after mobile-hide scrollto"
 15 2 * * * root mysqldump -u root -pPASSWORD --all-databases | gzip > /mnt/disk2/database_`data ' %m-%d-%Y'`.sql.gz 
 
 app.css(line 2311)  footer.site-info height: 220px
+
+AT&T: number@mms.att.net
+Verizon: number@vtext.com
+Sprint PCS: number@messaging.sprintpcs.com
+T-Mobile: number@tmomail.net
+Virgin Mobile: number@vmobl.com

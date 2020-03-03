@@ -7,7 +7,9 @@ package com.milford.churchcms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -20,6 +22,8 @@ public class AppConstants {
     
     public static List<String> roles = new ArrayList<>(
         Arrays.asList("ADMIN","USER"));
+
+    public static Map<String, String> textMessageAddress = new HashMap<String, String>();
     
     public final static List<String> positions = new ArrayList<>(
          Arrays.asList("Lead Pastor", "Associate Pastor", "Youth Pastor", "College Pastor", "Music Pastor",
@@ -35,6 +39,14 @@ public class AppConstants {
                  "Galatians","Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians","1 Timothy",
                  "2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter","1 John","2 John","3 John",
                  "Jude","Revelation")); 
+    
+    static{
+        textMessageAddress.put("AT&T", "@mms.att.net");
+        textMessageAddress.put("Verizon", "@vtext.com");
+        textMessageAddress.put("Sprint", "messaging.sprintpcs.com");
+        textMessageAddress.put("T-Mobile", "@tmomail.net");
+        textMessageAddress.put("Virgin", "@vmobl.com");
+    }
     
     public class WebPage{
         public static final int num_of_items = 2;
