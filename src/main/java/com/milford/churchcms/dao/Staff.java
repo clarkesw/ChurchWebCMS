@@ -6,7 +6,6 @@
 package com.milford.churchcms.dao;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,8 +26,10 @@ public class Staff {
     @GeneratedValue
     private Integer id;
     
-    @Column(name="first_name")
+    private String namePreffix;
+    private String nameSuffix;
     private String firstName;
+    private String middleName;
     private String lastName;
     private String fullName;
     private String position;
@@ -38,8 +39,9 @@ public class Staff {
     private String workPhone;
     private String mobilePhone;
     private String mobileCarrier;
-    private boolean recieveChurchUpdates;
-    private boolean recievePrayerRequests;
+    private boolean recieveChurchUpdates = false;
+    private boolean recievePrayerRequests = false;
+    private boolean isUser = false;
     private String photo;
     private String bio;
     
@@ -71,6 +73,39 @@ public class Staff {
         this.recievePrayerRequests = recievePrayerRequests;
     }
 
+    public boolean isIsUser() {
+        return isUser;
+    }
+
+    public void setIsUser(boolean isUser) {
+        this.isUser = isUser;
+    }
+
+    public String getNamePreffix() {
+        return namePreffix;
+    }
+
+    public void setNamePreffix(String namePreffix) {
+        this.namePreffix = namePreffix;
+    }
+
+    public String getNameSuffix() {
+        return nameSuffix;
+    }
+
+    public void setNameSuffix(String nameSuffix) {
+        this.nameSuffix = nameSuffix;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    
     public String getMobilePhone() {
         return mobilePhone;
     }
@@ -214,12 +249,11 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Staff{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", fullName=" + fullName + 
-                ", position=" + position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + 
-                ", workPhone=" + workPhone + ", mobilePhone=" + mobilePhone + ", mobileCarrier=" + mobileCarrier + 
-                ", recieveChurchUpdates=" + recieveChurchUpdates + ", recievePrayerRequests=" + recievePrayerRequests + 
-                ", photo=" + photo + ", bio=" + bio + ", user=" + user + ", homeAddress=" + homeAddress + '}';
+        return "Staff{" + "id=" + id + ", namePreffix=" + namePreffix + ", nameSuffix=" + nameSuffix + ", firstName=" + 
+                firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + 
+                position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + 
+                workPhone + ", mobilePhone=" + mobilePhone + ", mobileCarrier=" + mobileCarrier + ", recieveChurchUpdates=" + 
+                recieveChurchUpdates + ", recievePrayerRequests=" + recievePrayerRequests + ", isUser=" + isUser + ", photo=" + 
+                photo + ", user=" + user + ", homeAddress=" + homeAddress + '}';
     }
-
-
 }

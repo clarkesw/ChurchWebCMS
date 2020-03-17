@@ -28,7 +28,23 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" />
         <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../../../../stylesheets/jquery.wysiwyg.css" type="text/css" />
-        <link rel="stylesheet" href="../../../../stylesheets/examples.css" type="text/css" />
+       <link rel="stylesheet" href="../../../../stylesheets/examples.css" type="text/css" /> 
+       <link rel="icon" href="../../../../images/cross_favicon.jpg">
+       <style>
+            .welcome {
+              border-collapse: collapse;
+              border-spacing: 0;
+              border: 1px solid #ddd;
+            }
+
+            .welcome-tr:nth-child(even) {
+              background-color: #f2f2f2;
+            }
+           .footer {
+                position: fixed;
+                bottom: 20%;
+            }
+         </style>
     </head>
 
 <body>

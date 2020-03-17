@@ -14,15 +14,32 @@
                 </table>
             </h3>
         </div>
+        <br>
+        <div>
+            <table class="welcome welcome-tr" >
+                <caption>Prayer Duty</caption>
+                    <tbody>
+                    <c:if test="${empty staffers}"><b>Nobody</b></c:if>
+                        <c:forEach items="${staffers}" var="staff">
+                            <tr>
+                                <td>${staff.fullName}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <a>File Upload:</a>
+            Select file: <br />
+            <form action="fileupload.jsp" method="post"
+                                    enctype="multipart/form-data">
+            <input type="file" name="file" size="50" />
+            <br />
+            <input type="submit" value="Upload File" />
+            </form> 
+        </div>
 </div>
  
--<a>File Upload:</a>
-Select file: <br />
-<form action="fileupload.jsp" method="post"
-                        enctype="multipart/form-data">
-<input type="file" name="file" size="50" />
-<br />
-<input type="submit" value="Upload File" />
-</form> 
+
 
 <%@ include file="common/footer.jspf" %>

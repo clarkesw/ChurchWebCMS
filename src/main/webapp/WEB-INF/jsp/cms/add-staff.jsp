@@ -8,6 +8,12 @@
 					class="form-control" required="required" path="firstName"/>
                                 <form:errors path="firstName" cssClass="text-warning"/>
 			</fieldset>
+                        <fieldset class="form-group">
+				<form:label path="middleName">Middle Name</form:label> 
+				<form:input  type="text" maxlength="25"
+					class="form-control" path="middleName"/>
+                                <form:errors path="middleName" cssClass="text-warning"/>
+			</fieldset>
                          <fieldset class="form-group">
 				<form:label path="lastName">Last Name</form:label> 
 				<form:input  type="text" maxlength="25"
@@ -39,28 +45,55 @@
                                 <form:errors path="homePhone" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
+				<form:label path="mobilePhone">Mobile Phone</form:label> 
+				<form:input  type="text" 
+					class="form-control" path="mobilePhone"/>
+                                <form:errors path="mobilePhone" cssClass="text-warning"/>
+			</fieldset>
+                        <fieldset class="form-group">
+                               <form:label path="mobileCarrier">Mobile Carrier</form:label> 
+                               <form:select path = "mobileCarrier">
+                                <form:option value = "NONE" label = "Select"/>
+                                <form:options items = "${carriers}"/>
+                             </form:select>                            
+                        </fieldset>
+
+                        
+                        <fieldset class="form-group">
 				<form:label path="photo">Photo</form:label> 
 				<form:input  type="text" 
 					class="form-control" path="photo"/>
                                 <form:errors path="photo" cssClass="text-warning"/>
 			</fieldset>
-                        <form:label path="position">Position</form:label> 
-                      <form:select path="position">
-                           <form:option value = "NONE" label = "Select"/>
-                           <form:options items = "${positions}" />
-                        </form:select> 
+                        <fieldset class="form-group">
+                                <form:label path="position">Position</form:label> 
+                                <form:select path="position">
+                                   <form:option value = "NONE" label = "Select"/>
+                                   <form:options items = "${positions}" />
+                                </form:select>                         
+                        </fieldset>
+                    <fieldset class="form-group">
+                            <form:label path="recievePrayerRequests">Prayer Duty</form:label> 
+                            <form:checkbox class="form-control"  path="recievePrayerRequests"/>
+                            <form:errors path="recievePrayerRequests" cssClass="text-warning"/>
+                    </fieldset>
+                    <fieldset class="form-group">
+                            <form:label path="recieveChurchUpdates">Receive Church Updates</form:label> 
+                            <form:checkbox class="form-control"  path="recieveChurchUpdates"/>
+                            <form:errors path="recieveChurchUpdates" cssClass="text-warning"/>
+                    </fieldset>                    
        
                         
                     <c:if test = "${not empty unlockRole}">
                         <fieldset class="form-group">
 				<form:label path="user.username">User Name</form:label> 
-				<form:input  type="text" 
+				<form:input  type="text" required="required"
 					class="form-control" path="user.username"/>
                                 <form:errors path="user.username" cssClass="text-warning"/>
 			</fieldset> 
                         <fieldset class="form-group">
 				<form:label path="user.password">Password</form:label> 
-				<form:input  type="text" 
+				<form:input  type="text" required="required"
 					class="form-control" path="user.password"/>
                                 <form:errors path="user.password" cssClass="text-warning"/>
 			</fieldset> 

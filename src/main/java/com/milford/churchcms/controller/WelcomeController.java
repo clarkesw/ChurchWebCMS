@@ -7,6 +7,7 @@ package com.milford.churchcms.controller;
 
 
 import com.milford.churchcms.dao.User;
+import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.UserRepository;
 import com.milford.churchcms.util.PasswordUtil;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,9 @@ public class WelcomeController extends BaseController{
     
     @Autowired
     UserRepository repository;
+    
+    @Autowired
+    StaffRepository staffRepo;
     
     @Autowired 
     private HttpSession session;
@@ -68,6 +72,7 @@ public class WelcomeController extends BaseController{
         dbUser.setPassword("empty");
         session.setAttribute("loggedInUser", dbUser);
         model.put("user", userName);   
+        model.put("staffers", staffRepo.findByRecievePrayerRequestsTrue());
         return "cms/welcome";
     }
     

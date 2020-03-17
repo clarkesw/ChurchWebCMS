@@ -16,7 +16,7 @@
 			<tbody>
                             <c:forEach items="${staffers}" var="staff">
                                 <tr>
-                                    <td>${staff.firstname}</td>
+                                    <td>${staff.firstName}</td>
                                     <td>${staff.lastName}</td>                                                                                        
                                     <td>${staff.position}</td>
                                     <c:choose>
@@ -38,6 +38,7 @@
                             </c:forEach>
 			</tbody>
 		</table>
-		<div> <a class="button" href="/add-staff">Add Staff</a></div>
+		<div> <a class="button" href="/add-staff?isUser=0">Add Staff</a></div>
+                <a class="button" href="/add-staff?isUser=1">Add User</a></div>
 <%@ include file="common/footer.jspf" %>
 

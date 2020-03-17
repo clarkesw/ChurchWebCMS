@@ -10,6 +10,7 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+// https://dev.to/awwsmm/how-to-encrypt-a-password-in-java-42dh
 
 public class PasswordUtil {
     

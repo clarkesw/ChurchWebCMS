@@ -19,3 +19,41 @@ Verizon: number@vtext.com
 Sprint PCS: number@messaging.sprintpcs.com
 T-Mobile: number@tmomail.net
 Virgin Mobile: number@vmobl.com
+
+-------------- 1st script -----------------
+<select id="ddlFruits">
+    <option value=""></option>
+    <option value="1">Apple</option>
+    <option value="2">Mango</option>
+    <option value="3">Orange</option>
+</select>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#ddlFruits").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+        });
+    });
+</script>
+
+-------------- 2nd script -----------------
+<button onclick="myFunction()">Try it</button>
+
+<div id="myDIV">
+This is my DIV element.
+</div>
+
+<p><b>Note:</b> The element will not take up any space when the display property set to "none".</p>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>

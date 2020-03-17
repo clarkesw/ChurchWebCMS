@@ -22,6 +22,9 @@ public class AppConstants {
     
     public static List<String> roles = new ArrayList<>(
         Arrays.asList("ADMIN","USER"));
+    
+    public static List<String> days = new ArrayList<>(
+        Arrays.asList("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"));
 
     public static Map<String, String> textMessageAddress = new HashMap<String, String>();
     
@@ -48,13 +51,19 @@ public class AppConstants {
         textMessageAddress.put("Virgin", "@vmobl.com");
     }
     
-    public class WebPage{
+    public static class Name{
+            public final static List<String> suffix = new ArrayList<>(
+                Arrays.asList("Sr.", "Jr.", "II", "III", "IIII"));
+            public final static List<String> preffix = new ArrayList<>(
+                Arrays.asList("Dr.", "Rev."));            
+    }
+    public static class WebPage{
         public static final int num_of_items = 2;
         public static final String HOME = "Home";
         public static final String CALENDAR = "Calendar";
     }
     
-    public class Session{
+    public static class Session{
        // public static final String 
     }
     

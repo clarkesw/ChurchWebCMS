@@ -5,7 +5,7 @@
 	    <div class="navbar-collapse">
 	        <ul class="nav navbar-nav">
                     <li><img border="0" alt="Milford" src="/images/Milford.png" width="50" height="50"></li>
-	            <li class="active"><a href="login">Home</a></li>
+	            <li class="active"><a href="welcome">Home</a></li>
 	       <!--     <li><a href="/list-pages">Web Pages</a></li>
                     <li><a href="/list-names">Web Page Name</a></li> -->
                     <li><a href="/list-events">Calendar</a></li>

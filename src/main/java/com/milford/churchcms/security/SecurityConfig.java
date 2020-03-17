@@ -40,8 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers("/*","/login","/index*","/h2/**").permitAll()
                                     .antMatchers("/*todo*/**").access("hasRole('USER')");
-                                           //     .and()
-				//.formLogin();
+//                    .logout()
+//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            
+//                        .logoutSuccessUrl("/login")
+//                        .invalidateHttpSession(true)        // set invalidation state when logout
+//                        .deleteCookies("JSESSIONID")    
                 http.csrf().disable();
                 http.headers().frameOptions().disable();
         }

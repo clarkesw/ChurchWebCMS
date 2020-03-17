@@ -13,9 +13,11 @@ import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
+import java.util.Set;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -53,20 +55,31 @@ public class StaffController extends BaseController{
         
     @GetMapping("/list-staffers")
     public String showArticle(ModelMap model){
-        logger.debug("GET /list-staffers"); 
-        model.put("staffers", repository.findAll()); 
+        List<Staff> allstaff = repository.findAll();
+        logger.debug("GET /list-staffers Staffers: {}",allstaff.size()); 
+        
+        model.put("staffers", allstaff); 
         return "cms/list-staffers";
     }
  
     @GetMapping("/add-staff")
-    public String showAddStaff(ModelMap model, @ModelAttribute("staff") Staff staff){   
+    public String showAddStaff(ModelMap model, @RequestParam boolean isUser){   
         User currentUser = (User)session.getAttribute("loggedInUser");
         logger.debug("GET /add-staff User: {}", currentUser);  
+        Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
         
-        if("admin".equalsIgnoreCase(currentUser.getRole()))
+        Staff staff = new Staff();
+        
+        if("admin".equalsIgnoreCase(currentUser.getRole()) && isUser){
+            staff.setIsUser(true);
             model.addAttribute("unlockRole","good");
+        }
+            
+       logger.debug("   isUser: {}", staff);  
        
+        model.addAttribute("staff", staff);
         model.addAttribute("roles", AppConstants.roles);
+        model.addAttribute("carriers", keyCarriers);
         model.addAttribute("positions", AppConstants.positions);
 
         return "cms/add-staff";
@@ -108,15 +121,23 @@ public class StaffController extends BaseController{
     public String updateShowStaff(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-staff  ID : {}",id);
         User currentUser = (User)session.getAttribute("loggedInUser");
-        Optional<Staff> staff = repository.findById(id);
-        logger.debug("User : {}",currentUser);
+        Staff staff = repository.findById(id).get();
+        Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
         
-        if("admin".equals(currentUser.getRole()))
+        
+        if("admin".equals(currentUser.getRole()) && staff.isIsUser())
             model.addAttribute("unlockRole","good");
         
+        if(staff.isIsUser()){
+            staff.getUser().setBlankPassword();
+            logger.debug("   isUser : {}",staff.isIsUser());
+            
+        }
+        
+        model.addAttribute("carriers", keyCarriers);
         model.addAttribute("roles", AppConstants.roles);
         model.addAttribute("positions", AppConstants.positions);
-        model.addAttribute("staff", staff.get());
+        model.addAttribute("staff", staff);
         
         return "cms/add-staff";
     }     

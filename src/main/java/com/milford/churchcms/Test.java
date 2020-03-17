@@ -1,29 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.milford.churchcms;
 
-/**
- *
- * @author clarke
- */
+import java.io.IOException;
+import sun.misc.BASE64Decoder;
 
 public class Test{
 
 //     public static void main(String []args) throws Exception{
-//         String s = null;
-//         
-//         if(s == null)
-//            System.out.println("Hello World");
+//         String str = "OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=";
+//         String result = null;
+//
+//        BASE64Decoder decoder = new BASE64Decoder();
+//
+//            try {
+//                result = new String(decoder.decodeBuffer(str));
+//            } catch (IOException e) {
+//                //  throw new InvalidImplementationException(
+//            }  
 //            
-//     //   try{
-//           exceptionTry(); 
-//     //   }catch(Exception e){
-//     //       System.out.println(e);
-//      //  }
-//        
+//            System.out.println("Password : " + result);
 //     }
      
      public static void exceptionTry(){// throws Exception{
