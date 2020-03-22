@@ -12,36 +12,38 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 /**
  *
  * @author clarke
+ * 
+ * https://www.quickprogrammingtips.com/spring-boot/how-to-send-email-from-spring-boot-applications.html
  */
 @Service
 public class TextMessageService {
+    
+    @Autowired
+    private JavaMailSender sender;
     public Logger logger = LoggerFactory.getLogger(TextMessageService.class);
     
     public boolean sendMessage(Staff staff, String messageText, String requester){
-      logger.debug("   Staff : {}  Subject : {}  Sender: {} ",staff.getFullName() ,messageText, requester);
-      String host = "localhost";
-
-      Properties properties = System.getProperties();
-      properties.setProperty("mail.smtp.host", host);
-
-      Session session = Session.getDefaultInstance(properties);
+        
+      logger.debug("   Staff : {}  Message : {}  Requester: {} ",staff.getFullName() ,messageText, requester);
+      String sendTo = staff.getMobilePhone() + staff.getMobileCarrier();
 
       try {
-         MimeMessage message = new MimeMessage(session);
-
-         String to = staff.getMobilePhone() + staff.getMobileCarrier();
-         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-         message.setSubject(requester);
-         message.setText(messageText);
-         message.setFrom("people@milford.com");
-
-         Transport.send(message);
-
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+         
+        helper.setTo(sendTo);
+        helper.setText(messageText);
+        helper.setSubject(requester);
+         
+        sender.send(message);
       } catch (MessagingException mex) {
           logger.debug(mex.toString());
          return false;

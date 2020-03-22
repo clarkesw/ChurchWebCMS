@@ -7,7 +7,7 @@
                 <table>
                 
                     <tr>
-                        <td>No Messages</td>
+                        <td><%--No Messages --%></td>
                         <td></td>
                     </tr>
                 
@@ -17,7 +17,7 @@
         <br>
         <div>
             <table class="welcome welcome-tr" >
-                <caption>Prayer Duty</caption>
+                <caption>Prayer Duty:</caption>
                     <tbody>
                         <c:if test="${empty staffers}">
                                 <tr>
@@ -25,8 +25,8 @@
                                 </tr>
                         </c:if>
                         <c:forEach items="${staffers}" var="staff">
-                            <tr>
-                                <td>${staff.fullName}</td>
+                            <tr class="welcome welcome-tr">
+                                <td class="welcome welcome-tr">${staff.fullName}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

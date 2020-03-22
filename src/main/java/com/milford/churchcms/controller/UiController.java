@@ -17,7 +17,6 @@ import com.milford.churchcms.repository.ArticleRepository;
 import com.milford.churchcms.repository.BannerRepository;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.repository.PrayerRepository;
 import com.milford.churchcms.repository.SermonRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.WebPageRepository;

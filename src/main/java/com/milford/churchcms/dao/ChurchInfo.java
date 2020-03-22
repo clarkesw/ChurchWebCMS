@@ -36,9 +36,6 @@ public class ChurchInfo {
     private String twitter;
     private String youtube;
     
-//    private String emailUser;
-//    private String emailPass;
-    
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;
@@ -115,7 +112,6 @@ public class ChurchInfo {
     public void setYoutube(String youtube) {
         this.youtube = youtube;
     }
-
     
     public List<Staff> getStaffers() {
         return staffers;

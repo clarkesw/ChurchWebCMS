@@ -38,7 +38,7 @@
                             </c:forEach>
 			</tbody>
 		</table>
-		<div> <a class="button" href="/add-staff?isUser=0">Add Staff</a></div>
-                <a class="button" href="/add-staff?isUser=1">Add User</a></div>
+		<div> <a class="button" href="/add-staff?isUser=0">Add Church Member</a></div>
+                <a class="button" href="/add-staff?isUser=1">Add Website Admin</a></div>
 <%@ include file="common/footer.jspf" %>
 

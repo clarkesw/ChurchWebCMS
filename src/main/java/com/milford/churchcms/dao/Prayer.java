@@ -26,8 +26,7 @@ public class Prayer {
     private String phone;
     private String perferedContactMethod;
     private String perferedContactTime;
-    
- //   private Date date;
+    private Date date;
     
     public Prayer() {}
 
@@ -93,6 +92,14 @@ public class Prayer {
 
     public void setPerferedContactTime(String perferedContactTime) {
         this.perferedContactTime = perferedContactTime;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date datee) {
+        this.date = new Date();
     }
 
     @Override

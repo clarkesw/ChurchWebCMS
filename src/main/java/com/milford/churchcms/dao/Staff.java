@@ -5,6 +5,9 @@
  */
 package com.milford.churchcms.dao;
 
+import com.milford.churchcms.AppConstants;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -119,7 +122,8 @@ public class Staff {
     }
 
     public void setMobileCarrier(String mobileCarrier) {
-        this.mobileCarrier = mobileCarrier;
+        Map carriers = new HashMap(AppConstants.textMessageAddress);
+        this.mobileCarrier = (String)carriers.get(mobileCarrier);
     }
 
     public boolean isRecieveChurchUpdates() {

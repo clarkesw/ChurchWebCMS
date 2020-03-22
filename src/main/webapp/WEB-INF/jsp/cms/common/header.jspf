@@ -33,7 +33,8 @@
        <style>
             .welcome {
               border-collapse: collapse;
-              border-spacing: 0;
+              border-spacing: 25px;
+              cell-spacing:15px;
               border: 1px solid #ddd;
             }
 

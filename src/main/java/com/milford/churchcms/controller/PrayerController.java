@@ -57,4 +57,11 @@ public class PrayerController{
         repository.save(prayer);
         return "redirect:index.html"; 
     }    
+    
+    @GetMapping("/showPrayerRequests")
+    public String showPrayer(ModelMap model){
+        logger.debug("GET /showPrayerRequests ");
+        model.addAttribute("prayers", repository.findAll());
+        return "cms/list-prayers";
+    }    
 }
