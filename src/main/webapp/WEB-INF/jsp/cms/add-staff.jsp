@@ -104,16 +104,16 @@
                     </c:if>
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
-                    <c:choose>
-                        <c:when test="${staff.firstName ne null}">
-                            <a href="updateAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}">
-                                Edit ${staff.firstName}'s Address</a>
-                        </c:when>
-                         <c:otherwise>
-                             <a href="addAddressForStaff?fisrtName=${firstName}&lastName=${lastName}">
-                                Add ${firstName}'s Address</a>                            
-                         </c:otherwise>
-                    </c:choose> 
+            <c:choose>
+                <c:when test="${staff.firstName ne null}">
+                    <a href="updateAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}">
+                        Edit ${staff.firstName}'s Address</a>
+                </c:when>
+                 <c:otherwise>
+                     <a href="addAddressForStaff?fisrtName=${firstName}&lastName=${lastName}">
+                        Add ${firstName}'s Address</a>                            
+                 </c:otherwise>
+            </c:choose> 
 	</div>
 
 <%@ include file="common/footer.jspf" %>

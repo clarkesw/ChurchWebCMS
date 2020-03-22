@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.ServiceTimes;
 import com.milford.churchcms.dao.Staff;
@@ -105,8 +106,9 @@ public class ChurchInfoController extends BaseController{
         List<ServiceTimes> serviceTimes = timeRepository.findAll();
         logger.debug("GET /editServiceTimes Times : {}",serviceTimes.size());
         
-        model.put("serviceTimes", serviceTimes);
-        model.put("serviceTime", new ServiceTimes());
+        model.addAttribute("days", AppConstants.days);
+        model.addAttribute("serviceTimes", serviceTimes);
+        model.addAttribute("serviceTime", new ServiceTimes());
         
         return "cms/add-serviceTime";
     }    

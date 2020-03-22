@@ -67,6 +67,7 @@ public class SermonController extends BaseController{
         Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
         int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
         logger.debug("   Sermon ID : {}",lastSermonId);
+        
         repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), sermon.getDescription(),
                 sermon.getSermonDate(),sermon.getPassages()));
         return "redirect:list-sermons";
@@ -78,7 +79,8 @@ public class SermonController extends BaseController{
         repository.deleteById(id);
         return "redirect:list-sermons";
     }
-        @PostMapping("/update-sermon")
+        
+    @PostMapping("/update-sermon")
     public String updateSermonPost(ModelMap model,@Valid @ModelAttribute("sermon") Sermon sermon, BindingResult result){
         logger.debug("POST /update-sermon : {}",sermon);
         if(result.hasErrors())

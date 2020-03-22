@@ -19,7 +19,11 @@
             <table class="welcome welcome-tr" >
                 <caption>Prayer Duty</caption>
                     <tbody>
-                    <c:if test="${empty staffers}"><b>Nobody</b></c:if>
+                        <c:if test="${empty staffers}">
+                                <tr>
+                                    <td><b>Nobody</b></td>
+                                </tr>
+                        </c:if>
                         <c:forEach items="${staffers}" var="staff">
                             <tr>
                                 <td>${staff.fullName}</td>

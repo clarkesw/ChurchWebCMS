@@ -5,16 +5,19 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.dao.CalendarEvent;
 import com.milford.churchcms.dao.ChurchInfo;
+import com.milford.churchcms.dao.Prayer;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ArticleRepository;
 import com.milford.churchcms.repository.BannerRepository;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
+import com.milford.churchcms.repository.PrayerRepository;
 import com.milford.churchcms.repository.SermonRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.WebPageRepository;
@@ -86,6 +89,7 @@ public class UiController extends BaseController{
         
         return ""; 
     }
+    
     @GetMapping("/page/{name}")
     public String showPage(@PathVariable String name, ModelMap model){
         logger.debug("GET /page/" + name);
@@ -103,13 +107,18 @@ public class UiController extends BaseController{
             model.addAttribute("sermon", sermon.get());
         model.addAttribute("page", pageRepository.findByPageName(name));
         
-        logger.debug("  sermon" + sermon);
-        logger.debug("  church" + myChurch);
-        logger.debug("  article" + article);
+        logger.debug("  sermon : {}", sermon);
+        logger.debug("  church : {}", myChurch);
+        logger.debug("  article : {}", article);
         
         if("calendar".equals(name)){
             logger.debug(" Calendar " + pageRepository.findByPageName(name));
             return "calendar";
+        }else if("prayer".equals(name)){
+            model.addAttribute("contactMethods", AppConstants.Contact.contactMethods);
+            model.addAttribute("contactTimes", AppConstants.Contact.contactTimes);
+            model.addAttribute("prayer", new Prayer());
+            return "prayer";
         }  
                 
         return "home";
@@ -175,6 +184,15 @@ public class UiController extends BaseController{
         model.addAttribute("page", pageService.retrieveOnePage("event"));
         return "sermon";
     }
+    
+//    @GetMapping("/prayer")
+//    public String showPrayerPage(ModelMap model){
+//        logger.debug("GET /prayer/  " );     
+//
+//        model.addAttribute("church", getChurchInfo());
+//        model.addAttribute("page", pageService.retrieveOnePage("event"));
+//        return "prayer";
+//    }
     
     @GetMapping("/toolbar")
     public String toolBar(){

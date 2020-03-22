@@ -57,3 +57,7 @@ function myFunction() {
   }
 }
 </script>
+
+---------- 3/22 -------------
+1. Add email user/pass to church obj
+2. Add date to prayer obj

@@ -36,6 +36,9 @@ public class ChurchInfo {
     private String twitter;
     private String youtube;
     
+//    private String emailUser;
+//    private String emailPass;
+    
     @OneToOne(cascade=CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "ADDRESS_ID")
     private Address address;

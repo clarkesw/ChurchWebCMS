@@ -16,4 +16,4 @@ insert into user
 values (2,'OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=','admin','clarke');
 
 insert into staff
-values (1,null, "clarke", "clarke swindell",null,null, "swindell",null,null,"(404)431-2941",null,null,null,"IT",false,false,"me@church.com",null,null,2,null);
+values (1,null, "clarke", "clarke swindell",null,null, true,"swindell","taylor","@mms.att.net","(404)431-2941","Master",null,null,"IT",true,true,"me@church.com",null,null,2,null);

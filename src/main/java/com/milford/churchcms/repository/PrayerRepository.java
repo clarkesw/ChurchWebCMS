@@ -5,7 +5,6 @@
  */
 package com.milford.churchcms.repository;
 
-import com.milford.churchcms.dao.Address;
 import com.milford.churchcms.dao.Prayer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,9 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author clarke
  */
-public interface AddressRepository extends JpaRepository<Address,Integer>{
-    Address findTopByOrderByIdDesc();
-   // Address findById(int address_id);
-
-    public void save(Prayer prayer);
+public interface PrayerRepository extends JpaRepository<Prayer,Integer>{
+    Prayer findTopByOrderByIdDesc();
 }

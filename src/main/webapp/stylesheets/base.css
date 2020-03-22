@@ -37,3 +37,7 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.tablespace{
+    height: 30px;
+}

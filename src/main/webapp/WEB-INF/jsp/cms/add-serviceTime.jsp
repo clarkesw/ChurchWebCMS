@@ -21,10 +21,11 @@
                  <br><br><hr>
 		<form:form method="post" modelAttribute="serviceTime" >
                         <fieldset class="form-group">
-				<form:label path="day">Day</form:label> 
-				<form:input  type="text" maxlength="25"
-					class="form-control" required="required" path="day"/>
-                                <form:errors path="day" cssClass="text-warning"/>
+			    <form:label path="day">Day</form:label> 
+                                <form:select path = "day">
+                                <form:option value = "NONE" label = "Select"/>
+                                <form:options items = "${days}"/>
+                                </form:select> 
 			</fieldset>   
                         
                         <fieldset class="form-group">

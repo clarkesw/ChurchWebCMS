@@ -1,23 +1,16 @@
 package com.milford.churchcms;
 
-import java.io.IOException;
-import sun.misc.BASE64Decoder;
+import com.milford.churchcms.service.TextMessageService;
+
 
 public class Test{
 
 //     public static void main(String []args) throws Exception{
-//         String str = "OtszX/SBSG/JvVrUwvNVDD5N8rrKNayA43Wf1h4IVE4=";
-//         String result = null;
-//
-//        BASE64Decoder decoder = new BASE64Decoder();
-//
-//            try {
-//                result = new String(decoder.decodeBuffer(str));
-//            } catch (IOException e) {
-//                //  throw new InvalidImplementationException(
-//            }  
-//            
-//            System.out.println("Password : " + result);
+//         
+//         TextMessageService text = new TextMessageService();
+//         
+//         text.sendMessage(staff, messageText, requester)
+//         
 //     }
      
      public static void exceptionTry(){// throws Exception{

@@ -10,7 +10,6 @@ import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.service.EventService;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -78,7 +77,7 @@ public class CalendarEventController extends BaseController{
         int eventId = (lastEvent != null) ? lastEvent.getId() + 1 : 1;
         
         repository.save(new CalendarEvent(eventId,calEvent.getTitle(),calEvent.getDetails(), startDate, 
-                                                endDate,calEvent.getStartTime(),calEvent.getEndTime(),null));
+                                                endDate,calEvent.getStartTime(),calEvent.getEndTime(),calEvent.getContactName()));
         return "redirect:list-events";
     }
     

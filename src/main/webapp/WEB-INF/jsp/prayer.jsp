@@ -48,6 +48,7 @@
 <style type="text/css" media="all">
 @import url("../../stylesheets/jquery.fancybox.css?p7rj3q");
 </style>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
   <script type="text/javascript" src="../../scripts/jquery.min.js"></script>
 <script type="text/javascript" src="../../scripts/jquery.once.js?v=1.2"></script>
 <script type="text/javascript" src="../../scripts/drupal.js?p7rj3q"></script>
@@ -179,33 +180,54 @@ $(document).ready(function() {
     </header>
     <section id="content">
         <center>
-            <div id='event'>
-                <table width="600" cellpadding="20" border="0">
-                    <tr>
-                        <td>Title</td><td><b>${event.title}</b></td>
+            <form:form method="post" modelAttribute="prayer" action="../savePrayer">
+                <table style="width:40%">
+                    <tr class="tablespace">
+                        <td><form:label path="firstName">First Name</form:label> </td>
+                        <td><form:input  type="text" maxlength="25"
+                                class="form-control" required="required" path="firstName"/> </td>                      
                     </tr>
-                     <tr>
-                        <td>&nbsp;</td><td>&nbsp;</td>
-                    </tr>                   
-                    <tr>
-                        <td>Contact</td><td><a href="/staff/${contact.id}">${contact.fullName}</a> </td>
+                    <tr class="tablespace">
+                        <td><form:label path="lastName">Last Name</form:label> </td>
+                        <td><form:input  type="text" maxlength="25"
+                                class="form-control" path="lastName"/></td>
                     </tr>
-                                         <tr>
-                        <td>&nbsp;</td><td>&nbsp;</td>
-                    </tr>          
-                    <tr>
-                        <td>Date</td><td>${startdate}<br> ${event.startTime} to ${event.endTime}</td>
+                    <tr class="tablespace">
+                        <td><form:label path="prayerRquest">Prayer Request</form:label> </td>
+                        <td><form:textarea  type="text" 
+                                   class="form-control" required="required" path="prayerRquest"/></td>
                     </tr>
-                                         <tr>
-                        <td>&nbsp;</td><td>&nbsp;</td>
-                    </tr>          
-                    <tr>
-                        <td>Details</td><td>${event.details}</td>
+                    <tr class="tablespace">
+                        <td><form:label path="email">Email</form:label> </td>
+                        <td><form:input  type="text" 
+                                class="form-control" path="email"/></td>
                     </tr>
+                    <tr class="tablespace">
+                        <td><form:label path="phone">Phone</form:label> </td>
+                        <td><form:input  type="text" 
+                                class="form-control" path="phone"/></td>
+                    </tr>
+                     <tr class="tablespace">
+                        <td><form:label path="perferedContactMethod">Preferred Contact Method</form:label></td>
+                        <td> 
+                            <form:select path = "perferedContactMethod">
+                             <form:option value = "NONE" form:label = "Select"/>
+                             <form:options items = "${contactMethods}"/>
+                            </form:select>       
+                        </td>
+                    </tr>
+                    <tr class="tablespace">
+                        <td><form:label path="perferedContactTime">Preferred Contact Time</form:label> </td>
+                        <td>                        
+                            <form:select path = "perferedContactTime">
+                             <form:option value = "NONE" form:label = "Select"/>
+                             <form:options items = "${contactTimes}"/>
+                            </form:select>   
+                        </td>
+                    </tr>                    
                 </table>
-                
-
-            </div>
+			<button type="submit" class="btn btn-success">Submit</button>
+		</form:form>
         </center>
     </section>
     <!-- /#content -->

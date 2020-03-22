@@ -109,9 +109,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                         <ul class="menu">
                                             <li class="leaf"><a >Messages</a></li>
                                             <li class="leaf"><a >Give</a></li>
-                                            <li class="leaf"><a >Pray</a></li>
+                                            <li class="leaf"><a href="prayer">Pray</a></li>
                                             <li class="leaf"><a >Devotions</a></li>
-                                           <%-- <li>
+                                           <li>
                                                 <a href="#"> Social</a>
                                                 <ul class="dropdown">
                                                     <li class="first leaf"><a href="http://www.facebook.com/gatewaypeople" title="" class="social facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -119,7 +119,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                     <li class="last leaf"><a href="http://twitter.com/gatewaypeople" title="" class="social twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                                  </ul>   
                                             </li>
-                                        </li> --%>
+                                        </li> 
 
                                         </ul>
                                     </div>
@@ -147,7 +147,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                                 <li class="leaf"><a >Get Connected</a></li>
                                                                 <li class="leaf"><a >Ministries</a></li>
                                                                 <li class="leaf"><a href="calendar">Calendar</a></li>
-                                                               <li class="last leaf"><a href="../email/clarke.job@gmail.com" >Media Archive</a></li> 
+                                                               <li class="last leaf"><a >Media Archive</a></li> 
                                                             </ul>
                                                         </div>
                                                     </div>
