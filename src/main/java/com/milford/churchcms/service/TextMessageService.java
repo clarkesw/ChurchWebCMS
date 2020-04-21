@@ -50,4 +50,6 @@ public class TextMessageService {
       }
       return true;
     }
+    
+    public void someMethod(){}
 }

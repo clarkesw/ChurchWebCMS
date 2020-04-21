@@ -61,3 +61,26 @@ function myFunction() {
 ---------- 3/22 -------------
 Add donations
 https://donorbox.org/nonprofit-blog/donate-now-button-for-nonprofits/
+
+---------- 3/30 ------------------
+Bible verse tooltip
+http://localhost:8080/bannerMessage
+http://labs.bible.org/api/?passage=Exodus%204:4
+
+
+$(function() {$( ".teacher-link" ).tooltip({  
+    content: 'connecting',
+    content:function(callback) {
+            window.onload = function(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "http://localhost:8080/bannerMessage", true);
+                xhr.send();
+                xhr.onreadystatechange = function(){
+ 
+                    result = xhr.responseText;
+                    document.getElementById("demo").innerHTML = result;
+                }
+            });
+    },
+
+  })});

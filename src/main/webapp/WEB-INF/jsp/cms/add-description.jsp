@@ -19,6 +19,16 @@
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
             <form:form method="post" action="addDescriptionToSermon" modelAttribute="description">
+                    <table border="1" cellpadding="10">
+                        <c:if test="${not empty passages}">
+                            <c:forEach items="${passages}" var="pass">
+                                <tr>
+                                    <td>${pass.book} ${pass.chapter}:${pass.verse}</td>
+                                    <td>${pass.link}</td>
+                                </tr>   
+                            </c:forEach>
+                        </c:if> 
+                    </table>  
                 <fieldset class="form-group">
                         <form:label path="description">Description</form:label> 
                         <form:textarea  name="wysiwyg" id="wysiwyg" rows="30" cols="150" type="text" 
@@ -26,7 +36,6 @@
                         <form:errors path="description" cssClass="text-warning"/>
                 </fieldset>
             <button type="submit" class="btn btn-success">Update</button>
-
             </form:form>
 	</div>
 

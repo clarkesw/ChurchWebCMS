@@ -69,6 +69,11 @@
 <script src='../scripts/moment.min.js'></script>
 <script src='../scripts/jquery.min.js'></script>
 <script src='../scripts/fullcalendar.min.js'></script>
+<script src="https://www.biblegateway.com/public/link-to-us/tooltips/bglinks.js" type="text/javascript"></script>
+<script type="text/javascript">
+    BGLinks.version = "NLV";
+    BGLinks.linkVerses();
+</script>
 
 <style>
 
@@ -171,7 +176,7 @@
                         <td >Date</td><td>${sermon.sermonDate}</td>
                     </tr>                            
                      <tr>
-                        <td >&nbsp;</td><td>&nbsp;</td>
+                        <td >&nbsp;</td><td>Jeremiah 29:11</td>
                     </tr>          
                     <tr>
                         <td>Details</td><td><pre>${sermon.description}</pre></td>

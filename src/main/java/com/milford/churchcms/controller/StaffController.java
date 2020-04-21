@@ -109,7 +109,10 @@ public class StaffController extends BaseController{
         logger.debug("POST /update-staff Staff : {}",staff);
         if(result.hasErrors())
             return "cms/add-staff";
-        userRepo.delete(staff.getUser());
+        User user = staff.getUser();
+        
+        if(user != null)
+            userRepo.delete(staff.getUser());
         repository.delete(staff);
         repository.save(staff);  
         return "redirect:list-staffers";
@@ -131,7 +134,7 @@ public class StaffController extends BaseController{
             logger.debug("   isUser : {}",staff.isIsUser());
             
         }
-        
+        logger.debug("   Staff : {}",staff);
         model.addAttribute("carriers", keyCarriers);
         model.addAttribute("roles", AppConstants.roles);
         model.addAttribute("positions", AppConstants.positions);

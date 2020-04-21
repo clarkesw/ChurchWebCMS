@@ -34,6 +34,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class UiController extends BaseController{
@@ -184,14 +185,15 @@ public class UiController extends BaseController{
         return "sermon";
     }
     
-//    @GetMapping("/prayer")
-//    public String showPrayerPage(ModelMap model){
-//        logger.debug("GET /prayer/  " );     
-//
-//        model.addAttribute("church", getChurchInfo());
-//        model.addAttribute("page", pageService.retrieveOnePage("event"));
-//        return "prayer";
-//    }
+    @GetMapping("/testMe")
+    @ResponseBody
+    public String testPage(ModelMap model){
+        logger.debug("GET /testMe/  " );     
+        String uri = "http://labs.bible.org/api/?passage=Exodus%204:4";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+        return result;
+    }
     
     @GetMapping("/toolbar")
     public String toolBar(){
