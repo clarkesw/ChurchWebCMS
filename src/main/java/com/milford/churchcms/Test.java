@@ -1,27 +1,13 @@
 package com.milford.churchcms;
 
-import com.milford.churchcms.service.TextMessageService;
-
 
 public class Test{
 
-//     public static void main(String []args) throws Exception{
-//         
-//         TextMessageService text = new TextMessageService();
-//         
-//         text.sendMessage(staff, messageText, requester)
-//         
-//     }
-     
-     public static void exceptionTry(){// throws Exception{
-        int a = 0;
-   //     try{
-            a = 10/0;
-    //    }catch(Exception ex){
-          //  ex.printStackTrace(); // In Black
-    //        throw new OurException("This is messy"); //In Red
-    //    }
-    }
+     public static void main(String []args) throws Exception{
+         ProcessorImpl processor = new ProcessorImpl();
+         String result = processor.process(() -> "abc");
+         System.out.println(result);
+     }
 
 }
 

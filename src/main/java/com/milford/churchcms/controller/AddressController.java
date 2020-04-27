@@ -6,12 +6,7 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Address;
-import com.milford.churchcms.dao.ChurchInfo;
-import com.milford.churchcms.dao.Staff;
-import com.milford.churchcms.repository.AddressRepository;
-import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.repository.StaffRepository;
-import java.util.List;
+import com.milford.churchcms.service.AddressService;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -34,56 +29,43 @@ public class AddressController{
     private HttpSession session;
     
     @Autowired
-    AddressRepository repository;
-    
-    @Autowired
-    StaffRepository staffRepository;
-    
-    @Autowired
-    ChurchRepository churchRepository;
+    AddressService service;
         
     @GetMapping("/addAddressForStaff")
-    public String addAddressForStaff(ModelMap model, @RequestParam String fisrtName, @RequestParam String lastName){
-        
+    public String addAddressForStaffGet(ModelMap model, @RequestParam String fisrtName, @RequestParam String lastName){
         logger.debug("GET addAddressForStaff  Name : {}",fisrtName);
         
-        model.put("name", fisrtName);
-        Address address = staffRepository.findByFirstNameInAndLastNameIn(fisrtName, lastName).get(0).getHomeAddress();
+        Address address = service.addAddressForStaffGet(fisrtName, lastName);
         
+        model.put("name", fisrtName);
         if(address != null){
             model.put("address",address);
         }else{
             model.put("address", new Address());
         }
+        
         logger.debug(" Address: {}",address);
         return "cms/add-address";
     }    
     
     @PostMapping("/addAddressForStaff")
-    public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("address") Address address, BindingResult result, 
+    public String addAddressForStaffPost(ModelMap model,@Valid @ModelAttribute("address") Address address, BindingResult result, 
             @RequestParam String fisrtName, @RequestParam String lastName){
         logger.debug("POST addAddressForStaff  Name : {}",fisrtName);
-
-        Staff tempStaff = staffRepository.findByFirstNameInAndLastNameIn(fisrtName, lastName).get(0);
-        logger.debug("Address: {}",address);
+        logger.debug("   Address: {}",address);
         
-        staffRepository.delete(tempStaff);
-        tempStaff.setHomeAddress(address);
-        
-        staffRepository.save(tempStaff);
-        
+        service.addAddressForStaffPost(fisrtName, lastName, address);
         return "redirect:list-staffers"; 
     }    
  
     @GetMapping("/addAddressForChurch")
-    public String addAddressForChurch(ModelMap model, @RequestParam int address_id){
+    public String addAddressForChurchGet(ModelMap model, @RequestParam int address_id){
         logger.debug("GET addAddressForChurch  Address : {}",address_id);
         
         model.put("name", "Church");
         session.setAttribute("AddressID", address_id);
         if(address_id != -1){
-            Address churchAddress = repository.findById(address_id).get();
-            model.put("address",churchAddress);
+            model.put("address",service.addAddressForChurchGet(address_id));
         }else{
             model.put("address", new Address());
         }
@@ -91,27 +73,11 @@ public class AddressController{
     }    
     
     @PostMapping("/addAddressForChurch")
-    public String addAddressForChurch(ModelMap model,@Valid @ModelAttribute("address") Address address){
+    public String addAddressForChurchPost(ModelMap model,@Valid @ModelAttribute("address") Address address){
         logger.debug("Post addAddressForChurch  Name : {}",address);
         Integer id = (Integer)session.getAttribute("AddressID");
-        ChurchInfo myInfo = returnInfo();
-        logger.debug("   ChurchInfo myInfo : {}",myInfo);
-         
-        churchRepository.delete(myInfo);
-        myInfo.setAddress(address);
         
-        churchRepository.save(myInfo);
-        
+        service.addAddressForChurchPost(id,address);
         return "redirect:list-info"; 
     }    
-    
-    private ChurchInfo returnInfo(){
-        List<ChurchInfo> infoList = churchRepository.findAll();
-        ChurchInfo myInfo = null;        
-        for(ChurchInfo info : infoList){
-            myInfo = info;
- 
-        }
-        return myInfo;
-    }
 }

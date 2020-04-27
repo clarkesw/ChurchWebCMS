@@ -48,10 +48,10 @@ public class CalendarEventController extends BaseController{
         
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){
-        List<CalendarEvent> retrieveEvents = repository.findAll();
-        logger.debug("GET /list-events # of Events : {} ", retrieveEvents.size());
+        List<CalendarEvent> retrieveEvents = service.showEvent();
+        logger.debug("GET /list-events  Event size : {} ", retrieveEvents.size());
 
-        model.put("events", retrieveEvents);
+        model.addAttribute("events", retrieveEvents);
         return "cms/list-events";
     }
 

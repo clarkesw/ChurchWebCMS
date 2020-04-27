@@ -5,11 +5,7 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.dao.CalendarEvent;
-import com.milford.churchcms.dao.WebPage;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**

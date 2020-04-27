@@ -7,6 +7,7 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.repository.BannerRepository;
+import com.milford.churchcms.service.BannerService;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class BannerController extends BaseController{
     @Autowired
     BannerRepository repository;
         
+    @Autowired
+    BannerService service;
+    
     @GetMapping("/list-banner")
     public String showBanner(ModelMap model){
         Optional<Banner>  optBanner = repository.findTopByOrderByIdDesc();
@@ -45,7 +49,7 @@ public class BannerController extends BaseController{
     }
 
     @GetMapping("/add-banner")
-    public String showAddBanner(ModelMap model, @ModelAttribute("banner") Banner banner){     
+    public String addBanner(ModelMap model, @ModelAttribute("banner") Banner banner){     
         logger.debug("GET /add-banner Banner : {}",banner);
         return "cms/add-banner";
     }
@@ -56,14 +60,14 @@ public class BannerController extends BaseController{
         if(result.hasErrors())
             return "cms/add-banner";
 
-        repository.save(new Banner(banner.getMessage()));
+        service.addBanner(banner);
         return "redirect:list-banner";
     }
     
     @GetMapping("/delete-banner")
     public String deleteBanner(){
         logger.debug("GET /delete-banner");
-        repository.deleteAll();
+        service.deleteBanner();
         return "redirect:list-banner";
     }
 }

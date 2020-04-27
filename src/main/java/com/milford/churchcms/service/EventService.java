@@ -6,72 +6,27 @@
 package com.milford.churchcms.service;
 
 import com.milford.churchcms.dao.CalendarEvent;
-import com.milford.churchcms.util.DateUtil;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
+import com.milford.churchcms.repository.CalendarEventRepository;
+import com.milford.churchcms.repository.StaffRepository;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 @Service
 public class EventService {
     public Logger logger = LoggerFactory.getLogger(EventService.class);
-    private static final List<CalendarEvent> events = new ArrayList<CalendarEvent>();
-    private static int eventCount = 2;
-
-    static Date endDate = new Date();
     
-    static {
-        endDate.setDate(23);
-        endDate.setHours(20);
-    //    events.add(new CalendarEvent(0, "Learn Spring MVC",new Date() ,endDate ));
-    //    events.add(new CalendarEvent(1, "Go Fishing",new Date() ,endDate ));
-    }
-
-    public List<CalendarEvent> retrieveEvents() {
-        logger.debug("retrieveEvents title: {}" + events.get(0));
-        
-        return events;
-    }
-
-    public CalendarEvent retrieveOneEvent(int id) {
-        logger.debug("retrieveOneEvent id: {}" + id);
-        for (CalendarEvent event : events) {
-            if (event.getId() == id) {
-                return event;
-            }
-        }
-        return null;
-    }
+    @Autowired
+    CalendarEventRepository repository;
     
-    public void addEvent(Date start, Date end,String title, String url, boolean isRepeated) {
-        logger.debug("addEvent title: {}" + title);
-     //   events.add(new CalendarEvent(++eventCount, title, start, end));
-    }
+    @Autowired
+    StaffRepository staffRepository;
     
-    public void addLiteEvent(String title, Date start, Date end) {
-        logger.debug("addLiteEvent title: {}" + title);
-     //   events.add(new CalendarEvent(++eventCount, title, start, end));
-    }
- 
-    public void deleteEvent(int id) {
-        logger.debug("deleteEvent id: {}" + id);
-        Iterator<CalendarEvent> iterator = events.iterator();
-        while (iterator.hasNext()) {
-            CalendarEvent event = iterator.next();
-            if (event.getId() == id) {
-                iterator.remove();
-            }
-        }
-    }
-    
-    public void updateEvent(CalendarEvent event){
-        logger.debug("EventService.updateEvent id: {}" + event.getId());
-        deleteEvent(event.getId());  
-        
-        events.add(DateUtil.updateTimeDate(event));
+    public List<CalendarEvent> showEvent(){
+        return repository.findAll();
     }
 }

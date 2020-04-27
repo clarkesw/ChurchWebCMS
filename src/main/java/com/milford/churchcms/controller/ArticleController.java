@@ -7,6 +7,7 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Article;
 import com.milford.churchcms.repository.ArticleRepository;
+import com.milford.churchcms.service.ArticleService;
 import java.util.Collection;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
@@ -26,36 +27,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ArticleController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(ArticleController.class);
-
+    
     @Autowired
-    ArticleRepository repository;
+    ArticleService service;
     
     @Autowired 
     private HttpSession session;
     
     @GetMapping("/list-articles")
-    public String showArticle(ModelMap model){
+    public String showArticlePost(ModelMap model){
         logger.debug("GET /list-articles");
         String username = getLoggedInName(model);
-        model.put("articles", repository.findAll());
+        model.put("articles", service.showArticlePost());
         return "cms/list-articles";
     }
         
     @GetMapping("/listArticlesForPage")
-    public String showArticle(ModelMap model,@RequestParam String page){
+    public String showArticleGet(ModelMap model,@RequestParam String page){
         logger.debug("GET /listArticlesForPage page : {}",page); 
         session.setAttribute("ArticalWebPage", page);
-        model.put("articles", repository.findAllByPageName(page));
+        model.put("articles", service.showArticleGet(page));
         return "cms/list-articles";
-    }
-
-    private String getLoggedInName(ModelMap model) {
-        Collection<Object> values = model.values();
-        return (String)model.get("user");
     }
  
     @GetMapping("/add-articles")
-    public String showAddArticle(ModelMap model, @ModelAttribute("article") Article article){   
+    public String addArticleGet(ModelMap model, @ModelAttribute("article") Article article){   
         logger.debug("GET /add-articles Article : {}",article); 
         String pageName = (String)session.getAttribute("ArticalWebPage");
         if(pageName != null)
@@ -64,21 +60,19 @@ public class ArticleController extends BaseController{
     }
     
     @PostMapping("/add-articles")
-    public String addArticle(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
+    public String addArticlePost(ModelMap model,@Valid @ModelAttribute("article") Article article, BindingResult result){
         logger.debug("POST /add-articles Article : {}",article); 
         if(result.hasErrors())
             return "cms/add-article";
-        Article lastArt = repository.findTopByOrderByLastModified();
-        int articleId = (lastArt != null) ? lastArt.getId() + 1 : 1;
-        repository.save(new Article(articleId, article.getTitle(),article.getPageName(),article.getSubTitle(),
-                                    article.getContent(),article.getImageURL())); 
+        
+        service.addArticlePost(article);
         return "redirect:list-articles";
     }
     
     @GetMapping("/delete-article")
     public String deleteArticle(@RequestParam int id){
         logger.debug("deleteArticle ID : {}",id); 
-        repository.deleteById(id);  
+        service.deleteArticle(id);
         return "redirect:list-articles";
     }
     
@@ -87,22 +81,22 @@ public class ArticleController extends BaseController{
         logger.debug("POST /update-article article : {}",article);
         if(result.hasErrors())
             return "cms/add-article";
-        repository.delete(article);
         
-        Article lastArt = repository.findTopByOrderByLastModified();
-        int articleId = (lastArt != null) ? lastArt.getId() + 1 : 1;
-        repository.save(new Article(articleId, article.getTitle(),article.getPageName(),article.getSubTitle(),
-                                    article.getContent(),article.getImageURL())); 
-
+        service.updateArticlePost(article);
         return "redirect:list-articles";
     }
     
     @GetMapping("/update-article")
-    public String updateShowArticle(ModelMap model, @RequestParam int id){
+    public String updateArticleGet(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-article ID : {}",id);
-        Optional<Article> article = repository.findById(id);
+        Optional<Article> article = service.updateArticleGet(id);
         
         model.put("article", article.get());
         return "cms/add-article";
     }    
+    
+    private String getLoggedInName(ModelMap model) {
+        Collection<Object> values = model.values();
+        return (String)model.get("user");
+    }
 }
