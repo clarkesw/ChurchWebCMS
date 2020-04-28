@@ -12,6 +12,7 @@ import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.ServiceTimeRepository;
 import com.milford.churchcms.repository.StaffRepository;
+import com.milford.churchcms.service.ChurchInfoService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -34,17 +35,11 @@ public class ChurchInfoController extends BaseController{
     public Logger logger = LoggerFactory.getLogger(ChurchInfoController.class);
     
     @Autowired
-    ChurchRepository churchRepository;
-    
-    @Autowired
-    ServiceTimeRepository timeRepository;    
-    
-    @Autowired
-    StaffRepository staffRepository;
+    ChurchInfoService service;
         
     @GetMapping("/list-info")
     public String showInfo(ModelMap model){
-        Optional<ChurchInfo> info = churchRepository.findTopByOrderByIdDesc();
+        Optional<ChurchInfo> info = service.showInfo();
         
         if(info.isPresent()){
             logger.debug("GET /list-info Info: {}",info.get());
@@ -60,30 +55,26 @@ public class ChurchInfoController extends BaseController{
     public String updateInfoPost(ModelMap model,@Valid @ModelAttribute("info") ChurchInfo info, BindingResult result, 
             @RequestParam int id){
         logger.debug("POST /update-info Info :{}",info);
-        List<Staff> staffers = staffRepository.findAll();
-        
+         
         if(result.hasErrors())
             return "cms/add-event";
 
-        if(id != -1)
-            churchRepository.deleteAll();
-        
-        churchRepository.save(new ChurchInfo(info.getName(),info.getMissionStatement(),info.getEmail(),
-                info.getAddress(),info.getTelephone(),staffers)); 
+        service.updateInfoPost(info, id);
         return "redirect:list-info";
     }
     
     @GetMapping("/update-info")
     public String updateShowInfo(ModelMap model){
-        ChurchInfo myInfo = returnInfo();
-        logger.debug("GET /update-info Church Info : {}",myInfo);
-        List<Staff> findAll = staffRepository.findAll();
+        Optional<ChurchInfo> myInfo = service.showInfo();
+        
+        List<Staff> findAll = service.updateShowInfo();
         model.addAttribute("staffList",findAll); 
         
-        if(myInfo != null){      
-           model.put("info", myInfo);         
+        if(myInfo.isPresent()){ 
+           logger.debug("GET /update-info Church Info : {}", myInfo.get());
+           model.put("info", myInfo.get());         
         }else{
-           model.put("info", new ChurchInfo());  
+           model.addAttribute("info", new ChurchInfo());  
         }   
         
         return "cms/add-info";
@@ -93,17 +84,13 @@ public class ChurchInfoController extends BaseController{
     public String updateServicePost(ModelMap model,@Valid @ModelAttribute("serviceTime") ServiceTimes time){
         logger.debug("POST /editServiceTimes Time :{}",time);
         
-        ChurchInfo myInfo = returnInfo();
-        churchRepository.delete(myInfo);
-        
-        myInfo.getServiceTimes().add(time);
-        churchRepository.save(myInfo);
+        service.updateServicePost(time);
         return "redirect:list-info";
     }
     
     @GetMapping("/editServiceTimes")
     public String updateShowService(ModelMap model){
-        List<ServiceTimes> serviceTimes = timeRepository.findAll();
+        List<ServiceTimes> serviceTimes = service.updateShowService();
         logger.debug("GET /editServiceTimes Times : {}",serviceTimes.size());
         
         model.addAttribute("days", AppConstants.days);
@@ -113,13 +100,4 @@ public class ChurchInfoController extends BaseController{
         return "cms/add-serviceTime";
     }    
     
-    private ChurchInfo returnInfo(){
-        List<ChurchInfo> infoList = churchRepository.findAll();
-        ChurchInfo myInfo = null;        
-        for(ChurchInfo info : infoList){
-            myInfo = info;
-        }
-        
-        return myInfo;
-    }
 }
