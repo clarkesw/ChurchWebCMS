@@ -5,65 +5,42 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.WebPage;
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.milford.churchcms.repository.WebPageRepository;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class WebPageService {
 
     public Logger logger = LoggerFactory.getLogger(WebPageService.class);
-    private final List<WebPage> webPages = new ArrayList<>();
-    private final WebPage homePage = new WebPage(AppConstants.WebPage.HOME, "../images/background.png","www.google.com" ,AppConstants.WebPage.HOME, "The church is pregnant.",true);
-    
-    {
-        webPages.add(homePage);
-    }
 
-    public List<WebPage> retrievePages() {
-        return webPages;
+    @Autowired
+    WebPageRepository repository;
+    
+    public List<WebPage> showPages(){
+        return repository.findAll();
     }
     
-    public WebPage retrieveOnePage(int id) {
-        logger.debug("WebPageService.retrieveOnePage id: {}" + id);
-        for (WebPage page : webPages) {
-            if (page.getId() == id) {
-                return page;
-            }
-        }
-        return null;
+    public void  updatePagePost(WebPage page){
+        repository.delete(page); 
+        repository.save(new WebPage(page.getTitle(),page.getBgImage(),page.getLink(),page.getPageName(),page.getMessage(),page.isIsVisible()));        
     }
     
-   public WebPage retrieveOnePage(String name) {
-        logger.debug("WebPageService.retrieveOnePage name: " + name);
-        for (WebPage page : webPages) {
-            if (page.getPageName().equalsIgnoreCase(name)) {
-                return page;
-            }
-        }
-        return null;
+    public Optional<WebPage> findById(int id){
+        return repository.findById(id);
     }
     
-    public void deletePage(int id) {
-        logger.debug("WebPageService.deletePage id: {}" + id);
-        Iterator<WebPage> iterator = webPages.iterator();
-        while (iterator.hasNext()) {
-            WebPage page = iterator.next();
-            if (page.getId() == id) {
-                iterator.remove();
-            }
-        }
+    public void deleteById(int id){
+        repository.deleteById(id);
     }
     
-    public void updatePage(WebPage page){
-        logger.debug("WebPageService.updatePage id: {}" + page.getId());
-        deletePage(page.getId());    
-    	webPages.add(page);
-        logger.debug("WebPageService.updatePage id: {}" + webPages.get(0));
+    public void addWebPagePost(WebPage page){
+        repository.save(new WebPage(page.getTitle(),page.getBgImage(), page.getLink(), page.getPageName(), 
+                page.getMessage(), page.isIsVisible()));   
     }
 }

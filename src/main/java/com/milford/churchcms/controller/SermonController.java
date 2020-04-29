@@ -8,8 +8,7 @@ package com.milford.churchcms.controller;
 import com.milford.churchcms.dao.Description;
 import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
-import com.milford.churchcms.repository.SermonRepository;
-import java.util.Collection;
+import com.milford.churchcms.service.SermonService;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
@@ -33,50 +32,40 @@ public class SermonController extends BaseController{
     public Logger logger = LoggerFactory.getLogger(SermonController.class);
     
     @Autowired
-    SermonRepository repository;
+    SermonService service;
     
     @Autowired 
     private HttpSession session;
         
     @GetMapping("/list-sermons")
     public String showSermon(ModelMap model){
-        List<Sermon> sermons = repository.findAll();
+        List<Sermon> sermons = service.showSermon();
         logger.debug("GET /list-sermons Sermon size: {}",sermons.size());
         model.put("sermons", sermons);
 
         return "cms/list-sermons";
     }
-
-    private String getLoggedInName(ModelMap model) {
-        Collection<Object> values = model.values();
-        return (String)model.get("user");
-    }
  
     @GetMapping("/add-sermons")
-    public String showAddSermon(ModelMap model, @ModelAttribute("sermon") Sermon sermon){     
+    public String showAddSermonGet(ModelMap model, @ModelAttribute("sermon") Sermon sermon){     
         logger.debug("GET /add-sermons Sermon : {}",sermon);
         return "cms/add-sermon";
     }
     
     @PostMapping("/add-sermons")
-    public String addSermon(ModelMap model,@Valid @ModelAttribute("sermon") Sermon sermon, BindingResult result){
+    public String addSermonPost(ModelMap model,@Valid @ModelAttribute("sermon") Sermon sermon, BindingResult result){
         logger.debug("POST /add-sermons Sermon : {}",sermon);
         if(result.hasErrors())
             return "cms/add-sermon";
 
-        Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
-        int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
-        logger.debug("   Sermon ID : {}",lastSermonId);
-        
-        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), sermon.getDescription(),
-                sermon.getSermonDate(),sermon.getPassages()));
+        service.addSermonPost(sermon);
         return "redirect:list-sermons";
     }
     
     @GetMapping("/delete-sermon")
     public String deleteSermon(@RequestParam int id){
         logger.debug("/delete-sermon Sermon : {}",id);
-        repository.deleteById(id);
+        service.deleteSermon(id);
         return "redirect:list-sermons";
     }
         
@@ -86,22 +75,20 @@ public class SermonController extends BaseController{
         if(result.hasErrors())
             return "cms/add-sermon";
         
-        repository.delete(sermon);
-        Optional<Sermon> lastSermon = repository.findTopByOrderBySermonDateDesc();
         List<Passage> passages = (List<Passage>)session.getAttribute("passages");
-        int lastSermonId = (lastSermon.isPresent()) ? lastSermon.get().getId() + 1 : 1;
-        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), sermon.getDescription(),
-                sermon.getSermonDate(),passages));
+        service.updateSermonPost(sermon, passages);
         return "redirect:list-sermons";
     }
     
     @GetMapping("/update-sermon")
-    public String updateShowSermon(ModelMap model, @RequestParam int id){
+    public String updateShowSermonGet(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-sermon ID: {}", id);
-        Optional<Sermon> sermon = repository.findById(id);
-        model.addAttribute("passageList", sermon.get().getPassages());
+        Optional<Sermon> sermon = service.updateShowSermonGet(id);
         logger.debug("   passageList: {}", sermon.get().getPassages());
+        
+        model.addAttribute("passageList", sermon.get().getPassages());
         session.setAttribute("passages", sermon.get().getPassages());
+        
         if(sermon.isPresent())
             model.put("sermon", sermon.get());
         return "cms/add-sermon";
@@ -114,29 +101,21 @@ public class SermonController extends BaseController{
             return "cms/add-description";
         
         Integer sermonId = (Integer)session.getAttribute("sermonId");
-        Integer lastSermonIdRep = repository.getGreatestSid().get(0);
-        Sermon sermon = repository.findById(sermonId).get();
-       
-        repository.deleteById(sermonId);
-        
         List<Passage> passages = (List<Passage>)session.getAttribute("passages");
-        int lastSermonId = (lastSermonIdRep != null) ? lastSermonIdRep + 1 : 1;
-        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description.getDescription(),
-                sermon.getSermonDate(),passages));
+        service.addDescriptionSermonPost(passages, description, sermonId);
         return "redirect:list-sermons";
     }
     
     @GetMapping("/addDescriptionToSermon")
-    public String addDescriptionSermon(ModelMap model, @RequestParam int id){
+    public String addDescriptionSermonGet(ModelMap model, @RequestParam int id){
         logger.debug("GET /addDescriptionToSermon ID: {}", id);
         session.setAttribute("sermonId", id);
-        Optional<Sermon> sermon = repository.findById(id);
+        Optional<Sermon> sermon = service.updateShowSermonGet(id);
         
-        if(sermon.isPresent() && sermon.get().getDescription() != null){
-            model.addAttribute("passages", sermon.get().getPassages());
+        model.addAttribute("passages", sermon.get().getPassages());
+        if(sermon.isPresent() && sermon.get().getDescription() != null){       
             model.addAttribute("description", sermon.get().getDescription());
         }else{
-            model.addAttribute("passages", sermon.get().getPassages());
             model.addAttribute("description", new Description());
         }
         

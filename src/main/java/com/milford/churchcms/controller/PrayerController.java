@@ -6,11 +6,7 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Prayer;
-import com.milford.churchcms.dao.Staff;
-import com.milford.churchcms.repository.PrayerRepository;
-import com.milford.churchcms.repository.StaffRepository;
-import com.milford.churchcms.service.TextMessageService;
-import java.util.List;
+import com.milford.churchcms.service.PrayerService;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,13 +23,7 @@ public class PrayerController{
     public Logger logger = LoggerFactory.getLogger(PrayerController.class);
     
     @Autowired
-    PrayerRepository repository;
-    
-    @Autowired
-    StaffRepository StaffRepo;
-    
-    @Autowired
-    TextMessageService textService;
+    PrayerService service;
      
     @GetMapping("/savePrayer")
     public String addPrayer(ModelMap model){
@@ -46,22 +36,14 @@ public class PrayerController{
     public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("prayer") Prayer prayer){
         logger.debug("POST /prayer Prayer : {}",prayer);
 
-        String fullName = prayer.getFirstName() + " " + prayer.getLastName();
-        List<Staff> staffers = StaffRepo.findByRecievePrayerRequestsTrue();
-        
-        logger.debug("   name : {}", fullName);
-        staffers.forEach( staff -> 
-                textService.sendMessage(staff, prayer.getPrayerRquest(), fullName)
-        );
- 
-        repository.save(prayer);
+        service.addAddressForStaff(prayer);
         return "redirect:index.html"; 
     }    
     
     @GetMapping("/showPrayerRequests")
     public String showPrayer(ModelMap model){
         logger.debug("GET /showPrayerRequests ");
-        model.addAttribute("prayers", repository.findAll());
+        model.addAttribute("prayers", service.showPrayer());
         return "cms/list-prayers";
     }    
 }

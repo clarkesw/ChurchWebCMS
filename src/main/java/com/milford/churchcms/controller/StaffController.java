@@ -6,16 +6,10 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
-import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
-import com.milford.churchcms.repository.CalendarEventRepository;
-import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.repository.StaffRepository;
-import com.milford.churchcms.repository.UserRepository;
+import com.milford.churchcms.service.StaffService;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -35,35 +29,26 @@ public class StaffController extends BaseController{
     public Logger logger = LoggerFactory.getLogger(StaffController.class);
     private int staffId;
     private String role;
-    
-    @Autowired
-    StaffRepository repository;
-    
-    @Autowired
-    ChurchRepository churchRepo;
-    
-    @Autowired
-    CalendarEventRepository calendarRepo;
  
     @Autowired
-    UserRepository userRepo;
+    StaffService service;
         
     @Autowired 
     private HttpSession session;
         
     @GetMapping("/list-staffers")
-    public String showArticle(ModelMap model){
-        List<Staff> allstaff = repository.findAll();
+    public String showStaff(ModelMap model){
+        List<Staff> allstaff = service.showStaff();
         logger.debug("GET /list-staffers Staffers: {}",allstaff.size()); 
         
-        model.put("staffers", allstaff); 
+        model.addAttribute("staffers", allstaff); 
         return "cms/list-staffers";
     }
  
     @GetMapping("/add-staff")
-    public String showAddStaff(ModelMap model, @RequestParam boolean isUser){   
+    public String addStaffGet(ModelMap model, @RequestParam boolean isUser){   
         User currentUser = (User)session.getAttribute("loggedInUser");
-        logger.debug("GET /add-staff User: {}", currentUser);  
+        logger.debug("GET /add-staff currentUser: {}", currentUser);  
         Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
         
         Staff staff = new Staff();
@@ -72,8 +57,6 @@ public class StaffController extends BaseController{
             staff.setIsUser(true);
             model.addAttribute("unlockRole","good");
         }
-            
-       logger.debug("   isUser: {}", staff);  
        
         model.addAttribute("staff", staff);
         model.addAttribute("roles", AppConstants.roles);
@@ -84,12 +67,13 @@ public class StaffController extends BaseController{
     }
     
     @PostMapping("/add-staff")
-    public String addStaff(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result){
+    public String addStaffPost(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result){
         logger.debug("POST /add-staff Staff : {}",staff); 
         if(result.hasErrors())
             return "cms/add-staff";
         staff.setConFullName();
-        repository.save(staff); 
+        
+        service.addStaffPost(staff);
         return "redirect:list-staffers";
     }
     
@@ -97,10 +81,7 @@ public class StaffController extends BaseController{
     public String deleteStaff(@RequestParam int id){
         logger.debug("GET /delete-staff ID : {}",id); 
         
-        Staff staff = repository.getOne(id);
-        int userId = staff.getUser().getId();
-        userRepo.deleteById(userId);
-        repository.deleteById(id);  
+        service.deleteStaff(id);
         return "redirect:list-staffers";
     }
     
@@ -109,23 +90,18 @@ public class StaffController extends BaseController{
         logger.debug("POST /update-staff Staff : {}",staff);
         if(result.hasErrors())
             return "cms/add-staff";
-        User user = staff.getUser();
-        
-        if(user != null)
-            userRepo.delete(staff.getUser());
-        repository.delete(staff);
-        repository.save(staff);  
+
+        service.updateStaffPost(staff);
         return "redirect:list-staffers";
     }
     
     @GetMapping("/update-staff")
-    public String updateShowStaff(ModelMap model, @RequestParam int id){
+    public String updateStaffGet(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-staff  ID : {}",id);
         User currentUser = (User)session.getAttribute("loggedInUser");
-        Staff staff = repository.findById(id).get();
+        Staff staff = service.updateStaffGet(id);
         Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
-        
-        
+          
         if("admin".equals(currentUser.getRole()) && staff.isIsUser())
             model.addAttribute("unlockRole","good");
         
@@ -145,58 +121,27 @@ public class StaffController extends BaseController{
     
     @PostMapping("/update-user")
     public String updateUserPost(ModelMap model,@Valid @ModelAttribute("user") User user, BindingResult result){
-        List<Staff> savedStaff = null;
-        ChurchInfo church = null;
-        
         logger.debug("POST /update-user User : {}",user);
        
-        user.setRole(role);
+        service.updateUserPost(user);
         if(result.hasErrors())
             return "cms/update-user";
-        userRepo.delete(user);
-        List<Staff> staff = repository.findAll();
-        Optional<ChurchInfo> optChurch = churchRepo.findTopByOrderByIdDesc();
-        
-        if(optChurch.isPresent()){
-            church = optChurch.get();
-            churchRepo.deleteAll();
-        }
-        
-        ListIterator<Staff> staffIterator = staff.listIterator();
-        while(staffIterator.hasNext()){
-            Staff nextStaff = staffIterator.next();
-            if(nextStaff.getId().equals(staffId)){
-                repository.deleteById(staffId);
-                nextStaff.setUser(user);
-                repository.save(nextStaff);            
-            }
-        }
-
-        if(optChurch.isPresent()){
-            church.setStaffers(savedStaff);
-            churchRepo.save(church);
-        }
-        
         return "redirect:list-staffers";
     }
     
     @GetMapping("/update-user")
-    public String updateShowUser(ModelMap model, @RequestParam int userId, @RequestParam int staffId){
+    public String updateUserGet(ModelMap model, @RequestParam int userId, @RequestParam int staffId){
         logger.debug("GET /update-user  ID : {}",userId);
         User currentUser = (User)session.getAttribute("loggedInUser");
-       
-        Optional<User> optUser = userRepo.findById(userId);
-        User user = optUser.get();
-
-        user.setBlankPassword();
+        
+        User user = service.findUserById(userId);
+        model.put("user", user);
         logger.debug("User : {}",user);
-                    
-       if(!currentUser.getUsername().equals(optUser.get().getUsername()))
+        
+        if(!currentUser.getUsername().equals(user.getUsername()))
            return "redirect:list-staffers";
   
-        model.put("user", user);
-        this.staffId = staffId;
-        role = currentUser.getRole();
+        service.updateUserGet(userId, staffId, currentUser);
         
         return "cms/add-user";
     }     

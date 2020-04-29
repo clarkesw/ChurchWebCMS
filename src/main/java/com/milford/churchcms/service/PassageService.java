@@ -5,10 +5,8 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
-import com.milford.churchcms.repository.BannerRepository;
 import com.milford.churchcms.repository.PassageRepository;
 import com.milford.churchcms.repository.SermonRepository;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *

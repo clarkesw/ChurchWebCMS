@@ -32,13 +32,10 @@ public class WebPageController extends BaseController{
     @Autowired
     WebPageService service;
     
-    @Autowired
-    WebPageRepository repository;
-    
     @GetMapping("/list-pages")
     public String showPages(ModelMap model){
         logger.debug("/list-pages ");
-        model.put("pages", repository.findAll());
+        model.put("pages", service.showPages());
         return "cms/list-pages";
     }
     
@@ -49,14 +46,13 @@ public class WebPageController extends BaseController{
         if(result.hasErrors())
             return "/cms/add-page";
 
-        repository.delete(page); 
-        repository.save(new WebPage(page.getTitle(),page.getBgImage(),page.getLink(),page.getPageName(),page.getMessage(),page.isIsVisible()));
+        service.updatePagePost(page);
         return "redirect:list-pages";
     }
     
     @GetMapping("/update-page")
-    public String updateShowPage(ModelMap model, @RequestParam int id){
-        Optional<WebPage> page = repository.findById(id);
+    public String updatePageGet(ModelMap model, @RequestParam int id){
+        Optional<WebPage> page = service.findById(id);
         logger.debug("GET /update-page WebPage: {}", page.get());
         
         model.put("page", page.get());
@@ -64,27 +60,25 @@ public class WebPageController extends BaseController{
     }   
     
     @GetMapping("/add-pages")
-    public String showAddWebPage(ModelMap model,@Valid @ModelAttribute("page") WebPage page){    
+    public String addWebPageGet(ModelMap model,@Valid @ModelAttribute("page") WebPage page){    
         logger.debug("GET /add-pages WebPage: {}",page);
         return "cms/add-page";
     }
     
     @PostMapping("/add-pages")
-    public String addWebPage(ModelMap model,@Valid @ModelAttribute("page") WebPage page, BindingResult result){
+    public String addWebPagePost(ModelMap model,@Valid @ModelAttribute("page") WebPage page, BindingResult result){
         logger.debug("POST /add-pages WebPage : {}",page);
         if(result.hasErrors())
             return "cms/add-page";
-        Optional<WebPage> findById = repository.findById(page.getId());
-        logger.debug(" ***** " + findById.isPresent());
+        Optional<WebPage> webPage = service.findById(page.getId());
        
-        if(findById.isPresent())
-            repository.deleteById(page.getId() +1);
+        if(webPage.isPresent())
+            service.deleteById(page.getId() +1);
+        
         try{
-            repository.save(new WebPage(page.getTitle(),page.getBgImage(), page.getLink(), page.getPageName(), 
-                page.getMessage(), page.isIsVisible()));   
+            service.addWebPagePost(page);
         }catch(Exception e){
-            e.printStackTrace();
-           // throw new DBException("Add Web Page ",DbExceptionDescription.NOT_UNIQUE);
+            e.printStackTrace();       
         }
     
         return "redirect:list-pages";

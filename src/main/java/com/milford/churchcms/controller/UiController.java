@@ -13,19 +13,10 @@ import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.Prayer;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.dao.Staff;
-import com.milford.churchcms.repository.ArticleRepository;
-import com.milford.churchcms.repository.BannerRepository;
-import com.milford.churchcms.repository.CalendarEventRepository;
-import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.repository.SermonRepository;
-import com.milford.churchcms.repository.StaffRepository;
-import com.milford.churchcms.repository.WebPageRepository;
-import com.milford.churchcms.service.MyJmsMessage;
-import com.milford.churchcms.service.WebPageService;
+import com.milford.churchcms.service.UIService;
 import com.milford.churchcms.util.DateUtil;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,51 +33,25 @@ public class UiController extends BaseController{
     public Logger logger = LoggerFactory.getLogger(UiController.class);
     
     @Autowired
-    CalendarEventRepository eventRepository;
-        
-    @Autowired
-    ChurchRepository churchRepository;
-    
-    @Autowired
-    SermonRepository sermonRepository;
-        
-    @Autowired
-    ArticleRepository articleRepository;
-    
-    @Autowired
-    WebPageRepository pageRepository;
-    
-    @Autowired
-    MyJmsMessage myJmsMessage;
-        
-    @Autowired
-    WebPageService pageService;
-    
-    @Autowired
-    StaffRepository staffRepository;
-    
-    @Autowired
-    BannerRepository bannerRepository;
-    
-    @Autowired 
-    private HttpSession session;
+    UIService service;
         
     @GetMapping("/calEventArray")
     @ResponseBody
     public List<CalendarEvent> getCalendarEvent(){
         logger.debug("GET /calEventArray");
-        return eventRepository.findAll();
+        return service.getCalendarEvent();
     }
     
     @GetMapping("/bannerMessage")
     @ResponseBody
     public String getBanner(){
-        Optional<Banner> message = bannerRepository.findTopByOrderByIdDesc();
-        logger.debug("GET /bannerMessage");
+        Optional<Banner> banner = service.getBanner();
         
-        if(message.isPresent())
-            return message.get().getMessage();
-        
+        if(banner.isPresent()){
+            logger.debug("GET /bannerMessage Message" + banner.get().getMessage());
+            return banner.get().getMessage();
+        }
+            
         return ""; 
     }
     
@@ -94,9 +59,9 @@ public class UiController extends BaseController{
     public String showPage(@PathVariable String name, ModelMap model){
         logger.debug("GET /page/" + name);
         
-        Optional<Sermon> sermon = sermonRepository.findTopByOrderBySermonDateDesc();
-        Optional<ChurchInfo> myChurch = churchRepository.findTopByOrderByIdDesc();
-        Article article = articleRepository.findTopByOrderByLastModified();
+        Optional<Sermon> sermon = service.findSermonDateDesc();
+        Optional<ChurchInfo> myChurch = service.findChurchInfoByIdDesc();
+        Article article = service.findArticleByLastModified();
         
         model.addAttribute("article", article);
         if(myChurch.isPresent()){
@@ -105,14 +70,14 @@ public class UiController extends BaseController{
         }
         if(sermon.isPresent())
             model.addAttribute("sermon", sermon.get());
-        model.addAttribute("page", pageRepository.findByPageName(name));
+        model.addAttribute("page", service.findByPageName(name));
         
         logger.debug("  sermon : {}", sermon);
         logger.debug("  church : {}", myChurch);
         logger.debug("  article : {}", article);
         
         if("calendar".equals(name)){
-            logger.debug(" Calendar " + pageRepository.findByPageName(name));
+            logger.debug(" Calendar " + service.findByPageName(name));
             return "calendar";
         }else if("prayer".equals(name)){
             model.addAttribute("contactMethods", AppConstants.Contact.contactMethods);
@@ -131,7 +96,7 @@ public class UiController extends BaseController{
     
     @GetMapping("/staff/{id}")
     public String getStaff(@PathVariable int id, ModelMap model){
-        Optional<Staff> staff = staffRepository.findById(id);
+        Optional<Staff> staff = service.findStaffById(id);
         if(staff.isPresent())
             model.addAttribute("contact", staff.get());
         return "contact";
@@ -140,13 +105,13 @@ public class UiController extends BaseController{
     @GetMapping("/event/{id}")
     public String showEventPage(@PathVariable int id, ModelMap model){
         logger.debug("GET /event/" + id);
-        Optional<CalendarEvent> calEvent = eventRepository.findById(id);
+        Optional<CalendarEvent> calEvent = service.findEventById(id);
         CalendarEvent oneEvent = calEvent.get();
        
-        Optional<Staff> staffer = staffRepository.findByFullName(oneEvent.getContactName());
+        Optional<Staff> staffer = service.findStaffByFullName(oneEvent);
         
         model.addAttribute("event",oneEvent);
-        model.addAttribute("church", getChurchInfo());
+        model.addAttribute("church", service.getChurchInfo());
         model.addAttribute("startdate", DateUtil.dateFormat(oneEvent.getStartDateCont()));
         model.addAttribute("enddate", DateUtil.dateFormat(oneEvent.getEndDateCont()));
         
@@ -163,25 +128,25 @@ public class UiController extends BaseController{
     
     @GetMapping("/article/{id}")
     public String showArticlePage(@PathVariable int id, ModelMap model){
-        Optional<Article> artOption = articleRepository.findById(id);
+        Optional<Article> artOption = service.findArticleById(id);
         Article article = artOption.get();
         logger.debug("GET /article/  : {}" + article);     
 
         model.addAttribute("article", article);
-        model.addAttribute("church", getChurchInfo());
-        model.addAttribute("page", pageService.retrieveOnePage("event"));
+        model.addAttribute("church", service.getChurchInfo());
+        model.addAttribute("page", service.findByPageName("article"));
         return "article";
     }
   
     @GetMapping("/sermon/{id}")
     public String showSermonPage(@PathVariable int id, ModelMap model){
-        Optional<Sermon> sermonOpt = sermonRepository.findById(id);
+        Optional<Sermon> sermonOpt = service.findSermonById(id);
         Sermon sermon = sermonOpt.get();
         logger.debug("GET /sermon/  : {}" + sermon);     
 
         model.addAttribute("sermon", sermon);
-        model.addAttribute("church", getChurchInfo());
-        model.addAttribute("page", pageService.retrieveOnePage("event"));
+        model.addAttribute("church", service.getChurchInfo());
+        model.addAttribute("page", service.findByPageName("event"));
         return "sermon";
     }
     
@@ -199,9 +164,5 @@ public class UiController extends BaseController{
     public String toolBar(){
         return "toolbar";
     }
-    
-    private ChurchInfo getChurchInfo(){
-         List<ChurchInfo> churchInfo = churchRepository.findAll();
-         return churchInfo.get(0);
-    }
+   
 }

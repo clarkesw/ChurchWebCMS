@@ -7,12 +7,7 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.Passage;
-import com.milford.churchcms.dao.Sermon;
-import com.milford.churchcms.repository.PassageRepository;
-import com.milford.churchcms.repository.SermonRepository;
 import com.milford.churchcms.service.PassageService;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
@@ -34,12 +29,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class PassageController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(PassageController.class);
-    
-    @Autowired
-    PassageRepository repository;
-    
-    @Autowired
-    SermonRepository sermonRepo;
     
     @Autowired
     PassageService service;

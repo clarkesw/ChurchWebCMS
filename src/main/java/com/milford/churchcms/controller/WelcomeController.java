@@ -7,8 +7,7 @@ package com.milford.churchcms.controller;
 
 
 import com.milford.churchcms.dao.User;
-import com.milford.churchcms.repository.StaffRepository;
-import com.milford.churchcms.repository.UserRepository;
+import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -16,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +22,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-//@SessionAttributes("user")
 public class WelcomeController extends BaseController{
     
     @Autowired
-    UserRepository repository;
-    
-    @Autowired
-    StaffRepository staffRepo;
+    WelcomeService service;
     
     @Autowired 
     private HttpSession session;
@@ -50,7 +43,7 @@ public class WelcomeController extends BaseController{
         String userName = user.getUsername();
 
         logger.debug("POST /login  User : {}", userName);
-        User dbUser = repository.findByUsername(userName);
+        User dbUser = service.checkLoginCredentials(userName);
         
         if(dbUser == null){
             model.addAttribute("error", "Incorrect Username/Password.");
@@ -72,7 +65,7 @@ public class WelcomeController extends BaseController{
         dbUser.setPassword("empty");
         session.setAttribute("loggedInUser", dbUser);
         model.put("user", userName);   
-        model.put("staffers", staffRepo.findByRecievePrayerRequestsTrue());
+        model.put("staffers", service.findByRecievePrayerRequestsTrue());
         return "cms/welcome";
     }
     
@@ -82,10 +75,5 @@ public class WelcomeController extends BaseController{
         if(session.getAttribute("user") != null)
             return "cms/welcome";
         return "cms/login-page";
-    }
-    
-    private String getLoggedInUser(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
     }
 }
