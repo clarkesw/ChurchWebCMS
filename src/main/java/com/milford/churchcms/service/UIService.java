@@ -48,9 +48,6 @@ public class UIService {
     WebPageRepository pageRepository;
         
     @Autowired
-    WebPageService pageService;
-    
-    @Autowired
     StaffRepository staffRepository;
     
     @Autowired
