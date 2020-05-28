@@ -5,9 +5,7 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.controller.PrayerController;
 import com.milford.churchcms.dao.Staff;
-import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 import org.slf4j.Logger;

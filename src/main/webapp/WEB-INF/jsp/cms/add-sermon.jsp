@@ -10,7 +10,7 @@
 			</fieldset>
 			<fieldset class="form-group">
 				<form:label path="subTitle">Sub Title</form:label> 
-				<form:textarea  type="text" maxlength="25"
+				<form:input  type="text" maxlength="25"
 					class="form-control" path="subTitle"/>
                                 <form:errors path="subTitle" cssClass="text-warning"/>
 			</fieldset>
@@ -42,7 +42,7 @@
                         </fieldset>
 			<fieldset class="form-group">
 				<form:label path="imageURL">Image URL</form:label> 
-				<form:textarea  type="text" maxlength="25"
+				<form:input  type="text" maxlength="25"
 					class="form-control" path="imageURL"/>
                                 <form:errors path="imageURL" cssClass="text-warning"/>
 			</fieldset>

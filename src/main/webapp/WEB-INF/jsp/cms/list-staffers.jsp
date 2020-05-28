@@ -20,13 +20,12 @@
                                     <td>${staff.lastName}</td>                                                                                        
                                     <td>${staff.position}</td>
                                     <c:choose>
-                                        <c:when test="${empty staff.user}">
-                                            <td><a type="button" class="btn btn-success" 
-                                                  href="update-user?address_id=-1">Add User</a></td>
+                                        <c:when test="${staff.isAdmin}">
+                                             <td><a type="button" class="btn btn-success" 
+                                                  href="update-user?userId=${staff.user.id}&staffId=${staff.id}">Edit User</a></td>                                                                                          
                                         </c:when>
                                         <c:otherwise>
-                                             <td><a type="button" class="btn btn-success" 
-                                                  href="update-user?userId=${staff.user.id}&staffId=${staff.id}">Edit User</a></td>                                       
+                                            <td></td>
                                         </c:otherwise>
                                     </c:choose>
                                     <td><a type="button" class="btn btn-success" 

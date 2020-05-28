@@ -10,11 +10,13 @@ import com.milford.churchcms.repository.BannerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author clarke
  */
+@Service
 public class BannerService {
     public Logger logger = LoggerFactory.getLogger(BannerService.class);
 

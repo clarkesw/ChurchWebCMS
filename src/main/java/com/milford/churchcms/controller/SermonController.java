@@ -102,6 +102,8 @@ public class SermonController extends BaseController{
         
         Integer sermonId = (Integer)session.getAttribute("sermonId");
         List<Passage> passages = (List<Passage>)session.getAttribute("passages");
+        logger.debug("  sermonId : {}",sermonId);
+        logger.debug("  passages : {}",passages);
         service.addDescriptionSermonPost(passages, description, sermonId);
         return "redirect:list-sermons";
     }

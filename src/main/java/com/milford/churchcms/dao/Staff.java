@@ -44,7 +44,7 @@ public class Staff {
     private String mobileCarrier;
     private boolean recieveChurchUpdates = false;
     private boolean recievePrayerRequests = false;
-    private boolean isUser = false;
+    private boolean isAdmin = false;
     private String photo;
     private String bio;
     
@@ -76,12 +76,12 @@ public class Staff {
         this.recievePrayerRequests = recievePrayerRequests;
     }
 
-    public boolean isIsUser() {
-        return isUser;
+    public boolean isIsAdmin() {
+        return isAdmin;
     }
 
-    public void setIsUser(boolean isUser) {
-        this.isUser = isUser;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getNamePreffix() {
@@ -191,7 +191,7 @@ public class Staff {
         return firstName;
     }
 
-    public final void setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
     }
 
@@ -199,7 +199,7 @@ public class Staff {
         return lastName;
     }
 
-    public final void setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
     }
 
@@ -257,7 +257,7 @@ public class Staff {
                 firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + 
                 position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + 
                 workPhone + ", mobilePhone=" + mobilePhone + ", mobileCarrier=" + mobileCarrier + ", recieveChurchUpdates=" + 
-                recieveChurchUpdates + ", recievePrayerRequests=" + recievePrayerRequests + ", isUser=" + isUser + ", photo=" + 
+                recieveChurchUpdates + ", recievePrayerRequests=" + recievePrayerRequests + ", isUser=" + isAdmin + ", photo=" + 
                 photo + ", user=" + user + ", homeAddress=" + homeAddress + '}';
     }
 }

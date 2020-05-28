@@ -3,11 +3,11 @@ package com.milford.churchcms;
 
 public class Test{
 
-     public static void main(String []args) throws Exception{
-         ProcessorImpl processor = new ProcessorImpl();
-         String result = processor.process(() -> "abc");
-         System.out.println(result);
-     }
+//     public static void main(String []args) throws Exception{
+//         ProcessorImpl processor = new ProcessorImpl();
+//         String result = processor.process(() -> "abc");
+//         System.out.println(result);
+//     }
 
 }
 

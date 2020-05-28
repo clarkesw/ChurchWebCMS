@@ -27,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class StaffController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(StaffController.class);
-    private int staffId;
-    private String role;
  
     @Autowired
     StaffService service;
@@ -54,7 +52,7 @@ public class StaffController extends BaseController{
         Staff staff = new Staff();
         
         if("admin".equalsIgnoreCase(currentUser.getRole()) && isUser){
-            staff.setIsUser(true);
+            staff.setIsAdmin(true);
             model.addAttribute("unlockRole","good");
         }
        
@@ -102,12 +100,12 @@ public class StaffController extends BaseController{
         Staff staff = service.updateStaffGet(id);
         Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
           
-        if("admin".equals(currentUser.getRole()) && staff.isIsUser())
+        if("admin".equals(currentUser.getRole()) && staff.isIsAdmin())
             model.addAttribute("unlockRole","good");
         
-        if(staff.isIsUser()){
+        if(staff.isIsAdmin()){
             staff.getUser().setBlankPassword();
-            logger.debug("   isUser : {}",staff.isIsUser());
+            logger.debug("   isUser : {}",staff.isIsAdmin());
             
         }
         logger.debug("   Staff : {}",staff);
