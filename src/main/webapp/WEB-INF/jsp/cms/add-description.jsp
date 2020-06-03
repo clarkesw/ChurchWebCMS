@@ -18,7 +18,7 @@
 <body>
 <%@ include file="common/navigation.jspf" %>
 	<div class="container">
-            <form:form method="post" action="addDescriptionToSermon" modelAttribute="description">
+            <form:form method="post" action="addDescriptionToSermon" modelAttribute="sermon">
                     <table border="1" cellpadding="10">
                         <c:if test="${not empty passages}">
                             <c:forEach items="${passages}" var="pass">

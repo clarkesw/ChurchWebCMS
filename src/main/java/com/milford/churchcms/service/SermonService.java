@@ -56,14 +56,14 @@ public class SermonService {
         return repository.findById(id);
     }
     
-    public void addDescriptionSermonPost(List<Passage> passages, Description description, int sermonId){
+    public void addDescriptionSermonPost(List<Passage> passages, String description, int sermonId){
         Integer lastSermonIdRep = repository.getGreatestSid().get(0);
         Sermon sermon = repository.findById(sermonId).get();
        
         repository.deleteById(sermonId);
              
         int lastSermonId = (lastSermonIdRep != null) ? lastSermonIdRep + 1 : 1;
-        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description.getDescription(),
+        repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description,
                 sermon.getSermonDate(),passages));
     }
     

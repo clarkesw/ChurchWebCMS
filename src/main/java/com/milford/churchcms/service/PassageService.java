@@ -31,11 +31,12 @@ public class PassageService {
     @Autowired
     SermonRepository sermonRepo;
         
-    public List<Passage> showSermon(){
-        return repository.findAll();
+    public List<Passage> getPassages(int sermonId){
+        Optional<Sermon> sermon = sermonRepo.findById(sermonId);
+        return sermon.get().getPassages();
     }
     
-    public void deleteSermon(int id){
+    public void deletePassage(int id){
         repository.deleteById(id); 
     }
     

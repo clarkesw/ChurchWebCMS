@@ -6,6 +6,7 @@
 package com.milford.churchcms.repository;
 
 import com.milford.churchcms.dao.Passage;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,4 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PassageRepository extends JpaRepository<Passage,Integer>{
     Passage findTopByOrderByIdDesc();
+    List<Passage> findPassagesById(int id);
 }

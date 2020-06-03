@@ -5,7 +5,6 @@
  */
 package com.milford.churchcms.controller;
 
-import com.milford.churchcms.dao.Description;
 import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.service.SermonService;
@@ -95,8 +94,8 @@ public class SermonController extends BaseController{
     }
     
     @PostMapping("/addDescriptionToSermon")
-    public String addDescriptionSermonPost(ModelMap model,@Valid @ModelAttribute("description") Description description, BindingResult result){
-        logger.debug("POST /addDescriptionToSermon : {}",description);
+    public String addDescriptionSermonPost(ModelMap model,@Valid @ModelAttribute Sermon sermon, BindingResult result){
+        logger.debug("POST /addDescriptionToSermon : {}",sermon.getDescription());
         if(result.hasErrors())
             return "cms/add-description";
         
@@ -104,7 +103,7 @@ public class SermonController extends BaseController{
         List<Passage> passages = (List<Passage>)session.getAttribute("passages");
         logger.debug("  sermonId : {}",sermonId);
         logger.debug("  passages : {}",passages);
-        service.addDescriptionSermonPost(passages, description, sermonId);
+        service.addDescriptionSermonPost(passages, sermon.getDescription(), sermonId);
         return "redirect:list-sermons";
     }
     
@@ -114,13 +113,14 @@ public class SermonController extends BaseController{
         session.setAttribute("sermonId", id);
         Optional<Sermon> sermon = service.updateShowSermonGet(id);
         
-        model.addAttribute("passages", sermon.get().getPassages());
-        if(sermon.isPresent() && sermon.get().getDescription() != null){       
-            model.addAttribute("description", sermon.get().getDescription());
-        }else{
-            model.addAttribute("description", new Description());
-        }
+        List<Passage> passages = sermon.get().getPassages();
+        model.addAttribute("passages", passages);
         
+        if(sermon.isPresent() && sermon.get().getDescription() != null){       
+            model.addAttribute("sermon", sermon);
+        }else{
+            model.addAttribute("sermon", new Sermon());
+        }
         return "cms/add-description";
     }
 }

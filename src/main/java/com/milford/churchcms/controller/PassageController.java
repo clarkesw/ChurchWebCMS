@@ -36,20 +36,10 @@ public class PassageController extends BaseController{
     @Autowired 
     private HttpSession session;
         
-    @GetMapping("/list-passages")
-    public String showSermon(ModelMap model){
-
-        List<Passage> passages = service.showSermon();
-        model.addAttribute("passages", passages);
-        if(!passages.isEmpty())
-            logger.debug("showEvent Passage 1 : {}" + passages.get(0));
-        return "cms/list-passages";
-    }
-
     @GetMapping("/delete-passage")
-    public String deleteSermon(@RequestParam int id){
+    public String deletePassage(@RequestParam int id){
         logger.debug("GET /delete-passage Passage ID: {}",id);
-        service.deleteSermon(id);
+        service.deletePassage(id);
         return "redirect:list-sermons";
     }
     
@@ -85,10 +75,10 @@ public class PassageController extends BaseController{
  
     @GetMapping("/addPassagesToSermon")
     public String addPassagesToSermonGet(ModelMap model, @RequestParam int id){ 
-        logger.debug("GET /addPassagesToSermon  ");
+        logger.debug("GET /addPassagesToSermon  id: {}", id);
         session.setAttribute("SermonID", id);
         
-        List<Passage> passages = service.showSermon();
+        List<Passage> passages = service.getPassages(id);
         model.addAttribute("passageList", passages);
         model.addAttribute("books", AppConstants.books);
         model.addAttribute("passage", new Passage());
