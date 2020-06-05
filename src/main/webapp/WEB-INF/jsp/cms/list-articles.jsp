@@ -5,9 +5,9 @@
 			<caption>Articles</caption>
 			<thead>
 				<tr>
-                                    <th>Name</th>
-                                    <th>Page</th>
+                                    <th>Title</th>
                                     <th>Last Modified Date</th>
+                                    <th></th>
                                     <th></th>
                                     <th></th>
 				</tr>
@@ -15,9 +15,18 @@
 			<tbody>
 				<c:forEach items="${articles}" var="art">
 					<tr>
-                                            <td>${art.title}</td>
-                                            <td>${art.pageName}</td>                                                                                        
+                                            <td>${art.title}</td>                                                                                    
                                             <td>${art.lastModified}</td>
+                                            <c:choose>
+                                                <c:when test="${empty art.content}">
+                                                    <td><a type="button" class="btn btn-success" 
+                                                          href="addDescriptionToArticle?id=${art.id}">Add Description</a></td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td><a type="button" class="btn btn-success" 
+                                                          href="addDescriptionToArticle?id=${art.id}">Edit Description</a></td>                                     
+                                                </c:otherwise>
+                                            </c:choose> 
                                             <td><a type="button" class="btn btn-success" href="/update-article?id=${art.id}">Update</a></td>
                                             <td><a type="button" class="btn btn-warning" href="/delete-article?id=${art.id}">Delete</a></td>
 					</tr>

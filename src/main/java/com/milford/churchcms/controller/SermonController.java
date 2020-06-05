@@ -115,12 +115,8 @@ public class SermonController extends BaseController{
         
         List<Passage> passages = sermon.get().getPassages();
         model.addAttribute("passages", passages);
-        
-        if(sermon.isPresent() && sermon.get().getDescription() != null){       
-            model.addAttribute("sermon", sermon);
-        }else{
-            model.addAttribute("sermon", new Sermon());
-        }
+          
+        model.addAttribute("sermon", sermon);
         return "cms/add-description";
     }
 }

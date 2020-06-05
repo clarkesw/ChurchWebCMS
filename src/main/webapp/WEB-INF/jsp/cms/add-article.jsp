@@ -15,23 +15,12 @@
                                 <form:errors path="subTitle" cssClass="text-warning"/>
 			</fieldset>
                         <fieldset class="form-group">
-				<form:label path="content">Content</form:label> 
-				<form:textarea  type="text" 
-					class="form-control" path="content"/>
-                                <form:errors path="content" cssClass="text-warning"/>
-			</fieldset>
-                        <fieldset class="form-group">
 				<form:label path="imageURL">Image URL</form:label> 
 				<form:input  type="text" 
 					class="form-control" path="imageURL"/>
                                 <form:errors path="imageURL" cssClass="text-warning"/>
 			</fieldset>
-                        <fieldset class="form-group">
-				<form:label path="pageName">Page Name(Will not be seen, used for internal reference)</form:label> 
-				<form:input  type="text" 
-					class="form-control" path="pageName"/>
-                                <form:errors path="pageName" cssClass="text-warning"/>
-			</fieldset>
+                        <form:hidden path="content"/>
 			<button type="submit" class="btn btn-success">Update</button>
 		</form:form>
 	</div>

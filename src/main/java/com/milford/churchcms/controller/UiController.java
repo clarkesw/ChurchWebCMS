@@ -77,7 +77,7 @@ public class UiController extends BaseController{
         logger.debug("  article : {}", article);
         
         if("calendar".equals(name)){
-            logger.debug(" Calendar " + service.findByPageName(name));
+            logger.debug("  Calendar : {}", service.findByPageName(name));
             return "calendar";
         }else if("prayer".equals(name)){
             model.addAttribute("contactMethods", AppConstants.Contact.contactMethods);

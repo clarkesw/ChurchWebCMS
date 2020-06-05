@@ -38,7 +38,11 @@ public class Article {
     public Article() {}
     
     public Article(Article art) {
-        new Article (art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
+        this(art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
+    }
+    
+    public Article(int id, Article art) {
+        this(id, art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
     }
 
     public Article(String title, String pageName, String subTitle, String url, String content, String imageURL) {
@@ -51,7 +55,7 @@ public class Article {
         this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
     }
         
-    public Article(int id, String title, String pageName, String subTitle, String content, String imageURL) {
+    public Article(int id, String title, String pageName, String subTitle, String url, String content, String imageURL) {
         this.id = id;
         this.title = title;
         this.pageName = pageName;

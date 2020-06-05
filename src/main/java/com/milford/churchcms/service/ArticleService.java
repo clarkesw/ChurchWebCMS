@@ -6,6 +6,8 @@
 package com.milford.churchcms.service;
 
 import com.milford.churchcms.dao.Article;
+import com.milford.churchcms.dao.Passage;
+import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.repository.ArticleRepository;
 import java.util.List;
 import java.util.Optional;
@@ -50,9 +52,22 @@ public class ArticleService {
     }
     
     private void saveArticle(Article article){
+        logger.debug("Entered saveArticle article : {}",article);
         Article lastArt = repository.findTopByOrderByLastModified();
         int articleId = (lastArt != null) ? lastArt.getId() + 1 : 1;
-        repository.save(new Article(articleId, article.getTitle(),article.getPageName(),article.getSubTitle(),
-                                    article.getContent(),article.getImageURL()));     
+        repository.save(new Article(articleId, article));     
     }
+    
+    public void addDescriptionArticlePost(String description, Article article){
+        logger.debug("Entered addDescriptionArticlePost article : {}",article);
+        Integer lastArticleId = repository.getGreatestId().get(0);
+       
+        article.setContent(description);
+        deleteArticle(article.getId());
+        
+        int lastId = (lastArticleId != null) ? lastArticleId + 1 : 1;
+        logger.debug("   lastId : {}", lastId);
+        repository.save(new Article(lastId, article));
+    }
+    
 }

@@ -6,9 +6,11 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Article;
-import com.milford.churchcms.repository.ArticleRepository;
+import com.milford.churchcms.dao.Passage;
+import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.service.ArticleService;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -37,7 +39,6 @@ public class ArticleController extends BaseController{
     @GetMapping("/list-articles")
     public String showArticlePost(ModelMap model){
         logger.debug("GET /list-articles");
-        String username = getLoggedInName(model);
         model.put("articles", service.showArticlePost());
         return "cms/list-articles";
     }
@@ -95,8 +96,30 @@ public class ArticleController extends BaseController{
         return "cms/add-article";
     }    
     
-    private String getLoggedInName(ModelMap model) {
-        Collection<Object> values = model.values();
-        return (String)model.get("user");
+    @PostMapping("/addDescriptionToArticle")
+    public String addDescriptionArticlePost(ModelMap model,@Valid @ModelAttribute Article article, BindingResult result){
+        String content = article.getContent();
+        logger.debug("POST /addDescriptionToArticle : {}",content);
+        if(result.hasErrors())
+            return "cms/add-art-description";
+        
+        Integer articleId = (Integer)session.getAttribute("articleId");
+        
+        logger.debug("  article : {}", article);
+        logger.debug("  articleId : {}", articleId);
+        service.addDescriptionArticlePost(content, article);
+        return "redirect:list-articles";
+    }
+    
+    @GetMapping("/addDescriptionToArticle")
+    public String addDescriptionArticleGet(ModelMap model, @RequestParam int id){
+        logger.debug("GET /addDescriptionToArticle ID: {}", id);
+        
+        session.setAttribute("articleId", id);
+        Optional<Article> article = service.updateArticleGet(id);
+        
+        logger.debug("   article : {}", article);
+        model.addAttribute("article", article);
+        return "cms/add-art-description";
     }
 }

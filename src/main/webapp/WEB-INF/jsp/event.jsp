@@ -69,7 +69,7 @@
 <script src='../scripts/moment.min.js'></script>
 <script src='../scripts/jquery.min.js'></script>
 <script src='../scripts/fullcalendar.min.js'></script>
-       <script>
+<!--       <script>
            var result;
             window.onload = function(){
                 var xhr = new XMLHttpRequest();
@@ -93,7 +93,7 @@ $(document).ready(function() {
  
     });
 
-</script>
+</script> -->
 <style>
 
   body {

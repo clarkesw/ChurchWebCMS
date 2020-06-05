@@ -63,7 +63,7 @@ public class WelcomeController extends BaseController{
             }
         }
         dbUser.setPassword("empty");
-        session.setAttribute("loggedInUser", dbUser);
+        session.setAttribute("loggedInUser", dbUser.getUsername());
         model.put("user", userName);   
         model.put("staffers", service.findByRecievePrayerRequestsTrue());
         return "cms/welcome";
@@ -71,9 +71,14 @@ public class WelcomeController extends BaseController{
     
     @GetMapping("/login")
     public String showWelcomePage(ModelMap model){
-        logger.debug("GET /login User : {}",session.getAttribute("user"));
-        if(session.getAttribute("user") != null)
+        String user = (String)session.getAttribute("loggedInUser");
+        logger.debug("GET /login User : {}",user);
+        
+        if(user != null){
+            model.put("user", user);   
+            model.put("staffers", service.findByRecievePrayerRequestsTrue());
             return "cms/welcome";
+        }            
         return "cms/login-page";
     }
 }
