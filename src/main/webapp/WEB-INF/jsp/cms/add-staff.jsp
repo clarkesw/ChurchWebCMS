@@ -57,7 +57,13 @@
                                 <form:options items = "${carriers}"/>
                              </form:select>                            
                         </fieldset>
-
+                        <fieldset class="form-group">
+                               <form:label path="prefferedContact">Preferred Contact Method</form:label> 
+                               <form:select path = "prefferedContact">
+                                <form:option value = "NONE" label = "Select"/>
+                                <form:options items = "${prefferedContactList}"/>
+                             </form:select>                            
+                        </fieldset>
                         
                         <fieldset class="form-group">
 				<form:label path="photo">Photo</form:label> 

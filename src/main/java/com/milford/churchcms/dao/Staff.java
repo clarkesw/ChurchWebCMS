@@ -42,6 +42,7 @@ public class Staff {
     private String workPhone;
     private String mobilePhone;
     private String mobileCarrier;
+    private String prefferedContact;
     private boolean recieveChurchUpdates = false;
     private boolean recievePrayerRequests = false;
     private boolean isAdmin = false;
@@ -74,6 +75,14 @@ public class Staff {
         this.mobileCarrier = mobileCarrier;
         this.recieveChurchUpdates = recieveChurchUpdates;
         this.recievePrayerRequests = recievePrayerRequests;
+    }
+
+    public String getPrefferedContact() {
+        return prefferedContact;
+    }
+
+    public void setPrefferedContact(String prefferedContact) {
+        this.prefferedContact = prefferedContact;
     }
 
     public boolean isIsAdmin() {

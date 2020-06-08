@@ -9,6 +9,7 @@ import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.StaffService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -60,6 +61,7 @@ public class StaffController extends BaseController{
         model.addAttribute("roles", AppConstants.roles);
         model.addAttribute("carriers", keyCarriers);
         model.addAttribute("positions", AppConstants.positions);
+        model.addAttribute("prefferedContactList", new ArrayList<>(AppConstants.prefferedContactList.keySet()));
 
         return "cms/add-staff";
     }
@@ -113,6 +115,7 @@ public class StaffController extends BaseController{
         model.addAttribute("roles", AppConstants.roles);
         model.addAttribute("positions", AppConstants.positions);
         model.addAttribute("staff", staff);
+        model.addAttribute("prefferedContactList", new ArrayList<>(AppConstants.prefferedContactList.keySet()));
         
         return "cms/add-staff";
     }     
