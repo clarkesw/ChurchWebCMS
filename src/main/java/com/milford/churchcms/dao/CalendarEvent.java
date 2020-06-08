@@ -56,8 +56,8 @@ public class CalendarEvent {
         this.endDateCont = endDateCont;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.start =  DateUtil.setStartUIDate(startDateCont);
-        this.end = DateUtil.setEndUIDate(endDateCont);
+        this.start =  DateUtil.getUIDate(startDateCont);
+        this.end = DateUtil.getUIDate(endDateCont);
         this.contactName = contact;
     }
 

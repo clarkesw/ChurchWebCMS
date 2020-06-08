@@ -58,9 +58,9 @@ public class CalendarEventController extends BaseController{
     public String addEventPost(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent calEvent, BindingResult result){
         logger.debug("POST /add-events Event : {}",calEvent);
         if(result.hasErrors())
-            return "cms/add-event";
+            return "cms/add-events";
 
-        service.addEventPost(calEvent);
+        service.updateEventPost(calEvent);
         return "redirect:list-events";
     }
     
@@ -75,7 +75,7 @@ public class CalendarEventController extends BaseController{
     public String updateEventPost(ModelMap model,@Valid @ModelAttribute("event") CalendarEvent event, BindingResult result){
         logger.debug("POST /update-event eventId : {}",event.getId());
         if(result.hasErrors())
-            return "cms/add-event";
+            return "cms/update-event";
         
         service.updateEventPost(event);
         return "redirect:list-events";

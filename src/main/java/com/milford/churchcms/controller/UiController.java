@@ -107,7 +107,7 @@ public class UiController extends BaseController{
         logger.debug("GET /event/" + id);
         Optional<CalendarEvent> calEvent = service.findEventById(id);
         CalendarEvent oneEvent = calEvent.get();
-       
+       logger.debug("   oneEvent : {}", oneEvent);
         Optional<Staff> staffer = service.findStaffByFullName(oneEvent);
         
         model.addAttribute("event",oneEvent);
@@ -120,7 +120,6 @@ public class UiController extends BaseController{
         }else{
             model.addAttribute("contact",new Staff());
         }
-        
         
         logger.debug("    event" + oneEvent);
         return "event";
