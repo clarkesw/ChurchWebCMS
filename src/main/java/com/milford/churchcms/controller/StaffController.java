@@ -72,6 +72,7 @@ public class StaffController extends BaseController{
         if(result.hasErrors())
             return "cms/add-staff";
         staff.setConFullName();
+        String prefContact = AppConstants.prefferedContactList.getValue(staff.getPrefferedContact()); 
         
         service.addStaffPost(staff);
         return "redirect:list-staffers";
