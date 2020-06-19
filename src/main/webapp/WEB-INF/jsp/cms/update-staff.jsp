@@ -20,7 +20,7 @@
 					class="form-control" required="required" path="lastName"/>
                                 <form:errors path="lastName" cssClass="text-warning"/>
 			</fieldset>
-                        <fieldset class="form-group">
+                         <fieldset class="form-group">
 				<form:label path="bio">Bio</form:label> 
 				<form:textarea  type="text" 
 					class="form-control" path="bio"/>
@@ -95,27 +95,8 @@
                             <form:checkbox class="form-control"  path="recieveChurchUpdates"/>
                             <form:errors path="recieveChurchUpdates" cssClass="text-warning"/>
                     </fieldset>                    
-       
-                        
-                    <c:if test = "${not empty unlockRole}">
-                        <fieldset class="form-group">
-				<form:label path="user.username">User Name</form:label> 
-				<form:input  type="text" required="required"
-					class="form-control" path="user.username"/>
-                                <form:errors path="user.username" cssClass="text-warning"/>
-			</fieldset> 
-                        <fieldset class="form-group">
-				<form:label path="user.password">Password</form:label> 
-				<form:input  type="text" required="required"
-					class="form-control" path="user.password"/>
-                                <form:errors path="user.password" cssClass="text-warning"/>
-			</fieldset> 
-                        <form:select path = "user.role">
-                           <form:option value = "NONE" label = "Select"/>
-                           <form:options items = "${roles}"/>
-                        </form:select>  
-                    </c:if>
-			<button type="submit" class="btn btn-success">Update</button>
+                    <form:hidden path="isAdmin"/> 
+                    <button type="submit" class="btn btn-success">Update</button>
 		</form:form>
             <c:choose>
                 <c:when test="${staff.firstName ne null}">

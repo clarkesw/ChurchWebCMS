@@ -9,9 +9,7 @@ import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.StaffService;
-import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,27 +30,30 @@ public class StaffController extends BaseController{
     @Autowired
     StaffService service;
         
-    @Autowired 
-    private HttpSession session;
-        
     @GetMapping("/list-staffers")
     public String showStaff(ModelMap model){
         List<Staff> allstaff = service.showStaff();
-        logger.debug("GET /list-staffers Staffers: {}",allstaff.size()); 
+        logger.debug("GET /list-staffers Staffers: {}",allstaff.size());
+        User currentUser = getLoggedInUser();
+        
+        if("ADMIN".equalsIgnoreCase(currentUser.getRole()))
+            model.addAttribute("userEdit", false);
         
         model.addAttribute("staffers", allstaff); 
         return "cms/list-staffers";
     }
  
     @GetMapping("/add-staff")
-    public String addStaffGet(ModelMap model, @RequestParam boolean isUser){   
-        User currentUser = (User)session.getAttribute("loggedInUser");
-        logger.debug("GET /add-staff currentUser: {}", currentUser);  
+    public String addStaffGet(ModelMap model, @RequestParam boolean isAdmin){   
+        String currentUserName = (String)session.getAttribute("loggedInUser");
+        logger.debug("GET /add-staff currentUser: {}", currentUserName);  
+        
+        User currentUser = service.findByUsername(currentUserName);
         Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
         
         Staff staff = new Staff();
         
-        if("admin".equalsIgnoreCase(currentUser.getRole()) && isUser){
+        if("admin".equalsIgnoreCase(currentUser.getRole())){
             staff.setIsAdmin(true);
             model.addAttribute("unlockRole","good");
         }
@@ -61,7 +62,7 @@ public class StaffController extends BaseController{
         model.addAttribute("roles", AppConstants.roles);
         model.addAttribute("carriers", keyCarriers);
         model.addAttribute("positions", AppConstants.positions);
-        model.addAttribute("prefferedContactList", new ArrayList<>(AppConstants.prefferedContactList.keySet()));
+        model.addAttribute("prefferedContactList", AppConstants.prefferedContactList);
 
         return "cms/add-staff";
     }
@@ -72,7 +73,6 @@ public class StaffController extends BaseController{
         if(result.hasErrors())
             return "cms/add-staff";
         staff.setConFullName();
-        String prefContact = AppConstants.prefferedContactList.getValue(staff.getPrefferedContact()); 
         
         service.addStaffPost(staff);
         return "redirect:list-staffers";
@@ -90,7 +90,7 @@ public class StaffController extends BaseController{
     public String updateStaffPost(ModelMap model,@Valid @ModelAttribute("staff") Staff staff, BindingResult result){
         logger.debug("POST /update-staff Staff : {}",staff);
         if(result.hasErrors())
-            return "cms/add-staff";
+            return "cms/update-staff";
 
         service.updateStaffPost(staff);
         return "redirect:list-staffers";
@@ -99,26 +99,31 @@ public class StaffController extends BaseController{
     @GetMapping("/update-staff")
     public String updateStaffGet(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-staff  ID : {}",id);
-        User currentUser = (User)session.getAttribute("loggedInUser");
+        String loggedInUser = (String)session.getAttribute("loggedInUser");
+        User currentUser = service.findByUsername(loggedInUser);
+        
+        logger.debug("   currentUser : {}",currentUser);
+        
         Staff staff = service.updateStaffGet(id);
+        logger.debug("   staff : {}",staff);
+        
         Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
           
-        if("admin".equals(currentUser.getRole()) && staff.isIsAdmin())
+        if("admin".equals(currentUser.getRole()))
             model.addAttribute("unlockRole","good");
         
         if(staff.isIsAdmin()){
             staff.getUser().setBlankPassword();
-            logger.debug("   isUser : {}",staff.isIsAdmin());
-            
+            logger.debug("   isAdmin : {}",staff.isIsAdmin());    
         }
-        logger.debug("   Staff : {}",staff);
+         
         model.addAttribute("carriers", keyCarriers);
         model.addAttribute("roles", AppConstants.roles);
         model.addAttribute("positions", AppConstants.positions);
         model.addAttribute("staff", staff);
-        model.addAttribute("prefferedContactList", new ArrayList<>(AppConstants.prefferedContactList.keySet()));
+        model.addAttribute("prefferedContactList", AppConstants.prefferedContactList);
         
-        return "cms/add-staff";
+        return "cms/update-staff";
     }     
     
     @PostMapping("/update-user")
@@ -134,11 +139,15 @@ public class StaffController extends BaseController{
     @GetMapping("/update-user")
     public String updateUserGet(ModelMap model, @RequestParam int userId, @RequestParam int staffId){
         logger.debug("GET /update-user  ID : {}",userId);
-        User currentUser = (User)session.getAttribute("loggedInUser");
+        String loggedInUser = (String)session.getAttribute("loggedInUser");
+        User currentUser = service.findByUsername(loggedInUser);
         
         User user = service.findUserById(userId);
         model.put("user", user);
         logger.debug("User : {}",user);
+        
+        if(currentUser == null)
+            return "redirect:login";
         
         if(!currentUser.getUsername().equals(user.getUsername()))
            return "redirect:list-staffers";
@@ -147,5 +156,11 @@ public class StaffController extends BaseController{
         
         return "cms/add-user";
     }     
-        
+      
+   private User getLoggedInUser(){
+       String currentUserName = (String)session.getAttribute("loggedInUser");
+        User user = service.findByUsername(currentUserName);
+        user.setBlankPassword();
+       return user;
+   }
 }

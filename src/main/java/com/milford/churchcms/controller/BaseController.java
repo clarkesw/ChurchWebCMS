@@ -7,6 +7,8 @@ package com.milford.churchcms.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.InitBinder;
  * @author clarke
  */
 public class BaseController {
+    
+    @Autowired 
+    HttpSession session;
     
     @InitBinder
     public void initBinder(WebDataBinder binder) {

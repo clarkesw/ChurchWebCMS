@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                   .antMatchers("/*todo*/**", "/*event*/**", "/*cms*/**").access("hasRole('USER')").and()
 //               .formLogin();
 
-		http.authorizeRequests().antMatchers("/*","/login","/index*","/h2/**").permitAll()
-                                    .antMatchers("/*todo*/**").access("hasRole('USER')");
+		http.authorizeRequests().antMatchers("/login","/index*","/h2/**").permitAll()
+                                    .antMatchers("/*todo*/**").access("hasRole('USER')");  // "/*",
 //                    .logout()
 //                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))            
 //                        .logoutSuccessUrl("/login")

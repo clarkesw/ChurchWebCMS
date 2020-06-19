@@ -12,6 +12,8 @@ import com.milford.churchcms.repository.CalendarEventRepository;
 import com.milford.churchcms.repository.ChurchRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.repository.UserRepository;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Optional;
@@ -48,6 +50,7 @@ public class StaffService {
     }
     
     public void addStaffPost(Staff staff){
+        setPrefContact(staff);
         repository.save(staff); 
     }
     
@@ -60,6 +63,7 @@ public class StaffService {
     
     public void updateStaffPost(Staff staff){
         User user = staff.getUser();
+        setPrefContact(staff);
         
         if(user != null)
             userRepo.delete(staff.getUser());
@@ -69,6 +73,10 @@ public class StaffService {
     
     public Staff updateStaffGet(int id){
         return repository.findById(id).get();
+    }
+    
+    public User findByUsername(String userName){
+        return userRepo.findByUsername(userName);
     }
     
     public void updateUserPost(User user){
@@ -113,5 +121,21 @@ public class StaffService {
         this.staffId = staffId;
         role = currentUser.getRole(); 
         return false;
+    }
+
+    private void setPrefContact(Staff staff) {
+        String prefContact = staff.getPrefferedContact().replace(" ", ""); 
+        Class staffObj = staff.getClass();
+        Method[] methods = staffObj.getMethods();
+      
+        for(Method method : methods){
+             if(method.getName().equals("get"+prefContact)){
+                try {
+                    staff.setPrefferedContact((String)method.invoke(staff));
+                }catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                    logger.error("Failed to set contact ",prefContact, ex);
+                }     
+             }
+         }
     }
 }

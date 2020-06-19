@@ -6,9 +6,11 @@
 package com.milford.churchcms.controller;
 
 
+import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -65,7 +67,9 @@ public class WelcomeController extends BaseController{
         dbUser.setPassword("empty");
         session.setAttribute("loggedInUser", dbUser.getUsername());
         model.put("user", userName);   
-        model.put("staffers", service.findByRecievePrayerRequestsTrue());
+        List<Staff> prayerStaff = service.findByRecievePrayerRequestsTrue();        
+        model.put("staffers", prayerStaff);
+
         return "cms/welcome";
     }
     

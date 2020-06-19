@@ -20,7 +20,7 @@
                                     <td>${staff.lastName}</td>                                                                                        
                                     <td>${staff.position}</td>
                                     <c:choose>
-                                        <c:when test="${staff.isAdmin}">
+                                        <c:when test="${userEdit}">
                                              <td><a type="button" class="btn btn-success" 
                                                   href="update-user?userId=${staff.user.id}&staffId=${staff.id}">Edit User</a></td>                                                                                          
                                         </c:when>
@@ -37,7 +37,7 @@
                             </c:forEach>
 			</tbody>
 		</table>
-		<div> <a class="button" href="/add-staff?isUser=0">Add Church Member</a></div>
-                <a class="button" href="/add-staff?isUser=1">Add Website Admin</a></div>
+		<div> <a class="button" href="/add-staff?isAdmin=0">Add Church Member</a></div>
+                <a class="button" href="/add-staff?isAdmin=1">Add Website Admin</a></div>
 <%@ include file="common/footer.jspf" %>
 

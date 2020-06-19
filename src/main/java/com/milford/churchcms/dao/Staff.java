@@ -59,6 +59,22 @@ public class Staff {
 
     public Staff(){}
     
+    public Staff(Staff staffer){
+        setFirstName(staffer.firstName);
+        setLastName(staffer.lastName);
+        setConFullName();
+        this.position = staffer.position;
+        this.homeEmail = staffer.homeEmail;
+        this.workEmail = staffer.workEmail;
+        this.homePhone = staffer.homePhone;
+        this.workPhone = staffer.workPhone;
+        this.homeAddress = staffer.homeAddress;
+        this.mobilePhone = staffer.mobilePhone;
+        this.mobileCarrier = staffer.mobileCarrier;
+        this.recieveChurchUpdates = staffer.recieveChurchUpdates;
+        this.recievePrayerRequests = staffer.recievePrayerRequests;
+    }
+    
     public Staff(String firstName, String lastName, String position, String homeEmail, String workEmail,
             String homePhone, String workPhone, Address homeAddress, String mobilePhone, String mobileCarrier,
             boolean recieveChurchUpdates, boolean recievePrayerRequests) {
@@ -266,7 +282,7 @@ public class Staff {
                 firstName + ", middleName=" + middleName + ", lastName=" + lastName + ", fullName=" + fullName + ", position=" + 
                 position + ", homeEmail=" + homeEmail + ", workEmail=" + workEmail + ", homePhone=" + homePhone + ", workPhone=" + 
                 workPhone + ", mobilePhone=" + mobilePhone + ", mobileCarrier=" + mobileCarrier + ", recieveChurchUpdates=" + 
-                recieveChurchUpdates + ", recievePrayerRequests=" + recievePrayerRequests + ", isUser=" + isAdmin + ", photo=" + 
+                recieveChurchUpdates + ", recievePrayerRequests=" + recievePrayerRequests + ", isAdmin=" + isAdmin + ", photo=" + 
                 photo + ", user=" + user + ", homeAddress=" + homeAddress + '}';
     }
 }

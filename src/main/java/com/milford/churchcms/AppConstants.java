@@ -23,7 +23,8 @@ public class AppConstants {
     public static List<String> roles = new ArrayList<>(
         Arrays.asList("ADMIN","USER"));
     
-    public static Map<String,String> prefferedContactList = new HashMap<>();
+    public static List<String> prefferedContactList = new ArrayList<>(
+         Arrays.asList("Home Email", "Work Email", "Home Phone", "Work Phone", "Mobile Phone"));
     
     public static List<String> days = new ArrayList<>(
         Arrays.asList("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"));
@@ -51,12 +52,6 @@ public class AppConstants {
         textMessageAddress.put("Sprint", "messaging.sprintpcs.com");
         textMessageAddress.put("T-Mobile", "@tmomail.net");
         textMessageAddress.put("Virgin", "@vmobl.com");
-        
-        prefferedContactList.put("Home Email","home_email");
-        prefferedContactList.put("Work Email","work_email");
-        prefferedContactList.put("Home Phone","home_phone" );
-        prefferedContactList.put("Work Phone","work_phone");
-        prefferedContactList.put("Mobile Phone","mobile_phone");
     }
     
     public static class Contact{
