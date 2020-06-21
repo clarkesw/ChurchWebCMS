@@ -9,7 +9,6 @@ import com.milford.churchcms.dao.WebPageNames;
 import com.milford.churchcms.repository.WebPageNameRepository;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +28,6 @@ public class WebPageNameController extends BaseController{
     
     @Autowired
     WebPageNameRepository repository;
-    
-    @Autowired 
-    private HttpSession session;
         
     @GetMapping("/list-names")
     public String showWebPageNames(ModelMap model){

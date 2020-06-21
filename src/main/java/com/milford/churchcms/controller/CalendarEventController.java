@@ -10,7 +10,6 @@ import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.service.EventService;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +31,6 @@ public class CalendarEventController extends BaseController{
     
     @Autowired
     EventService service;
-        
-    @Autowired 
-    private HttpSession session;
         
     @GetMapping("/list-events")
     public String showEvent(ModelMap model){

@@ -26,16 +26,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class BannerController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(BannerController.class);
-    
-    @Autowired
-    BannerRepository repository;
         
     @Autowired
     BannerService service;
     
     @GetMapping("/list-banner")
     public String showBanner(ModelMap model){
-        Optional<Banner>  optBanner = repository.findTopByOrderByIdDesc();
+        Optional<Banner>  optBanner = service.showBanner();
         
         if(optBanner.isPresent()){
             Banner banner = optBanner.get();

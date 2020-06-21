@@ -10,7 +10,6 @@ import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.service.PassageService;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +31,6 @@ public class PassageController extends BaseController{
     
     @Autowired
     PassageService service;
-        
-    @Autowired 
-    private HttpSession session;
         
     @GetMapping("/delete-passage")
     public String deletePassage(@RequestParam int id){

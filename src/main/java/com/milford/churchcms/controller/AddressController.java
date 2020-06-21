@@ -7,7 +7,6 @@ package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Address;
 import com.milford.churchcms.service.AddressService;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class AddressController{
+public class AddressController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(AddressController.class);
-    
-    @Autowired 
-    private HttpSession session;
     
     @Autowired
     AddressService service;

@@ -11,7 +11,6 @@ import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,9 +27,6 @@ public class WelcomeController extends BaseController{
     
     @Autowired
     WelcomeService service;
-    
-    @Autowired 
-    private HttpSession session;
     
     @Value("${spring.datasource.url}")
     private String dataSourceInfo;

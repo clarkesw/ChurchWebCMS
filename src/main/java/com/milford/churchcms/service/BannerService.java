@@ -7,6 +7,7 @@ package com.milford.churchcms.service;
 
 import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.repository.BannerRepository;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class BannerService {
     @Autowired
     BannerRepository repository;
         
+    public Optional<Banner> showBanner(){
+        return repository.findTopByOrderByIdDesc();
+    }
     public void addBanner(Banner banner){
         repository.save(new Banner(banner.getMessage()));
     }

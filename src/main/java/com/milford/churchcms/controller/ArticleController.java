@@ -6,13 +6,8 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Article;
-import com.milford.churchcms.dao.Passage;
-import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.service.ArticleService;
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +27,6 @@ public class ArticleController extends BaseController{
     
     @Autowired
     ArticleService service;
-    
-    @Autowired 
-    private HttpSession session;
     
     @GetMapping("/list-articles")
     public String showArticlePost(ModelMap model){

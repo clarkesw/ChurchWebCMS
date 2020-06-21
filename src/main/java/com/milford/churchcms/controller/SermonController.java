@@ -10,7 +10,6 @@ import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.service.SermonService;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +31,6 @@ public class SermonController extends BaseController{
     
     @Autowired
     SermonService service;
-    
-    @Autowired 
-    private HttpSession session;
         
     @GetMapping("/list-sermons")
     public String showSermon(ModelMap model){
