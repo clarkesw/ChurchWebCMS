@@ -24,13 +24,23 @@
                                             <td><a type="button" class="btn btn-success" 
                                                   href="update-user?userId=${staff.user.id}&staffId=${staff.id}">Edit User</a></td>                                         
                                         </c:when>
-                                    <c:otherwise>
-                                        <td></td>
-                                    </c:otherwise>
+                                        <c:otherwise>
+                                            <td></td>
+                                        </c:otherwise>
                                     </c:choose>
-                                    <td><a type="button" class="btn btn-success" 
-                                           href="addAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}&id=${staff.id}">
-                                            Edit Address</a></td>
+                                    <c:choose>
+                                        <c:when test="${empty staff.homeAddress}">
+                                            <td><a type="button" class="btn btn-success" 
+                                                   href="addAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}">
+                                                    Add Address</a></td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td><a type="button" class="btn btn-success" 
+                                                   href="addAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}">
+                                                    Edit Address</a></td>
+                                        </c:otherwise>                                            
+                                    </c:choose>                                                 
+
                                     <td><a type="button" class="btn btn-success" href="/update-staff?id=${staff.id}">Update</a></td>
                                     <c:choose>
                                         <c:when test="${staff.position != 'Lead Pastor'}">
