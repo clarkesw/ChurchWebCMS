@@ -37,8 +37,9 @@ public class StaffController extends BaseController{
         User currentUser = getLoggedInUser();
         
         if("ADMIN".equalsIgnoreCase(currentUser.getRole()))
-            model.addAttribute("userEdit", false);
+            model.addAttribute("userEdit", true);
         
+        model.addAttribute("currentUser", currentUser.getUsername()); 
         model.addAttribute("staffers", allstaff); 
         return "cms/list-staffers";
     }
@@ -63,7 +64,10 @@ public class StaffController extends BaseController{
         model.addAttribute("carriers", keyCarriers);
         model.addAttribute("positions", AppConstants.positions);
         model.addAttribute("prefferedContactList", AppConstants.prefferedContactList);
-
+        
+        if(isAdmin)
+            return "cms/add-admin";
+        
         return "cms/add-staff";
     }
     

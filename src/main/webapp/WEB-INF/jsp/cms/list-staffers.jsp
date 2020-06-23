@@ -20,24 +20,37 @@
                                     <td>${staff.lastName}</td>                                                                                        
                                     <td>${staff.position}</td>
                                     <c:choose>
-                                        <c:when test="${userEdit}">
-                                             <td><a type="button" class="btn btn-success" 
-                                                  href="update-user?userId=${staff.user.id}&staffId=${staff.id}">Edit User</a></td>                                                                                          
+                                        <c:when test="${(userEdit && staff.user.id > 0) || currentUser == staff.user.username}">
+                                            <td><a type="button" class="btn btn-success" 
+                                                  href="update-user?userId=${staff.user.id}&staffId=${staff.id}">Edit User</a></td>                                         
                                         </c:when>
-                                        <c:otherwise>
-                                            <td></td>
-                                        </c:otherwise>
+                                    <c:otherwise>
+                                        <td></td>
+                                    </c:otherwise>
                                     </c:choose>
                                     <td><a type="button" class="btn btn-success" 
                                            href="addAddressForStaff?fisrtName=${staff.firstName}&lastName=${staff.lastName}&id=${staff.id}">
                                             Edit Address</a></td>
                                     <td><a type="button" class="btn btn-success" href="/update-staff?id=${staff.id}">Update</a></td>
-                                    <td><a type="button" class="btn btn-warning" href="/delete-staff?id=${staff.id}">Delete</a></td>
+                                    <c:choose>
+                                        <c:when test="${staff.position != 'Lead Pastor'}">
+                                            <td><a type="button" class="btn btn-warning" href="/delete-staff?id=${staff.id}">Delete</a></td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td></td>
+                                        </c:otherwise>                                            
+                                    </c:choose>                                            
                                 </tr>
                             </c:forEach>
 			</tbody>
 		</table>
 		<div> <a class="button" href="/add-staff?isAdmin=0">Add Church Member</a></div>
-                <a class="button" href="/add-staff?isAdmin=1">Add Website Admin</a></div>
+                 <c:choose>
+                    <c:when test="${userEdit}">
+                        <div><a class="button" href="/add-staff?isAdmin=1">Add Website Admin</a></div> 
+                    </c:when>
+                </c:choose>
+ 
+        </div>
 <%@ include file="common/footer.jspf" %>
 

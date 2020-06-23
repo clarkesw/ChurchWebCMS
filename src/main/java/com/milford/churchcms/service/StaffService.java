@@ -56,8 +56,11 @@ public class StaffService {
     
     public void deleteStaff(@RequestParam int id){
         Staff staff = repository.getOne(id);
-        int userId = staff.getUser().getId();
-        userRepo.deleteById(userId);
+        
+        if(staff.getUser() != null){
+            int userId = staff.getUser().getId();
+            userRepo.deleteById(userId);           
+        }
         repository.deleteById(id);          
     }
     
