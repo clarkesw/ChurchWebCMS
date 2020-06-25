@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.css" />
         <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../../../../stylesheets/jquery.wysiwyg.css" type="text/css" />
-       <link rel="stylesheet" href="../../../../stylesheets/examples.css" type="text/css" /> 
+       <link rel="stylesheet" href="../../../../stylesheets/base.css" type="text/css" /> 
        <link rel="icon" href="../../../../images/cross_favicon.jpg">
        <style>
             .welcome {
@@ -44,6 +44,37 @@
            .footer {
                 position: fixed;
                 bottom: 20%;
+            }
+            .cell {
+                max-width: 50px; /* tweak me please */
+                white-space : nowrap;
+                overflow : hidden;
+            }
+
+            .expand-small-on-hover:hover {
+                max-width : 200px; 
+                text-overflow: ellipsis;
+            }
+
+            .expand-maximum-on-hover:hover {
+               /* max-width : 55%; */
+                display:block;
+            }
+            .grow {
+                padding: 5px 5px 5px 5px;
+                border-radius: 10px;
+                height: 49px;
+                width: 30%;
+                margin: 5px 1% 5px 1%;
+                float: left;
+                position: relative;
+                transition: height 0.5s;
+                -webkit-transition: height 0.5s;
+                text-align: center;
+                overflow: hidden;
+            }
+            .grow:hover {
+                height: 145px;
             }
          </style>
     </head>

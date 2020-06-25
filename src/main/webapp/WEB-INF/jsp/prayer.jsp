@@ -194,13 +194,13 @@ $(document).ready(function() {
                     </tr>
                     <tr class="tablespace">
                         <td><form:label path="prayerRquest">Prayer Request</form:label> </td>
-                        <td><form:textarea  type="text" 
+                        <td><form:textarea  type="text" maxlength="255"
                                    class="form-control" required="required" path="prayerRquest"/></td>
                     </tr>
                     <tr class="tablespace">
                         <td><form:label path="email">Email</form:label> </td>
                         <td><form:input  type="text" 
-                                class="form-control" path="email"/></td>
+                                class="form-control" required="required" path="email"/></td>
                     </tr>
                     <tr class="tablespace">
                         <td><form:label path="phone">Phone</form:label> </td>

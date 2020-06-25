@@ -27,16 +27,16 @@ public class PrayerController{
      
     @GetMapping("/savePrayer")
     public String addPrayer(ModelMap model){
-        logger.debug("GET /prayer ");
+        logger.debug("GET /savePrayer ");
         model.addAttribute("prayer", new Prayer());
         return "prayer";
     }    
     
     @PostMapping("/savePrayer")
-    public String addAddressForStaff(ModelMap model,@Valid @ModelAttribute("prayer") Prayer prayer){
-        logger.debug("POST /prayer Prayer : {}",prayer);
+    public String addPrayerPost(ModelMap model,@Valid @ModelAttribute("prayer") Prayer prayer){
+        logger.debug("POST /savePrayer Prayer : {}",prayer);
 
-        service.addAddressForStaff(prayer);
+        service.addPrayerPost(prayer);
         return "redirect:index.html"; 
     }    
     

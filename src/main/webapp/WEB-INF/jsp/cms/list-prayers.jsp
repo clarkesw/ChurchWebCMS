@@ -5,8 +5,7 @@
 			<caption>Prayer</caption>
 			<thead>
 				<tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Name</th>
                                     <th>Prayer Request</th>
                                     <th>Email</th>
                                     <th>Phone</th>
@@ -17,10 +16,9 @@
 			<tbody>
                             <c:forEach items="${prayers}" var="prayer">
                                 <tr>
-                                    <td>${prayer.firstName}</td>
-                                    <td>${prayer.lastName}</td>                                                                                        
-                                    <td>${prayer.prayerRquest}</td>
-                                     <td>${prayer.email}</td>
+                                    <td>${prayer.firstName} ${prayer.lastName}</td>                                                                                    
+                                    <td class="grow">${prayer.prayerRquest}</td>
+                                    <td>${prayer.email}</td>
                                     <td>${prayer.phone}</td>                                                                                        
                                     <td>${prayer.perferedContactMethod}</td>  
                                     <td>${prayer.perferedContactTime}</td> 
