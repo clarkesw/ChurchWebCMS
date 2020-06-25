@@ -34,16 +34,15 @@ public class PrayerService {
     @Autowired
     TextMessageService textService;
     
-    public void addAddressForStaff(Prayer prayer){
+    public void addPrayerPost(Prayer prayer){
         String fullName = prayer.getFirstName() + " " + prayer.getLastName();
         List<Staff> staffers = StaffRepo.findByRecievePrayerRequestsTrue();
         
+        repository.save(prayer);
         logger.debug("   name : {}", fullName);
         staffers.forEach( staff -> 
                 textService.sendMessage(staff, prayer.getPrayerRquest(), fullName)
         );
- 
-        repository.save(prayer);
     }
     
     public List<Prayer> showPrayer(){
