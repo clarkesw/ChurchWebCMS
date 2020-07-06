@@ -23,5 +23,6 @@ public interface StaffRepository extends JpaRepository<Staff,Integer>{
     List<String> getFullNames();
     Optional<Staff> findByFullName(String fullName);
     List<Staff> findByRecievePrayerRequestsTrue();
+    List<Staff> findByRecieveChurchUpdatesTrue();
     Staff findTopByOrderByIdDesc();
 }

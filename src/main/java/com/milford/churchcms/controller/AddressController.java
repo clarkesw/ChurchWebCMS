@@ -29,7 +29,7 @@ public class AddressController extends BaseController{
         
     @GetMapping("/addAddressForStaff")
     public String addAddressForStaffGet(ModelMap model, @RequestParam String fisrtName, @RequestParam String lastName){
-        logger.debug("GET addAddressForStaff  Name : {}",fisrtName);
+        logger.debug("GET /addAddressForStaff  Name : {}",fisrtName);
         
         Address address = service.addAddressForStaffGet(fisrtName, lastName);
         
@@ -47,7 +47,7 @@ public class AddressController extends BaseController{
     @PostMapping("/addAddressForStaff")
     public String addAddressForStaffPost(ModelMap model,@Valid @ModelAttribute("address") Address address, BindingResult result, 
             @RequestParam String fisrtName, @RequestParam String lastName){
-        logger.debug("POST addAddressForStaff  Name : {}",fisrtName);
+        logger.debug("POST /addAddressForStaff  Name : {}",fisrtName);
         logger.debug("   Address: {}",address);
         
         service.addAddressForStaffPost(fisrtName, lastName, address);
@@ -56,7 +56,7 @@ public class AddressController extends BaseController{
  
     @GetMapping("/addAddressForChurch")
     public String addAddressForChurchGet(ModelMap model, @RequestParam int address_id){
-        logger.debug("GET addAddressForChurch  Address : {}",address_id);
+        logger.debug("GET /addAddressForChurch  Address : {}",address_id);
         
         model.put("name", "Church");
         session.setAttribute("AddressID", address_id);
@@ -70,7 +70,7 @@ public class AddressController extends BaseController{
     
     @PostMapping("/addAddressForChurch")
     public String addAddressForChurchPost(ModelMap model,@Valid @ModelAttribute("address") Address address){
-        logger.debug("Post addAddressForChurch  Name : {}",address);
+        logger.debug("Post /addAddressForChurch  Name : {}",address);
         Integer id = (Integer)session.getAttribute("AddressID");
         
         service.addAddressForChurchPost(id,address);

@@ -36,23 +36,9 @@ public class Article {
     private String lastModified;
 
     public Article() {}
-    
-    public Article(Article art) {
-        this(art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
-    }
-    
+
     public Article(int id, Article art) {
         this(id, art.getTitle(), art.getPageName(), art.getSubTitle(),art.getUrl(), art.getContent(), art.getImageURL());
-    }
-
-    public Article(String title, String pageName, String subTitle, String url, String content, String imageURL) {
-        this.title = title;
-        this.pageName = pageName;
-        this.subTitle = subTitle;
-        this.url = createUrl(this.id);
-        this.content = content;
-        this.imageURL = imageURL;
-        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
     }
         
     public Article(int id, String title, String pageName, String subTitle, String url, String content, String imageURL) {

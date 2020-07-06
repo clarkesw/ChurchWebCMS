@@ -89,98 +89,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </script>
 </head>
 
-<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-department og-context og-context-node og-context-node-1" background='${page.bgImage}'>
+<body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-department og-context og-context-node og-context-node-1" background="../../images/background.png">
 
     <div id="top"></div>
-    <header class="header header-v1" role="banner">
-        <div class="wrapper">
-            <div id="site-logo">
-                <a href="home" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="90" height="90" alt="Home" /></a>
-            </div>
-        </div>
-        <div class="header-top">
-            <div class="wrapper">
-                <div class="secondary-navigations">
-                    <div class="secondary-nav">
-                        <div class="region region-secondary-nav">
-                            <div id="block-menu-menu-secondary-menu" class="block block-menu">
-                                <div class="wrapper">                         
-                                    <div>
-                                        <ul class="menu">
-                                            <li class="leaf"><a >Messages</a></li>
-                                            <li class="leaf"><a >Give</a></li>
-                                            <li class="leaf"><a href="prayer">Pray</a></li>
-                                            <li class="leaf"><a >Devotions</a></li>
-                                           <li>
-                                                <a href="#"> Social</a>
-                                                <ul class="dropdown">
-                                                    <li class="first leaf"><a href="http://www.facebook.com/gatewaypeople" title="" class="social facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                                    <li class="leaf"><a href="https://instagram.com/gatewaypeople" class="social instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                                                    <li class="last leaf"><a href="http://twitter.com/gatewaypeople" title="" class="social twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                                 </ul>   
-                                            </li>
-                                        </li> 
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.secondary-navigations -->
-                    </div>
-                    <!-- /.wrapper -->
-                </div>
-                <!-- /.header-top -->
-                <div class="header-inner">
-                    <div class="wrapper">
-                        <div class="site-branding">
-                            <div class="nav-bg">
-                                <div class="nav-wrapper">
-                                    <div class="nav-inner">
-                                        <div class="main-nav">
-                                            <div class="region region-main-nav">
-                                                <div id="block-system-main-menu" class="block block-system block-menu">
-                                                    <div class="wrapper">
-                                                        <div>
-                                                            <ul class="menu">
-                                                                <li class="first leaf"><a >About Us</a></li>
-                                                                <li class="leaf"><a >Get Connected</a></li>
-                                                                <li class="leaf"><a >Ministries</a></li>
-                                                                <li class="leaf"><a href="calendar">Calendar</a></li>
-                                                               <li class="last leaf"><a >Media Archive</a></li> 
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.wrapper -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                     <%--    <div id="dl-menu" class="dl-menuwrapper">
-                                       <span class="dl-trigger hamburger icon">
-                                            <a href="#"></a>
-                                            </span> 
-                                            <ul class="dl-menu">
-                                                    <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
-                                                    <li class="leaf"><a href="makeConnections">Get Connected</a></li>
-                                                    <li class="leaf"><a href="ministries">Ministries</a></li>
-                                                    <li class="leaf"><a href="calendarEvents" title="">Events</a></li>
-                                                    <li class="last leaf"><a href="mediaArchive">Media Archive</a></li>
-                                            </ul>
-                                        </div>--%>
-                                   <%--     <script src="../../scripts/menuCall.js?null"></script> --%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-            
-        <marquee behavior="scroll" direction="left"><div id='banner'></div></marquee>
-        <!--/.header-inner -->
-        
-    </header>
+    <%@ include file="navigation.jspf" %>
     <section id="content">
         <div class="clearfix">
             <a id="main-content"></a>
@@ -234,7 +146,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
                                                     <div class="card card--type-session card--tag-service">
                                                         <a class="card-wrapper" href="${sermon.url}">
                                                             <div class="card-preview">
-                                                                <div class="card-thumbnail" style="background-image:url('http://cdn.gatewaypeople.com/video/Main/2018/Images/20180428_OvercomingUnforgiveness.jpg');"></div>
+                                                                <div class="card-thumbnail" style="background-image:url('${sermon.imageURL}');"></div>
                                                                 <div class="card-preview-content">
                                                                     <!-- VMS states sets up timers and leverages code in session.js to define which timer should be displayed -->
                                                                     <ul class="vms-states">

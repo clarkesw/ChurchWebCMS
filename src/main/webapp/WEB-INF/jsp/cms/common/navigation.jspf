@@ -14,6 +14,7 @@
                     <li><a href="/list-events">Calendar</a></li>
                     <li><a href="/list-info">Church Info</a></li>
                     <li><a href="/showPrayerRequests">Prayer Requests</a></li>
+                    <li><a href="/sendAlert">Send Alert</a></li>
                      <li><a href="/list-sermons">Sermon</a></li>
                      <li><a href="/list-staffers">Staff</a></li>
 	        </ul>

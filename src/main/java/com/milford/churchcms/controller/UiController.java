@@ -159,6 +159,15 @@ public class UiController extends BaseController{
         return result;
     }
     
+    @GetMapping("/aboutOurChruch")
+    public String aboutPage(ModelMap model){
+        logger.debug("GET /aboutOurChruch  ");     
+        String uri = "http://labs.bible.org/api/?passage=Exodus%204:4";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(uri, String.class);
+        return "about";
+    }
+    
     @GetMapping("/toolbar")
     public String toolBar(){
         return "toolbar";

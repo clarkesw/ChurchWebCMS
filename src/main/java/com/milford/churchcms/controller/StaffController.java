@@ -34,7 +34,7 @@ public class StaffController extends BaseController{
     public String showStaff(ModelMap model){
         List<Staff> allstaff = service.showStaff();
         logger.debug("GET /list-staffers Staffers: {}",allstaff.size());
-        User currentUser = getLoggedInUser();
+        User currentUser = super.getLoggedInUser();
         
         if("ADMIN".equalsIgnoreCase(currentUser.getRole()))
             model.addAttribute("userEdit", true);
@@ -161,10 +161,4 @@ public class StaffController extends BaseController{
         return "cms/add-user";
     }     
       
-   private User getLoggedInUser(){
-       String currentUserName = (String)session.getAttribute("loggedInUser");
-        User user = service.findByUsername(currentUserName);
-        user.setBlankPassword();
-       return user;
-   }
 }

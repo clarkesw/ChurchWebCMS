@@ -38,7 +38,6 @@ public class TextMessageService {
         MimeMessageHelper helper = new MimeMessageHelper(message);
          
         helper.setTo(sendTo);
-        helper.setFrom("clarke@gmail.com");
         helper.setText(messageText);
         helper.setSubject(requester);
          

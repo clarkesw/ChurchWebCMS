@@ -26,6 +26,7 @@
                             </c:forEach>
 			</tbody>
 		</table>
-		<div> 
+            <a type="button" class="btn btn-warning" href="/deleteAllPrayers">Delete All</a>
+	</div> 
 <%@ include file="common/footer.jspf" %>
 

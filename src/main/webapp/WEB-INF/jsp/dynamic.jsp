@@ -14,7 +14,7 @@
 <meta property="og:url" content="${church.url}" />
 <meta property="og:title" content=${church.name} />
 <meta property="og:description" content=${church.missionStatement} />
-  <title>${page.title}</title>
+  <title>${church.name}</title>
   <style type="text/css" media="all">
 @import url("../../stylesheets/system.base.css?p7rj3q");
 @import url("../../stylesheets/base.css");
@@ -84,10 +84,10 @@
                                 <div class="wrapper">                         
                                     <div>
                                         <ul class="menu">
-                                            <li class="leaf"><a href="watch/message-archives/individualf6eb.html?og_group_ref_target_id_entityreference_filter=1" class="watch-archive">Messages</a></li>
-                                            <li class="leaf"><a href="ministries/life/tithes-egiving.html">Give</a></li>
-                                            <li class="leaf"><a href="ministries/prayer.html">Pray</a></li>
-                                            <li class="leaf"><a href="devotions.html">Devotions</a></li>
+                                            <li class="leaf"><a >Messages</a></li>
+                                            <li class="leaf"><a >Give</a></li>
+                                            <li class="leaf"><a href="prayer">Pray</a></li>
+                                            <li class="leaf"><a >Devotions</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -110,11 +110,11 @@
                                                     <div class="wrapper">
                                                         <div>
                                                             <ul class="menu">
-                                                                <li class="first leaf"><a href="aboutOurChruch">About Us</a></li>
-                                                                <li class="leaf"><a href="makeConnections">Get Connected</a></li>
-                                                                <li class="leaf"><a href="ministries">Ministries</a></li>
-                                                                <li class="leaf"><a href="calendarEvents">Events</a></li>
-                                                               <li class="last leaf"><a href="mediaArchive" >Media Archive</a></li> 
+                                                                <li class="first leaf"href="aboutOurChruch"><a >About Us</a></li>
+                                                                <li class="leaf"><a href="calendar">Calendar</a></li>
+                                                                <li class="leaf"><a >Get Connected</a></li>
+                                                                <li class="leaf"><a >Ministries</a></li>                                          
+                                                               <li class="last leaf"><a >Media Archive</a></li> 
                                                             </ul>
                                                         </div>
                                                     </div>

@@ -53,7 +53,7 @@
 			</fieldset>
                         <fieldset class="form-group">
 				<form:label path="mobilePhone">Mobile Phone</form:label> 
-				<form:input  type="text" 
+				<form:input  type="text" required="recievePrayerRequests"
 					class="form-control" path="mobilePhone"/>
                                 <form:errors path="mobilePhone" cssClass="text-warning"/>
 			</fieldset>

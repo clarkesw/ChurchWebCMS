@@ -5,6 +5,8 @@
  */
 package com.milford.churchcms.dao;
 
+import com.milford.churchcms.AppConstants;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +31,17 @@ public class Prayer {
     private Date date;
     
     public Prayer() {}
+    
+    public Prayer(Prayer prayerReq) {
+        this.firstName = prayerReq.firstName;
+        this.lastName = prayerReq.lastName;
+        this.email = prayerReq.email;
+        this.perferedContactMethod = prayerReq.perferedContactMethod;
+        this.perferedContactTime = prayerReq.perferedContactTime;
+        this.phone = prayerReq.phone;
+        this.prayerRquest = prayerReq.prayerRquest;
+        setDate();
+    }
 
     public int getId() {
         return id;
@@ -98,7 +111,7 @@ public class Prayer {
         return date;
     }
 
-    public void setDate(Date datee) {
+    public void setDate() {
         this.date = new Date();
     }
 

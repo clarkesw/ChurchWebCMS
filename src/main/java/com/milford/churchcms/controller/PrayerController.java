@@ -46,4 +46,11 @@ public class PrayerController{
         model.addAttribute("prayers", service.showPrayer());
         return "cms/list-prayers";
     }    
+    
+    @GetMapping("/deleteAllPrayers")
+    public String deletePrayers(ModelMap model){
+        logger.debug("GET /deleteAllPrayers ");
+        service.deletePrayers();
+        return "cms/list-prayers";
+    }   
 }

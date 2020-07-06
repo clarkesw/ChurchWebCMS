@@ -5,6 +5,8 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.dao.User;
+import com.milford.churchcms.service.StaffService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
@@ -22,11 +24,20 @@ public class BaseController {
     @Autowired 
     HttpSession session;
     
+    @Autowired
+    StaffService staffService;
+        
     @InitBinder
-    public void initBinder(WebDataBinder binder) {
+    void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(
                 dateFormat, false));
     }
-        
+       
+    User getLoggedInUser(){
+       String currentUserName = (String)session.getAttribute("loggedInUser");
+       User user = staffService.findByUsername(currentUserName);
+       user.setBlankPassword();
+       return user;
+   }
 }

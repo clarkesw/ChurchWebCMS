@@ -5,10 +5,8 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.dao.Banner;
 import com.milford.churchcms.dao.Prayer;
 import com.milford.churchcms.dao.Staff;
-import com.milford.churchcms.repository.BannerRepository;
 import com.milford.churchcms.repository.PrayerRepository;
 import com.milford.churchcms.repository.StaffRepository;
 import java.util.List;
@@ -38,14 +36,18 @@ public class PrayerService {
         String fullName = prayer.getFirstName() + " " + prayer.getLastName();
         List<Staff> staffers = StaffRepo.findByRecievePrayerRequestsTrue();
         
-        repository.save(prayer);
+        repository.save(new Prayer(prayer));
         logger.debug("   name : {}", fullName);
         staffers.forEach( staff -> 
-                textService.sendMessage(staff, prayer.getPrayerRquest(), fullName)
+                textService.sendMessage(staff, prayer.getPrayerRquest(), "Prayer Req: " + fullName)
         );
     }
     
     public List<Prayer> showPrayer(){
         return repository.findAll();
+    }
+    
+    public void deletePrayers(){
+        repository.deleteAll();
     }
 }
