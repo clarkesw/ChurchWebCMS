@@ -75,62 +75,9 @@
                 <a href="index.html" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="125" height="125" alt="Home" /></a>
             </div>
         </div>
-        <div class="header-top">
-            <div class="wrapper">
-                <div class="secondary-navigations">
-                    <div class="secondary-nav">
-                        <div class="region region-secondary-nav">
-                            <div id="block-menu-menu-secondary-menu" class="block block-menu">
-                                <div class="wrapper">                         
-                                    <div>
-                                        <ul class="menu">
-                                            <li class="leaf"><a >Messages</a></li>
-                                            <li class="leaf"><a >Give</a></li>
-                                            <li class="leaf"><a href="prayer">Pray</a></li>
-                                            <li class="leaf"><a >Devotions</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.secondary-navigations -->
-                    </div>
-                    <!-- /.wrapper -->
-                </div>
-                <!-- /.header-top -->
-                <div class="header-inner">
-                    <div class="wrapper">
-                        <div class="site-branding">
-                            <div class="nav-bg">
-                                <div class="nav-wrapper">
-                                    <div class="nav-inner">
-                                        <div class="main-nav">
-                                            <div class="region region-main-nav">
-                                                <div id="block-system-main-menu" class="block block-system block-menu">
-                                                    <div class="wrapper">
-                                                        <div>
-                                                            <ul class="menu">
-                                                                <li class="first leaf"href="aboutOurChruch"><a >About Us</a></li>
-                                                                <li class="leaf"><a href="calendar">Calendar</a></li>
-                                                                <li class="leaf"><a >Get Connected</a></li>
-                                                                <li class="leaf"><a >Ministries</a></li>                                          
-                                                               <li class="last leaf"><a >Media Archive</a></li> 
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.wrapper -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>        <!-- /.header-inner -->
+        <%@ include file="commonUI/navigation.jspf" %>
     </header>
+    <br>
     <section id="content">
     
         <!-- /.content-wrapper remove-->

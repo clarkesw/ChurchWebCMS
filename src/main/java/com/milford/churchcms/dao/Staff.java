@@ -9,6 +9,7 @@ import com.milford.churchcms.AppConstants;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,8 @@ public class Staff {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(length = 5000)
+    private String bio;
     
     private String namePreffix;
     private String nameSuffix;
@@ -47,7 +50,6 @@ public class Staff {
     private boolean recievePrayerRequests = false;
     private boolean isAdmin = false;
     private String photo;
-    private String bio;
     
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = User.class, orphanRemoval = true)
     @JoinColumn(name = "USER_ID", referencedColumnName = "id")    

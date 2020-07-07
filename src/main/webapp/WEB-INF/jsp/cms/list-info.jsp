@@ -7,6 +7,7 @@
 				<tr>
                                     <th>Name</th>
                                     <th>Mission Statement</th>
+                                    <th>About</th>
                                     <th>Address</th>
                                     <th>Service Times</th>
                                     <th></th>
@@ -17,6 +18,17 @@
                                 <tr>
                                     <td>${info.name}</td>
                                     <td>${info.missionStatement}</td>
+                                    <c:choose>
+                                        <c:when test="${empty info.about}">
+                                            <td><a type="button" class="btn btn-success" 
+                                                  href="updateChurchAbout">Add About</a></td>
+                                        </c:when>
+                                        <c:otherwise>
+                                             <td><a type="button" class="btn btn-success" 
+                                                  href="updateChurchAbout">Edit About</a></td>                                       
+                                        </c:otherwise>
+                                    </c:choose>
+         
                                     <c:choose>
                                         <c:when test="${empty info.address}">
                                             <td><a type="button" class="btn btn-success" 

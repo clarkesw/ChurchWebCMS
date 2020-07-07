@@ -103,4 +103,12 @@ public class UIService {
     public Optional<Staff> findStaffByFullName(CalendarEvent oneEvent){
         return staffRepository.findByFullName(oneEvent.getContactName());
     }
+    
+    public List<Staff> findAllStaff(){
+        return staffRepository.findAll();
+    }
+    
+    public List<Staff> findAllByPosition(String position){
+        return staffRepository.findAllByPosition(position);
+    }
 }

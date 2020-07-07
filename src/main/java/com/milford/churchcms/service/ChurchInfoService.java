@@ -39,13 +39,19 @@ public class ChurchInfoService {
         return churchRepository.findTopByOrderByIdDesc();
     }
     
+    public void updateChurchAbout(ChurchInfo about){
+        
+        churchRepository.deleteAll();
+        churchRepository.save(about);
+    }
+    
     public void updateInfoPost(ChurchInfo info, int id){
         if(id != -1)
             churchRepository.deleteAll();
         
-        List<Staff> staffers = staffRepository.findAll();
-        churchRepository.save(new ChurchInfo(info.getName(),info.getMissionStatement(),info.getEmail(),
-                info.getAddress(),info.getTelephone(),staffers)); 
+      //  List<Staff> staffers = staffRepository.findAll();
+     //   info.setStaffers(staffers);
+        churchRepository.save(new ChurchInfo(info)); 
     }
     
     public List<Staff> updateShowInfo(){

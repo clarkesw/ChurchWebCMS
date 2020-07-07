@@ -14,7 +14,7 @@
 <meta property="og:url" content="${church.url}" />
 <meta property="og:title" content=${church.name} />
 <meta property="og:description" content=${church.missionStatement} />
-  <title>${church.name}</title>
+  <title>${page.title}</title>
   <style type="text/css" media="all">
 @import url("../../stylesheets/system.base.css?p7rj3q");
 @import url("../../stylesheets/base.css");
@@ -48,7 +48,6 @@
 <style type="text/css" media="all">
 @import url("../../stylesheets/jquery.fancybox.css?p7rj3q");
 </style>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
   <script type="text/javascript" src="../../scripts/jquery.min.js"></script>
 <script type="text/javascript" src="../../scripts/jquery.once.js?v=1.2"></script>
 <script type="text/javascript" src="../../scripts/drupal.js?p7rj3q"></script>
@@ -70,31 +69,7 @@
 <script src='../scripts/moment.min.js'></script>
 <script src='../scripts/jquery.min.js'></script>
 <script src='../scripts/fullcalendar.min.js'></script>
-       <script>
-           var result;
-            window.onload = function(){
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "http://localhost:8080/calEventArray", true);
-                xhr.send();
-                xhr.onreadystatechange = function(){
- 
-                        result = xhr.responseText;
-                        document.getElementById("demo").innerHTML = result;
-                    }
-                }
-       </script>
-<script>
 
-$(document).ready(function() {
-        $('#calendar').fullCalendar({
-            theme: true,
-            editable: false,
-            events: "/calEventArray"
-        });
- 
-    });
-
-</script>
 <style>
 
   body {
@@ -127,54 +102,29 @@ $(document).ready(function() {
     <br>
     <section id="content">
         <center>
-            <form:form method="post" modelAttribute="prayer" action="../savePrayer">
-                <table style="width:40%">
-                    <tr class="tablespace">
-                        <td><form:label path="firstName">First Name</form:label> </td>
-                        <td><form:input  type="text" maxlength="25"
-                                class="form-control" required="required" path="firstName"/> </td>                      
-                    </tr>
-                    <tr class="tablespace">
-                        <td><form:label path="lastName">Last Name</form:label> </td>
-                        <td><form:input  type="text" maxlength="25"
-                                class="form-control" path="lastName"/></td>
-                    </tr>
-                    <tr class="tablespace">
-                        <td><form:label path="prayerRquest">Prayer Request</form:label> </td>
-                        <td><form:textarea  type="text" maxlength="255"
-                                   class="form-control" required="required" path="prayerRquest"/></td>
-                    </tr>
-                    <tr class="tablespace">
-                        <td><form:label path="email">Email</form:label> </td>
-                        <td><form:input  type="text" 
-                                class="form-control" required="required" path="email"/></td>
-                    </tr>
-                    <tr class="tablespace">
-                        <td><form:label path="phone">Phone</form:label> </td>
-                        <td><form:input  type="text" 
-                                class="form-control" path="phone"/></td>
-                    </tr>
-                     <tr class="tablespace">
-                        <td><form:label path="perferedContactMethod">Preferred Contact Method</form:label></td>
-                        <td> 
-                            <form:select path = "perferedContactMethod">
-                             <form:option value = "NONE" form:label = "Select"/>
-                             <form:options items = "${contactMethods}"/>
-                            </form:select>       
-                        </td>
-                    </tr>
-                    <tr class="tablespace">
-                        <td><form:label path="perferedContactTime">Preferred Contact Time</form:label> </td>
-                        <td>                        
-                            <form:select path = "perferedContactTime">
-                             <form:option value = "NONE" form:label = "Select"/>
-                             <form:options items = "${contactTimes}"/>
-                            </form:select>   
-                        </td>
-                    </tr>                    
+            <div id='event'>
+                <table width="600" cellpadding="20" border="0">
+                    <c:forEach items="${mainStaff}" var="staff">
+                        <tr>
+                            <td colspan="2">${staff.position}:  ${staff.firstName} ${staff.lastName}</td>
+                        </tr>
+
+                        <tr>
+                          <td> <img src="${staff.photo}" width="300" height="300"> </td>
+                              <td>
+                              <table>
+                                 <tr>
+                                    <td>${staff.bio}</td>
+                                 </tr>
+                                 <tr>
+                                    <td><a href="../staff/${staff.id}">Contact Info</a></td>
+                                 </tr>           
+                              </table>
+                          </td>  
+                        </tr>                    
+                    </c:forEach>
                 </table>
-			<button type="submit" class="btn btn-success">Submit</button>
-		</form:form>
+            </div>
         </center>
     </section>
     <!-- /#content -->

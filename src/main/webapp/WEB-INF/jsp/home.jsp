@@ -92,7 +92,18 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <body class="html front not-logged-in no-sidebars page-node page-node- page-node-1 node-type-department og-context og-context-node og-context-node-1" background="../../images/background.png">
 
     <div id="top"></div>
-    <%@ include file="navigation.jspf" %>
+        <header class="header header-v1" role="banner">
+        <div class="wrapper">
+            <div id="site-logo">
+                <a href="home" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="90" height="90" alt="Home" /></a>
+            </div>
+        </div>
+        <%@ include file="commonUI/navigation.jspf" %>
+            
+        <marquee behavior="scroll" direction="left"><div id='banner'></div></marquee>
+        <!--/.header-inner -->
+        
+    </header>
     <section id="content">
         <div class="clearfix">
             <a id="main-content"></a>

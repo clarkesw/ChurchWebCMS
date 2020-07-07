@@ -1,10 +1,4 @@
-    <header class="header header-v1" role="banner">
-        <div class="wrapper">
-            <div id="site-logo">
-                <a href="home" title='${church.name}' rel="home" class="site-nav-logo"><img src="../../images/Milford.png" width="90" height="90" alt="Home" /></a>
-            </div>
-        </div>
-        <div class="header-top">
+ <div class="header-top">
             <div class="wrapper">
                 <div class="secondary-navigations">
                     <div class="secondary-nav">
@@ -20,9 +14,9 @@
                                            <li>
                                                 <a href="#"> Social</a>
                                                 <ul class="dropdown">
-                                                    <li class="first leaf"><a href="http://www.facebook.com/gatewaypeople" title="" class="social facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                                    <li class="leaf"><a href="https://instagram.com/gatewaypeople" class="social instagram" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                                                    <li class="last leaf"><a href="http://twitter.com/gatewaypeople" title="" class="social twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                                    <li class="first leaf"><a href="${church.facebook}" title="" class="social facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                                    <li class="leaf"><a href="${church.youtube}" class="social youtube" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                                                    <li class="last leaf"><a href="${church.twitter}" title="" class="social twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                                  </ul>   
                                             </li>
                                         </li> 
@@ -49,10 +43,10 @@
                                                     <div class="wrapper">
                                                         <div>
                                                             <ul class="menu">
-                                                                <li class="first leaf"href="aboutOurChruch"><a >About Us</a></li>
+                                                                <li class="first leaf"><a href="about">About Us</a></li>
                                                                 <li class="leaf"><a href="calendar">Calendar</a></li>
                                                                 <li class="leaf"><a >Get Connected</a></li>
-                                                                <li class="leaf"><a >Ministries</a></li>                                          
+                                                                <li class="leaf"><a href="churchStaff">Church Staff</a></li>                                          
                                                                <li class="last leaf"><a >Media Archive</a></li> 
                                                             </ul>
                                                         </div>
@@ -82,8 +76,3 @@
                 </div>
             </div>
         </div> 
-            
-        <marquee behavior="scroll" direction="left"><div id='banner'></div></marquee>
-        <!--/.header-inner -->
-        
-    </header>

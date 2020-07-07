@@ -28,10 +28,14 @@ public class ChurchInfo {
     private int id = 1;
     private String name;
     private String missionStatement;
+    
+    @Column(columnDefinition="TEXT")
+    private String about;
     private String email;
     private String url;
     private String telephone;
     private String fax;
+    
     private String facebook;
     private String twitter;
     private String youtube;
@@ -50,35 +54,27 @@ public class ChurchInfo {
 
     public ChurchInfo() {}
 
-    public ChurchInfo(String name, String missionStatement, String email, Address address, String telephone, List<Staff> staffers) {
-        this.id = id;
-        this.name = name;
-        this.missionStatement = missionStatement;
-        this.email = email;
-        this.address = address;
-        this.telephone = telephone;
-        this.staffers = staffers;
-    }
-        
-    public ChurchInfo(int id,String name, String missionStatement, String email, Address address, String telephone, List<Staff> staffers) {
-        this.id = id;
-        this.name = name;
-        this.missionStatement = missionStatement;
-        this.email = email;
-        this.address = address;
-        this.telephone = telephone;
-        this.staffers = staffers;
-    }
-
     public ChurchInfo(ChurchInfo info) {
         this.name = info.getName();
         this.missionStatement = info.getMissionStatement();
+        this.about = info.getAbout();
         this.email = info.getEmail();
         this.address = info.getAddress();
         this.telephone = info.getTelephone();
         this.staffers = info.getStaffers();
+        this.facebook = info.getFacebook();
+        this.twitter = info.getTwitter();
+        this.youtube = info.getYoutube();
         this.url = info.getUrl();
         this.serviceTimes = info.getServiceTimes();
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public String getFax() {

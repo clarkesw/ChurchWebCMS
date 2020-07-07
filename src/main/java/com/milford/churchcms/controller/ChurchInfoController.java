@@ -9,9 +9,6 @@ import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.ChurchInfo;
 import com.milford.churchcms.dao.ServiceTimes;
 import com.milford.churchcms.dao.Staff;
-import com.milford.churchcms.repository.ChurchRepository;
-import com.milford.churchcms.repository.ServiceTimeRepository;
-import com.milford.churchcms.repository.StaffRepository;
 import com.milford.churchcms.service.ChurchInfoService;
 import java.util.List;
 import java.util.Optional;
@@ -98,6 +95,23 @@ public class ChurchInfoController extends BaseController{
         model.addAttribute("serviceTime", new ServiceTimes());
         
         return "cms/add-serviceTime";
-    }    
+    }   
+    
+    @PostMapping("/updateChurchAbout")
+    public String updateChurchAbout(ModelMap model,@Valid @ModelAttribute("info") ChurchInfo info){
+        logger.debug("POST /updateChurchAbout about.isEmpty() :{}", info.getAbout().isEmpty());
+        
+        service.updateChurchAbout(info);
+        return "redirect:list-info";
+    }
+    
+    @GetMapping("/updateChurchAbout")
+    public String updateChurchAbout(ModelMap model){
+        logger.debug("GET /updateChurchAbout Times : {}");
+        
+        model.addAttribute("info", service.returnInfo());
+        
+        return "cms/add-church-about";
+    }   
     
 }

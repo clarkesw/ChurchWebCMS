@@ -17,11 +17,13 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface StaffRepository extends JpaRepository<Staff,Integer>{
     Staff findByPosition(String position);
+    List<Staff> findAllByPosition(String position);
+    Optional<Staff> findByFullName(String fullName);
     List<Staff> findByFirstNameInAndLastNameIn(String firstName, String lastName);
     
     @Query("select fullName from Staff")
     List<String> getFullNames();
-    Optional<Staff> findByFullName(String fullName);
+    
     List<Staff> findByRecievePrayerRequestsTrue();
     List<Staff> findByRecieveChurchUpdatesTrue();
     Staff findTopByOrderByIdDesc();

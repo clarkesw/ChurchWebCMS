@@ -36,6 +36,9 @@ public class AppConstants {
                  "IT","Sound", "Video","Guitarist", "Drumer", "Choir", "Pianist",
                  "Administrative Assistant","Food Bank","Deacon","Elder","Security","Custodian","Usher","Preschool","Greeter"));
     
+    public final static List<String> corePositions = new ArrayList<>(
+         Arrays.asList("Lead Pastor", "Associate Pastor", "Youth Pastor", "College Pastor", "Music Pastor", "Deacon","Elder"));
+                
     public final static List<String> books = new ArrayList<>(
          Arrays.asList("Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel",
                  "2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job",

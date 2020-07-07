@@ -17,6 +17,7 @@ import com.milford.churchcms.service.UIService;
 import com.milford.churchcms.util.DateUtil;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +71,22 @@ public class UiController extends BaseController{
         }
         if(sermon.isPresent())
             model.addAttribute("sermon", sermon.get());
-        model.addAttribute("page", service.findByPageName(name));
         
         logger.debug("  sermon : {}", sermon);
         logger.debug("  church : {}", myChurch);
         logger.debug("  article : {}", article);
+        List<String> positionList = AppConstants.prefferedContactList;
+        List<Staff> contactList = null;
         
-        if("calendar".equals(name)){
-            logger.debug("  Calendar : {}", service.findByPageName(name));
+        if("about".equals(name)){
+            return "about";
+        }else if("churchStaff".equals(name)){
+            for(String position : positionList){
+               contactList.addAll(service.findAllByPosition(position));
+            }
+            model.addAttribute("mainStaff", contactList);
+            return "churchStaff";
+        }else if("calendar".equals(name)){
             return "calendar";
         }else if("prayer".equals(name)){
             model.addAttribute("contactMethods", AppConstants.Contact.contactMethods);
@@ -148,6 +157,20 @@ public class UiController extends BaseController{
         model.addAttribute("page", service.findByPageName("event"));
         return "sermon";
     }
+       
+    @GetMapping("/aboutOurChurch")
+    public String aboutPage(ModelMap model){
+        logger.debug("GET /aboutOurChurch  ");     
+        model.addAttribute("church", service.getChurchInfo());
+        return "about";
+    }
+    
+    @GetMapping("/churchStaff")
+    public String churchStaff(ModelMap model){
+        logger.debug("GET /aboutOurChruch  ");     
+        model.addAttribute("church", service.getChurchInfo());
+        return "about";
+    }
     
     @GetMapping("/testMe")
     @ResponseBody
@@ -159,14 +182,7 @@ public class UiController extends BaseController{
         return result;
     }
     
-    @GetMapping("/aboutOurChruch")
-    public String aboutPage(ModelMap model){
-        logger.debug("GET /aboutOurChruch  ");     
-        String uri = "http://labs.bible.org/api/?passage=Exodus%204:4";
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-        return "about";
-    }
+
     
     @GetMapping("/toolbar")
     public String toolBar(){
