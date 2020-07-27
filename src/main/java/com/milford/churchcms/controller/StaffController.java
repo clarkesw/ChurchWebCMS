@@ -116,10 +116,8 @@ public class StaffController extends BaseController{
         if("admin".equals(currentUser.getRole()))
             model.addAttribute("unlockRole","good");
         
-        if(staff.isIsAdmin()){
+        if(staff.getUser() != null)
             staff.getUser().setBlankPassword();
-            logger.debug("   isAdmin : {}",staff.isIsAdmin());    
-        }
          
         model.addAttribute("carriers", keyCarriers);
         model.addAttribute("roles", AppConstants.roles);

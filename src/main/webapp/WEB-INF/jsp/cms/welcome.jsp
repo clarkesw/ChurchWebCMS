@@ -24,9 +24,9 @@
                                     <td><b>Nobody</b></td>
                                 </tr>
                         </c:if>
-                        <c:forEach items="${staffers}" var="staff">
+                        <c:forEach items="${staffers}" var="fullName">
                             <tr class="welcome welcome-tr">
-                                <td class="welcome welcome-tr">${staff.fullName}</td>
+                                <td class="welcome welcome-tr">${fullName}</td>
                             </tr>
                         </c:forEach>
                     </tbody>

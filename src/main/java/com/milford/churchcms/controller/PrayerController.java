@@ -44,6 +44,7 @@ public class PrayerController{
     public String showPrayer(ModelMap model){
         logger.debug("GET /showPrayerRequests ");
         model.addAttribute("prayers", service.showPrayer());
+        logger.debug("   prayers : {}", service.showPrayer());
         return "cms/list-prayers";
     }    
     

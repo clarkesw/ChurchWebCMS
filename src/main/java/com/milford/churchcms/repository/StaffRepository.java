@@ -16,8 +16,8 @@ import org.springframework.data.jpa.repository.Query;
  * @author clarke
  */
 public interface StaffRepository extends JpaRepository<Staff,Integer>{
-    Staff findByPosition(String position);
-    List<Staff> findAllByPosition(String position);
+
+    List<Staff> findByPosition(String position);
     Optional<Staff> findByFullName(String fullName);
     List<Staff> findByFirstNameInAndLastNameIn(String firstName, String lastName);
     

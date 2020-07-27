@@ -11,6 +11,7 @@ import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,9 +64,11 @@ public class WelcomeController extends BaseController{
         dbUser.setPassword("empty");
         session.setAttribute("loggedInUser", dbUser.getUsername());
         model.put("user", userName);   
-        List<Staff> prayerStaff = service.findByRecievePrayerRequestsTrue();        
-        model.put("staffers", prayerStaff);
-
+        
+        List<String> staffNames = getFullNames();
+        model.put("staffers", staffNames);
+        logger.debug("   Recieve Prayer Requests : {}", staffNames);
+        
         return "cms/welcome";
     }
     
@@ -76,9 +79,21 @@ public class WelcomeController extends BaseController{
         
         if(user != null){
             model.put("user", user);   
-            model.put("staffers", service.findByRecievePrayerRequestsTrue());
+            List<String> staffNames = getFullNames();
+            model.put("staffers", staffNames);
+            logger.debug("   Recieve Prayer Requests : {}", staffNames);
             return "cms/welcome";
         }            
         return "cms/login-page";
+    }
+    
+    private List<String> getFullNames(){
+        List<Staff> prayerStaff = service.findByRecievePrayerRequestsTrue(); 
+        
+        List<String> staffNames = prayerStaff
+                .stream()
+                .map(staff -> staff.getFullName())
+                .collect(Collectors.toList());
+        return staffNames;
     }
 }

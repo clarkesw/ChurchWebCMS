@@ -15,6 +15,7 @@ import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.service.UIService;
 import com.milford.churchcms.util.DateUtil;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,17 +76,20 @@ public class UiController extends BaseController{
         logger.debug("  sermon : {}", sermon);
         logger.debug("  church : {}", myChurch);
         logger.debug("  article : {}", article);
-        List<String> positionList = AppConstants.prefferedContactList;
-        List<Staff> contactList = null;
+        List<String> corePositionList = AppConstants.corePositions;
+        List<Staff> contactList = new ArrayList();
         
         if("about".equals(name)){
             return "about";
         }else if("churchStaff".equals(name)){
-            for(String position : positionList){
+            for(String position : corePositionList){
+               logger.debug("  position : {}", position);
                contactList.addAll(service.findAllByPosition(position));
             }
+            logger.debug("  contactList : {}", contactList);
             model.addAttribute("mainStaff", contactList);
             return "churchStaff";
+            
         }else if("calendar".equals(name)){
             return "calendar";
         }else if("prayer".equals(name)){

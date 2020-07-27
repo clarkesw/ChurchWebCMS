@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
     http://localhost:8080/page/sites/all/modules/custom/gwp_simple_menu/js/gwp_simple_menu5da7.js?p7rj3q
    "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" xmlns:og="http://ogp.me/ns#" xmlns:article="http://ogp.me/ns/article#" xmlns:book="http://ogp.me/ns/book#" xmlns:profile="http://ogp.me/ns/profile#" xmlns:video="http://ogp.me/ns/video#" xmlns:product="http://ogp.me/ns/product#" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr" xmlns:og="http://ogp.me/ns#" xmlns:article="http://ogp.me/ns/article#" xmlns:book="http://ogp.me/ns/book#" xmlns:profile="http://ogp.me/ns/profile#" xmlns:video="http://ogp.me/ns/video#" xmlns:product="http://ogp.me/ns/product#" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head profile="http://www.w3.org/1999/xhtml/vocab">
 <meta http-equiv="x-dns-prefetch-control" content="on" />
 <link rel="dns-prefetch" href="//cf.gatewaypeople.com" />
@@ -102,26 +103,27 @@
     <br>
     <section id="content">
         <center>
-            <div id='event'>
-                <table width="600" cellpadding="20" border="0">
-                    <c:forEach items="${mainStaff}" var="staff">
+            <div id='event'> 
+                <table width="1000" cellpadding="20" border="0">
+                    <c:forEach items="${mainStaff}" var="staffer">
                         <tr>
-                            <td colspan="2">${staff.position}:  ${staff.firstName} ${staff.lastName}</td>
+                            <td colspan="2"> <h3>${staffer.position}:  ${staffer.firstName} ${staffer.lastName}</h3></td>
                         </tr>
 
                         <tr>
-                          <td> <img src="${staff.photo}" width="300" height="300"> </td>
+                          <td> <img src="" width="300" height="300"> </td>
                               <td>
-                              <table>
+                              <table border="0">
                                  <tr>
-                                    <td>${staff.bio}</td>
+                                    <td>${staffer.bio}</td>
                                  </tr>
                                  <tr>
-                                    <td><a href="../staff/${staff.id}">Contact Info</a></td>
+                                    <td><a href="../staff/${staffer.id}">Contact Info</a></td>
                                  </tr>           
                               </table>
                           </td>  
-                        </tr>                    
+                        </tr>    
+                     
                     </c:forEach>
                 </table>
             </div>
@@ -134,8 +136,6 @@
                 <div class="church-tag">${church.name}| <span>${church.missionStatement}</span></div>
                 <div class="church-info">&copy; 2018 | ${church.telephone} | ${church.address.addressLine1}, ${church.address.addressLine2}</div>
             </div>
-        <div class="clearfix"></div>
-        <div class="clearfix"></div>
         </center>
         <!-- /.wrapper -->
     </footer>

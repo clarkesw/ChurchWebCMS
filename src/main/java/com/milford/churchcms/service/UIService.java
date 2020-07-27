@@ -109,6 +109,6 @@ public class UIService {
     }
     
     public List<Staff> findAllByPosition(String position){
-        return staffRepository.findAllByPosition(position);
+        return staffRepository.findByPosition(position);
     }
 }

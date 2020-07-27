@@ -29,7 +29,7 @@ public class Staff {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(length = 5000)
+    @Column(columnDefinition="TEXT")
     private String bio;
     
     private String namePreffix;
