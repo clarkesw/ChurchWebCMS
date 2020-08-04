@@ -12,6 +12,7 @@ import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class WelcomeController extends BaseController{
+public class WelcomeController{
+   
+    @Autowired 
+    HttpSession session;
     
     @Autowired
     WelcomeService service;

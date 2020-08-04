@@ -18,11 +18,11 @@
                                             <td>${page.pageName}</td>
                                             <td>${page.lastModified}</td>
                                             <td>${page.isVisible}</td>
-                                            <td><a type="button" class="btn btn-success" href="/update-page?id=${page.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-success" href="/api/update-page?id=${page.id}">Update</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<div> <a class="button" href="/add-pages">Add Page</a></div> 
+		<div> <a class="button" href="/api/add-pages">Add Page</a></div> 
 <%@ include file="common/footer.jspf" %>
 

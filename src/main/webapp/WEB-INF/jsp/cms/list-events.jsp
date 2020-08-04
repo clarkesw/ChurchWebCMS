@@ -26,13 +26,13 @@
                                             <td>${formattedEndDate} ${event.endTime}</td>
                                             <td>${event.isRepeated}</td>
                                             
-                                            <td><a type="button" class="btn btn-success" href="/update-event?id=${event.id}">Update</a></td>
-                                            <td><a type="button" class="btn btn-warning" href="/delete-event?id=${event.id}">Delete</a></td>
+                                            <td><a type="button" class="btn btn-success" href="/api/update-event?id=${event.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-warning" href="/api/delete-event?id=${event.id}">Delete</a></td>
 					</tr>
                                     </c:forEach>
                             </c:if>
 			</tbody>
 		</table>
-		<div> <a class="button" href="/add-events">Add Event</a></div>
+		<div> <a class="button" href="/api/add-events">Add Event</a></div>
 <%@ include file="common/footer.jspf" %>
 

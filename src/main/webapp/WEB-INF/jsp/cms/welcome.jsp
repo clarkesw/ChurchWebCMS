@@ -1,4 +1,4 @@
-<%@ include file="common/header.jspf" %>
+<%@ include file="common/header_login.jspf" %>
 <%@ include file="common/navigation.jspf" %>
 <div class="container">
     <h1>${user}'s Dashboard!! </h1>

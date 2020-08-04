@@ -20,19 +20,19 @@
                                             <c:choose>
                                                 <c:when test="${empty art.content}">
                                                     <td><a type="button" class="btn btn-success" 
-                                                          href="addDescriptionToArticle?id=${art.id}">Add Description</a></td>
+                                                          href="/api/addDescriptionToArticle?id=${art.id}">Add Description</a></td>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <td><a type="button" class="btn btn-success" 
-                                                          href="addDescriptionToArticle?id=${art.id}">Edit Description</a></td>                                     
+                                                          href="/api/addDescriptionToArticle?id=${art.id}">Edit Description</a></td>                                     
                                                 </c:otherwise>
                                             </c:choose> 
-                                            <td><a type="button" class="btn btn-success" href="/update-article?id=${art.id}">Update</a></td>
-                                            <td><a type="button" class="btn btn-warning" href="/delete-article?id=${art.id}">Delete</a></td>
+                                            <td><a type="button" class="btn btn-success" href="/api/update-article?id=${art.id}">Update</a></td>
+                                            <td><a type="button" class="btn btn-warning" href="/api/delete-article?id=${art.id}">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<div> <a class="button" href="/add-articles">Add Article</a></div>
+		<div> <a class="button" href="/api/add-articles">Add Article</a></div>
 <%@ include file="common/footer.jspf" %>
 

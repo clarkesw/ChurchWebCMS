@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class PrayerController{
+public class PrayerController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(PrayerController.class);
     

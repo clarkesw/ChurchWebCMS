@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("username")
-public class LogoutController  extends BaseController{
+public class LogoutController{
     
     @GetMapping(value = "/logout")
     public String logout(HttpServletRequest request,

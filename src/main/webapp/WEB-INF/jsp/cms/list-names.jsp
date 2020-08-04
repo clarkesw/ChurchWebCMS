@@ -14,13 +14,13 @@
                             <c:forEach items="${names}" var="name">
                             <tr>
                                 <td>${name.name}</td>
-                                <td><a type="button" class="btn btn-success" href="/update-name?id=${name.id}">Update</a></td>
+                                <td><a type="button" class="btn btn-success" href="/api/update-name?id=${name.id}">Update</a></td>
                              <%--   <c:if test="${name.deletable}">
                                     <td><a type="button" class="btn btn-warning" href="/delete-name?id=${name.id}">Delete</a></td>
                                 </c:if> --%>
                                 <c:choose>
                                     <c:when test="${name.deletable}">
-                                        <td><a type="button" class="btn btn-warning" href="/delete-name?id=${name.id}">Delete</a></td>
+                                        <td><a type="button" class="btn btn-warning" href="/api/delete-name?id=${name.id}">Delete</a></td>
                                     </c:when>    
                                     <c:otherwise>
                                         <td></td>
@@ -30,6 +30,6 @@
                             </c:forEach>
 			</tbody>
 		</table>
-		<div><div> <a class="button" href="/add-names">Add Name</a></div>
+		<div><div> <a class="button" href="/api/add-names">Add Name</a></div>
 <%@ include file="common/footer.jspf" %>
 
