@@ -6,12 +6,15 @@
 package com.milford.churchcms.controller;
 
 
+import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
+import com.milford.churchcms.util.JWTUtil;
 import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -33,13 +36,16 @@ public class WelcomeController{
     @Autowired
     WelcomeService service;
     
+    @Autowired
+    JWTUtil JWTserv;
+    
     @Value("${spring.datasource.url}")
     private String dataSourceInfo;
     
     Logger logger = LoggerFactory.getLogger(WelcomeController.class);
     
     @PostMapping("/login")
-    public String checkLoginCredentials(ModelMap model,@Valid @ModelAttribute("user") User user){
+    public String checkLoginCredentials(HttpServletResponse response, ModelMap model,@Valid @ModelAttribute("user") User user){
         String[] dataSource =  dataSourceInfo.split(":");
         String rootPW = PasswordUtil.generateSecurePassword("root");
         String whichDB = dataSource[1];
@@ -65,20 +71,24 @@ public class WelcomeController{
                 return "cms/login-page";
             }
         }
-        dbUser.setPassword("empty");
-        session.setAttribute("loggedInUser", dbUser.getUsername());
+    //    dbUser.setPassword("empty");
+        session.setAttribute(AppConstants.Session.CurrentUser, dbUser.getUsername());
         model.put("user", userName);   
+        
+        String createdToken = JWTUtil.createToken(userName, 800000);
+        session.setAttribute(AppConstants.Security.JWT, createdToken);
+        logger.debug("   createToken : {}", createdToken);
         
         List<String> staffNames = getFullNames();
         model.put("staffers", staffNames);
-        logger.debug("   Recieve Prayer Requests : {}", staffNames);
+        
         
         return "cms/welcome";
     }
     
     @GetMapping("/login")
     public String showWelcomePage(ModelMap model){
-        String user = (String)session.getAttribute("loggedInUser");
+        String user = (String)session.getAttribute(AppConstants.Session.CurrentUser);
         logger.debug("GET /login User : {}",user);
         
         if(user != null){

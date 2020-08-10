@@ -77,8 +77,12 @@ public class AppConstants {
         public static final String CALENDAR = "Calendar";
     }
     
-    public static class Session{
-       // public static final String 
+    public static class Security{
+       public static final String JWT = "JWT"; 
+       public static final String secretKey = "4C8kupp4meOO32M78sKdX83l45LLd32X";
     }
     
+    public static class Session{
+        public static final String CurrentUser = "loggedInUser"; 
+    }
 }

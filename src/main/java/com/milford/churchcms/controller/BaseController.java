@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.StaffService;
 import java.text.SimpleDateFormat;
@@ -39,7 +40,7 @@ public class BaseController {
     }
        
     User getLoggedInUser(){
-       String currentUserName = (String)session.getAttribute("loggedInUser");
+       String currentUserName = (String)session.getAttribute(AppConstants.Session.CurrentUser);
        User user = staffService.findByUsername(currentUserName);
        user.setBlankPassword();
        return user;

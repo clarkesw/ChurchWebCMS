@@ -10,6 +10,9 @@ import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.StaffService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,15 +30,19 @@ public class StaffController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(StaffController.class);
  
+    @Autowired 
+    HttpSession session;
+        
     @Autowired
     StaffService service;
         
     @GetMapping("/list-staffers")
-    public String showStaff(ModelMap model){
+    public String showStaff(HttpServletRequest req, ModelMap model){
         List<Staff> allstaff = service.showStaff();
         logger.debug("GET /list-staffers Staffers: {}",allstaff.size());
         User currentUser = super.getLoggedInUser();
         
+        logger.debug("   JWT: {}",session.getAttribute(AppConstants.Security.JWT));
         if("ADMIN".equalsIgnoreCase(currentUser.getRole()))
             model.addAttribute("userEdit", true);
         
@@ -46,10 +53,9 @@ public class StaffController extends BaseController{
  
     @GetMapping("/add-staff")
     public String addStaffGet(ModelMap model, @RequestParam boolean isAdmin){   
-        String currentUserName = (String)session.getAttribute("loggedInUser");
-        logger.debug("GET /add-staff currentUser: {}", currentUserName);  
+        User currentUser = getLoggedInUser();
+        logger.debug("GET /add-staff currentUser: {}", currentUser.getUsername());  
         
-        User currentUser = service.findByUsername(currentUserName);
         Object[] keyCarriers = AppConstants.textMessageAddress.keySet().toArray();
         
         Staff staff = new Staff();
@@ -103,10 +109,7 @@ public class StaffController extends BaseController{
     @GetMapping("/update-staff")
     public String updateStaffGet(ModelMap model, @RequestParam int id){
         logger.debug("GET /update-staff  ID : {}",id);
-        String loggedInUser = (String)session.getAttribute("loggedInUser");
-        User currentUser = service.findByUsername(loggedInUser);
-        
-        logger.debug("   currentUser : {}",currentUser);
+        User currentUser = getLoggedInUser();
         
         Staff staff = service.updateStaffGet(id);
         logger.debug("   staff : {}",staff);
@@ -141,8 +144,8 @@ public class StaffController extends BaseController{
     @GetMapping("/update-user")
     public String updateUserGet(ModelMap model, @RequestParam int userId, @RequestParam int staffId){
         logger.debug("GET /update-user  ID : {}",userId);
-        String loggedInUser = (String)session.getAttribute("loggedInUser");
-        User currentUser = service.findByUsername(loggedInUser);
+
+        User currentUser = getLoggedInUser();
         
         User user = service.findUserById(userId);
         model.put("user", user);
@@ -157,6 +160,5 @@ public class StaffController extends BaseController{
         service.updateUserGet(userId, staffId, currentUser);
         
         return "cms/add-user";
-    }     
-      
+    }   
 }
