@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("username")
-public class LogoutController{
+public class LogoutController extends BaseController{
     
     @Autowired 
     HttpSession session;
@@ -28,10 +28,10 @@ public class LogoutController{
     @GetMapping(value = "/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         String user = (String) session.getAttribute(AppConstants.Session.CurrentUser);
-       
         logger.debug("GET /logout user: {}", user);
+        
         session.removeAttribute(AppConstants.Security.JWT);
-
+        session.removeAttribute(user);
         return "redirect:/";
     }
 }

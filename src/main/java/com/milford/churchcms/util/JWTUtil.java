@@ -50,7 +50,7 @@ public class JWTUtil {
             return claims.getSubject();
     }
     
-    public static void checkJWT(String jwt) {
+    public static void checkJWT(String jwt) throws IllegalArgumentException {
  
         Claims claims = Jwts.parser()         
            .setSigningKey(DatatypeConverter.parseBase64Binary(secretKey))

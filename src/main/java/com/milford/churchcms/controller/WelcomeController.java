@@ -36,9 +36,6 @@ public class WelcomeController{
     @Autowired
     WelcomeService service;
     
-    @Autowired
-    JWTUtil JWTserv;
-    
     @Value("${spring.datasource.url}")
     private String dataSourceInfo;
     
@@ -92,9 +89,12 @@ public class WelcomeController{
         logger.debug("GET /login User : {}",user);
         
         if(user != null){
-            model.put("user", user);   
             List<String> staffNames = getFullNames();
+            
+            model.put("user", user);   
             model.put("staffers", staffNames);
+            
+         //   JWTUtil.checkJWT((String)session.getAttribute(AppConstants.Security.JWT));
             logger.debug("   Recieve Prayer Requests : {}", staffNames);
             return "cms/welcome";
         }            

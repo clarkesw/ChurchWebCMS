@@ -30,11 +30,10 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) 
             throws IOException, ServletException {
         
-        filterChain.doFilter(servletRequest, servletResponse);
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        
         String JWT_Token = (String)httpServletRequest.getSession().getAttribute(AppConstants.Security.JWT);
         JWTUtil.checkJWT(JWT_Token);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
