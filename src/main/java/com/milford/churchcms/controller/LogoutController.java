@@ -32,6 +32,6 @@ public class LogoutController extends BaseController{
         
         session.removeAttribute(AppConstants.Security.JWT);
         session.removeAttribute(user);
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

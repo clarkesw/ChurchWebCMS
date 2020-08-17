@@ -11,7 +11,6 @@ import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.StaffService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;

@@ -8,6 +8,7 @@ package com.milford.churchcms.service;
 import com.milford.churchcms.dao.Description;
 import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
+import com.milford.churchcms.repository.PassageRepository;
 import com.milford.churchcms.repository.SermonRepository;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,9 @@ public class SermonService {
 
     @Autowired
     SermonRepository repository;
+    
+    @Autowired
+    PassageRepository passRepo;
     
     public List<Sermon> showSermon(){
         return repository.findAll();
@@ -61,6 +65,7 @@ public class SermonService {
         Sermon sermon = repository.findById(sermonId).get();
        
         repository.deleteById(sermonId);
+        passRepo.saveAll(passages);
              
         int lastSermonId = (lastSermonIdRep != null) ? lastSermonIdRep + 1 : 1;
         repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description,

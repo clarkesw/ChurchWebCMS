@@ -86,15 +86,21 @@ public class WelcomeController{
     @GetMapping("/login")
     public String showWelcomePage(ModelMap model){
         String user = (String)session.getAttribute(AppConstants.Session.CurrentUser);
+        String JWT = (String)session.getAttribute(AppConstants.Security.JWT);
         logger.debug("GET /login User : {}",user);
         
-        if(user != null){
+        if(user != null && JWT != null){
             List<String> staffNames = getFullNames();
             
             model.put("user", user);   
             model.put("staffers", staffNames);
             
-         //   JWTUtil.checkJWT((String)session.getAttribute(AppConstants.Security.JWT));
+            try{
+               JWTUtil.checkJWT(JWT); 
+            }catch(io.jsonwebtoken.ExpiredJwtException ee){
+                return "redirect:logout";
+            }
+            
             logger.debug("   Recieve Prayer Requests : {}", staffNames);
             return "cms/welcome";
         }            

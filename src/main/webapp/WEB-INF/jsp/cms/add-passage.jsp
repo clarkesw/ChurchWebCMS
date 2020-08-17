@@ -25,7 +25,7 @@
                         </c:if> 
                     </table>  
             <br><br><hr>
-            <form:form method="post" modelAttribute="passage" action="addPassagesToSermon"> 
+            <form:form method="post" modelAttribute="passage" action="/api/addPassagesToSermon"> 
                 <fieldset class="form-group">
                       <form:label path="book">Book</form:label> 
                       <form:select path="book">
