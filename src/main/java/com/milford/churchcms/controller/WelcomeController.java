@@ -6,12 +6,16 @@
 package com.milford.churchcms.controller;
 
 
+import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.Staff;
 import com.milford.churchcms.dao.User;
+import com.milford.churchcms.util.JWTUtil;
 import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +28,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class WelcomeController extends BaseController{
+public class WelcomeController{
+   
+    @Autowired 
+    HttpSession session;
     
     @Autowired
     WelcomeService service;
@@ -35,7 +42,7 @@ public class WelcomeController extends BaseController{
     Logger logger = LoggerFactory.getLogger(WelcomeController.class);
     
     @PostMapping("/login")
-    public String checkLoginCredentials(ModelMap model,@Valid @ModelAttribute("user") User user){
+    public String checkLoginCredentials(HttpServletResponse response, ModelMap model,@Valid @ModelAttribute("user") User user){
         String[] dataSource =  dataSourceInfo.split(":");
         String rootPW = PasswordUtil.generateSecurePassword("root");
         String whichDB = dataSource[1];
@@ -61,26 +68,39 @@ public class WelcomeController extends BaseController{
                 return "cms/login-page";
             }
         }
-        dbUser.setPassword("empty");
-        session.setAttribute("loggedInUser", dbUser.getUsername());
+    //    dbUser.setPassword("empty");
+        session.setAttribute(AppConstants.Session.CurrentUser, dbUser.getUsername());
         model.put("user", userName);   
+        
+        String createdToken = JWTUtil.createToken(userName, 800000);
+        session.setAttribute(AppConstants.Security.JWT, createdToken);
+        logger.debug("   createToken : {}", createdToken);
         
         List<String> staffNames = getFullNames();
         model.put("staffers", staffNames);
-        logger.debug("   Recieve Prayer Requests : {}", staffNames);
+        
         
         return "cms/welcome";
     }
     
     @GetMapping("/login")
     public String showWelcomePage(ModelMap model){
-        String user = (String)session.getAttribute("loggedInUser");
+        String user = (String)session.getAttribute(AppConstants.Session.CurrentUser);
+        String JWT = (String)session.getAttribute(AppConstants.Security.JWT);
         logger.debug("GET /login User : {}",user);
         
-        if(user != null){
-            model.put("user", user);   
+        if(user != null && JWT != null){
             List<String> staffNames = getFullNames();
+            
+            model.put("user", user);   
             model.put("staffers", staffNames);
+            
+            try{
+               JWTUtil.checkJWT(JWT); 
+            }catch(io.jsonwebtoken.ExpiredJwtException ee){
+                return "redirect:logout";
+            }
+            
             logger.debug("   Recieve Prayer Requests : {}", staffNames);
             return "cms/welcome";
         }            

@@ -1,0 +1,13 @@
+sudo /etc/init.d/mysql start/stop
+
+sudo mysql
+
+select * from mysql.user;
+	auth_socket
+	caching_sha2_password
+	
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';
+UPDATE mysql.user SET plugin = 'caching_sha2_password' WHERE user = 'root';
+FLUSH PRIVILEGES;
+
+mysql --user=root --password

@@ -16,15 +16,15 @@
                                         <c:choose>
                                             <c:when test="${empty banner.message}">
                                                 <td><a type="button" class="btn btn-success" 
-                                                      href="/add-banner">Add</a></td>
+                                                      href="/api/add-banner">Add</a></td>
                                             </c:when>
                                             <c:otherwise>
                                                  <td><a type="button" class="btn btn-success" 
-                                                      href="/add-banner">Edit</a></td>                                       
+                                                      href="/api/add-banner">Edit</a></td>                                       
                                             </c:otherwise>
                                         </c:choose> 
                                                           
-                                    <td><a type="button" class="btn btn-warning" href="/delete-banner">Delete</a></td>
+                                    <td><a type="button" class="btn btn-warning" href="/api/delete-banner">Delete</a></td>
                                 </tr>
 			</tbody>
 		</table>

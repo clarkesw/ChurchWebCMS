@@ -6,7 +6,6 @@
 package com.milford.churchcms.controller;
 
 import com.milford.churchcms.dao.Banner;
-import com.milford.churchcms.repository.BannerRepository;
 import com.milford.churchcms.service.BannerService;
 import java.util.Optional;
 import javax.validation.Valid;

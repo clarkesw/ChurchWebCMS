@@ -18,7 +18,6 @@ import com.milford.churchcms.util.DateUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
-public class UiController extends BaseController{
+public class UiController{
     
     public Logger logger = LoggerFactory.getLogger(UiController.class);
     

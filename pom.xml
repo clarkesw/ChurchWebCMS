@@ -48,7 +48,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
 		</dependency>
                 <dependency>
                         <groupId>org.springframework.boot</groupId>
@@ -90,11 +89,6 @@
                     <artifactId>bootstrap</artifactId>
                     <version>3.3.6</version>
                 </dependency>
-<!--                <dependency>
-                    <groupId>org.webjars</groupId>
-                    <artifactId>bootstrap-datetimepicker</artifactId>
-                    <version>3.3.6</version>
-                </dependency>-->
                 <dependency>
                     <groupId>org.webjars</groupId>
                     <artifactId>jquery</artifactId>
@@ -116,6 +110,11 @@
                     <version>1.4</version>
                     <type>jar</type>
                 </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt</artifactId>
+                    <version>0.6.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

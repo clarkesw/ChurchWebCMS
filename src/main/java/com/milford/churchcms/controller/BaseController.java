@@ -5,6 +5,7 @@
  */
 package com.milford.churchcms.controller;
 
+import com.milford.churchcms.AppConstants;
 import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.StaffService;
 import java.text.SimpleDateFormat;
@@ -12,13 +13,17 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
  * @author clarke
  */
+@Controller
+@RequestMapping("/api")
 public class BaseController {
     
     @Autowired 
@@ -35,7 +40,7 @@ public class BaseController {
     }
        
     User getLoggedInUser(){
-       String currentUserName = (String)session.getAttribute("loggedInUser");
+       String currentUserName = (String)session.getAttribute(AppConstants.Session.CurrentUser);
        User user = staffService.findByUsername(currentUserName);
        user.setBlankPassword();
        return user;
