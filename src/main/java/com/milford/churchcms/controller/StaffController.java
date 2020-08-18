@@ -11,7 +11,6 @@ import com.milford.churchcms.dao.User;
 import com.milford.churchcms.service.StaffService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +28,6 @@ public class StaffController extends BaseController{
     
     public Logger logger = LoggerFactory.getLogger(StaffController.class);
  
-    @Autowired 
-    HttpSession session;
-        
     @Autowired
     StaffService service;
         

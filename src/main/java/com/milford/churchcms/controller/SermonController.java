@@ -96,20 +96,23 @@ public class SermonController extends BaseController{
             return "cms/add-description";
         
         Integer sermonId = (Integer)session.getAttribute("sermonId");
-        List<Passage> passages = (List<Passage>)session.getAttribute("passages");
+        List<Passage> passages = (List<Passage>) session.getAttribute("passages");
+        service.addDescriptionSermonPost(passages, sermon.getDescription(), sermonId);
+        
         logger.debug("  sermonId : {}",sermonId);
         logger.debug("  passages : {}",passages);
-        service.addDescriptionSermonPost(passages, sermon.getDescription(), sermonId);
         return "redirect:list-sermons";
     }
     
     @GetMapping("/addDescriptionToSermon")
     public String addDescriptionSermonGet(ModelMap model, @RequestParam int id){
         logger.debug("GET /addDescriptionToSermon ID: {}", id);
+        
         session.setAttribute("sermonId", id);
         Optional<Sermon> sermon = service.updateShowSermonGet(id);
         
         List<Passage> passages = sermon.get().getPassages();
+        session.setAttribute("passages", passages);
         model.addAttribute("passages", passages);
           
         model.addAttribute("sermon", sermon);

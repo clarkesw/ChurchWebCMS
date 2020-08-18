@@ -65,7 +65,7 @@ public class SermonService {
         Sermon sermon = repository.findById(sermonId).get();
        
         repository.deleteById(sermonId);
-        passRepo.saveAll(passages);
+   //     passRepo.saveAll(passages);
              
         int lastSermonId = (lastSermonIdRep != null) ? lastSermonIdRep + 1 : 1;
         repository.save(new Sermon(lastSermonId, sermon.getTitle(), sermon.getSubTitle(), description,
