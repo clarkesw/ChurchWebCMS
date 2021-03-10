@@ -5,7 +5,6 @@
  */
 package com.milford.churchcms.service;
 
-import com.milford.churchcms.dao.Description;
 import com.milford.churchcms.dao.Passage;
 import com.milford.churchcms.dao.Sermon;
 import com.milford.churchcms.repository.PassageRepository;

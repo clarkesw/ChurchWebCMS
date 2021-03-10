@@ -84,3 +84,6 @@ $(function() {$( ".teacher-link" ).tooltip({
     },
 
   })});
+
+---------- AWS Deployment ---------
+mvn clean package -Pproduction -DskipTests

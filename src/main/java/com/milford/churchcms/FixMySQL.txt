@@ -11,3 +11,6 @@ UPDATE mysql.user SET plugin = 'caching_sha2_password' WHERE user = 'root';
 FLUSH PRIVILEGES;
 
 mysql --user=root --password
+
+---------- Change Password ----------------
+UPDATE user SET authentication_string=PASSWORD("c1arke") WHERE User='root';
