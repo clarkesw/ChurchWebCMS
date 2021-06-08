@@ -14,6 +14,7 @@ import com.milford.churchcms.service.WelcomeService;
 import com.milford.churchcms.util.PasswordUtil;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -42,7 +43,7 @@ public class WelcomeController{
     Logger logger = LoggerFactory.getLogger(WelcomeController.class);
     
     @PostMapping("/login")
-    public String checkLoginCredentials(HttpServletResponse response, ModelMap model,@Valid @ModelAttribute("user") User user){
+    public String checkLoginCredentials(HttpServletResponse response, HttpServletRequest servletRequest, ModelMap model,@Valid @ModelAttribute("user") User user){
         String[] dataSource =  dataSourceInfo.split(":");
         String rootPW = PasswordUtil.generateSecurePassword("root");
         String whichDB = dataSource[1];
@@ -68,13 +69,14 @@ public class WelcomeController{
                 return "cms/login-page";
             }
         }
-    //    dbUser.setPassword("empty");
+        
+        session.setAttribute("Secret", "Tokie");
         session.setAttribute(AppConstants.Session.CurrentUser, dbUser.getUsername());
         model.put("user", userName);   
         
         String createdToken = JWTUtil.createToken(userName, 800000);
         session.setAttribute(AppConstants.Security.JWT, createdToken);
-        logger.debug("   createToken : {}", createdToken);
+        logger.debug("   Set Header Secret : {}", response.getHeader("Secret"));
         
         List<String> staffNames = getFullNames();
         model.put("staffers", staffNames);

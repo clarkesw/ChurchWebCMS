@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Test{
 
-     public static void main(String []args) throws Exception{
-       //  printList(Arrays.asList(1,2,3,4,5,6,7,8,9));
-       Car myCar = new Mazda();
-       myCar.honk(new UgHorn());
-    }
+//     public static void main(String []args) throws Exception{
+//       //  printList(Arrays.asList(1,2,3,4,5,6,7,8,9));
+//       Car myCar = new Mazda();
+//       myCar.honk(new UgHorn());
+//    }
      
 //    public static void printList(List<Integer> nums){
 //        nums.stream()
