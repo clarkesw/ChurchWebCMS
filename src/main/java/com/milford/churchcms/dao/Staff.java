@@ -6,6 +6,7 @@
 package com.milford.churchcms.dao;
 
 import com.milford.churchcms.AppConstants;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "STAFF")
-public class Staff {
+public class Staff implements Serializable {
     
     @Id
     @GeneratedValue

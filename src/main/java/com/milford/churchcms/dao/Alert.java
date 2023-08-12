@@ -25,7 +25,7 @@ public class Alert {
     public Alert(String group, String message) {
         this.message = message;
         this.group = group;
-        this.date = new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
+        this.date = new SimpleDateFormat(AppConstants.DATE_FORMAT).format(new Date());
     }
 
     public String getGroup() {

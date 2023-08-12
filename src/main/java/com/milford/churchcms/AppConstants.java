@@ -17,29 +17,29 @@ import java.util.Map;
  */
 public class AppConstants {
     
-    public static final String dateFormat = "M-d-yyyy  h:mm:ss a";
-    public static final String salt = "feiH34rvfdk!!fe((";
+    public static final String DATE_FORMAT = "M-d-yyyy  h:mm:ss a";
+    public static final String SALT = "feiH34rvfdk!!fe((";
     
-    public static List<String> roles = new ArrayList<>(
+    public static final List<String> ROLES = new ArrayList<>(
         Arrays.asList("ADMIN","USER"));
     
-    public static List<String> prefferedContactList = new ArrayList<>(
+    public static final List<String> PREFFERED_CONTACT_LIST = new ArrayList<>(
          Arrays.asList("Home Email", "Work Email", "Home Phone", "Work Phone", "Mobile Phone"));
     
-    public static List<String> days = new ArrayList<>(
+    public static final List<String> DAYS = new ArrayList<>(
         Arrays.asList("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"));
 
-    public static Map<String, String> textMessageAddress = new HashMap<String, String>();
+    public static final Map<String, String> textMessageAddress = new HashMap<>();
     
-    public final static List<String> positions = new ArrayList<>(
+    public static final List<String> positions = new ArrayList<>(
          Arrays.asList("Lead Pastor", "Associate Pastor", "Youth Pastor", "College Pastor", "Music Pastor",
                  "IT","Sound", "Video","Guitarist", "Drumer", "Choir", "Pianist",
                  "Administrative Assistant","Food Bank","Deacon","Elder","Security","Custodian","Usher","Preschool","Greeter"));
     
-    public final static List<String> corePositions = new ArrayList<>(
+    public static final List<String> corePositions = new ArrayList<>(
          Arrays.asList("Lead Pastor", "Associate Pastor", "Youth Pastor", "College Pastor", "Music Pastor", "Deacon","Elder"));
                 
-    public final static List<String> books = new ArrayList<>(
+    public static final List<String> books = new ArrayList<>(
          Arrays.asList("Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel",
                  "2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Esther","Job",
                  "Psalm","Proverbs","Ecclesiastes","Song of Songs","Isaiah","Jeremiah","Lamentations","Ezekiel",

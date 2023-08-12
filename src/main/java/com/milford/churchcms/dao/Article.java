@@ -49,7 +49,7 @@ public class Article {
         this.url = createUrl(id);
         this.content = content;
         this.imageURL = imageURL;
-        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
+        this.lastModified =  new SimpleDateFormat(AppConstants.DATE_FORMAT).format(new Date());
     }
 
     public String getLastModified() {

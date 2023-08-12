@@ -41,7 +41,7 @@ public class PasswordUtil {
     }
     public static String generateSecurePassword(String password) {
         String returnValue = null;
-        byte[] securePassword = hash(password.toCharArray(), AppConstants.salt.getBytes());
+        byte[] securePassword = hash(password.toCharArray(), AppConstants.SALT.getBytes());
  
         returnValue = Base64.getEncoder().encodeToString(securePassword);
  

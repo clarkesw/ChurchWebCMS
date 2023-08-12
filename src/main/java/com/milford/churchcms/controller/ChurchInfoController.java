@@ -90,7 +90,7 @@ public class ChurchInfoController extends BaseController{
         List<ServiceTimes> serviceTimes = service.updateShowService();
         logger.debug("GET /editServiceTimes Times : {}",serviceTimes.size());
         
-        model.addAttribute("days", AppConstants.days);
+        model.addAttribute("days", AppConstants.DAYS);
         model.addAttribute("serviceTimes", serviceTimes);
         model.addAttribute("serviceTime", new ServiceTimes());
         

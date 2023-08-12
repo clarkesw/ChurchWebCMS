@@ -61,10 +61,10 @@ public class StaffController extends BaseController{
         }
        
         model.addAttribute("staff", staff);
-        model.addAttribute("roles", AppConstants.roles);
+        model.addAttribute("roles", AppConstants.ROLES);
         model.addAttribute("carriers", keyCarriers);
         model.addAttribute("positions", AppConstants.positions);
-        model.addAttribute("prefferedContactList", AppConstants.prefferedContactList);
+        model.addAttribute("prefferedContactList", AppConstants.PREFFERED_CONTACT_LIST);
         
         if(isAdmin)
             return "cms/add-admin";
@@ -118,10 +118,10 @@ public class StaffController extends BaseController{
             staff.getUser().setBlankPassword();
          
         model.addAttribute("carriers", keyCarriers);
-        model.addAttribute("roles", AppConstants.roles);
+        model.addAttribute("roles", AppConstants.ROLES);
         model.addAttribute("positions", AppConstants.positions);
         model.addAttribute("staff", staff);
-        model.addAttribute("prefferedContactList", AppConstants.prefferedContactList);
+        model.addAttribute("prefferedContactList", AppConstants.PREFFERED_CONTACT_LIST);
         
         return "cms/update-staff";
     }     

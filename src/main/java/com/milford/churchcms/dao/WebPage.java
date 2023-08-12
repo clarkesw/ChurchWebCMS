@@ -54,7 +54,7 @@ public class WebPage {
         this.bgImage = bgImage;
         this.link = link;
         this.pageName = pageName;
-        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
+        this.lastModified =  new SimpleDateFormat(AppConstants.DATE_FORMAT).format(new Date());
         this.message = message;
         this.isVisible = isVisible;
     }

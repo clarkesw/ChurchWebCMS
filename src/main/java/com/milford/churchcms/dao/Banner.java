@@ -32,7 +32,7 @@ public class Banner {
 
     public Banner(String message) {
         this.message = message;
-        this.lastModified =  new SimpleDateFormat(AppConstants.dateFormat).format(new Date());
+        this.lastModified =  new SimpleDateFormat(AppConstants.DATE_FORMAT).format(new Date());
     }
 
     public int getId() {
